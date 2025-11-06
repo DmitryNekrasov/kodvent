@@ -6,7 +6,7 @@ plugins {
     signing
 }
 
-group = "me.scannorone"
+group = "io.github.dmitrynekrasov"
 version = "0.1.0"
 
 repositories {

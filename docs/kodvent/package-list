@@ -1,0 +1,6 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:kodvent////PointingToDeclaration/kodvent/kodvent/index.html
+$dokka.location:kodvent//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/decrement.html
+$dokka.location:kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/increment.html
+kodvent

@@ -1,6 +1,6 @@
 @file:Suppress("RedundantVisibilityModifier")
 
-package me.scannorone.kodvent
+package kodvent
 
 /**
  * Increments the count for the specified key by 1.

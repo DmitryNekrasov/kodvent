@@ -3,6 +3,8 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.2.20-blue.svg?logo=kotlin)](http://kotlinlang.org)
 
+![kodvent](logo.jpg)
+
 A Kotlin utility library for Advent of Code challenges, providing helpful extension functions for common data structure operations.
 
 ## Features

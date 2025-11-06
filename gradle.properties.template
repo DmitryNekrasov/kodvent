@@ -1,0 +1,10 @@
+kotlin.code.style=official
+
+# Sonatype credentials for publishing to Maven Central
+# IMPORTANT: Add these to ~/.gradle/gradle.properties (NOT this project file) to keep them secure
+#
+# sonatype.username=your-sonatype-username
+# sonatype.password=your-sonatype-password
+#
+# signing.keyFile=~/.gnupg/private-key.asc
+# signing.password=your-key-passphrase

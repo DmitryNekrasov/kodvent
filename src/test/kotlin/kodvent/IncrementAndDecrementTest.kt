@@ -1,10 +1,10 @@
-import kodvent.decrement
-import kodvent.increment
+package kodvent
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class IncrementAndDecrementTest {
 

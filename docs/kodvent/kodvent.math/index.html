@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>increment</title>
+    <title>kodvent.math</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -104,52 +104,50 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent</a><span class="delimiter">/</span><span class="current">increment</span></div>
+<div class="main-content" data-page-type="package" id="content" pageIds="kodvent::kodvent.math////PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><span class="current">kodvent.math</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>increment</span></span></h1>
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Increments the count for the specified key by 1.</p><p class="paragraph">If the key does not exist in the map, it will be added with a value of 1. If the key already exists, its value will be increased by 1.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be incremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   val wordCounts = mutableMapOf&lt;String, Int&gt;()
-
-// Adding a new key starts at 1
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(1, wordCounts[&quot;hello&quot;])
-
-// Incrementing again increases the count
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(2, wordCounts[&quot;hello&quot;])
-
-// Different keys are tracked independently
-wordCounts.increment(&quot;world&quot;)
-assertEquals(1, wordCounts[&quot;world&quot;])
-assertEquals(2, wordCounts[&quot;hello&quot;]) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   val text = &quot;the quick brown fox jumps over the lazy dog&quot;
-val wordFrequency = mutableMapOf&lt;String, Int&gt;()
-
-text.split(&quot; &quot;).forEach { word -&gt;
-    wordFrequency.increment(word)
-}
-
-assertEquals(2, wordFrequency[&quot;the&quot;])
-assertEquals(1, wordFrequency[&quot;quick&quot;])
-assertEquals(1, wordFrequency[&quot;fox&quot;]) 
-   //sampleEnd
-}</code></pre></div></div></div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1010183680%2FFunctions%2F769193423" anchor-label="gcd" id="1010183680%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gcd.html"><span><span>gcd</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1010183680%2FFunctions%2F769193423"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Computes the greatest common divisor (GCD) of two integers using the Euclidean algorithm.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">See <a href="gcd.html">gcd</a> for Int parameters</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1898280896%2FFunctions%2F769193423" anchor-label="lcm" id="1898280896%2FFunctions%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lcm.html"><span><span>lcm</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1898280896%2FFunctions%2F769193423"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Computes the least common multiple (LCM) of two integers.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">See <a href="lcm.html">lcm</a> for Int parameters</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
     <div class="footer">
         <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>

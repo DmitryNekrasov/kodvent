@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>increment</title>
+    <title>gcd</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -104,52 +104,68 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent</a><span class="delimiter">/</span><span class="current">increment</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.math//gcd/#kotlin.Int#kotlin.Int/PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.math</a><span class="delimiter">/</span><span class="current">gcd</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>increment</span></span></h1>
+    <h1 class="cover"><span><span>gcd</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Increments the count for the specified key by 1.</p><p class="paragraph">If the key does not exist in the map, it will be added with a value of 1. If the key already exists, its value will be increased by 1.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be incremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Computes the greatest common divisor (GCD) of two integers using the Euclidean algorithm.</p><p class="paragraph">The GCD is the largest positive integer that divides both numbers without a remainder.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the greatest common divisor of <a href="gcd.html">a</a> and <a href="gcd.html">b</a></p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>a</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the first integer</p></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>b</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the second integer</p></div></div></div></div></div><h4 class="">See also</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="lcm.html"><span><span>lcm</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
+import kodvent.math.lcm
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val wordCounts = mutableMapOf&lt;String, Int&gt;()
+   // Find the greatest common divisor of two numbers
+val result1 = gcd(48, 18)
+assertEquals(6, result1)
 
-// Adding a new key starts at 1
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(1, wordCounts[&quot;hello&quot;])
+val result2 = gcd(15, 25)
+assertEquals(5, result2)
 
-// Incrementing again increases the count
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(2, wordCounts[&quot;hello&quot;])
-
-// Different keys are tracked independently
-wordCounts.increment(&quot;world&quot;)
-assertEquals(1, wordCounts[&quot;world&quot;])
-assertEquals(2, wordCounts[&quot;hello&quot;]) 
+// GCD of coprime numbers is 1
+val result3 = gcd(7, 13)
+assertEquals(1, result3) 
    //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
+import kodvent.math.lcm
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val text = &quot;the quick brown fox jumps over the lazy dog&quot;
-val wordFrequency = mutableMapOf&lt;String, Int&gt;()
+   // Use GCD to simplify a fraction
+val numerator = 48
+val denominator = 180
 
-text.split(&quot; &quot;).forEach { word -&gt;
-    wordFrequency.increment(word)
-}
+val divisor = gcd(numerator, denominator)
+val simplifiedNumerator = numerator / divisor
+val simplifiedDenominator = denominator / divisor
 
-assertEquals(2, wordFrequency[&quot;the&quot;])
-assertEquals(1, wordFrequency[&quot;quick&quot;])
-assertEquals(1, wordFrequency[&quot;fox&quot;]) 
+// 48/180 simplifies to 4/15
+assertEquals(4, simplifiedNumerator)
+assertEquals(15, simplifiedDenominator) 
    //sampleEnd
-}</code></pre></div></div></div>
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
+import kodvent.math.lcm
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   // Use GCD to reduce a ratio to its simplest form
+val width = 1920
+val height = 1080
+
+val divisor = gcd(width, height)
+val aspectWidth = width / divisor
+val aspectHeight = height / divisor
+
+// 1920:1080 reduces to 16:9
+assertEquals(16, aspectWidth)
+assertEquals(9, aspectHeight) 
+   //sampleEnd
+}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">See <a href="gcd.html">gcd</a> for Int parameters</p></div></div>
 </div>
     <div class="footer">
         <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>

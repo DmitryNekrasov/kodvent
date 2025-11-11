@@ -2,9 +2,9 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>increment</title>
-    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
-    <script>var pathToRoot = "../../";</script>
+    <title>makeSet</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
     if (storage == null) {
@@ -20,25 +20,25 @@
     }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
-<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
-<link href="../../styles/style.css" rel="Stylesheet">
-<link href="../../styles/main.css" rel="Stylesheet">
-<link href="../../styles/prism.css" rel="Stylesheet">
-<link href="../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
-<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
-<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
-<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
-<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
-<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
-<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
-<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
     <div class="root">
     <nav class="navigation theme-dark" id="navigation-wrapper">
-            <a class="library-name--link" href="../../index.html">
+            <a class="library-name--link" href="../../../index.html">
                     kodvent
             </a>
         <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
@@ -104,50 +104,41 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent</a><span class="delimiter">/</span><span class="current">increment</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.datastructures/DisjointSetUnion/makeSet/#kotlin.Int/PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../../index.html">kodvent</a><span class="delimiter">/</span><a href="../index.html">kodvent.datastructures</a><span class="delimiter">/</span><a href="index.html">DisjointSetUnion</a><span class="delimiter">/</span><span class="current">makeSet</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>increment</span></span></h1>
+    <h1 class="cover"><span>make</span><wbr></wbr><span><span>Set</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Increments the count for the specified key by 1.</p><p class="paragraph">If the key does not exist in the map, it will be added with a value of 1. If the key already exists, its value will be increased by 1.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be incremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="make-set.html"><span class="token function">makeSet</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Resets element <a href="make-set.html">x</a> to be in its own singleton set.</p><p class="paragraph">This operation makes <a href="make-set.html">x</a> the representative of a new set containing only itself, effectively removing it from any set it was previously part of. Other elements that were in the same set remain connected.</p><p class="paragraph">Time complexity: <code class="lang-kotlin">O(n)</code>, where <code class="lang-kotlin">n</code> is the size of the disjoint set, as it may need     to find all elements in the set and reconnect them.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>x</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The element to reset. Must be in range [0, size).</p></div></div></div></div></div><h4 class="">Throws</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html"><span>Index</span><wbr></wbr><span>Out</span><wbr></wbr><span>Of</span><wbr></wbr><span>Bounds</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="make-set.html">x</a> is not in the valid range [0, size).</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 fun main() { 
    //sampleStart 
-   val wordCounts = mutableMapOf&lt;String, Int&gt;()
+   val dsu = DisjointSetUnion(5)
 
-// Adding a new key starts at 1
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(1, wordCounts[&quot;hello&quot;])
+// Create a set {0, 1, 2}
+dsu.union(0, 1)
+dsu.union(1, 2)
+assertEquals(3, dsu.count()) // {0,1,2}, {3}, {4}
 
-// Incrementing again increases the count
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(2, wordCounts[&quot;hello&quot;])
+// Verify all are connected
+assertTrue(dsu.connected(0, 1))
+assertTrue(dsu.connected(1, 2))
+assertTrue(dsu.connected(0, 2))
 
-// Different keys are tracked independently
-wordCounts.increment(&quot;world&quot;)
-assertEquals(1, wordCounts[&quot;world&quot;])
-assertEquals(2, wordCounts[&quot;hello&quot;]) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
-import kotlin.test.Test
-import kotlin.test.assertEquals
+// Remove element 1 from its set
+dsu.makeSet(1)
+assertEquals(4, dsu.count()) // {0,2}, {1}, {3}, {4}
 
-fun main() { 
-   //sampleStart 
-   val text = &quot;the quick brown fox jumps over the lazy dog&quot;
-val wordFrequency = mutableMapOf&lt;String, Int&gt;()
+// Element 1 is now isolated
+assertFalse(dsu.connected(0, 1))
+assertFalse(dsu.connected(1, 2))
 
-text.split(&quot; &quot;).forEach { word -&gt;
-    wordFrequency.increment(word)
-}
-
-assertEquals(2, wordFrequency[&quot;the&quot;])
-assertEquals(1, wordFrequency[&quot;quick&quot;])
-assertEquals(1, wordFrequency[&quot;fox&quot;]) 
+// But 0 and 2 remain connected
+assertTrue(dsu.connected(0, 2)) 
    //sampleEnd
 }</code></pre></div></div></div>
 </div>

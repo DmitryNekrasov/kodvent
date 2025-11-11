@@ -158,7 +158,10 @@ public class DisjointSetUnion(size: Int) {
             return
         }
 
-        val elementsInSet = parent.indices.filter { i -> i != x && find(i) == x }
+        for (i in parent.indices) {
+            find(i)
+        }
+        val elementsInSet = parent.indices.filter { i -> i != x && parent[i] == x }
         if (elementsInSet.isEmpty()) {
             rank[x] = 0
             return
@@ -167,10 +170,10 @@ public class DisjointSetUnion(size: Int) {
         val root = elementsInSet[0]
         for (i in elementsInSet) {
             parent[i] = root
+            rank[i] = 0
         }
 
-        parent[root] = root
-        rank[root] = 0
+        rank[root] = if (elementsInSet.size > 1) 1 else 0
         rank[x] = 0
     }
 }

@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.1.3        </div>
+0.1.4        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -130,12 +130,12 @@ assertTrue(dsu.connected(0, 2)) // 0 and 2 are connected through 1
 assertFalse(dsu.connected(0, 3)) // 0 and 3 are in different networks
 
 // We have 3 separate networks: {0,1,2}, {3,4}, {5}
-assertEquals(3, dsu.count())
+assertEquals(3, dsu.count)
 
 // Connect the networks
 dsu.union(2, 3) // Bridge the first two networks
 assertTrue(dsu.connected(0, 4)) // Now 0 and 4 are connected
-assertEquals(2, dsu.count()) 
+assertEquals(2, dsu.count) 
    //sampleEnd
 }</code></pre></div></div></div>
 </div>

@@ -20,6 +20,11 @@ package kodvent.datastructures
  *
  * @constructor Creates a DisjointSetUnion with [size] elements, where each element is initially
  *              in its own singleton set.
+ *
+ * @sample samples.DisjointSetUnionSamples.basicUsage
+ * @sample samples.DisjointSetUnionSamples.networkConnectivity
+ * @sample samples.DisjointSetUnionSamples.detectingCycles
+ * @sample samples.DisjointSetUnionSamples.socialNetworkClusters
  */
 public class DisjointSetUnion(size: Int) {
     private val parent = IntArray(size) { it }
@@ -38,6 +43,8 @@ public class DisjointSetUnion(size: Int) {
      * @return The representative element of the set containing [x].
      *
      * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, size).
+     *
+     * @sample samples.DisjointSetUnionSamples.findingRepresentatives
      */
     public fun find(x: Int): Int {
         if (x !in parent.indices) {
@@ -65,6 +72,9 @@ public class DisjointSetUnion(size: Int) {
      *         were already in the same set.
      *
      * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, size).
+     *
+     * @sample samples.DisjointSetUnionSamples.basicUsage
+     * @sample samples.DisjointSetUnionSamples.detectingCycles
      */
     public fun union(x: Int, y: Int): Boolean {
         val rootX = find(x)
@@ -100,6 +110,8 @@ public class DisjointSetUnion(size: Int) {
      * @return `true` if [x] and [y] are in the same set, `false` otherwise.
      *
      * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, size).
+     *
+     * @sample samples.DisjointSetUnionSamples.networkConnectivity
      */
     public fun connected(x: Int, y: Int): Boolean {
         return find(x) == find(y)
@@ -111,6 +123,8 @@ public class DisjointSetUnion(size: Int) {
      * Time complexity: `O(n)`, where `n` is the size of the disjoint set.
      *
      * @return The number of distinct sets currently in the data structure.
+     *
+     * @sample samples.DisjointSetUnionSamples.dynamicConnectivityUpdates
      */
     public fun count(): Int {
         return parent.indices.count { it == parent[it] }
@@ -129,6 +143,8 @@ public class DisjointSetUnion(size: Int) {
      * @param x The element to reset. Must be in range [0, size).
      *
      * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, size).
+     *
+     * @sample samples.DisjointSetUnionSamples.makeSetUsage
      */
     public fun makeSet(x: Int) {
         if (x !in parent.indices) {

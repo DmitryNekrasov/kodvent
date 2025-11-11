@@ -229,7 +229,7 @@ class DisjointSetUnionTest {
         dsu.union(0, 2) // Merges {0, 1} with {2, 3}
         assertEquals(7, dsu.count())
 
-        dsu.union(1, 3) // Already in same set
+        dsu.union(1, 3) // Already in the same set
         assertEquals(7, dsu.count())
     }
 

@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>lcm</title>
+    <title>kodvent.datastructures</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -104,47 +104,35 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.math//lcm/#kotlin.Int#kotlin.Int/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.math</a><span class="delimiter">/</span><span class="current">lcm</span></div>
+<div class="main-content" data-page-type="package" id="content" pageIds="kodvent::kodvent.datastructures////PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><span class="current">kodvent.datastructures</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>lcm</span></span></h1>
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Computes the least common multiple (LCM) of two integers.</p><p class="paragraph">The LCM is the smallest positive integer that is divisible by both numbers. This function uses the relationship: <code class="lang-kotlin">lcm(a, b) = (a * b) / gcd(a, b)</code>, but calculates it as <code class="lang-kotlin">(a / gcd(a, b)) * b</code> to reduce the risk of integer overflow.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the least common multiple of <a href="lcm.html">a</a> and <a href="lcm.html">b</a></p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>a</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the first integer</p></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>b</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the second integer</p></div></div></div></div></div><h4 class="">See also</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="gcd.html"><span><span>gcd</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
-import kodvent.math.lcm
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Find the least common multiple of two numbers
-val result1 = lcm(8, 12)
-assertEquals(24, result1)
-
-val result2 = lcm(15, 20)
-assertEquals(60, result2)
-
-// LCM of coprime numbers is their product
-val result3 = lcm(7, 13)
-assertEquals(91, result3) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
-import kodvent.math.lcm
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Two buses arrive at a station: one every 12 minutes, another every 18 minutes
-// Find when they will arrive at the same time again
-val bus1Interval = 12
-val bus2Interval = 18
-
-val nextSimultaneousArrival = lcm(bus1Interval, bus2Interval)
-
-// They will both arrive after 36 minutes
-assertEquals(36, nextSimultaneousArrival) 
-   //sampleEnd
-}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">See <a href="lcm.html">lcm</a> for Int parameters</p></div></div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="1457215004%2FClasslikes%2F769193423" anchor-label="DisjointSetUnion" id="1457215004%2FClasslikes%2F769193423" data-filterable-set=":dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-disjoint-set-union/index.html"><span>Disjoint</span><wbr></wbr><span>Set</span><wbr></wbr><span><span>Union</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1457215004%2FClasslikes%2F769193423"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-disjoint-set-union/index.html">DisjointSetUnion</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A <a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">Disjoint Set Union</a> (DSU) data structure, also known as Union-Find.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
     <div class="footer">
         <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>

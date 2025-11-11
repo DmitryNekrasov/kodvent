@@ -25,6 +25,7 @@ package kodvent.datastructures
  * @sample samples.DisjointSetUnionSamples.networkConnectivity
  * @sample samples.DisjointSetUnionSamples.detectingCycles
  * @sample samples.DisjointSetUnionSamples.socialNetworkClusters
+ * @sample samples.DisjointSetUnionSamples.kruskalMinimumSpanningTree
  */
 public class DisjointSetUnion(size: Int) {
     private val parent = IntArray(size) { it }

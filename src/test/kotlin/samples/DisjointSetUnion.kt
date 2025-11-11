@@ -9,6 +9,62 @@ import kotlin.test.assertTrue
 class DisjointSetUnionSamples {
 
     @Test
+    fun kruskalMinimumSpanningTree() {
+        // Use DSU to implement Kruskal's algorithm for finding Minimum Spanning Tree (MST)
+        // Graph with 6 vertices (0-5) and weighted edges
+        // edge = listOf(from, to, weight)
+        val n = 6
+
+        val edges = listOf(
+            listOf(0, 1, 4),
+            listOf(0, 2, 2),
+            listOf(1, 2, 1),
+            listOf(1, 3, 5),
+            listOf(2, 3, 8),
+            listOf(2, 4, 10),
+            listOf(3, 4, 2),
+            listOf(3, 5, 6),
+            listOf(4, 5, 3)
+        )
+
+        // Kruskal's algorithm: sort edges by weight (ascending)
+        val sortedEdges = edges.sortedBy { it[2] }
+
+        val dsu = DisjointSetUnion(n)
+        val mstEdges = mutableListOf<List<Int>>()
+        var totalWeight = 0
+
+        // Process edges in order of increasing weight
+        for (edge in sortedEdges) {
+            val from = edge[0]
+            val to = edge[1]
+            val weight = edge[2]
+
+            // Try to add edge to MST
+            // If the vertices are not connected, add the edge (no cycle is created)
+            if (dsu.union(from, to)) {
+                mstEdges.add(edge)
+                totalWeight += weight
+            }
+            // If union returns false, the edge would create a cycle, so skip it
+        }
+
+        // MST should have exactly n-1 edges for n vertices
+        assertEquals(n - 1, mstEdges.size)
+
+        // Verify the minimum total weight
+        // MST edges: (1,2,1), (0,2,2), (3,4,2), (4,5,3), (1,3,5) = total 13
+        assertEquals(13, totalWeight)
+
+        // All vertices should be in one connected part
+        assertEquals(1, dsu.count())
+
+        // Verify the MST contains the correct edges (sorted by weight)
+        val mstWeights = mstEdges.map { it[2] }.sorted()
+        assertEquals(listOf(1, 2, 2, 3, 5), mstWeights)
+    }
+
+    @Test
     fun basicUsage() {
         // Create a DSU with 5 elements (0, 1, 2, 3, 4)
         val dsu = DisjointSetUnion(5)

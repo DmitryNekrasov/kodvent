@@ -151,28 +151,20 @@ public class DisjointSetUnion(size: Int) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
 
-        if (parent[x] != x) {
-            parent[x] = x
-            rank[x] = 0
-            _count++
-            return
-        }
+        parent.indices.forEach { find(it) }
 
-        for (i in parent.indices) {
-            find(i)
-        }
-        val elementsInSet = parent.indices.filter { i -> i != x && parent[i] == x }
-        if (elementsInSet.isEmpty()) {
-            rank[x] = 0
-            return
-        }
+        val oldRoot = parent[x]
+        val elementsInSet = parent.indices.filter { parent[it] == oldRoot }
+        if (elementsInSet.size == 1) return
 
-        val root = elementsInSet[0]
+        val newRoot = elementsInSet.first { it != x }
         for (i in elementsInSet) {
-            parent[i] = root
-            rank[i] = 0
+            if (i != x) {
+                parent[i] = newRoot
+            }
         }
 
+        parent[x] = x
         rank[x] = 0
         _count++
     }

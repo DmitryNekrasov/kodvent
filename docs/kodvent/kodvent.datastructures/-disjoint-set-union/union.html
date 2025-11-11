@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.1.3        </div>
+0.1.4        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -121,15 +121,15 @@ fun main() {
 val dsu = DisjointSetUnion(5)
 
 // Initially, each element is in its own set
-assertEquals(5, dsu.count())
+assertEquals(5, dsu.count)
 
 // Union elements 0 and 1
 assertTrue(dsu.union(0, 1))
-assertEquals(4, dsu.count())
+assertEquals(4, dsu.count)
 
 // Union elements 2 and 3
 assertTrue(dsu.union(2, 3))
-assertEquals(3, dsu.count())
+assertEquals(3, dsu.count)
 
 // Elements 0 and 1 are now connected
 assertTrue(dsu.connected(0, 1))

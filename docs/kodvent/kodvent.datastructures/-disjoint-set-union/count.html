@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.1.3        </div>
+0.1.4        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -109,7 +109,7 @@
   <div class="cover ">
     <h1 class="cover"><span><span>count</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="count.html"><span class="token function">count</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Counts the number of disjoint sets.</p><p class="paragraph">Time complexity: <code class="lang-kotlin">O(1)</code>.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The number of distinct sets currently in the data structure.</p></span><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="count.html">count</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">The number of disjoint sets.</p><p class="paragraph">Time complexity: <code class="lang-kotlin">O(1)</code>.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -120,23 +120,23 @@ fun main() {
    val dsu = DisjointSetUnion(6)
 
 // Build a network step by step
-assertEquals(6, dsu.count()) // Initially 6 separate components
+assertEquals(6, dsu.count) // Initially 6 separate components
 
 dsu.union(0, 1)
-assertEquals(5, dsu.count())
+assertEquals(5, dsu.count)
 
 dsu.union(2, 3)
-assertEquals(4, dsu.count())
+assertEquals(4, dsu.count)
 
 dsu.union(4, 5)
-assertEquals(3, dsu.count())
+assertEquals(3, dsu.count)
 
 // Now merge the components
 dsu.union(1, 2)
-assertEquals(2, dsu.count()) // {0,1,2,3}, {4,5}
+assertEquals(2, dsu.count) // {0,1,2,3}, {4,5}
 
 dsu.union(3, 4)
-assertEquals(1, dsu.count()) // All connected: {0,1,2,3,4,5}
+assertEquals(1, dsu.count) // All connected: {0,1,2,3,4,5}
 
 // Verify everything is connected
 assertTrue(dsu.connected(0, 5))

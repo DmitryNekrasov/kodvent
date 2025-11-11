@@ -6,7 +6,7 @@ $dokka.location:kodvent.datastructures/DisjointSetUnion/DisjointSetUnion/#kotlin
 $dokka.location:kodvent.datastructures/DisjointSetUnion/connected/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/connected.html
 $dokka.location:kodvent.datastructures/DisjointSetUnion/count/#/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/count.html
 $dokka.location:kodvent.datastructures/DisjointSetUnion/find/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/find.html
-$dokka.location:kodvent.datastructures/DisjointSetUnion/makeSet/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/make-set.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/isolate/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/isolate.html
 $dokka.location:kodvent.datastructures/DisjointSetUnion/union/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/union.html
 $dokka.location:kodvent.math////PointingToDeclaration/kodvent/kodvent.math/index.html
 $dokka.location:kodvent.math//gcd/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.math/gcd.html

@@ -646,4 +646,18 @@ class DisjointSetUnionTest {
             }
         }
     }
+
+    @Test
+    fun `isolate should disconnect element from other elements in same set`() {
+        val dsu = DisjointSetUnion(4)
+
+        dsu.union(0, 1)
+        dsu.union(2, 3)
+        dsu.union(0, 2)  // Now all elements are in one set: {0, 1, 2, 3}
+
+        dsu.isolate(2)  // {0, 1, 3}, {2}
+
+        assertFalse(dsu.connected(2, 3))
+        assertTrue(dsu.connected(0, 3))
+    }
 }

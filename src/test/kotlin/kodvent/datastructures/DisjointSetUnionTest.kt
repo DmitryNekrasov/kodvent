@@ -653,7 +653,7 @@ class DisjointSetUnionTest {
 
         dsu.union(0, 1)
         dsu.union(2, 3)
-        dsu.union(0, 2)  // Now all elements are in one part: {0, 1, 2, 3}
+        dsu.union(0, 2)  // Now all elements are in one set: {0, 1, 2, 3}
 
         dsu.isolate(2)  // {0, 1, 3}, {2}
 

@@ -9,7 +9,7 @@ import kotlin.test.assertFailsWith
 class DisjointSetUnionTest {
 
     @Test
-    fun testInitialState() {
+    fun `DSU should start with each element in its own singleton set`() {
         val dsu = DisjointSetUnion(5)
 
         // Initially, each element should be in its own set
@@ -27,7 +27,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testSingleElementDSU() {
+    fun `DSU should handle single element`() {
         val dsu = DisjointSetUnion(1)
 
         assertEquals(1, dsu.count())
@@ -36,7 +36,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testBasicUnion() {
+    fun `union should merge disjoint sets`() {
         val dsu = DisjointSetUnion(5)
 
         // Union 0 and 1
@@ -56,7 +56,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testUnionReturnsFalseForSameSet() {
+    fun `union should return false when elements are already in same set`() {
         val dsu = DisjointSetUnion(5)
 
         // Union 0 and 1
@@ -70,7 +70,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testChainedUnions() {
+    fun `union should handle chained operations`() {
         val dsu = DisjointSetUnion(6)
 
         // Chain: 0 - 1 - 2
@@ -97,7 +97,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testMergingLargeSets() {
+    fun `union should merge large sets correctly`() {
         val dsu = DisjointSetUnion(10)
 
         // Create a set {0, 1, 2, 3}
@@ -127,7 +127,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testUnionToSingleSet() {
+    fun `union should merge all elements into single set`() {
         val dsu = DisjointSetUnion(5)
 
         // Union all elements into one set
@@ -147,7 +147,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testConnected() {
+    fun `connected should correctly identify connected and disconnected elements`() {
         val dsu = DisjointSetUnion(5)
 
         // Element is always connected to itself
@@ -172,7 +172,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testMakeSet() {
+    fun `makeSet should isolate element into singleton set`() {
         val dsu = DisjointSetUnion(5)
 
         // Create a set {0, 1, 2}
@@ -194,7 +194,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testMakeSetOnRoot() {
+    fun `makeSet should isolate root element while keeping others connected`() {
         val dsu = DisjointSetUnion(5)
 
         // Create a set {0, 1, 2}
@@ -215,7 +215,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testCount() {
+    fun `count should track number of disjoint sets`() {
         val dsu = DisjointSetUnion(10)
 
         assertEquals(10, dsu.count())
@@ -234,7 +234,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testFindWithPathCompression() {
+    fun `find should compress paths to root`() {
         val dsu = DisjointSetUnion(5)
 
         // Create a chain: 0 -> 1 -> 2 -> 3 -> 4
@@ -254,7 +254,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testFindOutOfBoundsNegative() {
+    fun `find should throw IndexOutOfBoundsException for negative index`() {
         val dsu = DisjointSetUnion(5)
 
         assertFailsWith<IndexOutOfBoundsException> {
@@ -263,7 +263,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testFindOutOfBoundsTooLarge() {
+    fun `find should throw IndexOutOfBoundsException for index beyond size`() {
         val dsu = DisjointSetUnion(5)
 
         assertFailsWith<IndexOutOfBoundsException> {
@@ -276,7 +276,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testUnionOutOfBounds() {
+    fun `union should throw IndexOutOfBoundsException for invalid indices`() {
         val dsu = DisjointSetUnion(5)
 
         assertFailsWith<IndexOutOfBoundsException> {
@@ -293,7 +293,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testConnectedOutOfBounds() {
+    fun `connected should throw IndexOutOfBoundsException for invalid indices`() {
         val dsu = DisjointSetUnion(5)
 
         assertFailsWith<IndexOutOfBoundsException> {
@@ -306,7 +306,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testMakeSetOutOfBounds() {
+    fun `makeSet should throw IndexOutOfBoundsException for invalid index`() {
         val dsu = DisjointSetUnion(5)
 
         assertFailsWith<IndexOutOfBoundsException> {
@@ -319,7 +319,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testLargeScale() {
+    fun `DSU should handle large scale operations with 1000 elements`() {
         val size = 1000
         val dsu = DisjointSetUnion(size)
 
@@ -360,7 +360,7 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testComplexScenario() {
+    fun `DSU should handle complex multi-step scenarios`() {
         val dsu = DisjointSetUnion(10)
 
         // Create several components
@@ -408,13 +408,13 @@ class DisjointSetUnionTest {
     }
 
     @Test
-    fun testEmptyDSU() {
+    fun `DSU should handle empty initialization`() {
         val dsu = DisjointSetUnion(0)
         assertEquals(0, dsu.count())
     }
 
     @Test
-    fun testStressPathCompression() {
+    fun `find should compress paths in long chains`() {
         val dsu = DisjointSetUnion(100)
 
         // Create a long chain

@@ -414,6 +414,213 @@ class DisjointSetUnionTest {
     }
 
     @Test
+    fun `makeSet should truly isolate element with no remaining connections`() {
+        val dsu = DisjointSetUnion(5)
+
+        // Create a set {0, 1, 2, 3, 4}
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+        dsu.union(2, 3)
+        dsu.union(3, 4)
+
+        assertEquals(1, dsu.count())
+        assertTrue(dsu.connected(0, 4))
+
+        // Reset element 2 (middle element)
+        dsu.makeSet(2)
+
+        assertEquals(2, dsu.count())
+
+        // Element 2 should be completely isolated
+        assertFalse(dsu.connected(0, 2), "Element 0 should not be connected to 2")
+        assertFalse(dsu.connected(1, 2), "Element 1 should not be connected to 2")
+        assertFalse(dsu.connected(2, 3), "Element 2 should not be connected to 3")
+        assertFalse(dsu.connected(2, 4), "Element 2 should not be connected to 4")
+
+        // Element 2 should be its own root
+        assertEquals(2, dsu.find(2))
+
+        // Other elements should still be connected to each other
+        val otherRoot = dsu.find(0)
+        assertEquals(otherRoot, dsu.find(1), "Elements 0 and 1 should have same root")
+        assertEquals(otherRoot, dsu.find(3), "Elements 0 and 3 should have same root")
+        assertEquals(otherRoot, dsu.find(4), "Elements 0 and 4 should have same root")
+    }
+
+    @Test
+    fun `makeSet should ensure no element points to the isolated element`() {
+        val dsu = DisjointSetUnion(6)
+
+        // Create two sets: {0, 1, 2} and {3, 4, 5}
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+        dsu.union(3, 4)
+        dsu.union(4, 5)
+
+        assertEquals(2, dsu.count())
+
+        // Isolate element 1
+        dsu.makeSet(1)
+
+        assertEquals(3, dsu.count())
+
+        // Critical: no element should be connected to element 1
+        for (i in 0..<6) {
+            if (i != 1) {
+                assertFalse(dsu.connected(i, 1), "Element $i should not be connected to 1 after makeSet(1)")
+            }
+        }
+
+        // Element 1 should only be connected to itself
+        assertTrue(dsu.connected(1, 1))
+        assertEquals(1, dsu.find(1))
+    }
+
+    @Test
+    fun `makeSet should work correctly after path compression`() {
+        val dsu = DisjointSetUnion(7)
+
+        // Create a long chain to ensure path compression happens
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+        dsu.union(2, 3)
+        dsu.union(3, 4)
+        dsu.union(4, 5)
+        dsu.union(5, 6)
+
+        // Trigger path compression by finding a deep element
+        dsu.find(6)
+        dsu.find(0)
+
+        // Now isolate element 3
+        dsu.makeSet(3)
+
+        assertEquals(2, dsu.count())
+
+        // Element 3 should be completely isolated
+        for (i in 0..<7) {
+            if (i != 3) {
+                assertFalse(dsu.connected(i, 3), "Element $i should not be connected to 3 after makeSet(3)")
+            }
+        }
+
+        // All other elements should still be connected
+        val otherRoot = dsu.find(0)
+        for (i in 0..<7) {
+            if (i != 3) {
+                assertEquals(otherRoot, dsu.find(i), "Element $i should have the same root as others")
+            }
+        }
+    }
+
+    @Test
+    fun `makeSet should handle multiple consecutive isolations`() {
+        val dsu = DisjointSetUnion(5)
+
+        // Create one big set
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+        dsu.union(2, 3)
+        dsu.union(3, 4)
+
+        assertEquals(1, dsu.count())
+
+        // Isolate elements one by one
+        dsu.makeSet(1)
+        assertEquals(2, dsu.count())
+        assertFalse(dsu.connected(0, 1))
+        assertFalse(dsu.connected(1, 2))
+
+        dsu.makeSet(3)
+        assertEquals(3, dsu.count())
+        assertFalse(dsu.connected(2, 3))
+        assertFalse(dsu.connected(3, 4))
+
+        // Element 1 and 3 should each be in singleton sets
+        assertEquals(1, dsu.find(1))
+        assertEquals(3, dsu.find(3))
+
+        // No element should be connected to the isolated elements
+        for (i in 0..<5) {
+            if (i != 1) {
+                assertFalse(dsu.connected(i, 1), "Element $i should not be connected to 1")
+            }
+            if (i != 3) {
+                assertFalse(dsu.connected(i, 3), "Element $i should not be connected to 3")
+            }
+        }
+    }
+
+    @Test
+    fun `makeSet should maintain correct count after isolation`() {
+        val dsu = DisjointSetUnion(10)
+
+        // Create three sets: {0,1,2,3}, {4,5,6}, {7,8,9}
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+        dsu.union(2, 3)
+
+        dsu.union(4, 5)
+        dsu.union(5, 6)
+
+        dsu.union(7, 8)
+        dsu.union(8, 9)
+
+        assertEquals(3, dsu.count())
+
+        // Isolate one element from each set
+        dsu.makeSet(1)
+        assertEquals(4, dsu.count())
+
+        dsu.makeSet(5)
+        assertEquals(5, dsu.count())
+
+        dsu.makeSet(8)
+        assertEquals(6, dsu.count())
+
+        // Verify that isolated elements are truly isolated
+        for (i in 0..<10) {
+            if (i != 1) assertFalse(dsu.connected(i, 1))
+            if (i != 5) assertFalse(dsu.connected(i, 5))
+            if (i != 8) assertFalse(dsu.connected(i, 8))
+        }
+    }
+
+    @Test
+    fun `makeSet should handle the specific bug case from Copilot comment`() {
+        // This test recreates the exact scenario described in Copilot's comment:
+        // parent[0]=1, parent[1]=2, parent[2]=2
+        // This represents: 0→1→2 where 2 is the root
+        // After makeSet(1), element 0 should NOT be connected to element 1
+
+        val dsu = DisjointSetUnion(3)
+
+        // Create the structure: 0→1→2
+        dsu.union(0, 1)
+        dsu.union(1, 2)
+
+        // All should be connected before makeSet
+        assertTrue(dsu.connected(0, 1))
+        assertTrue(dsu.connected(0, 2))
+        assertTrue(dsu.connected(1, 2))
+        assertEquals(1, dsu.count())
+
+        // Now isolate element 1 - this is where the bug would manifest
+        dsu.makeSet(1)
+
+        // After makeSet(1), element 1 should be completely isolated
+        assertEquals(2, dsu.count())
+        assertFalse(dsu.connected(0, 1), "Element 0 should NOT be connected to 1 after makeSet(1)")
+        assertFalse(dsu.connected(1, 2), "Element 1 should NOT be connected to 2 after makeSet(1)")
+
+        // But 0 and 2 should still be connected
+        assertTrue(dsu.connected(0, 2), "Elements 0 and 2 should remain connected")
+
+        // Element 1 should be its own root
+        assertEquals(1, dsu.find(1))
+    }
+
+    @Test
     fun `find should compress paths in long chains`() {
         val dsu = DisjointSetUnion(100)
 

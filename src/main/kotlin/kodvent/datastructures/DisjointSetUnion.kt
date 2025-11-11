@@ -147,9 +147,9 @@ public class DisjointSetUnion(size: Int) {
      *
      * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, size).
      *
-     * @sample samples.DisjointSetUnionSamples.makeSetUsage
+     * @sample samples.DisjointSetUnionSamples.isolateUsage
      */
-    public fun makeSet(x: Int) {
+    public fun isolate(x: Int) {
         if (x !in parent.indices) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }

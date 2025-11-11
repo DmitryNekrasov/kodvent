@@ -182,7 +182,7 @@ class DisjointSetUnionSamples {
     }
 
     @Test
-    fun makeSetUsage() {
+    fun isolateUsage() {
         val dsu = DisjointSetUnion(5)
 
         // Create a set {0, 1, 2}
@@ -196,7 +196,7 @@ class DisjointSetUnionSamples {
         assertTrue(dsu.connected(0, 2))
 
         // Remove element 1 from its set
-        dsu.makeSet(1)
+        dsu.isolate(1)
         assertEquals(4, dsu.count()) // {0,2}, {1}, {3}, {4}
 
         // Element 1 is now isolated

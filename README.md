@@ -27,6 +27,19 @@ Common mathematical functions for number theory and algorithmic problems:
 - **`lcm(a: Int, b: Int): Int`** - Computes the least common multiple (LCM) of two integers
 - Both functions are also available for `Long` parameters
 
+### Disjoint Set Union (Union-Find)
+
+An efficient data structure for managing disjoint sets with near-constant time operations:
+
+- **`DisjointSetUnion(size: Int)`** - Creates a DSU with `size` elements, each initially in its own set
+- **`find(x: Int): Int`** - Finds the representative (root) of the set containing element `x`
+- **`union(x: Int, y: Int): Boolean`** - Merges the sets containing `x` and `y`, returns `true` if merged
+- **`connected(x: Int, y: Int): Boolean`** - Checks if `x` and `y` are in the same set
+- **`count(): Int`** - Returns the number of disjoint sets
+- **`makeSet(x: Int)`** - Resets element `x` to be in its own singleton set
+
+The implementation uses path compression and union by rank optimizations for optimal performance.
+
 ## Installation
 
 Add the dependency to your project:
@@ -93,6 +106,39 @@ val result2 = lcm(12, 18)  // 36
 // Solve a scheduling problem
 // Two buses arrive every 12 and 18 minutes
 val nextSimultaneousArrival = lcm(12, 18)  // 36 minutes
+```
+
+### Graph Algorithms with Disjoint Set Union
+
+```kotlin
+import kodvent.datastructures.DisjointSetUnion
+
+// Detect cycles in a graph
+val dsu = DisjointSetUnion(4)
+
+// Add edges: 0-1, 1-2, 2-3
+dsu.union(0, 1)  // true - edge added
+dsu.union(1, 2)  // true - edge added
+dsu.union(2, 3)  // true - edge added
+
+// Try to add edge 0-3 (would create a cycle)
+val hasCycle = !dsu.union(0, 3)  // true - cycle detected!
+
+// Kruskal's algorithm for Minimum Spanning Tree
+data class Edge(val from: Int, val to: Int, val weight: Int)
+
+val edges = listOf(
+    Edge(0, 1, 4),
+    Edge(0, 2, 2),
+    Edge(1, 2, 1),
+    Edge(1, 3, 5)
+)
+
+val dsuMst = DisjointSetUnion(4)
+val mst = edges.sortedBy { it.weight }
+    .filter { dsuMst.union(it.from, it.to) }
+
+// mst contains edges with minimum total weight
 ```
 
 ## Development

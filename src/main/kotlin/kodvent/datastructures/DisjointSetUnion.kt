@@ -176,7 +176,6 @@ public class DisjointSetUnion(size: Int) {
             rank[i] = 0
         }
 
-        rank[root] = if (elementsInSet.size > 1) 1 else 0
         rank[x] = 0
         count++
     }

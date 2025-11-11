@@ -152,25 +152,39 @@ public class DisjointSetUnion(size: Int) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
 
+        val oldRoot = find(x)
+
+        // If x is not a root, simply detach it
         if (parent[x] != x) {
             parent[x] = x
             rank[x] = 0
             return
         }
 
-        val elementsInSet = parent.indices.filter { i -> i != x && parent[i] == x }
+        // If x is a root, we need to find all elements in its set and give them a new root
+        val elementsInSet = parent.indices.filter { i -> i != x && find(i) == oldRoot }
+
         if (elementsInSet.isEmpty()) {
+            // x was already in its own singleton set
+            parent[x] = x
             rank[x] = 0
             return
         }
 
-        val root = elementsInSet[0]
+        // Choose a new root (first element in the set, excluding x)
+        val newRoot = elementsInSet[0]
+
+        // Reconnect all elements (except x) to the new root
         for (i in elementsInSet) {
-            parent[i] = root
+            parent[i] = newRoot
         }
 
-        parent[root] = root
-        rank[root] = 0
+        // Set the new root properly
+        parent[newRoot] = newRoot
+        rank[newRoot] = 0
+
+        // Isolate x
+        parent[x] = x
         rank[x] = 0
     }
 }

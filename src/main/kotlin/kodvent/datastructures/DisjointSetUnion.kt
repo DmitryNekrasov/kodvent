@@ -163,6 +163,7 @@ public class DisjointSetUnion(size: Int) {
                 parent[i] = newRoot
             }
         }
+        rank[newRoot] = 0
 
         parent[x] = x
         rank[x] = 0

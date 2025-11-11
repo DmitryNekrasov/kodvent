@@ -30,7 +30,7 @@ package kodvent.datastructures
 public class DisjointSetUnion(size: Int) {
     private val parent = IntArray(size) { it }
     private val rank = IntArray(size) { 0 }
-    private var count = size
+    private var _count = size
 
     /**
      * Finds the representative (root) of the set containing element [x].
@@ -98,7 +98,7 @@ public class DisjointSetUnion(size: Int) {
             }
         }
 
-        count--
+        _count--
         return true
     }
 
@@ -121,17 +121,14 @@ public class DisjointSetUnion(size: Int) {
     }
 
     /**
-     * Counts the number of disjoint sets.
+     * The number of disjoint sets.
      *
      * Time complexity: `O(1)`.
      *
-     * @return The number of distinct sets currently in the data structure.
-     *
      * @sample samples.DisjointSetUnionSamples.dynamicConnectivityUpdates
      */
-    public fun count(): Int {
-        return count
-    }
+    public val count: Int
+        get() = _count
 
     /**
      * Resets element [x] to be in its own singleton set.
@@ -157,7 +154,7 @@ public class DisjointSetUnion(size: Int) {
         if (parent[x] != x) {
             parent[x] = x
             rank[x] = 0
-            count++
+            _count++
             return
         }
 
@@ -177,6 +174,6 @@ public class DisjointSetUnion(size: Int) {
         }
 
         rank[x] = 0
-        count++
+        _count++
     }
 }

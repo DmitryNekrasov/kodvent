@@ -57,7 +57,7 @@ class DisjointSetUnionSamples {
         assertEquals(13, totalWeight)
 
         // All vertices should be in one connected part
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // Verify the MST contains the correct edges (sorted by weight)
         val mstWeights = mstEdges.map { it[2] }.sorted()
@@ -70,15 +70,15 @@ class DisjointSetUnionSamples {
         val dsu = DisjointSetUnion(5)
 
         // Initially, each element is in its own set
-        assertEquals(5, dsu.count())
+        assertEquals(5, dsu.count)
 
         // Union elements 0 and 1
         assertTrue(dsu.union(0, 1))
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
 
         // Union elements 2 and 3
         assertTrue(dsu.union(2, 3))
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Elements 0 and 1 are now connected
         assertTrue(dsu.connected(0, 1))
@@ -123,12 +123,12 @@ class DisjointSetUnionSamples {
         assertFalse(dsu.connected(0, 3)) // 0 and 3 are in different networks
 
         // We have 3 separate networks: {0,1,2}, {3,4}, {5}
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Connect the networks
         dsu.union(2, 3) // Bridge the first two networks
         assertTrue(dsu.connected(0, 4)) // Now 0 and 4 are connected
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
     }
 
     @Test
@@ -168,7 +168,7 @@ class DisjointSetUnionSamples {
         dsu.union(6, 7) // Person 6 and 7 are friends
 
         // We have 3 friend groups: {0,1,2}, {3,4,5}, {6,7}
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Check if people are in the same friend group
         assertTrue(dsu.connected(0, 2)) // In the same group
@@ -178,7 +178,7 @@ class DisjointSetUnionSamples {
         // Two groups merge when members become friends
         dsu.union(2, 3) // Person 2 and 3 become friends
         assertTrue(dsu.connected(0, 5)) // Now in the same group
-        assertEquals(2, dsu.count()) // Only 2 groups remain
+        assertEquals(2, dsu.count) // Only 2 groups remain
     }
 
     @Test
@@ -188,7 +188,7 @@ class DisjointSetUnionSamples {
         // Create a set {0, 1, 2}
         dsu.union(0, 1)
         dsu.union(1, 2)
-        assertEquals(3, dsu.count()) // {0,1,2}, {3}, {4}
+        assertEquals(3, dsu.count) // {0,1,2}, {3}, {4}
 
         // Verify all are connected
         assertTrue(dsu.connected(0, 1))
@@ -197,7 +197,7 @@ class DisjointSetUnionSamples {
 
         // Remove element 1 from its set
         dsu.isolate(1)
-        assertEquals(4, dsu.count()) // {0,2}, {1}, {3}, {4}
+        assertEquals(4, dsu.count) // {0,2}, {1}, {3}, {4}
 
         // Element 1 is now isolated
         assertFalse(dsu.connected(0, 1))
@@ -212,23 +212,23 @@ class DisjointSetUnionSamples {
         val dsu = DisjointSetUnion(6)
 
         // Build a network step by step
-        assertEquals(6, dsu.count()) // Initially 6 separate components
+        assertEquals(6, dsu.count) // Initially 6 separate components
 
         dsu.union(0, 1)
-        assertEquals(5, dsu.count())
+        assertEquals(5, dsu.count)
 
         dsu.union(2, 3)
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
 
         dsu.union(4, 5)
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Now merge the components
         dsu.union(1, 2)
-        assertEquals(2, dsu.count()) // {0,1,2,3}, {4,5}
+        assertEquals(2, dsu.count) // {0,1,2,3}, {4,5}
 
         dsu.union(3, 4)
-        assertEquals(1, dsu.count()) // All connected: {0,1,2,3,4,5}
+        assertEquals(1, dsu.count) // All connected: {0,1,2,3,4,5}
 
         // Verify everything is connected
         assertTrue(dsu.connected(0, 5))

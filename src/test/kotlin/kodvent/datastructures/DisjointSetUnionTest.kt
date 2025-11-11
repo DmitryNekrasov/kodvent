@@ -13,7 +13,7 @@ class DisjointSetUnionTest {
         val dsu = DisjointSetUnion(5)
 
         // Initially, each element should be in its own set
-        assertEquals(5, dsu.count())
+        assertEquals(5, dsu.count)
 
         // Each element should be its own root
         for (i in 0..<5) {
@@ -30,7 +30,7 @@ class DisjointSetUnionTest {
     fun `DSU should handle single element`() {
         val dsu = DisjointSetUnion(1)
 
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
         assertEquals(0, dsu.find(0))
         assertTrue(dsu.connected(0, 0))
     }
@@ -41,12 +41,12 @@ class DisjointSetUnionTest {
 
         // Union 0 and 1
         assertTrue(dsu.union(0, 1))
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
         assertTrue(dsu.connected(0, 1))
 
         // Union 2 and 3
         assertTrue(dsu.union(2, 3))
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
         assertTrue(dsu.connected(2, 3))
 
         // Verify other elements are still separate
@@ -61,12 +61,12 @@ class DisjointSetUnionTest {
 
         // Union 0 and 1
         assertTrue(dsu.union(0, 1))
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
 
         // Try to union them again - should return false
         assertFalse(dsu.union(0, 1))
         assertFalse(dsu.union(1, 0))
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
     }
 
     @Test
@@ -77,7 +77,7 @@ class DisjointSetUnionTest {
         assertTrue(dsu.union(0, 1))
         assertTrue(dsu.union(1, 2))
 
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
         assertTrue(dsu.connected(0, 1))
         assertTrue(dsu.connected(1, 2))
         assertTrue(dsu.connected(0, 2))
@@ -86,7 +86,7 @@ class DisjointSetUnionTest {
         assertTrue(dsu.union(3, 4))
         assertTrue(dsu.union(4, 5))
 
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
         assertTrue(dsu.connected(3, 4))
         assertTrue(dsu.connected(4, 5))
         assertTrue(dsu.connected(3, 5))
@@ -110,11 +110,11 @@ class DisjointSetUnionTest {
         dsu.union(5, 6)
         dsu.union(6, 7)
 
-        assertEquals(4, dsu.count()) // {0,1,2,3}, {4,5,6,7}, {8}, {9}
+        assertEquals(4, dsu.count) // {0,1,2,3}, {4,5,6,7}, {8}, {9}
 
         // Merge the two large sets
         assertTrue(dsu.union(3, 4))
-        assertEquals(3, dsu.count()) // {0,1,2,3,4,5,6,7}, {8}, {9}
+        assertEquals(3, dsu.count) // {0,1,2,3,4,5,6,7}, {8}, {9}
 
         // All elements from both sets should be connected
         assertTrue(dsu.connected(0, 7))
@@ -136,7 +136,7 @@ class DisjointSetUnionTest {
         dsu.union(2, 3)
         dsu.union(3, 4)
 
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // All elements should be connected
         for (i in 0..<5) {
@@ -179,13 +179,13 @@ class DisjointSetUnionTest {
         dsu.union(0, 1)
         dsu.union(1, 2)
 
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
         assertTrue(dsu.connected(0, 2))
 
         // Reset element 1
         dsu.isolate(1)
 
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
         assertFalse(dsu.connected(0, 1))
         assertFalse(dsu.connected(1, 2))
 
@@ -202,13 +202,13 @@ class DisjointSetUnionTest {
         dsu.union(1, 2)
 
         val root = dsu.find(0)
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Reset the root element
         dsu.isolate(root)
 
         // The count should increase
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
 
         // Original root should be in its own set now
         assertEquals(root, dsu.find(root))
@@ -218,19 +218,19 @@ class DisjointSetUnionTest {
     fun `count should track number of disjoint sets`() {
         val dsu = DisjointSetUnion(10)
 
-        assertEquals(10, dsu.count())
+        assertEquals(10, dsu.count)
 
         dsu.union(0, 1)
-        assertEquals(9, dsu.count())
+        assertEquals(9, dsu.count)
 
         dsu.union(2, 3)
-        assertEquals(8, dsu.count())
+        assertEquals(8, dsu.count)
 
         dsu.union(0, 2) // Merges {0, 1} with {2, 3}
-        assertEquals(7, dsu.count())
+        assertEquals(7, dsu.count)
 
         dsu.union(1, 3) // Already in the same set
-        assertEquals(7, dsu.count())
+        assertEquals(7, dsu.count)
     }
 
     @Test
@@ -323,7 +323,7 @@ class DisjointSetUnionTest {
         val size = 1000
         val dsu = DisjointSetUnion(size)
 
-        assertEquals(size, dsu.count())
+        assertEquals(size, dsu.count)
 
         // Union every even number with 0
         for (i in 0..<size step 2) {
@@ -335,7 +335,7 @@ class DisjointSetUnionTest {
             dsu.union(1, i)
         }
 
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
 
         // All even numbers should be connected to 0
         for (i in 0..<size step 2) {
@@ -352,7 +352,7 @@ class DisjointSetUnionTest {
 
         // Merge all into one
         dsu.union(0, 1)
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // Now all should be connected
         assertTrue(dsu.connected(0, 999))
@@ -374,7 +374,7 @@ class DisjointSetUnionTest {
 
         // Elements 8 and 9 are standalone
 
-        assertEquals(5, dsu.count())
+        assertEquals(5, dsu.count)
 
         // Test connections within components
         assertTrue(dsu.connected(0, 2))
@@ -388,29 +388,29 @@ class DisjointSetUnionTest {
 
         // Merge some components
         dsu.union(2, 3)  // Merges {0,1,2} and {3,4,5}
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
         assertTrue(dsu.connected(0, 5))
 
         dsu.union(7, 8)  // Merges {6,7} and {8}
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
         assertTrue(dsu.connected(6, 8))
 
         // Reset element 5
         dsu.isolate(5)
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
         assertFalse(dsu.connected(3, 5))
         assertFalse(dsu.connected(0, 5))
 
         // Re-union 5 back
         dsu.union(5, 4)
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
         assertTrue(dsu.connected(0, 5))
     }
 
     @Test
     fun `DSU should handle empty initialization`() {
         val dsu = DisjointSetUnion(0)
-        assertEquals(0, dsu.count())
+        assertEquals(0, dsu.count)
     }
 
     @Test
@@ -423,13 +423,13 @@ class DisjointSetUnionTest {
         dsu.union(2, 3)
         dsu.union(3, 4)
 
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
         assertTrue(dsu.connected(0, 4))
 
         // Reset element 2 (middle element)
         dsu.isolate(2)
 
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
 
         // Element 2 should be completely isolated
         assertFalse(dsu.connected(0, 2), "Element 0 should not be connected to 2")
@@ -457,12 +457,12 @@ class DisjointSetUnionTest {
         dsu.union(3, 4)
         dsu.union(4, 5)
 
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
 
         // Isolate element 1
         dsu.isolate(1)
 
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Critical: no element should be connected to element 1
         for (i in 0..<6) {
@@ -495,7 +495,7 @@ class DisjointSetUnionTest {
         // Now isolate element 3
         dsu.isolate(3)
 
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
 
         // Element 3 should be completely isolated
         for (i in 0..<7) {
@@ -523,16 +523,16 @@ class DisjointSetUnionTest {
         dsu.union(2, 3)
         dsu.union(3, 4)
 
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // Isolate elements one by one
         dsu.isolate(1)
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
         assertFalse(dsu.connected(0, 1))
         assertFalse(dsu.connected(1, 2))
 
         dsu.isolate(3)
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
         assertFalse(dsu.connected(2, 3))
         assertFalse(dsu.connected(3, 4))
 
@@ -566,17 +566,17 @@ class DisjointSetUnionTest {
         dsu.union(7, 8)
         dsu.union(8, 9)
 
-        assertEquals(3, dsu.count())
+        assertEquals(3, dsu.count)
 
         // Isolate one element from each set
         dsu.isolate(1)
-        assertEquals(4, dsu.count())
+        assertEquals(4, dsu.count)
 
         dsu.isolate(5)
-        assertEquals(5, dsu.count())
+        assertEquals(5, dsu.count)
 
         dsu.isolate(8)
-        assertEquals(6, dsu.count())
+        assertEquals(6, dsu.count)
 
         // Verify that isolated elements are truly isolated
         for (i in 0..<10) {
@@ -603,13 +603,13 @@ class DisjointSetUnionTest {
         assertTrue(dsu.connected(0, 1))
         assertTrue(dsu.connected(0, 2))
         assertTrue(dsu.connected(1, 2))
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // Now isolate element 1 - this is where the bug would manifest
         dsu.isolate(1)
 
         // After isolate(1), element 1 should be completely isolated
-        assertEquals(2, dsu.count())
+        assertEquals(2, dsu.count)
         assertFalse(dsu.connected(0, 1), "Element 0 should NOT be connected to 1 after isolate(1)")
         assertFalse(dsu.connected(1, 2), "Element 1 should NOT be connected to 2 after isolate(1)")
 
@@ -629,7 +629,7 @@ class DisjointSetUnionTest {
             dsu.union(i, i + 1)
         }
 
-        assertEquals(1, dsu.count())
+        assertEquals(1, dsu.count)
 
         // Find on the last element should compress the entire path
         val root = dsu.find(99)

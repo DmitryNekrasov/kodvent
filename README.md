@@ -35,7 +35,7 @@ An efficient data structure for managing disjoint sets with near-constant time o
 - **`find(x: Int): Int`** - Finds the representative (root) of the set containing element `x`
 - **`union(x: Int, y: Int): Boolean`** - Merges the sets containing `x` and `y`, returns `true` if merged
 - **`connected(x: Int, y: Int): Boolean`** - Checks if `x` and `y` are in the same set
-- **`count(): Int`** - Returns the number of disjoint sets
+- **`count: Int`** - The number of disjoint sets
 - **`isolate(x: Int)`** - Resets element `x` to be in its own singleton set
 
 The implementation uses path compression and union by rank optimizations for optimal performance.

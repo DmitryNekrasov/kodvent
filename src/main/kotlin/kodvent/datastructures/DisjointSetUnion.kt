@@ -49,7 +49,7 @@ public class DisjointSetUnion(size: Int) {
      */
     public fun find(x: Int): Int {
         if (x !in parent.indices) {
-            throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0..${parent.size})")
+            throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
         if (parent[x] != x) {
             parent[x] = find(parent[x])
@@ -149,7 +149,7 @@ public class DisjointSetUnion(size: Int) {
      */
     public fun makeSet(x: Int) {
         if (x !in parent.indices) {
-            throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0..${parent.size})")
+            throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
 
         val oldRoot = find(x)

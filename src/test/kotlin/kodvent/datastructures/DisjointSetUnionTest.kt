@@ -208,7 +208,7 @@ class DisjointSetUnionTest {
         dsu.makeSet(root)
 
         // The count should increase
-        assertTrue(dsu.count() > 3)
+        assertEquals(4, dsu.count())
 
         // Original root should be in its own set now
         assertEquals(root, dsu.find(root))

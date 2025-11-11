@@ -120,9 +120,11 @@ public class DisjointSetUnion(size: Int) {
      * Resets element [x] to be in its own singleton set.
      *
      * This operation makes [x] the representative of a new set containing only itself,
-     * effectively removing it from any set it was previously part of.
+     * effectively removing it from any set it was previously part of. Other elements
+     * that were in the same set remain connected.
      *
-     * Time complexity: `O(1)`
+     * Time complexity: `O(n)`, where `n` is the size of the disjoint set, as it may need
+     *                  to find all elements in the set and reconnect them.
      *
      * @param x The element to reset. Must be in range [0, size).
      *
@@ -132,6 +134,39 @@ public class DisjointSetUnion(size: Int) {
         if (x !in parent.indices) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0..${parent.size})")
         }
+
+        val oldRoot = find(x)
+
+        // If x is not a root, simply detach it
+        if (parent[x] != x) {
+            parent[x] = x
+            rank[x] = 0
+            return
+        }
+
+        // If x is a root, we need to find all elements in its set and give them a new root
+        val elementsInSet = parent.indices.filter { i -> i != x && find(i) == oldRoot }
+
+        if (elementsInSet.isEmpty()) {
+            // x was already in its own singleton set
+            parent[x] = x
+            rank[x] = 0
+            return
+        }
+
+        // Choose a new root (first element in the set, excluding x)
+        val newRoot = elementsInSet[0]
+
+        // Reconnect all elements (except x) to the new root
+        for (i in elementsInSet) {
+            parent[i] = newRoot
+        }
+
+        // Set the new root properly
+        parent[newRoot] = newRoot
+        rank[newRoot] = 0
+
+        // Isolate x
         parent[x] = x
         rank[x] = 0
     }

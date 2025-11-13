@@ -68,8 +68,10 @@ public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
  * @sample samples.PowSamples.powBasicUsage
  * @sample samples.PowSamples.powInfixNotation
  */
-public infix fun Long.pow(power: Long): Long =
-    binaryExponentiation(this, power) { x, y -> x * y }
+public infix fun Long.pow(power: Long): Long {
+    require(power >= 0) { "power must be non-negative, but was $power" }
+    return binaryExponentiation(this, power) { x, y -> x * y }
+}
 
 /**
  * Raises this Long to the given power modulo a specified value using binary exponentiation.

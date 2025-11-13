@@ -92,7 +92,7 @@ public infix fun Long.pow(power: Long): Long {
  * @sample samples.PowSamples.powModuloFermatLittleTheorem
  */
 public fun Long.pow(power: Long, modulo: Long): Long =
-    binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }
+    binaryExponentiation(this.mod(modulo), power) { x, y -> x * y % modulo }
 
 private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long, Long) -> Long): Long {
     var a = base

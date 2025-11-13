@@ -2,6 +2,7 @@ package kodvent.math
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class PowTest {
 
@@ -292,5 +293,35 @@ class PowTest {
 
         assertEquals(expectedEquivalent, result)
         assertEquals(9L, result)
+    }
+
+    @Test
+    fun `pow should throw when power is negative`() {
+        assertFailsWith<IllegalArgumentException> { 2L.pow(-1L) }
+    }
+
+    @Test
+    fun `pow should throw when power is very negative`() {
+        assertFailsWith<IllegalArgumentException> { 5L.pow(-100L) }
+    }
+
+    @Test
+    fun `pow with modulo should throw when power is negative`() {
+        assertFailsWith<IllegalArgumentException> { 2L.pow(-1L, 5L) }
+    }
+
+    @Test
+    fun `pow with modulo should throw when modulo is zero`() {
+        assertFailsWith<IllegalArgumentException> { 2L.pow(3L, 0L) }
+    }
+
+    @Test
+    fun `pow with modulo should throw when modulo is negative`() {
+        assertFailsWith<IllegalArgumentException> { 2L.pow(3L, -5L) }
+    }
+
+    @Test
+    fun `pow with modulo should throw when both power and modulo are invalid`() {
+        val exception = assertFailsWith<IllegalArgumentException> { 2L.pow(-1L, -5L) }
     }
 }

@@ -235,4 +235,62 @@ class PowTest {
 
         assertEquals(message, decrypted)
     }
+
+    @Test
+    fun `pow with modulo should handle negative base correctly using mod()`() {
+        // Using mod() ensures the result is always in the range [0, modulo)
+        // This is different from % which can return negative results
+
+        // (-3).mod(5) = 2, so (-3)^2 mod 5 = 2^2 mod 5 = 4
+        assertEquals(4L, (-3L).pow(2L, 5L))
+
+        // (-2).mod(7) = 5, so (-2)^3 mod 7 = 5^3 mod 7 = 125 mod 7 = 6
+        assertEquals(6L, (-2L).pow(3L, 7L))
+
+        // (-5).mod(13) = 8, so (-5)^2 mod 13 = 8^2 mod 13 = 64 mod 13 = 12
+        assertEquals(12L, (-5L).pow(2L, 13L))
+    }
+
+    @Test
+    fun `pow with modulo should handle negative base with odd power`() {
+        // For odd powers, the mathematical result would be negative,
+        // but mod() normalizes it to the range [0, modulo)
+
+        // (-2).mod(5) = 3, so (-2)^3 mod 5 = 3^3 mod 5 = 27 mod 5 = 2
+        assertEquals(2L, (-2L).pow(3L, 5L))
+
+        // (-3).mod(7) = 4, so (-3)^5 mod 7 = 4^5 mod 7 = 1024 mod 7 = 2
+        assertEquals(2L, (-3L).pow(5L, 7L))
+    }
+
+    @Test
+    fun `pow with modulo should handle negative base with even power`() {
+        // For even powers, the mathematical result would be positive
+
+        // (-2).mod(5) = 3, so (-2)^4 mod 5 = 3^4 mod 5 = 81 mod 5 = 1
+        assertEquals(1L, (-2L).pow(4L, 5L))
+
+        // (-3).mod(7) = 4, so (-3)^6 mod 7 = 4^6 mod 7 = 4096 mod 7 = 1
+        assertEquals(1L, (-3L).pow(6L, 7L))
+    }
+
+    @Test
+    fun `pow with modulo should demonstrate difference between mod and remainder`() {
+        // This test documents the behavior difference between % and mod()
+        // % (remainder) can return negative values, while mod() always returns non-negative
+
+        // Example: -3 % 5 = -3 (remainder), but (-3).mod(5) = 2 (modulo)
+        // The function uses mod(), so negative bases are normalized to positive equivalents
+
+        val negativeBase = -7L
+        val power = 3L
+        val modulo = 11L
+
+        // (-7).mod(11) = 4, so the computation is equivalent to 4^3 mod 11
+        val result = negativeBase.pow(power, modulo)
+        val expectedEquivalent = 4L.pow(power, modulo)
+
+        assertEquals(expectedEquivalent, result)
+        assertEquals(9L, result)
+    }
 }

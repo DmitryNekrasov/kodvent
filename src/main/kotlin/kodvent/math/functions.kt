@@ -69,7 +69,7 @@ public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
  * @sample samples.PowSamples.powInfixNotation
  */
 public infix fun Long.pow(power: Long): Long {
-    require(power >= 0) { "power must be non-negative, but was $power" }
+    require(power >= 0) { "Power must be non-negative, but was $power" }
     return binaryExponentiation(this, power) { x, y -> x * y }
 }
 
@@ -81,9 +81,9 @@ public infix fun Long.pow(power: Long): Long {
  * is applied at each step to prevent overflow.
  *
  * @param power the exponent (must be non-negative)
- * @param modulo the modulus value
+ * @param modulo the modulus value (must be positive)
  *
- * @return this number raised to the power of [power], modulo [modulo]
+ * @return this number raised to the power of [power], modulo [modulo]; a result is in the range [0, modulo)
  *
  * @see pow overload without a modulo parameter for regular exponentiation
  *
@@ -91,8 +91,11 @@ public infix fun Long.pow(power: Long): Long {
  * @sample samples.PowSamples.powModuloLastDigit
  * @sample samples.PowSamples.powModuloFermatLittleTheorem
  */
-public fun Long.pow(power: Long, modulo: Long): Long =
-    binaryExponentiation(this.mod(modulo), power) { x, y -> x * y % modulo }
+public fun Long.pow(power: Long, modulo: Long): Long {
+    require(power >= 0) { "Power must be non-negative, but was $power" }
+    require(modulo > 0) { "Modulo must be positive, but was $modulo" }
+    return binaryExponentiation(this.mod(modulo), power) { x, y -> x * y % modulo }
+}
 
 private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long, Long) -> Long): Long {
     var a = base

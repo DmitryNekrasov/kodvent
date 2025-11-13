@@ -48,3 +48,32 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
  * See [lcm] for Int parameters
  */
 public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
+
+public fun Long.pow(power: Long): Long {
+    var a = this
+    var b = power
+    var result = 1L
+    while (b > 0) {
+        if (power and 1L == 1L) {
+            result = result * a
+        }
+        a = a * a
+        b = b shr 1
+    }
+    return result
+}
+
+public fun Long.pow(power: Long, modulo: Long): Long {
+    var a = this % modulo
+    var b = power
+    var result = 1L
+    while (b > 0) {
+        if (power and 1L == 1L) {
+            result = result * a % modulo
+        }
+        a = a * a % modulo
+        b = b shr 1
+    }
+    return result
+}
+

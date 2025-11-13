@@ -49,10 +49,40 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
  */
 public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
 
+/**
+ * Raises this Long to the given power using binary exponentiation.
+ *
+ * This function uses the fast binary exponentiation algorithm
+ * (also known as [exponentiation by squaring](https://en.wikipedia.org/wiki/Exponentiation_by_squaring)),
+ * which computes the result in O(log n) time, where n is the exponent.
+ *
+ * **Warning**: This function does not check for overflow. For large bases or exponents,
+ * the result may overflow and wrap around.
+ *
+ * @param power the exponent (must be non-negative)
+ *
+ * @return this number rose to the power of [power]
+ *
+ * @see pow overload with modulo parameter for modular exponentiation
+ */
 public fun Long.pow(power: Long): Long {
     return binaryExponentiation(this, power) { x, y -> x * y }
 }
 
+/**
+ * Raises this Long to the given power modulo a specified value using binary exponentiation.
+ *
+ * This function uses the fast binary exponentiation algorithm with modular arithmetic,
+ * computing the result in O(log n) time, where n is the exponent. The modulo operation
+ * is applied at each step to prevent overflow.
+ *
+ * @param power the exponent (must be non-negative)
+ * @param modulo the modulus value
+ *
+ * @return this number rose to the power of [power], modulo [modulo]
+ *
+ * @see pow overload without a modulo parameter for regular exponentiation
+ */
 public fun Long.pow(power: Long, modulo: Long): Long {
     return binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }
 }

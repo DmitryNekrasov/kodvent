@@ -42,7 +42,7 @@ public fun lcm(a: Int, b: Int): Int = a / gcd(a, b) * b
 /**
  * See [gcd] for Int parameters
  */
-public fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
+public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
 
 /**
  * See [lcm] for Int parameters

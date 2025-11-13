@@ -50,30 +50,23 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
 public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
 
 public fun Long.pow(power: Long): Long {
-    var a = this
-    var b = power
-    var result = 1L
-    while (b > 0) {
-        if (power and 1L == 1L) {
-            result = result * a
-        }
-        a = a * a
-        b = b shr 1
-    }
-    return result
+    return binaryExponentiation(this, power) { x, y -> x * y }
 }
 
 public fun Long.pow(power: Long, modulo: Long): Long {
-    var a = this % modulo
+    return binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }
+}
+
+private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long, Long) -> Long): Long {
+    var a = base
     var b = power
     var result = 1L
     while (b > 0) {
-        if (power and 1L == 1L) {
-            result = result * a % modulo
+        if (b and 1L == 1L) {
+            result = multiply(result, a)
         }
-        a = a * a % modulo
+        a = multiply(a, a)
         b = b shr 1
     }
     return result
 }
-

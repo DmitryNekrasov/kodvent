@@ -27,6 +27,17 @@ Common mathematical functions for number theory and algorithmic problems:
 - **`lcm(a: Int, b: Int): Int`** - Computes the least common multiple (LCM) of two integers
 - Both functions are also available for `Long` parameters
 
+#### Power Functions
+
+Efficient exponentiation using binary exponentiation (O(log n) time complexity):
+
+- **`Long.pow(power: Long): Long`** - Raises a Long to the given power using fast binary exponentiation
+  - Supports infix notation: `2L pow 10L`
+  - Warning: Does not check for overflow with large values
+- **`Long.pow(power: Long, modulo: Long): Long`** - Modular exponentiation that prevents overflow
+  - Useful for computing large powers modulo a number
+  - Common in number theory problems
+
 ### Disjoint Set Union (Union-Find)
 
 An efficient data structure for managing disjoint sets with near-constant time operations:
@@ -106,6 +117,34 @@ val result2 = lcm(12, 18)  // 36
 // Solve a scheduling problem
 // Two buses arrive every 12 and 18 minutes
 val nextSimultaneousArrival = lcm(12, 18)  // 36 minutes
+```
+
+### Power and Modular Exponentiation
+
+```kotlin
+import kodvent.math.pow
+
+// Basic exponentiation using binary exponentiation
+val result1 = 2L.pow(10L)  // 1024
+val result2 = 5L.pow(3L)   // 125
+
+// Using infix notation for cleaner syntax
+val result3 = 2L pow 10L   // 1024
+val area = 5L pow 2L       // 25
+
+// Modular exponentiation to prevent overflow
+// Useful for large computations
+val modulo = 1000000007L
+val result4 = 2L.pow(100L, modulo)  // 976371285
+
+// Find the last digit of a large power
+val lastDigit = 7L.pow(100L, 10L)  // 1 (last digit of 7^100)
+
+// Number theory: verify Fermat's Little Theorem
+// For prime p: a^(p-1) ≡ 1 (mod p)
+val a = 5L
+val p = 13L  // prime
+val fermat = a.pow(p - 1, p)  // 1
 ```
 
 ### Graph Algorithms with Disjoint Set Union

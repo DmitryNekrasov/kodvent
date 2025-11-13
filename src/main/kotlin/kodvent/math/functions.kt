@@ -64,6 +64,9 @@ public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
  * @return this number rose to the power of [power]
  *
  * @see pow overload with modulo parameter for modular exponentiation
+ *
+ * @sample samples.PowSamples.powBasicUsage
+ * @sample samples.PowSamples.powInfixNotation
  */
 public infix fun Long.pow(power: Long): Long =
     binaryExponentiation(this, power) { x, y -> x * y }
@@ -81,6 +84,10 @@ public infix fun Long.pow(power: Long): Long =
  * @return this number rose to the power of [power], modulo [modulo]
  *
  * @see pow overload without a modulo parameter for regular exponentiation
+ *
+ * @sample samples.PowSamples.powModuloBasicUsage
+ * @sample samples.PowSamples.powModuloLastDigit
+ * @sample samples.PowSamples.powModuloFermatLittleTheorem
  */
 public fun Long.pow(power: Long, modulo: Long): Long =
     binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }

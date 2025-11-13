@@ -61,7 +61,7 @@ public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
  *
  * @param power the exponent (must be non-negative)
  *
- * @return this number rose to the power of [power]
+ * @return this number raised to the power of [power]
  *
  * @see pow overload with modulo parameter for modular exponentiation
  *
@@ -81,7 +81,7 @@ public infix fun Long.pow(power: Long): Long =
  * @param power the exponent (must be non-negative)
  * @param modulo the modulus value
  *
- * @return this number rose to the power of [power], modulo [modulo]
+ * @return this number raised to the power of [power], modulo [modulo]
  *
  * @see pow overload without a modulo parameter for regular exponentiation
  *

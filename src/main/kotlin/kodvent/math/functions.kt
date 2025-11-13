@@ -83,7 +83,7 @@ public infix fun Long.pow(power: Long): Long {
  * @param power the exponent (must be non-negative)
  * @param modulo the modulus value (must be positive)
  *
- * @return this number raised to the power of [power], modulo [modulo]; a result is in the range [0, modulo)
+ * @return this number raised to the power of [power], modulo [modulo]; the result is in the range [0, modulo)
  *
  * @see pow overload without a modulo parameter for regular exponentiation
  *

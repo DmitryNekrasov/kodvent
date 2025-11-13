@@ -65,9 +65,8 @@ public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
  *
  * @see pow overload with modulo parameter for modular exponentiation
  */
-public fun Long.pow(power: Long): Long {
-    return binaryExponentiation(this, power) { x, y -> x * y }
-}
+public fun Long.pow(power: Long): Long =
+    binaryExponentiation(this, power) { x, y -> x * y }
 
 /**
  * Raises this Long to the given power modulo a specified value using binary exponentiation.
@@ -83,9 +82,8 @@ public fun Long.pow(power: Long): Long {
  *
  * @see pow overload without a modulo parameter for regular exponentiation
  */
-public fun Long.pow(power: Long, modulo: Long): Long {
-    return binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }
-}
+public fun Long.pow(power: Long, modulo: Long): Long =
+    binaryExponentiation(this % modulo, power) { x, y -> x * y % modulo }
 
 private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long, Long) -> Long): Long {
     var a = base

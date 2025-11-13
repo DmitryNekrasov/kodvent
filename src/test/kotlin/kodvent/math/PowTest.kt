@@ -322,6 +322,6 @@ class PowTest {
 
     @Test
     fun `pow with modulo should throw when both power and modulo are invalid`() {
-        val exception = assertFailsWith<IllegalArgumentException> { 2L.pow(-1L, -5L) }
+        assertFailsWith<IllegalArgumentException> { 2L.pow(-1L, -5L) }
     }
 }

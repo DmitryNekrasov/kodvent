@@ -15,9 +15,14 @@ $dokka.location:kodvent.math//lcm/#kotlin.Int#kotlin.Int/PointingToDeclaration/
 $dokka.location:kodvent.math//lcm/#kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/lcm.html
 $dokka.location:kodvent.math//pow/kotlin.Long#kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/pow.html
 $dokka.location:kodvent.math//pow/kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/pow.html
+$dokka.location:kodvent.strings////PointingToDeclaration/kodvent/kodvent.strings/index.html
+$dokka.location:kodvent.strings//allIndicesOf/kotlin.CharSequence#kotlin.CharSequence#kotlin.Char/PointingToDeclaration/kodvent/kodvent.strings/all-indices-of.html
+$dokka.location:kodvent.strings//prefixFunction/#kotlin.Int#kotlin.Function1[kotlin.Int,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kodvent/kodvent.strings/prefix-function.html
+$dokka.location:kodvent.strings//prefixFunction/kotlin.CharSequence#/PointingToDeclaration/kodvent/kodvent.strings/prefix-function.html
 $dokka.location:kodvent////PointingToDeclaration/kodvent/kodvent/index.html
 $dokka.location:kodvent//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/decrement.html
 $dokka.location:kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/increment.html
 kodvent
 kodvent.datastructures
 kodvent.math
+kodvent.strings

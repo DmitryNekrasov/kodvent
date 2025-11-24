@@ -21,6 +21,9 @@ package kodvent.strings
  * @return an array where the i-th element contains the length of the longest proper prefix
  *         of this[0..i] that is also a suffix of this[0..i]
  *
+ * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionBasicUsage
+ * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionUnderstandingTheResult
+ *
  * @see CharSequence.allIndicesOf
  */
 public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::get)
@@ -41,6 +44,9 @@ public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::ge
  *
  * @return an array where the i-th element contains the length of the longest proper prefix
  *         that is also a suffix for the subsequence [0..i]
+ *
+ * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
+ * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithCustomObjects
  *
  * @see CharSequence.allIndicesOf
  */
@@ -70,6 +76,15 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  *                  Must not appear in either the needle or the text. Defaults to '#'.
  *
  * @return a list of all starting indices where the needle occurs in this character sequence
+ *
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfBasicUsage
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfFindingOverlappingPatterns
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfCountingOccurrences
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfSearchInDNA
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfWithCustomDelimiter
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfRepeatedPatternDetection
+ * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfEdgeCases
+ * @sample samples.PrefixFunctionAndKMPSamples.combiningPrefixFunctionAndKMP
  *
  * @see prefixFunction
  */

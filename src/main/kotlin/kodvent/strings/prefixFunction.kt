@@ -18,3 +18,14 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
     }
     return pi
 }
+
+public fun CharSequence.findAll(needle: CharSequence, delimiter: Char = '#'): List<Int> {
+    val pi = "$needle$delimiter$this".prefixFunction()
+    val result = mutableListOf<Int>()
+    for (i in (needle.length + 1)..pi.lastIndex) {
+        if (pi[i] == needle.length) {
+            result.add(i - 2 * needle.length)
+        }
+    }
+    return result
+}

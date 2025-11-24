@@ -51,6 +51,22 @@ An efficient data structure for managing disjoint sets with near-constant time o
 
 The implementation uses path compression and union by rank optimizations for optimal performance.
 
+### String Algorithms
+
+Efficient string matching and analysis functions based on the prefix function and KMP algorithm:
+
+- **`CharSequence.prefixFunction(): IntArray`** - Computes the prefix function for a character sequence
+  - The prefix function π[i] represents the length of the longest proper prefix that is also a suffix
+  - Fundamental component of the Knuth-Morris-Pratt algorithm
+  - Time complexity: O(n)
+- **`prefixFunction(length: Int, at: (Int) -> T): IntArray`** - Generic version that works with any type of sequence
+  - Works with any elements that can be accessed by index and compared for equality
+  - Useful for pattern matching in non-string sequences
+- **`CharSequence.allIndicesOf(needle: CharSequence, delimiter: Char = '#'): List<Int>`** - Finds all occurrences of a substring
+  - Uses the KMP algorithm for efficient string matching
+  - Time complexity: O(n + m) where n is text length and m is pattern length
+  - Returns all starting indices where the pattern occurs
+
 ## Installation
 
 Add the dependency to your project:
@@ -178,6 +194,43 @@ val mst = edges.sortedBy { it.weight }
     .filter { dsuMst.union(it.from, it.to) }
 
 // mst contains edges with minimum total weight
+```
+
+### String Matching with KMP Algorithm
+
+```kotlin
+import kodvent.strings.allIndicesOf
+import kodvent.strings.prefixFunction
+
+// Find all occurrences of a pattern in text
+val text = "ababcababa"
+val pattern = "aba"
+val indices = text.allIndicesOf(pattern)  // [0, 5, 7]
+
+// Count pattern occurrences
+val dna = "ATGCATGCATGC"
+val dnaPattern = "ATGC"
+val count = dna.allIndicesOf(dnaPattern).size  // 3
+
+// Find overlapping patterns
+val str = "aaaa"
+val overlapping = str.allIndicesOf("aa")  // [0, 1, 2] - finds overlaps
+
+// Compute prefix function for pattern analysis
+val s = "abacaba"
+val pi = s.prefixFunction()  // [0, 0, 1, 0, 1, 2, 3]
+// pi[6] = 3 means "aba" is both prefix and suffix of "abacaba"
+
+// Use prefix function for period detection
+val periodic = "abababab"
+val prefixArray = periodic.prefixFunction()
+val period = periodic.length - prefixArray.last()  // 2
+// The string has a repeating pattern of length 2
+
+// Generic prefix function with custom types
+val numbers = listOf(1, 2, 1, 2, 1, 2, 3)
+val numPi = prefixFunction(numbers.size, numbers::get)
+// Works with any comparable elements
 ```
 
 ## Development

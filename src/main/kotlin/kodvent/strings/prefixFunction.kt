@@ -77,6 +77,8 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  *
  * @return a list of all starting indices where the needle occurs in this character sequence
  *
+ * @throws IllegalArgumentException if the delimiter appears in the needle or in this text
+ *
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfBasicUsage
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfFindingOverlappingPatterns
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfCountingOccurrences
@@ -89,6 +91,9 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  * @see prefixFunction
  */
 public fun CharSequence.allIndicesOf(needle: CharSequence, delimiter: Char = '#'): List<Int> {
+    require(delimiter !in needle) { "Delimiter '$delimiter' must not appear in the needle string" }
+    require(delimiter !in this) { "Delimiter '$delimiter' must not appear in the text" }
+
     val pi = "$needle$delimiter$this".prefixFunction()
     val result = mutableListOf<Int>()
     for (i in (needle.length + 1)..pi.lastIndex) {

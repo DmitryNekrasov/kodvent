@@ -8,6 +8,7 @@ package kodvent.strings
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class PrefixFunctionAndKMPTest {
 
@@ -188,5 +189,25 @@ class PrefixFunctionAndKMPTest {
     fun `allIndicesOf complex case with multiple overlapping matches`() {
         val result = "aabaabaabaab".allIndicesOf("aabaab")
         assertEquals(listOf(0, 3, 6), result)
+    }
+
+    @Test
+    fun `allIndicesOf throws when delimiter appears in needle`() {
+        assertFailsWith<IllegalArgumentException> { "hello world".allIndicesOf("hel#lo") }
+    }
+
+    @Test
+    fun `allIndicesOf throws when delimiter appears in text`() {
+        assertFailsWith<IllegalArgumentException> { "hel#lo world".allIndicesOf("hello") }
+    }
+
+    @Test
+    fun `allIndicesOf throws when custom delimiter appears in needle`() {
+        assertFailsWith<IllegalArgumentException> { "hello world".allIndicesOf("hel\$lo", delimiter = '$') }
+    }
+
+    @Test
+    fun `allIndicesOf throws when custom delimiter appears in text`() {
+        assertFailsWith<IllegalArgumentException> { "hel\$lo world".allIndicesOf("hello", delimiter = '$') }
     }
 }

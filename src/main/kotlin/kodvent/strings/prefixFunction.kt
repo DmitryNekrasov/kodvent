@@ -91,6 +91,8 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  * @see prefixFunction
  */
 public fun CharSequence.allIndicesOf(needle: CharSequence, delimiter: Char = '#'): List<Int> {
+    if (needle.isEmpty()) return (0..<length).toList()
+
     require(delimiter !in needle) { "Delimiter '$delimiter' must not appear in the needle string" }
     require(delimiter !in this) { "Delimiter '$delimiter' must not appear in the text" }
 

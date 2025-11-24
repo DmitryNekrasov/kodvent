@@ -167,10 +167,10 @@ class PrefixFunctionAndKMPTest {
 
     @Test
     fun `allIndicesOf with empty needle returns indices for all positions`() {
-        // When the needle is empty, the algorithm returns all positions in the text
-        // This is the actual behavior of the KMP algorithm for empty patterns
         val result = "abcdef".allIndicesOf("")
-        assertEquals(listOf(1, 2, 3, 4, 5, 6), result)
+        assertEquals(listOf(0, 1, 2, 3, 4, 5), result)
+        assertEquals("abcdef".indexOf(""), result.first())
+        assertEquals("abcdef".lastIndexOf(""), result.last())
     }
 
     @Test

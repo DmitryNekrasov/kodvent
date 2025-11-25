@@ -11,7 +11,7 @@ package kodvent.strings
  * Computes the prefix function for this character sequence.
  *
  * The prefix function π[i] is defined as the length of the longest proper prefix
- * of the substring s[0..i] that is also a suffix of this substring.
+ * of the substring `s[0..i]` that is also a suffix of this substring.
  * This is a fundamental component of the
  * [Knuth-Morris-Pratt (KMP) string matching algorithm](https://cp-algorithms.com/string/prefix-function.html).
  *
@@ -19,7 +19,7 @@ package kodvent.strings
  * Space complexity: O(n) for the result array
  *
  * @return an array where the i-th element contains the length of the longest proper prefix
- *         of this[0..i] that is also a suffix of this[0..i]
+ *         of `this[0..i]` that is also a suffix of `this[0..i]`
  *
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionBasicUsage
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionUnderstandingTheResult
@@ -43,7 +43,7 @@ public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::ge
  * @param at a function that returns the element at a given index
  *
  * @return an array where the i-th element contains the length of the longest proper prefix
- *         that is also a suffix for the subsequence [0..i]
+ *         that is also a suffix for the subsequence `[0..i]`
  *
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithCustomObjects

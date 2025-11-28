@@ -21,7 +21,6 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
         require(start >= 0) { "Start index $start is negative. Valid range: [0, ${size - 1}]" }
         require(end < size) { "End index $end is out of bounds. Valid range: [0, ${size - 1}]" }
         require(start <= end) { "Start index $start is greater than end index $end" }
-
         return queryRange(1, 0, size - 1, start, end)
             ?: error("Query returned null for valid range [$start, $end]")
     }
@@ -33,6 +32,11 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
 
     public fun getOrDefault(start: Int, end: Int, defaultValue: T): T {
         return getOrNull(start, end) ?: defaultValue
+    }
+
+    fun update(index: Int, newValue: T) {
+        require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }
+        update(1, 0, size - 1, index, newValue)
     }
 
     private fun build(source: Collection<T>, nodeIndex: Int = 1, start: Int = 0, end: Int = size - 1) {
@@ -64,6 +68,24 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
                     else -> operation(leftResult, rightResult)
                 }
             }
+        }
+    }
+
+    private fun update(nodeIndex: Int, start: Int, end: Int, index: Int, newValue: T) {
+        if (start == end) {
+            tree[nodeIndex] = newValue
+        } else {
+            val mid = start + (end - start) / 2
+            val leftNodeIndex = nodeIndex * 2
+            val rightNodeIndex = nodeIndex * 2 + 1
+
+            if (index <= mid) {
+                update(leftNodeIndex, start, mid, index, newValue)
+            } else {
+                update(rightNodeIndex, mid + 1, end, index, newValue)
+            }
+
+            tree[nodeIndex] = operation(tree[leftNodeIndex]!!, tree[rightNodeIndex]!!)
         }
     }
 }

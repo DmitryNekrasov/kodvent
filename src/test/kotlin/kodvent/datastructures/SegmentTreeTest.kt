@@ -20,7 +20,7 @@ class SegmentTreeTest {
     }
 
     @Test
-    fun `get should handle single element segment tree`() {
+    fun `methods for getting the value should handle single element segment tree`() {
         val tree = SegmentTree(listOf(42), Int::plus)
         assertEquals(42, tree[0, 0])
         assertEquals(42, tree.getOrNull(0, 0))

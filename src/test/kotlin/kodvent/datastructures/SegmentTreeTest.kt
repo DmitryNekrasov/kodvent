@@ -620,7 +620,7 @@ class SegmentTreeTest {
             Point(3, 4),
             Point(5, 6)
         )
-        val tree = SegmentTree(data) { a, b -> Point(a.x + b.x, a.y + b.y) }
+        val tree = SegmentTree(data, Point::plus)
         val result = tree[0, 2]
         assertEquals(9, result.x)
         assertEquals(12, result.y)
@@ -630,5 +630,11 @@ class SegmentTreeTest {
         val updatedResult = tree[0, 2]
         assertEquals(19, updatedResult.x)
         assertEquals(22, updatedResult.y)
+
+        tree[2] *= 3
+        assertEquals(Point(15, 18), tree[2])
+        val finalResult = tree[0, 2]
+        assertEquals(29, finalResult.x)
+        assertEquals(34, finalResult.y)
     }
 }

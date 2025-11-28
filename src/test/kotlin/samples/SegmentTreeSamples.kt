@@ -126,18 +126,6 @@ class SegmentTreeSamples {
     }
 
     @Test
-    fun subarraySumQueries() {
-        val array = listOf(10, 20, 30, 40, 50, 60, 70, 80)
-        val segmentTree = SegmentTree(array, Int::plus)
-
-        // Multiple range sum queries
-        assertEquals(30, segmentTree[0, 1])  // 10 + 20
-        assertEquals(120, segmentTree[2, 4]) // 30 + 40 + 50
-        assertEquals(210, segmentTree[5, 7]) // 60 + 70 + 80
-        assertEquals(360, segmentTree[0, 7]) // entire array
-    }
-
-    @Test
     fun safeQueryMethods() {
         val numbers = listOf(5, 10, 15, 20, 25)
         val segmentTree = SegmentTree(numbers, Int::plus)

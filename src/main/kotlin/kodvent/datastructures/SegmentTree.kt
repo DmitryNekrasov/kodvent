@@ -27,6 +27,14 @@ package kodvent.datastructures
  * @param source the initial collection of elements to build the segment tree from
  * @param operation an associative binary operation (e.g., sum, min, max, gcd) to combine elements.
  *        Must be associative: `operation(a, operation(b, c)) == operation(operation(a, b), c)`
+ *
+ * @sample samples.SegmentTreeSamples.basicRangeSumQuery
+ * @sample samples.SegmentTreeSamples.rangeMinimumQuery
+ * @sample samples.SegmentTreeSamples.rangeMaximumQuery
+ * @sample samples.SegmentTreeSamples.rangeGCDQuery
+ * @sample samples.SegmentTreeSamples.stockPriceAnalysis
+ * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
+ * @sample samples.SegmentTreeSamples.slidingWindowMinimum
  */
 public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T) -> T) {
     private val size = source.size
@@ -70,6 +78,8 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
      *
      * @return the result of applying the operation to all elements in the range, or null if
      *         [start] < 0, [end] >= [size], or [start] > [end]
+     *
+     * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
     public fun getOrNull(start: Int, end: Int): T? {
         if (start < 0 || end >= size || start > end) return null
@@ -89,6 +99,8 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
      *
      * @return the result of applying the operation to all elements in the range, or [defaultValue] if
      *         [start] < 0, [end] >= [size], or [start] > [end]
+     *
+     * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
     public fun getOrDefault(start: Int, end: Int, defaultValue: T): T {
         return getOrNull(start, end) ?: defaultValue
@@ -104,6 +116,8 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
      * @param newValue the new value to set at the specified index
      *
      * @throws IllegalArgumentException if [index] is out of bounds
+     *
+     * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
      */
     public fun update(index: Int, newValue: T) {
         require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }

@@ -7,6 +7,27 @@
 
 package kodvent.datastructures
 
+/**
+ * A [segment tree data structure](https://en.wikipedia.org/wiki/Segment_tree)
+ * that supports efficient range queries and point updates.
+ *
+ * A segment tree is a binary tree used for storing intervals or segments. It allows querying
+ * which of the stored segments contain a given point and supports efficient range queries
+ * using an associative binary operation.
+ *
+ * ## Time Complexity
+ * - Construction: O(n)
+ * - Range query: O(log n)
+ * - Point update: O(log n)
+ *
+ * ## Space Complexity
+ * - O(n) where n is the size of the [source] collection
+ *
+ * @param T the type of elements in the segment tree
+ * @param source the initial collection of elements to build the segment tree from
+ * @param operation an associative binary operation (e.g., sum, min, max, gcd) to combine elements.
+ *        Must be associative: `operation(a, operation(b, c)) == operation(operation(a, b), c)`
+ */
 public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T) -> T) {
     private val size = source.size
     private val tree = MutableList<T?>(size * 4) { null }
@@ -17,6 +38,18 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
         }
     }
 
+    /**
+     * Queries the result of applying the operation over the range [[start], [end]] (inclusive).
+     *
+     * This operator function allows using bracket notation for range queries.
+     *
+     * @param start the starting index of the range (inclusive); must be non-negative
+     * @param end the ending index of the range (inclusive); must be less than the tree size
+     *
+     * @return the result of applying the operation to all elements in the range [[start], [end]]
+     *
+     * @throws IllegalArgumentException if [start] is negative, [end] is out of bounds, or [start] > [end]
+     */
     public operator fun get(start: Int, end: Int): T {
         require(start >= 0) { "Start index $start is negative. Valid range: [0, ${size - 1}]" }
         require(end < size) { "End index $end is out of bounds. Valid range: [0, ${size - 1}]" }
@@ -25,16 +58,54 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
             ?: error("Query returned null for valid range [$start, $end]")
     }
 
+    /**
+     * Queries the result of applying the operation over the range [[start], [end]] (inclusive),
+     * returning null if the indices are invalid.
+     *
+     * This is a safe version of [get] that returns null instead of throwing an exception
+     * when the indices are out of bounds or invalid.
+     *
+     * @param start the starting index of the range (inclusive)
+     * @param end the ending index of the range (inclusive)
+     *
+     * @return the result of applying the operation to all elements in the range, or null if
+     *         [start] < 0, [end] >= [size], or [start] > [end]
+     */
     public fun getOrNull(start: Int, end: Int): T? {
         if (start < 0 || end >= size || start > end) return null
         return queryRange(1, 0, size - 1, start, end)
     }
 
+    /**
+     * Queries the result of applying the operation over the range [[start], [end]] (inclusive),
+     * returning a [defaultValue] if the indices are invalid.
+     *
+     * This is a safe version of [get] that returns a [defaultValue] instead of throwing an exception
+     * when the indices are out of bounds or invalid.
+     *
+     * @param start the starting index of the range (inclusive)
+     * @param end the ending index of the range (inclusive)
+     * @param defaultValue the value to return if the indices are invalid
+     *
+     * @return the result of applying the operation to all elements in the range, or [defaultValue] if
+     *         [start] < 0, [end] >= [size], or [start] > [end]
+     */
     public fun getOrDefault(start: Int, end: Int, defaultValue: T): T {
         return getOrNull(start, end) ?: defaultValue
     }
 
-    fun update(index: Int, newValue: T) {
+    /**
+     * Updates the value at the specified [index] to a [newValue].
+     *
+     * This operation updates a single element in the segment tree and propagates
+     * the change up through all affected nodes in O(log n) time.
+     *
+     * @param index the index of the element to update; must be in range [0, [size])
+     * @param newValue the new value to set at the specified index
+     *
+     * @throws IllegalArgumentException if [index] is out of bounds
+     */
+    public fun update(index: Int, newValue: T) {
         require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }
         update(1, 0, size - 1, index, newValue)
     }

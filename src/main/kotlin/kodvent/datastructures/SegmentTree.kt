@@ -122,22 +122,23 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     }
 
     /**
-     * Updates the value at the specified [index] to a [newValue].
+     * Updates the value at the specified [index] to a [value].
      *
-     * This operation updates a single element in the segment tree and propagates
+     * This operator function allows using assignment syntax to update elements.
+     * The operation updates a single element in the segment tree and propagates
      * the change up through all affected nodes in O(log n) time.
      *
      * @param index the index of the element to update; must be in range [0, [size])
-     * @param newValue the new value to set at the specified index
+     * @param value the new value to set at the specified index
      *
      * @throws IllegalArgumentException if [index] is out of bounds
      *
      * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
      */
-    public fun update(index: Int, newValue: T) {
+    public operator fun set(index: Int, value: T) {
         require(size > 0) { "Cannot update empty segment tree" }
         require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }
-        update(1, 0, size - 1, index, newValue)
+        update(1, 0, size - 1, index, value)
     }
 
     private fun build(source: List<T>, nodeIndex: Int = 1, start: Int = 0, end: Int = size - 1) {

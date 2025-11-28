@@ -124,10 +124,10 @@ class SegmentTreeTest {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
         assertEquals(3, tree[2])
 
-        tree.update(2, 100)
+        tree[2] = 100
         assertEquals(100, tree[2])
 
-        tree.update(0, 50)
+        tree[0] = 50
         assertEquals(50, tree[0])
         assertEquals(100, tree[2])
     }
@@ -242,7 +242,7 @@ class SegmentTreeTest {
         assertEquals(15, tree[0, 4])
         assertEquals(3, tree[2, 2])
 
-        tree.update(2, 10)
+        tree[2] = 10
         assertEquals(22, tree[0, 4])
         assertEquals(10, tree[2, 2])
         assertEquals(12, tree[1, 2])
@@ -251,8 +251,8 @@ class SegmentTreeTest {
     @Test
     fun `update should modify multiple elements`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        tree.update(0, 10)
-        tree.update(4, 50)
+        tree[0] = 10
+        tree[4] = 50
         assertEquals(69, tree[0, 4])
         assertEquals(10, tree[0, 0])
         assertEquals(50, tree[4, 4])
@@ -262,11 +262,11 @@ class SegmentTreeTest {
     @Test
     fun `update should modify boundary elements`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        tree.update(0, 100)
+        tree[0] = 100
         assertEquals(100, tree[0, 0])
         assertEquals(114, tree[0, 4])
 
-        tree.update(4, 200)
+        tree[4] = 200
         assertEquals(200, tree[4, 4])
         assertEquals(309, tree[0, 4])
     }
@@ -276,7 +276,7 @@ class SegmentTreeTest {
         val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::minOf)
         assertEquals(1, tree[0, 7])
 
-        tree.update(3, 10)
+        tree[3] = 10
         assertEquals(2, tree[0, 7])
         assertEquals(10, tree[3, 3])
         assertEquals(2, tree[0, 2])
@@ -287,7 +287,7 @@ class SegmentTreeTest {
         val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::maxOf)
         assertEquals(9, tree[0, 7])
 
-        tree.update(4, 100)
+        tree[4] = 100
         assertEquals(100, tree[0, 7])
         assertEquals(100, tree[4, 4])
         assertEquals(8, tree[0, 2])
@@ -303,7 +303,7 @@ class SegmentTreeTest {
             Triple(1, 5, 40),
         )
         for ((index, value, expectedSum) in updates) {
-            tree.update(index, value)
+            tree[index] = value
             assertEquals(expectedSum, tree[0, 4])
         }
     }
@@ -317,7 +317,7 @@ class SegmentTreeTest {
     @Test
     fun `update should throw when updating empty segment tree`() {
         val tree = SegmentTree(emptyList(), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree.update(0, 42) }
+        assertFailsWith<IllegalArgumentException> { tree[0] = 42 }
     }
 
     @Test
@@ -341,13 +341,13 @@ class SegmentTreeTest {
     @Test
     fun `update should throw when index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree.update(-1, 10) }
+        assertFailsWith<IllegalArgumentException> { tree[-1] = 10 }
     }
 
     @Test
     fun `update should throw when index is out of bounds`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree.update(5, 10) }
+        assertFailsWith<IllegalArgumentException> { tree[5] = 10 }
     }
 
     @Test
@@ -357,7 +357,7 @@ class SegmentTreeTest {
         assertEquals(5050, tree[0, 99])
         assertEquals(95050, tree[900, 999])
 
-        tree.update(500, 0)
+        tree[500] = 0
         assertEquals(500500 - 501, tree[0, 999])
     }
 
@@ -405,7 +405,7 @@ class SegmentTreeTest {
         assertEquals(9, result.x)
         assertEquals(12, result.y)
 
-        tree.update(1, Point(0, 0))
+        tree[1] = Point(0, 0)
         val updatedResult = tree[0, 2]
         assertEquals(6, updatedResult.x)
         assertEquals(8, updatedResult.y)
@@ -418,7 +418,7 @@ class SegmentTreeTest {
         assertEquals("Hello ", tree[0, 1])
         assertEquals("World!", tree[2, 3])
 
-        tree.update(2, "Kotlin")
+        tree[2] = "Kotlin"
         assertEquals("Hello Kotlin!", tree[0, 3])
     }
 
@@ -453,15 +453,15 @@ class SegmentTreeTest {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), ::maxOf)
         assertEquals(5, tree[0, 4])
 
-        tree.update(2, 100)
+        tree[2] = 100
         assertEquals(100, tree[0, 4])
         assertEquals(100, tree[2, 3])
 
-        tree.update(4, 200)
+        tree[4] = 200
         assertEquals(200, tree[0, 4])
         assertEquals(200, tree[3, 4])
 
-        tree.update(0, 300)
+        tree[0] = 300
         assertEquals(300, tree[0, 4])
         assertEquals(300, tree[0, 1])
     }

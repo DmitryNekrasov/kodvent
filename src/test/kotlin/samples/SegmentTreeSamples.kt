@@ -159,7 +159,7 @@ class SegmentTreeSamples {
         assertEquals(1, segmentTree[2, 5])
 
         // Update: Change element at index 4 from 1 to 10
-        segmentTree.update(4, 10)
+        segmentTree[4] = 10
 
         // Query 2: Find minimum in range [2, 5] after update
         // Elements: 9, 5, 10, 7 -> minimum is now 5
@@ -170,7 +170,7 @@ class SegmentTreeSamples {
         assertEquals(3, segmentTree[0, 3])
 
         // Update: Change element at index 1 from 3 to 1
-        segmentTree.update(1, 1)
+        segmentTree[1] = 1
 
         // Query 4: Find minimum in range [0, 3] after update
         // Elements: 8, 1, 9, 5 -> minimum is now 1

@@ -7,5 +7,5 @@
 
 package kodvent.datastructures
 
-class SegmentTree {
+public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T) -> T) {
 }

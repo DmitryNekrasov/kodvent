@@ -31,6 +31,15 @@ class SegmentTreeSamples {
         // Query a single element (range of size 1)
         val single = segmentTree[2, 2]
         assertEquals(5, single)
+
+        // Use compound assignment operators to update values
+        segmentTree[2] += 10  // 5 + 10 = 15
+        assertEquals(15, segmentTree[2])
+        assertEquals(46, segmentTree[0, 5])
+
+        segmentTree[3] -= 2   // 7 - 2 = 5
+        assertEquals(5, segmentTree[3])
+        assertEquals(44, segmentTree[0, 5])
     }
 
     @Test
@@ -123,6 +132,15 @@ class SegmentTreeSamples {
         val weekMax = maxTree[0, 6]
         val volatility = weekMax - weekMin
         assertEquals(35, volatility) // 130 - 95 = 35
+
+        // Apply price corrections using compound assignment operators
+        maxTree[2] += 5  // Day 2 price increased by 5: 95 + 5 = 100
+        assertEquals(100, maxTree[2])
+        assertEquals(130, maxTree[0, 6])  // Max is still 130
+
+        maxTree[5] -= 20  // Day 5 price decreased by 20: 130 - 20 = 110
+        assertEquals(110, maxTree[5])
+        assertEquals(125, maxTree[0, 6])  // Max is now 125 (day 6)
     }
 
     @Test
@@ -203,5 +221,38 @@ class SegmentTreeSamples {
 
         // Window [5, 7]: elements 8, 3, 6 -> min = 3
         assertEquals(3, segmentTree[5, 7])
+    }
+
+    @Test
+    fun compoundAssignmentOperators() {
+        val numbers = listOf(10, 20, 30, 40, 50)
+        val segmentTree = SegmentTree(numbers, Int::plus)
+
+        assertEquals(150, segmentTree[0, 4])
+
+        segmentTree[2] += 5  // 30 + 5 = 35
+        assertEquals(35, segmentTree[2])
+        assertEquals(155, segmentTree[0, 4])
+
+        segmentTree[1] -= 5  // 20 - 5 = 15
+        assertEquals(15, segmentTree[1])
+        assertEquals(150, segmentTree[0, 4])
+
+        segmentTree[0] *= 2  // 10 * 2 = 20
+        assertEquals(20, segmentTree[0])
+        assertEquals(160, segmentTree[0, 4])
+
+        segmentTree[4] /= 5  // 50 / 5 = 10
+        assertEquals(10, segmentTree[4])
+        assertEquals(120, segmentTree[0, 4])
+
+        segmentTree[3] %= 13  // 40 % 13 = 1
+        assertEquals(1, segmentTree[3])
+        assertEquals(81, segmentTree[0, 4])
+
+        segmentTree[2] += 10  // 35 + 10 = 45
+        segmentTree[2] *= 2   // 45 * 2 = 90
+        assertEquals(90, segmentTree[2])
+        assertEquals(136, segmentTree[0, 4])
     }
 }

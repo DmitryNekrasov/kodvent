@@ -128,12 +128,16 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      * The operation updates a single element in the segment tree and propagates
      * the change up through all affected nodes in O(log n) time.
      *
+     * Since both [get] and [set] operators are defined, compound assignment operators
+     * (`+=`, `-=`, `*=`, `/=`, `%=`) work automatically by combining get and set operations.
+     *
      * @param index the index of the element to update; must be in range [0, [size])
      * @param value the new value to set at the specified index
      *
      * @throws IllegalArgumentException if [index] is out of bounds
      *
      * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
+     * @sample samples.SegmentTreeSamples.compoundAssignmentOperators
      */
     public operator fun set(index: Int, value: T) {
         require(size > 0) { "Cannot update empty segment tree" }

@@ -21,10 +21,10 @@ package kodvent.datastructures
  * - Point update: O(log n)
  *
  * ## Space Complexity
- * - O(n) where n is the size of the [source] collection
+ * - O(n) where n is the size of the [source] list
  *
  * @param T the type of elements in the segment tree
- * @param source the initial collection of elements to build the segment tree from
+ * @param source the initial list of elements to build the segment tree from
  * @param operation an associative binary operation (e.g., sum, min, max, gcd) to combine elements.
  *        Must be associative: `operation(a, operation(b, c)) == operation(operation(a, b), c)`
  *
@@ -36,7 +36,7 @@ package kodvent.datastructures
  * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
  * @sample samples.SegmentTreeSamples.slidingWindowMinimum
  */
-public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T) -> T) {
+public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T) {
     private val size = source.size
     private val tree = MutableList<T?>(size * 4) { null }
 
@@ -124,9 +124,9 @@ public class SegmentTree<T>(source: Collection<T>, private val operation: (T, T)
         update(1, 0, size - 1, index, newValue)
     }
 
-    private fun build(source: Collection<T>, nodeIndex: Int = 1, start: Int = 0, end: Int = size - 1) {
+    private fun build(source: List<T>, nodeIndex: Int = 1, start: Int = 0, end: Int = size - 1) {
         if (start == end) {
-            tree[nodeIndex] = source.elementAt(start)
+            tree[nodeIndex] = source[start]
         } else {
             val mid = start + (end - start) / 2
             val leftNodeIndex = nodeIndex * 2

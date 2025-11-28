@@ -14,7 +14,7 @@ import kotlin.test.assertNull
 class SegmentTreeTest {
 
     @Test
-    fun `get should return null for empty segment tree`() {
+    fun `getOrNull should return null for empty segment tree`() {
         val tree = SegmentTree(emptyList(), Int::plus)
         assertNull(tree.getOrNull(0, 0))
     }

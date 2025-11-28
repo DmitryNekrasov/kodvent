@@ -21,7 +21,7 @@ package kodvent.datastructures
  * - Point update: O(log n)
  *
  * ## Space Complexity
- * - O(n) where n is the size of the [source] list
+ * - O(4n) internal storage (O(n) in Big-O notation) where n is the size of the [source] list
  *
  * @param T the type of elements in the segment tree
  * @param source the initial list of elements to build the segment tree from

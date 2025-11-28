@@ -164,17 +164,14 @@ class SegmentTreeTest {
     fun `update should modify single element`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
 
-        // Before update
         assertEquals(15, tree[0, 4])
         assertEquals(3, tree[2, 2])
 
-        // Update middle element
         tree.update(2, 10)
 
-        // After update
-        assertEquals(22, tree[0, 4])  // 1 + 2 + 10 + 4 + 5
+        assertEquals(22, tree[0, 4])
         assertEquals(10, tree[2, 2])
-        assertEquals(12, tree[1, 2])  // 2 + 10
+        assertEquals(12, tree[1, 2])
     }
 
     @Test
@@ -184,10 +181,10 @@ class SegmentTreeTest {
         tree.update(0, 10)
         tree.update(4, 50)
 
-        assertEquals(69, tree[0, 4])  // 10 + 2 + 3 + 4 + 50
+        assertEquals(69, tree[0, 4])
         assertEquals(10, tree[0, 0])
         assertEquals(50, tree[4, 4])
-        assertEquals(9, tree[1, 3])  // 2 + 3 + 4 (unchanged)
+        assertEquals(9, tree[1, 3])
     }
 
     @Test
@@ -209,12 +206,11 @@ class SegmentTreeTest {
 
         assertEquals(1, tree[0, 7])
 
-        // Update the minimum element
         tree.update(3, 10)
 
-        assertEquals(2, tree[0, 7])  // Now minimum is 2
+        assertEquals(2, tree[0, 7])
         assertEquals(10, tree[3, 3])
-        assertEquals(2, tree[0, 2])  // min(5, 2, 8)
+        assertEquals(2, tree[0, 2])
     }
 
     @Test
@@ -223,12 +219,11 @@ class SegmentTreeTest {
 
         assertEquals(9, tree[0, 7])
 
-        // Update the maximum element
         tree.update(4, 100)
 
-        assertEquals(100, tree[0, 7])  // Now maximum is 100
+        assertEquals(100, tree[0, 7])
         assertEquals(100, tree[4, 4])
-        assertEquals(8, tree[0, 2])    // max(5, 2, 8) unchanged
+        assertEquals(8, tree[0, 2])
     }
 
     @Test
@@ -236,10 +231,10 @@ class SegmentTreeTest {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
 
         val updates = listOf(
-            Triple(0, 10, 24),  // update(0, 10) -> sum = 24
-            Triple(2, 20, 41),  // update(2, 20) -> sum = 41
-            Triple(4, 1, 37),   // update(4, 1) -> sum = 37
-            Triple(1, 5, 40),   // update(1, 5) -> sum = 40
+            Triple(0, 10, 24),
+            Triple(2, 20, 41),
+            Triple(4, 1, 37),
+            Triple(1, 5, 40),
         )
 
         for ((index, value, expectedSum) in updates) {
@@ -247,8 +242,6 @@ class SegmentTreeTest {
             assertEquals(expectedSum, tree[0, 4])
         }
     }
-
-    // ==================== Error Condition Tests ====================
 
     @Test
     fun `get should throw when start index is negative`() {
@@ -300,20 +293,15 @@ class SegmentTreeTest {
         assert(exception.message!!.contains("out of bounds"))
     }
 
-    // ==================== Edge Cases and Special Scenarios ====================
-
     @Test
     fun `SegmentTree should handle large data sets`() {
         val tree = SegmentTree((1..1000).toList(), Int::plus)
 
-        // Sum of 1 to 1000 = 500500
         assertEquals(500500, tree[0, 999])
 
-        // Test various ranges
-        assertEquals(5050, tree[0, 99])     // Sum of 1 to 100
-        assertEquals(95050, tree[900, 999])  // Sum of 901 to 1000
+        assertEquals(5050, tree[0, 99])
+        assertEquals(95050, tree[900, 999])
 
-        // Update and verify
         tree.update(500, 0)
         assertEquals(500500 - 501, tree[0, 999])
     }
@@ -364,13 +352,13 @@ class SegmentTreeTest {
         val tree = SegmentTree(data) { a, b -> Point(a.x + b.x, a.y + b.y) }
 
         val result = tree[0, 2]
-        assertEquals(9, result.x)  // 1 + 3 + 5
-        assertEquals(12, result.y) // 2 + 4 + 6
+        assertEquals(9, result.x)
+        assertEquals(12, result.y)
 
         tree.update(1, Point(0, 0))
         val updatedResult = tree[0, 2]
-        assertEquals(6, updatedResult.x)  // 1 + 0 + 5
-        assertEquals(8, updatedResult.y)  // 2 + 0 + 6
+        assertEquals(6, updatedResult.x)
+        assertEquals(8, updatedResult.y)
     }
 
     @Test
@@ -389,14 +377,13 @@ class SegmentTreeTest {
     fun `get should handle bitwise or operation`() {
         val tree = SegmentTree(listOf(1, 2, 4, 8, 16), Int::or)
 
-        assertEquals(31, tree[0, 4])  // 1 | 2 | 4 | 8 | 16 = 31
-        assertEquals(7, tree[0, 2])   // 1 | 2 | 4 = 7
-        assertEquals(24, tree[3, 4])  // 8 | 16 = 24
+        assertEquals(31, tree[0, 4])
+        assertEquals(7, tree[0, 2])
+        assertEquals(24, tree[3, 4])
     }
 
     @Test
     fun `SegmentTree should handle power of two sizes`() {
-        // Test with sizes that are powers of 2
         for (size in listOf(1, 2, 4, 8, 16, 32, 64)) {
             val tree = SegmentTree((1..size).toList(), Int::plus)
             val expectedSum = size * (size + 1) / 2
@@ -406,7 +393,6 @@ class SegmentTreeTest {
 
     @Test
     fun `SegmentTree should handle non-power of two sizes`() {
-        // Test with sizes that are NOT powers of 2
         for (size in listOf(3, 5, 7, 9, 15, 17, 31, 33)) {
             val tree = SegmentTree((1..size).toList(), Int::plus)
             val expectedSum = size * (size + 1) / 2

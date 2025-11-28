@@ -121,6 +121,7 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
      */
     public fun update(index: Int, newValue: T) {
+        require(size > 0) { "Cannot update empty segment tree" }
         require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }
         update(1, 0, size - 1, index, newValue)
     }

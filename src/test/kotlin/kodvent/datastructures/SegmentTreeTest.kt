@@ -57,6 +57,82 @@ class SegmentTreeTest {
     }
 
     @Test
+    fun `single-index get operator should query individual elements`() {
+        val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
+        assertEquals(10, tree[0])
+        assertEquals(30, tree[2])
+        assertEquals(50, tree[4])
+    }
+
+    @Test
+    fun `single-index get operator should be equivalent to range query`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        for (i in 0..4) {
+            assertEquals(tree[i, i], tree[i], "Mismatch at index $i")
+        }
+    }
+
+    @Test
+    fun `single-index get operator should work with min operation`() {
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::minOf)
+        assertEquals(5, tree[0])
+        assertEquals(1, tree[3])
+        assertEquals(4, tree[7])
+    }
+
+    @Test
+    fun `single-index get operator should work with max operation`() {
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::maxOf)
+        assertEquals(5, tree[0])
+        assertEquals(9, tree[4])
+        assertEquals(7, tree[6])
+    }
+
+    @Test
+    fun `single-index get operator should work with custom operations`() {
+        val tree = SegmentTree(listOf(2, 3, 4, 5), Int::times)
+        assertEquals(2, tree[0])
+        assertEquals(5, tree[3])
+
+        val gcdTree = SegmentTree(listOf(12, 18, 24, 36, 48), ::gcd)
+        assertEquals(12, gcdTree[0])
+        assertEquals(36, gcdTree[3])
+    }
+
+    @Test
+    fun `single-index get operator should throw on empty tree`() {
+        val tree = SegmentTree(emptyList(), Int::plus)
+        assertFailsWith<IllegalArgumentException> { tree[0] }
+    }
+
+    @Test
+    fun `single-index get operator should throw on negative index`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertFailsWith<IllegalArgumentException> { tree[-1] }
+        assertFailsWith<IllegalArgumentException> { tree[-5] }
+    }
+
+    @Test
+    fun `single-index get operator should throw on out of bounds index`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertFailsWith<IllegalArgumentException> { tree[5] }
+        assertFailsWith<IllegalArgumentException> { tree[10] }
+    }
+
+    @Test
+    fun `single-index get operator should work after updates`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(3, tree[2])
+
+        tree.update(2, 100)
+        assertEquals(100, tree[2])
+
+        tree.update(0, 50)
+        assertEquals(50, tree[0])
+        assertEquals(100, tree[2])
+    }
+
+    @Test
     fun `get should compute sum of adjacent elements`() {
         val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
         assertEquals(30, tree[0, 1])

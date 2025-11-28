@@ -68,6 +68,20 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     }
 
     /**
+     * Queries the value at a single [index] position.
+     *
+     * This is a convenience operator function that allows using bracket notation with a single index
+     * to query individual elements. It is equivalent to calling `get(index, index)`.
+     *
+     * @param index the index of the element to query; must be in range [0, [size])
+     *
+     * @return the value at the specified [index]
+     *
+     * @throws IllegalArgumentException if [index] is out of bounds or the tree is empty
+     */
+    public operator fun get(index: Int): T = get(index, index)
+
+    /**
      * Queries the result of applying the operation over the range [[start], [end]] (inclusive),
      * returning null if the indices are invalid.
      *

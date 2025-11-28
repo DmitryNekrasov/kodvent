@@ -6,7 +6,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.dmitrynekrasov/kodvent.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dmitrynekrasov/kodvent)
 [![KDoc link](https://img.shields.io/badge/API_reference-KDoc-blue)](https://dmitrynekrasov.github.io/kodvent/)
 
-![kodvent](logo.jpg)
+![kodvent](logo.png)
 
 A Kotlin utility library for Advent of Code challenges, providing helpful extension functions for common data structure operations.
 

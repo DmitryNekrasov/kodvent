@@ -465,4 +465,170 @@ class SegmentTreeTest {
         assertEquals(300, tree[0, 4])
         assertEquals(300, tree[0, 1])
     }
+
+    @Test
+    fun `compound assignment operator plusAssign should work with sum operation`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(15, tree[0, 4])
+        assertEquals(3, tree[2])
+
+        tree[2] += 10
+        assertEquals(13, tree[2])
+        assertEquals(25, tree[0, 4])
+
+        tree[0] += 5
+        assertEquals(6, tree[0])
+        assertEquals(30, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operator minusAssign should work with sum operation`() {
+        val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
+        assertEquals(150, tree[0, 4])
+        assertEquals(30, tree[2])
+
+        tree[2] -= 10
+        assertEquals(20, tree[2])
+        assertEquals(140, tree[0, 4])
+
+        tree[4] -= 25
+        assertEquals(25, tree[4])
+        assertEquals(115, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operator timesAssign should work with sum operation`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(3, tree[2])
+        assertEquals(15, tree[0, 4])
+
+        tree[2] *= 10
+        assertEquals(30, tree[2])
+        assertEquals(42, tree[0, 4])
+
+        tree[1] *= 3
+        assertEquals(6, tree[1])
+        assertEquals(46, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operator divAssign should work with sum operation`() {
+        val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
+        assertEquals(30, tree[2])
+        assertEquals(150, tree[0, 4])
+
+        tree[2] /= 3
+        assertEquals(10, tree[2])
+        assertEquals(130, tree[0, 4])
+
+        tree[4] /= 5
+        assertEquals(10, tree[4])
+        assertEquals(90, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operator remAssign should work with sum operation`() {
+        val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
+        assertEquals(30, tree[2])
+        assertEquals(150, tree[0, 4])
+
+        tree[2] %= 7
+        assertEquals(2, tree[2])
+        assertEquals(122, tree[0, 4])
+
+        tree[4] %= 11
+        assertEquals(6, tree[4])
+        assertEquals(78, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operators should work with min operation`() {
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::minOf)
+        assertEquals(1, tree[0, 7])
+        assertEquals(8, tree[2])
+
+        tree[2] += 5
+        assertEquals(13, tree[2])
+        assertEquals(1, tree[0, 7])
+
+        tree[3] *= 10
+        assertEquals(10, tree[3])
+        assertEquals(2, tree[0, 7])
+    }
+
+    @Test
+    fun `compound assignment operators should work with max operation`() {
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::maxOf)
+        assertEquals(9, tree[0, 7])
+        assertEquals(5, tree[0])
+
+        tree[0] += 100
+        assertEquals(105, tree[0])
+        assertEquals(105, tree[0, 7])
+
+        tree[4] *= 2
+        assertEquals(18, tree[4])
+        assertEquals(105, tree[0, 7])
+    }
+
+    @Test
+    fun `compound assignment operators should work with string concatenation`() {
+        val tree = SegmentTree(listOf("Hello", " ", "World", "!"), String::plus)
+        assertEquals("Hello World!", tree[0, 3])
+        assertEquals("World", tree[2])
+
+        tree[2] += " Kotlin"
+        assertEquals("World Kotlin", tree[2])
+        assertEquals("Hello World Kotlin!", tree[0, 3])
+
+        tree[0] += " There"
+        assertEquals("Hello There", tree[0])
+        assertEquals("Hello There World Kotlin!", tree[0, 3])
+    }
+
+    @Test
+    fun `compound assignment operators should handle multiple consecutive operations`() {
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(15, tree[0, 4])
+
+        tree[2] += 10
+        assertEquals(13, tree[2])
+        assertEquals(25, tree[0, 4])
+
+        tree[2] -= 5
+        assertEquals(8, tree[2])
+        assertEquals(20, tree[0, 4])
+
+        tree[2] *= 2
+        assertEquals(16, tree[2])
+        assertEquals(28, tree[0, 4])
+
+        tree[2] /= 4
+        assertEquals(4, tree[2])
+        assertEquals(16, tree[0, 4])
+    }
+
+    @Test
+    fun `compound assignment operators should work with custom data types`() {
+        data class Point(val x: Int, val y: Int) {
+            operator fun plus(other: Point) = Point(x + other.x, y + other.y)
+            operator fun times(scalar: Int) = Point(x * scalar, y * scalar)
+        }
+
+        val data = listOf(
+            Point(1, 2),
+            Point(3, 4),
+            Point(5, 6)
+        )
+        val tree = SegmentTree(data) { a, b -> Point(a.x + b.x, a.y + b.y) }
+        val result = tree[0, 2]
+        assertEquals(9, result.x)
+        assertEquals(12, result.y)
+
+        tree[1] += Point(10, 10)
+        assertEquals(Point(13, 14), tree[1])
+        val updatedResult = tree[0, 2]
+        assertEquals(19, updatedResult.x)
+        assertEquals(22, updatedResult.y)
+    }
 }

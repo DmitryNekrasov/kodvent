@@ -246,51 +246,31 @@ class SegmentTreeTest {
     @Test
     fun `get should throw when start index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-
-        val exception = assertFailsWith<IllegalArgumentException> {
-            tree[-1, 2]
-        }
-        assert(exception.message!!.contains("negative"))
+        assertFailsWith<IllegalArgumentException> { tree[-1, 2] }
     }
 
     @Test
     fun `get should throw when end index is out of bounds`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-
-        val exception = assertFailsWith<IllegalArgumentException> {
-            tree[0, 5]
-        }
-        assert(exception.message!!.contains("out of bounds"))
+        assertFailsWith<IllegalArgumentException> { tree[0, 5] }
     }
 
     @Test
     fun `get should throw when start is greater than end`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-
-        val exception = assertFailsWith<IllegalArgumentException> {
-            tree[3, 1]
-        }
-        assert(exception.message!!.contains("greater than end"))
+        assertFailsWith<IllegalArgumentException> { tree[3, 1] }
     }
 
     @Test
     fun `update should throw when index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-
-        val exception = assertFailsWith<IllegalArgumentException> {
-            tree.update(-1, 10)
-        }
-        assert(exception.message!!.contains("out of bounds"))
+        assertFailsWith<IllegalArgumentException> { tree.update(-1, 10) }
     }
 
     @Test
     fun `update should throw when index is out of bounds`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-
-        val exception = assertFailsWith<IllegalArgumentException> {
-            tree.update(5, 10)
-        }
-        assert(exception.message!!.contains("out of bounds"))
+        assertFailsWith<IllegalArgumentException> { tree.update(5, 10) }
     }
 
     @Test

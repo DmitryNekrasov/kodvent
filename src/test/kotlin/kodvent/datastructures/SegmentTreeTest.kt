@@ -233,6 +233,12 @@ class SegmentTreeTest {
     }
 
     @Test
+    fun `get should throw when querying empty segment tree`() {
+        val tree = SegmentTree(emptyList(), Int::plus)
+        assertFailsWith<IllegalArgumentException> { tree[0, 0] }
+    }
+
+    @Test
     fun `get should throw when start index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
         assertFailsWith<IllegalArgumentException> { tree[-1, 2] }

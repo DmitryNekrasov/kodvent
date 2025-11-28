@@ -59,6 +59,7 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      * @throws IllegalArgumentException if [start] is negative, [end] is out of bounds, or [start] > [end]
      */
     public operator fun get(start: Int, end: Int): T {
+        require(size > 0) { "Cannot query empty segment tree" }
         require(start >= 0) { "Start index $start is negative. Valid range: [0, ${size - 1}]" }
         require(end < size) { "End index $end is out of bounds. Valid range: [0, ${size - 1}]" }
         require(start <= end) { "Start index $start is greater than end index $end" }

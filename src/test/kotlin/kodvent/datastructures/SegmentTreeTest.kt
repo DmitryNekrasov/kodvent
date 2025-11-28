@@ -5,6 +5,7 @@
 
 package kodvent.datastructures
 
+import kodvent.math.gcd
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -12,18 +13,15 @@ import kotlin.test.assertNull
 
 class SegmentTreeTest {
 
-    // ==================== Construction Tests ====================
-
     @Test
     fun testEmptySegmentTree() {
-        val tree = SegmentTree(emptyList<Int>()) { a, b -> a + b }
-        // Empty tree should handle queries gracefully
+        val tree = SegmentTree(emptyList(), Int::plus)
         assertNull(tree.getOrNull(0, 0))
     }
 
     @Test
     fun testSingleElementSegmentTree() {
-        val tree = SegmentTree(listOf(42)) { a, b -> a + b }
+        val tree = SegmentTree(listOf(42), Int::plus)
         assertEquals(42, tree[0, 0])
         assertEquals(42, tree.getOrNull(0, 0))
         assertEquals(42, tree.getOrDefault(0, 0, 0))
@@ -31,36 +29,28 @@ class SegmentTreeTest {
 
     @Test
     fun testMultipleElementsConstruction() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-        assertEquals(15, tree[0, 4]) // Sum of all elements
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(15, tree[0, 4])
     }
-
-    // ==================== Range Query Tests - Sum Operation ====================
 
     @Test
     fun testSumFullRange() {
-        val data = listOf(1, 2, 3, 4, 5, 6, 7, 8)
-        val tree = SegmentTree(data) { a, b -> a + b }
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5, 6, 7, 8), Int::plus)
         assertEquals(36, tree[0, 7])
     }
 
     @Test
     fun testSumPartialRanges() {
-        val data = listOf(1, 2, 3, 4, 5, 6, 7, 8)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
-        assertEquals(6, tree[0, 2])   // 1 + 2 + 3
-        assertEquals(22, tree[3, 6])  // 4 + 5 + 6 + 7
-        assertEquals(21, tree[5, 7])  // 6 + 7 + 8
-        assertEquals(5, tree[1, 2])   // 2 + 3
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5, 6, 7, 8), Int::plus)
+        assertEquals(6, tree[0, 2])
+        assertEquals(22, tree[3, 6])
+        assertEquals(21, tree[5, 7])
+        assertEquals(5, tree[1, 2])
     }
 
     @Test
     fun testSumSingleElement() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
         assertEquals(1, tree[0, 0])
         assertEquals(3, tree[2, 2])
         assertEquals(5, tree[4, 4])
@@ -68,88 +58,62 @@ class SegmentTreeTest {
 
     @Test
     fun testSumAdjacentElements() {
-        val data = listOf(10, 20, 30, 40, 50)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
-        assertEquals(30, tree[0, 1])   // 10 + 20
-        assertEquals(50, tree[1, 2])   // 20 + 30
-        assertEquals(90, tree[3, 4])   // 40 + 50
+        val tree = SegmentTree(listOf(10, 20, 30, 40, 50), Int::plus)
+        assertEquals(30, tree[0, 1])
+        assertEquals(50, tree[1, 2])
+        assertEquals(90, tree[3, 4])
     }
-
-    // ==================== Range Query Tests - Min Operation ====================
 
     @Test
     fun testMinFullRange() {
-        val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-        val tree = SegmentTree(data) { a, b -> minOf(a, b) }
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::minOf)
         assertEquals(1, tree[0, 7])
     }
 
     @Test
     fun testMinPartialRanges() {
-        val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-        val tree = SegmentTree(data) { a, b -> minOf(a, b) }
-
-        assertEquals(2, tree[0, 2])   // min(5, 2, 8)
-        assertEquals(1, tree[1, 4])   // min(2, 8, 1, 9)
-        assertEquals(3, tree[5, 6])   // min(3, 7)
-        assertEquals(1, tree[3, 3])   // min(1)
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::minOf)
+        assertEquals(2, tree[0, 2])
+        assertEquals(1, tree[1, 4])
+        assertEquals(3, tree[5, 6])
+        assertEquals(1, tree[3, 3])
     }
-
-    // ==================== Range Query Tests - Max Operation ====================
 
     @Test
     fun testMaxFullRange() {
-        val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-        val tree = SegmentTree(data) { a, b -> maxOf(a, b) }
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::maxOf)
         assertEquals(9, tree[0, 7])
     }
 
     @Test
     fun testMaxPartialRanges() {
-        val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-        val tree = SegmentTree(data) { a, b -> maxOf(a, b) }
-
-        assertEquals(8, tree[0, 2])   // max(5, 2, 8)
-        assertEquals(9, tree[1, 4])   // max(2, 8, 1, 9)
-        assertEquals(7, tree[5, 6])   // max(3, 7)
-        assertEquals(9, tree[4, 4])   // max(9)
+        val tree = SegmentTree(listOf(5, 2, 8, 1, 9, 3, 7, 4), ::maxOf)
+        assertEquals(8, tree[0, 2])
+        assertEquals(9, tree[1, 4])
+        assertEquals(7, tree[5, 6])
+        assertEquals(9, tree[4, 4])
     }
-
-    // ==================== Range Query Tests - Product Operation ====================
 
     @Test
     fun testProductOperation() {
-        val data = listOf(2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a * b }
-
-        assertEquals(120, tree[0, 3])  // 2 * 3 * 4 * 5
-        assertEquals(6, tree[0, 1])    // 2 * 3
-        assertEquals(20, tree[2, 3])   // 4 * 5
-        assertEquals(60, tree[1, 3])   // 3 * 4 * 5
+        val tree = SegmentTree(listOf(2, 3, 4, 5), Int::times)
+        assertEquals(120, tree[0, 3])
+        assertEquals(6, tree[0, 1])
+        assertEquals(20, tree[2, 3])
+        assertEquals(60, tree[1, 3])
     }
-
-    // ==================== Range Query Tests - GCD Operation ====================
 
     @Test
     fun testGcdOperation() {
-        val data = listOf(12, 18, 24, 36, 48)
-        val tree = SegmentTree(data) { a, b -> gcd(a, b) }
-
-        assertEquals(6, tree[0, 4])    // GCD of all
-        assertEquals(6, tree[0, 1])    // GCD(12, 18)
-        assertEquals(12, tree[2, 4])   // GCD(24, 36, 48)
+        val tree = SegmentTree(listOf(12, 18, 24, 36, 48), ::gcd)
+        assertEquals(6, tree[0, 4])
+        assertEquals(6, tree[0, 1])
+        assertEquals(12, tree[2, 4])
     }
-
-    private fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
-
-    // ==================== getOrNull Tests ====================
 
     @Test
     fun testGetOrNullValidRanges() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
         assertEquals(15, tree.getOrNull(0, 4))
         assertEquals(6, tree.getOrNull(0, 2))
         assertEquals(3, tree.getOrNull(2, 2))
@@ -157,30 +121,24 @@ class SegmentTreeTest {
 
     @Test
     fun testGetOrNullInvalidRanges() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
-        assertNull(tree.getOrNull(-1, 2))      // Negative start
-        assertNull(tree.getOrNull(0, 5))       // End out of bounds
-        assertNull(tree.getOrNull(3, 2))       // Start > end
-        assertNull(tree.getOrNull(-5, -1))     // Both negative
-        assertNull(tree.getOrNull(5, 10))      // Both out of bounds
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertNull(tree.getOrNull(-1, 2))
+        assertNull(tree.getOrNull(0, 5))
+        assertNull(tree.getOrNull(3, 2))
+        assertNull(tree.getOrNull(-5, -1))
+        assertNull(tree.getOrNull(5, 10))
     }
 
     @Test
     fun testGetOrNullEmptyTree() {
-        val tree = SegmentTree(emptyList<Int>()) { a, b -> a + b }
+        val tree = SegmentTree(emptyList(), Int::plus)
         assertNull(tree.getOrNull(0, 0))
         assertNull(tree.getOrNull(-1, 1))
     }
 
-    // ==================== getOrDefault Tests ====================
-
     @Test
     fun testGetOrDefaultValidRanges() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
         assertEquals(15, tree.getOrDefault(0, 4, -1))
         assertEquals(6, tree.getOrDefault(0, 2, -1))
         assertEquals(3, tree.getOrDefault(2, 2, -1))
@@ -188,23 +146,19 @@ class SegmentTreeTest {
 
     @Test
     fun testGetOrDefaultInvalidRanges() {
-        val data = listOf(1, 2, 3, 4, 5)
-        val tree = SegmentTree(data) { a, b -> a + b }
-
-        assertEquals(-1, tree.getOrDefault(-1, 2, -1))     // Negative start
-        assertEquals(-1, tree.getOrDefault(0, 5, -1))      // End out of bounds
-        assertEquals(-1, tree.getOrDefault(3, 2, -1))      // Start > end
-        assertEquals(999, tree.getOrDefault(-5, -1, 999))  // Different default
+        val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
+        assertEquals(-1, tree.getOrDefault(-1, 2, -1))
+        assertEquals(-1, tree.getOrDefault(0, 5, -1))
+        assertEquals(-1, tree.getOrDefault(3, 2, -1))
+        assertEquals(999, tree.getOrDefault(-5, -1, 999))
     }
 
     @Test
     fun testGetOrDefaultEmptyTree() {
-        val tree = SegmentTree(emptyList<Int>()) { a, b -> a + b }
+        val tree = SegmentTree(emptyList(), Int::plus)
         assertEquals(0, tree.getOrDefault(0, 0, 0))
         assertEquals(42, tree.getOrDefault(-1, 1, 42))
     }
-
-    // ==================== Update Tests ====================
 
     @Test
     fun testUpdateSingleElement() {

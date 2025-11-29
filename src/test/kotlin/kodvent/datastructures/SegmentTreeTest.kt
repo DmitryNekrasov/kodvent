@@ -108,15 +108,15 @@ class SegmentTreeTest {
     @Test
     fun `single-index get operator should throw on negative index`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[-1] }
-        assertFailsWith<IllegalArgumentException> { tree[-5] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[-1] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[-5] }
     }
 
     @Test
     fun `single-index get operator should throw on out of bounds index`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[5] }
-        assertFailsWith<IllegalArgumentException> { tree[10] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[5] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[10] }
     }
 
     @Test
@@ -323,13 +323,13 @@ class SegmentTreeTest {
     @Test
     fun `get should throw when start index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[-1, 2] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[-1, 2] }
     }
 
     @Test
     fun `get should throw when end index is out of bounds`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[0, 5] }
+        assertFailsWith<IndexOutOfBoundsException> { tree[0, 5] }
     }
 
     @Test
@@ -341,13 +341,13 @@ class SegmentTreeTest {
     @Test
     fun `update should throw when index is negative`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[-1] = 10 }
+        assertFailsWith<IndexOutOfBoundsException> { tree[-1] = 10 }
     }
 
     @Test
     fun `update should throw when index is out of bounds`() {
         val tree = SegmentTree(listOf(1, 2, 3, 4, 5), Int::plus)
-        assertFailsWith<IllegalArgumentException> { tree[5] = 10 }
+        assertFailsWith<IndexOutOfBoundsException> { tree[5] = 10 }
     }
 
     @Test

@@ -56,13 +56,14 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      *
      * @return the result of applying the operation to all elements in the range [[start], [end]]
      *
-     * @throws IllegalArgumentException if [start] is negative, [end] is out of bounds, or [start] > [end]
+     * @throws IllegalArgumentException if the tree is empty or [start] > [end]
+     * @throws IndexOutOfBoundsException if [start] is negative or [end] is out of bounds
      */
     public operator fun get(start: Int, end: Int): T {
         require(size > 0) { "Cannot query empty segment tree" }
-        require(start >= 0) { "Start index $start is negative. Valid range: [0, ${size - 1}]" }
-        require(end < size) { "End index $end is out of bounds. Valid range: [0, ${size - 1}]" }
         require(start <= end) { "Start index $start is greater than end index $end" }
+        if (start < 0) throw IndexOutOfBoundsException("Start index $start is negative. Valid range: [0, ${size - 1}]")
+        if (end >= size) throw IndexOutOfBoundsException("End index $end is out of bounds. Valid range: [0, ${size - 1}]")
         return queryRange(1, 0, size - 1, start, end)
             ?: error("Query returned null for valid range [$start, $end]")
     }
@@ -77,7 +78,8 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      *
      * @return the value at the specified [index]
      *
-     * @throws IllegalArgumentException if [index] is out of bounds or the tree is empty
+     * @throws IllegalArgumentException if the tree is empty
+     * @throws IndexOutOfBoundsException if [index] is out of bounds
      */
     public operator fun get(index: Int): T = get(index, index)
 
@@ -134,14 +136,15 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      * @param index the index of the element to update; must be in range [0, [size])
      * @param value the new value to set at the specified index
      *
-     * @throws IllegalArgumentException if [index] is out of bounds
+     * @throws IllegalArgumentException if the tree is empty
+     * @throws IndexOutOfBoundsException if [index] is out of bounds
      *
      * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
      * @sample samples.SegmentTreeSamples.compoundAssignmentOperators
      */
     public operator fun set(index: Int, value: T) {
         require(size > 0) { "Cannot update empty segment tree" }
-        require(index in 0..<size) { "Index $index is out of bounds. Valid range: [0, ${size - 1}]" }
+        if (index !in 0..<size) throw IndexOutOfBoundsException("Index $index is out of bounds. Valid range: [0, ${size - 1}]")
         update(1, 0, size - 1, index, value)
     }
 

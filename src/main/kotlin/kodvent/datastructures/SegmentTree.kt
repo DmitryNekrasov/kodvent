@@ -119,9 +119,7 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      *
      * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
-    public fun getOrDefault(start: Int, end: Int, defaultValue: T): T {
-        return getOrNull(start, end) ?: defaultValue
-    }
+    public fun getOrDefault(start: Int, end: Int, defaultValue: T): T = getOrNull(start, end) ?: defaultValue
 
     /**
      * Updates the value at the specified [index] to a [value].

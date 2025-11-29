@@ -8,7 +8,7 @@
 
 ![kodvent](kodvent-logo.png)
 
-A Kotlin utility library for Advent of Code challenges, providing helpful extension functions for common data structure operations.
+A Kotlin utility library for Advent of Code challenges, featuring efficient data structures, algorithms, and convenient extension functions.
 
 ## Features
 

@@ -8,7 +8,8 @@
 package kodvent.datastructures
 
 /**
- * A [Disjoint Set Union](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) (DSU) data structure, also known as Union-Find.
+ * A [Disjoint Set Union](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+ * (DSU) data structure, also known as Union-Find.
  *
  * This data structure efficiently maintains a partition of a set of elements into disjoint subsets
  * and supports two primary operations: finding which subset an element belongs to (find) and
@@ -18,7 +19,8 @@ package kodvent.datastructures
  * - **Path compression** during find operations: makes elements point directly to the root
  * - **Union by rank**: attaches the smaller tree under the root of the larger tree
  *
- * These optimizations provide near-constant [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time complexity for both operations.
+ * These optimizations provide near-constant
+ * [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time complexity for both operations.
  *
  * @param size The number of elements in the disjoint set. Elements are represented by integers
  *             in the range [0, [size]). Initially, each element is in its own set.

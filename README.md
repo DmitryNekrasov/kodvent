@@ -8,7 +8,7 @@
 
 ![kodvent](kodvent-logo.png)
 
-A Kotlin utility library for Advent of Code challenges, providing helpful extension functions for common data structure operations.
+A Kotlin utility library for Advent of Code challenges, featuring efficient data structures, algorithms, and convenient extension functions.
 
 ## Features
 
@@ -51,6 +51,27 @@ An efficient data structure for managing disjoint sets with near-constant time o
 
 The implementation uses path compression and union by rank optimizations for optimal performance.
 
+### Segment Tree
+
+An efficient data structure for answering range queries and performing point updates on arrays:
+
+- **`SegmentTree(source: List<T>, operation: (T, T) -> T)`** - Creates a segment tree from a list with an associative binary operation
+  - Common operations: `Int::plus` (sum), `::minOf` (minimum), `::maxOf` (maximum), `::gcd` (GCD)
+  - Construction time: O(n)
+- **`get(start: Int, end: Int): T`** - Queries the result over range [start, end] (inclusive)
+  - Supports bracket notation: `tree[2, 5]`
+  - Time complexity: O(log n)
+- **`get(index: Int): T`** - Queries a single element at the given index
+  - Supports bracket notation: `tree[3]`
+- **`getOrNull(start: Int, end: Int): T?`** - Safe range query that returns null for invalid indices
+- **`getOrDefault(start: Int, end: Int, defaultValue: T): T`** - Safe range query with default value
+- **`set(index: Int, value: T)`** - Updates the element at the given index
+  - Supports assignment syntax: `tree[3] = 10`
+  - Time complexity: O(log n)
+  - Compound assignment operators work automatically: `tree[3] += 5`, `tree[2] *= 2`
+
+Space complexity: O(n) where n is the size of the source list.
+
 ### String Algorithms
 
 Efficient string matching and analysis functions based on the prefix function and KMP algorithm:
@@ -75,7 +96,7 @@ Add the dependency to your project:
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.1.7")
+    implementation("io.github.dmitrynekrasov:kodvent:0.1.8")
 }
 ```
 
@@ -83,7 +104,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.1.7'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.1.8'
 }
 ```
 
@@ -93,7 +114,7 @@ dependencies {
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
     <artifactId>kodvent</artifactId>
-    <version>0.1.7</version>
+    <version>0.1.8</version>
 </dependency>
 ```
 
@@ -194,6 +215,61 @@ val mst = edges.sortedBy { it.weight }
     .filter { dsuMst.union(it.from, it.to) }
 
 // mst contains edges with minimum total weight
+```
+
+### Range Queries with Segment Tree
+
+```kotlin
+import kodvent.datastructures.SegmentTree
+import kodvent.math.gcd
+
+// Range sum queries
+val numbers = listOf(1, 3, 5, 7, 9, 11)
+val sumTree = SegmentTree(numbers, Int::plus)
+
+// Query sum of range [1, 4]: 3 + 5 + 7 + 9 = 24
+val sum = sumTree[1, 4]  // 24
+
+// Query entire array
+val totalSum = sumTree[0, 5]  // 36
+
+// Update a value and query again
+sumTree[2] = 15  // Change 5 to 15
+val newSum = sumTree[0, 5]  // 46
+
+// Use compound assignment operators
+sumTree[2] += 10  // 15 + 10 = 25
+sumTree[3] -= 2   // 7 - 2 = 5
+
+// Range minimum queries
+val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
+val minTree = SegmentTree(data, ::minOf)
+
+val minRange = minTree[0, 3]  // min of [5, 2, 8, 1] = 1
+val minAll = minTree[0, 7]    // min of entire array = 1
+
+// Range maximum queries
+val maxTree = SegmentTree(data, ::maxOf)
+val maxRange = maxTree[4, 7]  // max of [9, 3, 7, 4] = 9
+
+// Range GCD queries
+val values = listOf(12, 18, 24, 30, 36, 42)
+val gcdTree = SegmentTree(values, ::gcd)
+val rangeGcd = gcdTree[0, 2]  // GCD of [12, 18, 24] = 6
+
+// Safe queries with getOrNull and getOrDefault
+val safeResult = sumTree.getOrNull(0, 100)    // null (out of bounds)
+val withDefault = sumTree.getOrDefault(0, 100, 0)  // 0
+
+// Stock price analysis
+val prices = listOf(100, 120, 95, 110, 105, 130, 125)
+val priceMinTree = SegmentTree(prices, ::minOf)
+val priceMaxTree = SegmentTree(prices, ::maxOf)
+
+// Find min/max in the first 3 days
+val minPrice = priceMinTree[0, 2]  // 95
+val maxPrice = priceMaxTree[0, 2]  // 120
+val volatility = maxPrice - minPrice  // 25
 ```
 
 ### String Matching with KMP Algorithm

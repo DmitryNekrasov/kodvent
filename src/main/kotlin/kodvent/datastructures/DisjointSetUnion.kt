@@ -43,7 +43,7 @@ public class DisjointSetUnion(size: Int) {
      * This operation uses path compression: during the search, it makes every node on the path
      * point directly to the root, which speeds up future queries.
      *
-     * Time complexity: `O(α(n))` amortized, where `α` is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
      * @param x The element whose set representative to find. Must be in range [0, size).
      *
@@ -70,7 +70,7 @@ public class DisjointSetUnion(size: Int) {
      * of the tree with a larger rank. If ranks are equal, one tree is attached to the other and
      * the rank of the new root is increased.
      *
-     * Time complexity: `O(α(n))` amortized, where `α` is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
      * @param x The first element. Must be in range [0, size).
      * @param y The second element. Must be in range [0, size).
@@ -110,7 +110,7 @@ public class DisjointSetUnion(size: Int) {
     /**
      * Checks if elements [x] and [y] are in the same set.
      *
-     * Time complexity: `O(α(n))` amortized, where `α` is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
      * @param x The first element. Must be in range [0, size).
      * @param y The second element. Must be in range [0, size).
@@ -128,7 +128,7 @@ public class DisjointSetUnion(size: Int) {
     /**
      * The number of disjoint sets.
      *
-     * Time complexity: `O(1)`.
+     * Time complexity: O(1).
      *
      * @sample samples.DisjointSetUnionSamples.dynamicConnectivityUpdates
      */
@@ -142,7 +142,7 @@ public class DisjointSetUnion(size: Int) {
      * effectively removing it from any set it was previously part of. Other elements
      * that were in the same set remain connected.
      *
-     * Time complexity: `O(n)`, where `n` is the size of the disjoint set, as it may need
+     * Time complexity: O(n), where n is the size of the disjoint set, as it may need
      *                  to find all elements in the set and reconnect them.
      *
      * @param x The element to reset. Must be in range [0, size).

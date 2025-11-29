@@ -62,8 +62,10 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     public operator fun get(start: Int, end: Int): T {
         require(size > 0) { "Cannot query empty segment tree" }
         require(start <= end) { "Start index $start is greater than end index $end" }
+
         if (start < 0) throw IndexOutOfBoundsException("Start index $start is negative. Valid range: [0, ${size - 1}]")
         if (end >= size) throw IndexOutOfBoundsException("End index $end is out of bounds. Valid range: [0, ${size - 1}]")
+
         return queryRange(1, 0, size - 1, start, end)
             ?: error("Query returned null for valid range [$start, $end]")
     }

@@ -121,9 +121,7 @@ public class DisjointSetUnion(size: Int) {
      *
      * @sample samples.DisjointSetUnionSamples.networkConnectivity
      */
-    public fun connected(x: Int, y: Int): Boolean {
-        return find(x) == find(y)
-    }
+    public fun connected(x: Int, y: Int): Boolean = find(x) == find(y)
 
     /**
      * The number of disjoint sets.

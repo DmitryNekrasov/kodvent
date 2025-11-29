@@ -21,7 +21,7 @@ package kodvent.datastructures
  * These optimizations provide near-constant [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time complexity for both operations.
  *
  * @param size The number of elements in the disjoint set. Elements are represented by integers
- *             in the range [0, size). Initially, each element is in its own set.
+ *             in the range [0, [size]). Initially, each element is in its own set.
  *
  * @constructor Creates a DisjointSetUnion with [size] elements, where each element is initially
  *              in its own singleton set.
@@ -43,13 +43,14 @@ public class DisjointSetUnion(size: Int) {
      * This operation uses path compression: during the search, it makes every node on the path
      * point directly to the root, which speeds up future queries.
      *
-     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse
+     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
-     * @param x The element whose set representative to find. Must be in range [0, size).
+     * @param x The element whose set representative to find. Must be in range [0, [size]).
      *
      * @return The representative element of the set containing [x].
      *
-     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, size).
+     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, [size]).
      *
      * @sample samples.DisjointSetUnionSamples.findingRepresentatives
      */
@@ -70,15 +71,16 @@ public class DisjointSetUnion(size: Int) {
      * of the tree with a larger rank. If ranks are equal, one tree is attached to the other and
      * the rank of the new root is increased.
      *
-     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse
+     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
-     * @param x The first element. Must be in range [0, size).
-     * @param y The second element. Must be in range [0, size).
+     * @param x The first element. Must be in range [0, [size]).
+     * @param y The second element. Must be in range [0, [size]).
      *
      * @return `true` if the sets were merged (they were previously disjoint), `false` if [x] and [y]
      *         were already in the same set.
      *
-     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, size).
+     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, [size]).
      *
      * @sample samples.DisjointSetUnionSamples.basicUsage
      * @sample samples.DisjointSetUnionSamples.detectingCycles
@@ -110,14 +112,15 @@ public class DisjointSetUnion(size: Int) {
     /**
      * Checks if elements [x] and [y] are in the same set.
      *
-     * Time complexity: O(α(n)) amortized, where α is the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
+     * Time complexity: O(α(n)) amortized, where α is the inverse
+     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
      *
-     * @param x The first element. Must be in range [0, size).
-     * @param y The second element. Must be in range [0, size).
+     * @param x The first element. Must be in range [0, [size]).
+     * @param y The second element. Must be in range [0, [size]).
      *
      * @return `true` if [x] and [y] are in the same set, `false` otherwise.
      *
-     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, size).
+     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, [size]).
      *
      * @sample samples.DisjointSetUnionSamples.networkConnectivity
      */
@@ -140,12 +143,12 @@ public class DisjointSetUnion(size: Int) {
      * effectively removing it from any set it was previously part of. Other elements
      * that were in the same set remain connected.
      *
-     * Time complexity: O(n), where n is the size of the disjoint set, as it may need
+     * Time complexity: O(n), where n is the [size] of the disjoint set, as it may need
      *                  to find all elements in the set and reconnect them.
      *
-     * @param x The element to reset. Must be in range [0, size).
+     * @param x The element to reset. Must be in range [0, [size]).
      *
-     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, size).
+     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, [size]).
      *
      * @sample samples.DisjointSetUnionSamples.isolateUsage
      */

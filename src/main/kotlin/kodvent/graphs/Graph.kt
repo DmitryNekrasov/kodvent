@@ -20,6 +20,8 @@ public class Graph<T> {
 
     private val graph = mutableListOf<MutableList<Vertex>>()
 
+    public val size get() = graph.size
+
     public fun addEdge(from: T, to: T) {
         val vertexFrom = addVertex(from)
         val vertexTo = addVertex(to)

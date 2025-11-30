@@ -5,5 +5,10 @@
 
 package kodvent.graphs
 
+class SequentialMapper<K, V>(val generator: (Int) -> V) {
+    private val cache = mutableMapOf<K, V>()
+    operator fun get(key: K) = cache.getOrPut(key) { generator(cache.size) }
+}
+
 class Graph {
 }

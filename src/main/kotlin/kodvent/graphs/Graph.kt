@@ -15,5 +15,22 @@ class SequentialMapper<K, V>(val generator: (Int) -> V) {
 @JvmInline
 public value class Vertex(val id: Int)
 
-class Graph {
+public class Graph<T> {
+    private val vertexMap = SequentialMapper<T, Vertex>(::Vertex)
+
+    private val graph = mutableListOf<MutableList<Vertex>>()
+
+    public fun addEdge(from: T, to: T) {
+        val vertexFrom = addVertex(from)
+        val vertexTo = addVertex(to)
+        graph[vertexFrom.id].add(vertexTo)
+    }
+
+    private fun addVertex(v: T): Vertex {
+        val vertex = vertexMap[v]
+        if (graph.size <= vertex.id) {
+            graph.add(mutableListOf())
+        }
+        return vertex
+    }
 }

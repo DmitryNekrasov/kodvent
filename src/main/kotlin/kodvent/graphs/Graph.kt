@@ -10,6 +10,7 @@ package kodvent.graphs
 class SequentialMapper<K, V>(val generator: (Int) -> V) {
     private val cache = mutableMapOf<K, V>()
     operator fun get(key: K) = cache.getOrPut(key) { generator(cache.size) }
+    operator fun contains(key: K) = key in cache
 }
 
 @JvmInline
@@ -26,6 +27,11 @@ public class Graph<T> {
         val vertexFrom = addVertex(from)
         val vertexTo = addVertex(to)
         graph[vertexFrom.id].add(vertexTo)
+    }
+
+    public fun getVertex(v: T): Vertex {
+        require(v in vertexMap) { "Vertex $v not found" }
+        return vertexMap[v]
     }
 
     private fun addVertex(v: T): Vertex {

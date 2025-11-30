@@ -13,6 +13,10 @@ class GraphTest {
         graph.addEdge(4, 1)
         graph.addEdge(1, 5)
         graph.addEdge(5, 20)
+
+        val start = graph.getVertex(20)
+
         println(graph.size)
+        println(start.id)
     }
 }

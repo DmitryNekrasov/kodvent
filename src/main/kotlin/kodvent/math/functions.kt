@@ -115,3 +115,9 @@ private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long
     }
     return result
 }
+
+public fun Int.sqr(): Int = this * this
+
+public fun Long.sqr(): Long = this * this
+
+public fun Double.sqr(): Double = this * this

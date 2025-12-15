@@ -120,6 +120,10 @@ private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long
  * Returns the square of [this] Int value.
  *
  * @return the square of [this] value
+ *
+ * @sample samples.SqrSamples.sqrBasicUsage
+ * @sample samples.SqrSamples.sqrDistanceCalculation
+ * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Int.sqr(): Int = this * this
 
@@ -127,6 +131,10 @@ public fun Int.sqr(): Int = this * this
  * Returns the square of [this] Long value.
  *
  * @return the square of [this] value
+ *
+ * @sample samples.SqrSamples.sqrBasicUsage
+ * @sample samples.SqrSamples.sqrDistanceCalculation
+ * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Long.sqr(): Long = this * this
 
@@ -134,5 +142,9 @@ public fun Long.sqr(): Long = this * this
  * Returns the square of [this] Double value.
  *
  * @return the square of [this] value
+ *
+ * @sample samples.SqrSamples.sqrBasicUsage
+ * @sample samples.SqrSamples.sqrDistanceCalculation
+ * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Double.sqr(): Double = this * this

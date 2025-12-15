@@ -58,6 +58,8 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      *
      * @throws IllegalArgumentException if the tree is empty or [start] > [end]
      * @throws IndexOutOfBoundsException if [start] is negative or [end] is out of bounds
+     *
+     * @sample samples.SegmentTreeSamples.rangeQuery
      */
     public operator fun get(start: Int, end: Int): T {
         require(size > 0) { "Cannot query empty segment tree" }
@@ -82,6 +84,8 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
      *
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
+     *
+     * @sample samples.SegmentTreeSamples.singleIndexQuery
      */
     public operator fun get(index: Int): T = get(index, index)
 

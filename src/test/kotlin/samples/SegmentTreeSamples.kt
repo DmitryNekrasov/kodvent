@@ -14,6 +14,39 @@ import kotlin.test.assertNull
 class SegmentTreeSamples {
 
     @Test
+    fun singleIndexQuery() {
+        val numbers = listOf(5, 10, 15, 20, 25)
+        val segmentTree = SegmentTree(numbers, Int::plus)
+
+        val value = segmentTree[2]
+        assertEquals(15, value)
+
+        val firstValue = segmentTree[0]
+        assertEquals(5, firstValue)
+
+        val lastValue = segmentTree[4]
+        assertEquals(25, lastValue)
+    }
+
+    @Test
+    fun rangeQuery() {
+        val numbers = listOf(2, 4, 6, 8, 10)
+        val segmentTree = SegmentTree(numbers, Int::plus)
+
+        // Elements: 4, 6, 8
+        val sum = segmentTree[1, 3]
+        assertEquals(18, sum)
+
+        // Elements: 2, 4, 6, 8, 10
+        val totalSum = segmentTree[0, 4]
+        assertEquals(30, totalSum)
+
+        // Elements: 10
+        val singleRange = segmentTree[4, 4]
+        assertEquals(10, singleRange)
+    }
+
+    @Test
     fun basicRangeSumQuery() {
         // Create a segment tree for range sum queries
         val numbers = listOf(1, 3, 5, 7, 9, 11)

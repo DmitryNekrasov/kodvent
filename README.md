@@ -38,6 +38,14 @@ Efficient exponentiation using binary exponentiation (O(log n) time complexity):
   - Useful for computing large powers modulo a number
   - Common in number theory problems
 
+#### Square Functions
+
+Convenient extension functions for computing the square of a number:
+
+- **`Int.sqr(): Int`** - Returns the square of an Int value
+- **`Long.sqr(): Long`** - Returns the square of a Long value
+- **`Double.sqr(): Double`** - Returns the square of a Double value
+
 ### Disjoint Set Union (Union-Find)
 
 An efficient data structure for managing disjoint sets with near-constant time operations:
@@ -182,6 +190,28 @@ val lastDigit = 7L.pow(100L, 10L)  // 1 (last digit of 7^100)
 val a = 5L
 val p = 13L  // prime
 val fermat = a.pow(p - 1, p)  // 1
+```
+
+### Computing Squares
+
+```kotlin
+import kodvent.math.sqr
+
+val intSquare = 5.sqr()      // 25
+val longSquare = 10L.sqr()   // 100
+val doubleSquare = 3.5.sqr() // 12.25
+
+val sideLength = 7
+val area = sideLength.sqr()  // 49
+
+val x1 = 3
+val y1 = 4
+val x2 = 6
+val y2 = 8
+
+val dx = x2 - x1
+val dy = y2 - y1
+val distanceSquared = dx.sqr() + dy.sqr()  // 25
 ```
 
 ### Graph Algorithms with Disjoint Set Union

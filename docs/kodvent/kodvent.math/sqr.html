@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>decrement</title>
+    <title>sqr</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -104,55 +104,139 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent</a><span class="delimiter">/</span><span class="current">decrement</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.math//sqr/kotlin.Int#/PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.math</a><span class="delimiter">/</span><span class="current">sqr</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>decrement</span></span></h1>
+    <h1 class="cover"><span><span>sqr</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="decrement.html"><span class="token function">decrement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="decrement.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><p class="paragraph">Decrements the count for the specified key by 1.</p><p class="paragraph">If the key's count is greater than 1, it will be decreased by 1. If the key's count is exactly 1, the key will be removed from the map. If the key does not exist in the map, no changes are made.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph"><code class="lang-kotlin">true</code> if the key existed and was decremented or removed, <code class="lang-kotlin">false</code> if the key was not found</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be decremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">.</span><a href="sqr.html"><span class="token function">sqr</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Returns the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> Int value.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> value</p></span><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val inventory = mutableMapOf(&quot;apple&quot; to 3, &quot;banana&quot; to 1)
+   val result1 = 5.sqr()
+assertEquals(25, result1)
 
-// Decrement reduces the count
-inventory.decrement(&quot;apple&quot;)
-assertEquals(2, inventory[&quot;apple&quot;])
+val result2 = 10L.sqr()
+assertEquals(100L, result2)
 
-// Decrement returns true when the key exists
-val removed = inventory.decrement(&quot;banana&quot;)
-assertEquals(true, removed)
-
-// When the count reaches 0, the key is removed
-assertEquals(false, inventory.containsKey(&quot;banana&quot;))
-
-// Decrement returns false for non-existent keys
-val found = inventory.decrement(&quot;orange&quot;)
-assertEquals(false, found) 
+val result3 = 3.5.sqr()
+assertEquals(12.25, result3) 
    //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val stock = mutableMapOf(&quot;laptop&quot; to 5, &quot;mouse&quot; to 10, &quot;keyboard&quot; to 3)
+   val x1 = 3
+val y1 = 4
+val x2 = 6
+val y2 = 8
 
-// Sell 3 laptops
-repeat(3) { stock.decrement(&quot;laptop&quot;) }
-assertEquals(2, stock[&quot;laptop&quot;])
+val dx = x2 - x1
+val dy = y2 - y1
+val distanceSquared = dx.sqr() + dy.sqr()
 
-// Sell all keyboards
-repeat(3) { stock.decrement(&quot;keyboard&quot;) }
-assertEquals(false, stock.containsKey(&quot;keyboard&quot;))
+assertEquals(25, distanceSquared) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-// Try to sell a non-existent item
-val success = stock.decrement(&quot;monitor&quot;)
-assertEquals(false, success) 
+fun main() { 
+   //sampleStart 
+   val sideLength = 7
+val area = sideLength.sqr()
+
+assertEquals(49, area) 
+   //sampleEnd
+}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="sqr.html"><span class="token function">sqr</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Returns the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> Long value.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> value</p></span><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val result1 = 5.sqr()
+assertEquals(25, result1)
+
+val result2 = 10L.sqr()
+assertEquals(100L, result2)
+
+val result3 = 3.5.sqr()
+assertEquals(12.25, result3) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val x1 = 3
+val y1 = 4
+val x2 = 6
+val y2 = 8
+
+val dx = x2 - x1
+val dy = y2 - y1
+val distanceSquared = dx.sqr() + dy.sqr()
+
+assertEquals(25, distanceSquared) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val sideLength = 7
+val area = sideLength.sqr()
+
+assertEquals(49, area) 
+   //sampleEnd
+}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">.</span><a href="sqr.html"><span class="token function">sqr</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><p class="paragraph">Returns the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> Double value.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the square of <span data-unresolved-link="kodvent.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> value</p></span><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val result1 = 5.sqr()
+assertEquals(25, result1)
+
+val result2 = 10L.sqr()
+assertEquals(100L, result2)
+
+val result3 = 3.5.sqr()
+assertEquals(12.25, result3) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val x1 = 3
+val y1 = 4
+val x2 = 6
+val y2 = 8
+
+val dx = x2 - x1
+val dy = y2 - y1
+val distanceSquared = dx.sqr() + dy.sqr()
+
+assertEquals(25, distanceSquared) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.sqr
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   val sideLength = 7
+val area = sideLength.sqr()
+
+assertEquals(49, area) 
    //sampleEnd
 }</code></pre></div></div></div>
 </div>

@@ -6,8 +6,10 @@
 package samples
 
 import kodvent.boundsearch.partitionPoint
+import kodvent.math.sqr
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class PartitionPointSamples {
 
@@ -26,16 +28,14 @@ class PartitionPointSamples {
 
     @Test
     fun findFirstElementGreaterOrEqual() {
-        // Find the first element in a sorted array that is >= target value using Long version
-        val sortedArray = longArrayOf(5, 10, 15, 20, 25, 30, 35, 40)
-        val target = 22L
+        // Find the first element in a sorted array that is >= target value
+        val sortedArray = intArrayOf(5, 10, 15, 20, 25, 30, 35, 40)
+        val target = 22
 
-        val index = partitionPoint(0L, sortedArray.size.toLong()) { i ->
-            sortedArray[i.toInt()] < target
-        }
+        val index = partitionPoint(0, sortedArray.size) { sortedArray[it] < target }
 
-        assertEquals(4L, index)
-        assertEquals(25L, sortedArray[index.toInt()])
+        assertEquals(4, index)
+        assertEquals(25, sortedArray[index])
     }
 
     @Test
@@ -72,13 +72,14 @@ class PartitionPointSamples {
 
     @Test
     fun squareRootFloor() {
-        // Find floor(sqrt(n)) using binary search
-        val n = 50
+        // Find floor(sqrt(n)) using binary search with a Long version
+        val n = 12_345_678_912_345L
 
-        val sqrtFloor = partitionPoint(0, n + 1) { x -> x * x <= n } - 1
+        val sqrtFloor = partitionPoint(0L, 10_000_000L) { x -> x * x <= n } - 1
 
-        assertEquals(7, sqrtFloor)
-        assertEquals(49, sqrtFloor * sqrtFloor)
+        assertEquals(3_513_641L, sqrtFloor)
+        assertEquals(12_345_673_076_881L, sqrtFloor.sqr())
+        assertTrue((sqrtFloor + 1).sqr() > n)
     }
 
     @Test

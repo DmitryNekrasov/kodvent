@@ -11,6 +11,7 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
     partitionPoint(fromIndex.toLong(), toIndex.toLong()) { predicate(it.toInt()) }.toInt()
 
 public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long {
+    require(fromIndex <= toIndex) { "fromIndex ($fromIndex) is greater than toIndex ($toIndex)." }
     var low = fromIndex
     var high = toIndex
     while (low < high) {

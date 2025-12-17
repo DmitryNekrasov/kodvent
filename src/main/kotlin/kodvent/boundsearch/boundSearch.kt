@@ -7,19 +7,14 @@
 
 package kodvent.boundsearch
 
-public fun <T : Comparable<T>> List<T>.lowerBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
-    rangeCheck(size, fromIndex, toIndex)
-    return lowerBound(fromIndex, toIndex, element) { get(it) }
-}
-
 public fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
     lowerBound(fromIndex, toIndex, true, predicate)
 
-public fun <T : Comparable<T>> lowerBound(
+public inline fun <T : Comparable<T>> lowerBound(
     fromIndex: Int,
     toIndex: Int,
     element: T,
-    selector: (Int) -> T
+    crossinline selector: (Int) -> T
 ): Int {
     var low = fromIndex
     var high = toIndex - 1

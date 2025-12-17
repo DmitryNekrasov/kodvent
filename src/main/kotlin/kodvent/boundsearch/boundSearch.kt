@@ -29,15 +29,3 @@ public inline fun <T : Comparable<T>> lowerBound(
     }
     return low
 }
-
-/**
- * Checks that `from` and `to` are in
- * the range of [0..size] and throws an appropriate exception, if they aren't.
- */
-private fun rangeCheck(size: Int, fromIndex: Int, toIndex: Int) {
-    when {
-        fromIndex > toIndex -> throw IllegalArgumentException("fromIndex ($fromIndex) is greater than toIndex ($toIndex).")
-        fromIndex < 0 -> throw IndexOutOfBoundsException("fromIndex ($fromIndex) is less than zero.")
-        toIndex > size -> throw IndexOutOfBoundsException("toIndex ($toIndex) is greater than size ($size).")
-    }
-}

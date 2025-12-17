@@ -24,8 +24,21 @@ package kodvent.boundsearch
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
-public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
-    partitionPoint(fromIndex.toLong(), toIndex.toLong()) { predicate(it.toInt()) }.toInt()
+@Suppress("DuplicatedCode")
+public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {
+    require(fromIndex <= toIndex) { "fromIndex ($fromIndex) is greater than toIndex ($toIndex)." }
+    var low = fromIndex
+    var high = toIndex
+    while (low < high) {
+        val mid = (low + high).ushr(1)
+        if (predicate(mid)) {
+            low = mid + 1
+        } else {
+            high = mid
+        }
+    }
+    return low
+}
 
 /**
  * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
@@ -44,6 +57,7 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
+@Suppress("DuplicatedCode")
 public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long {
     require(fromIndex <= toIndex) { "fromIndex ($fromIndex) is greater than toIndex ($toIndex)." }
     var low = fromIndex

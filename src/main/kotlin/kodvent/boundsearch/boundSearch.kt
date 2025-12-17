@@ -7,7 +7,10 @@
 
 package kodvent.boundsearch
 
-public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {
+public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
+    partitionPoint(fromIndex.toLong(), toIndex.toLong()) { predicate(it.toInt()) }.toInt()
+
+public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long {
     var low = fromIndex
     var high = toIndex
     while (low < high) {

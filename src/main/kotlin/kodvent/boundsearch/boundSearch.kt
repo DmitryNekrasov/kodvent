@@ -7,9 +7,43 @@
 
 package kodvent.boundsearch
 
+/**
+ * Finds the partition point in the range `[fromIndex, toIndex)` where a predicate transitions from `true` to `false`.
+ *
+ * This function uses binary search to efficiently locate the first index in the range where the [predicate]
+ * returns `false`. The predicate must be monotonic: if it returns `false` for some index, it must return `false`
+ * for all later indices in the range.
+ *
+ * @param fromIndex The start of the range (inclusive). Must not be greater than [toIndex].
+ * @param toIndex The end of the range (exclusive). Must not be less than [fromIndex].
+ * @param predicate A monotonic predicate function that takes an index and returns `true` for all indices
+ *                  before the partition point and `false` from the partition point onwards.
+ *
+ * @return The partition point: the first index where [predicate] returns `false`, or [toIndex] if [predicate]
+ *         is `true` for all indices in the range.
+ *
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ */
 public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
     partitionPoint(fromIndex.toLong(), toIndex.toLong()) { predicate(it.toInt()) }.toInt()
 
+/**
+ * Finds the partition point in the range `[fromIndex, toIndex)` where a predicate transitions from `true` to `false`.
+ *
+ * This function uses binary search to efficiently locate the first index in the range where the [predicate]
+ * returns `false`. The predicate must be monotonic: if it returns `false` for some index, it must return `false`
+ * for all later indices in the range.
+ *
+ * @param fromIndex The start of the range (inclusive). Must not be greater than [toIndex].
+ * @param toIndex The end of the range (exclusive). Must not be less than [fromIndex].
+ * @param predicate A monotonic predicate function that takes an index and returns `true` for all indices
+ *                  before the partition point and `false` from the partition point onwards.
+ *
+ * @return The partition point: the first index where [predicate] returns `false`, or [toIndex] if [predicate]
+ *         is `true` for all indices in the range.
+ *
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ */
 public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long {
     require(fromIndex <= toIndex) { "fromIndex ($fromIndex) is greater than toIndex ($toIndex)." }
     var low = fromIndex

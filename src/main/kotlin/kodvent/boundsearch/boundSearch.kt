@@ -8,7 +8,7 @@
 package kodvent.boundsearch
 
 /**
- * Finds the partition point in the range `[fromIndex, toIndex)` where a predicate transitions from `true` to `false`.
+ * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
  *
  * This function uses binary search to efficiently locate the first index in the range where the [predicate]
  * returns `false`. The predicate must be monotonic: if it returns `false` for some index, it must return `false`
@@ -28,7 +28,7 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
     partitionPoint(fromIndex.toLong(), toIndex.toLong()) { predicate(it.toInt()) }.toInt()
 
 /**
- * Finds the partition point in the range `[fromIndex, toIndex)` where a predicate transitions from `true` to `false`.
+ * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
  *
  * This function uses binary search to efficiently locate the first index in the range where the [predicate]
  * returns `false`. The predicate must be monotonic: if it returns `false` for some index, it must return `false`

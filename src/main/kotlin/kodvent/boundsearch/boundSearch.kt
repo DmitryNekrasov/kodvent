@@ -7,39 +7,15 @@
 
 package kodvent.boundsearch
 
-public fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
-    lowerBound(fromIndex, toIndex, true, predicate)
-
-public fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long =
-    lowerBound(fromIndex, toIndex, true, predicate)
-
-public inline fun <T : Comparable<T>> lowerBound(
-    fromIndex: Int,
-    toIndex: Int,
-    element: T,
-    crossinline selector: (Int) -> T
-): Int = lowerBound(
-    fromIndex = fromIndex.toLong(),
-    toIndex = toIndex.toLong(),
-    element = element,
-    selector = { selector(it.toInt()) }
-).toInt()
-
-public inline fun <T : Comparable<T>> lowerBound(
-    fromIndex: Long,
-    toIndex: Long,
-    element: T,
-    crossinline selector: (Long) -> T
-): Long {
+public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {
     var low = fromIndex
-    var high = toIndex - 1
-    while (low <= high) {
+    var high = toIndex
+    while (low < high) {
         val mid = (low + high).ushr(1)
-        val cmp = compareValues(selector(mid), element)
-        if (cmp < 0) {
+        if (predicate(mid)) {
             low = mid + 1
         } else {
-            high = mid - 1
+            high = mid
         }
     }
     return low

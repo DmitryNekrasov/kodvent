@@ -10,12 +10,27 @@ package kodvent.boundsearch
 public fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int =
     lowerBound(fromIndex, toIndex, true, predicate)
 
+public fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long =
+    lowerBound(fromIndex, toIndex, true, predicate)
+
 public inline fun <T : Comparable<T>> lowerBound(
     fromIndex: Int,
     toIndex: Int,
     element: T,
     crossinline selector: (Int) -> T
-): Int {
+): Int = lowerBound(
+    fromIndex = fromIndex.toLong(),
+    toIndex = toIndex.toLong(),
+    element = element,
+    selector = { selector(it.toInt()) }
+).toInt()
+
+public inline fun <T : Comparable<T>> lowerBound(
+    fromIndex: Long,
+    toIndex: Long,
+    element: T,
+    crossinline selector: (Long) -> T
+): Long {
     var low = fromIndex
     var high = toIndex - 1
     while (low <= high) {

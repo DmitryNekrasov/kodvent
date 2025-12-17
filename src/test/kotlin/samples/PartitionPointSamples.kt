@@ -26,16 +26,35 @@ class PartitionPointSamples {
 
     @Test
     fun findFirstElementGreaterOrEqual() {
-        // Find the first element in a sorted array that is >= target value
-        val sortedArray = intArrayOf(5, 10, 15, 20, 25, 30, 35, 40)
-        val target = 22
+        // Find the first element in a sorted array that is >= target value using Long version
+        val sortedArray = longArrayOf(5, 10, 15, 20, 25, 30, 35, 40)
+        val target = 22L
 
-        val index = partitionPoint(0, sortedArray.size) { i ->
-            sortedArray[i] < target
+        val index = partitionPoint(0L, sortedArray.size.toLong()) { i ->
+            sortedArray[i.toInt()] < target
         }
 
-        assertEquals(4, index)
-        assertEquals(25, sortedArray[index])
+        assertEquals(4L, index)
+        assertEquals(25L, sortedArray[index.toInt()])
+    }
+
+    @Test
+    fun lowerBoundAndUpperBoundWithDuplicates() {
+        // Find lower bound and upper bound in an array with duplicates
+        val sortedArray = intArrayOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
+        val target = 9
+
+        val lowerBound = partitionPoint(0, sortedArray.size) { sortedArray[it] < target }
+        val upperBound = partitionPoint(0, sortedArray.size) { sortedArray[it] <= target }
+
+        assertEquals(7, lowerBound)
+        assertEquals(9, sortedArray[lowerBound])
+
+        assertEquals(11, upperBound)
+        assertEquals(11, sortedArray[upperBound])
+
+        val count = upperBound - lowerBound
+        assertEquals(4, count)
     }
 
     @Test

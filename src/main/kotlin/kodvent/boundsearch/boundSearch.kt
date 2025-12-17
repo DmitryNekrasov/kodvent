@@ -30,7 +30,7 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
     var low = fromIndex
     var high = toIndex
     while (low < high) {
-        val mid = (low + high).ushr(1)
+        val mid = low + (high - low).shr(1)
         if (predicate(mid)) {
             low = mid + 1
         } else {
@@ -63,7 +63,7 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
     var low = fromIndex
     var high = toIndex
     while (low < high) {
-        val mid = (low + high).ushr(1)
+        val mid = low + (high - low).shr(1)
         if (predicate(mid)) {
             low = mid + 1
         } else {

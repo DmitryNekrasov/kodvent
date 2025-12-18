@@ -18,11 +18,11 @@ import kodvent.boundsearch.partitionPoint
  * If all elements are less than [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index of the first such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param element the element to search for.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element that is greater than or equal to [element], or [toIndex] if all elements are less than [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
@@ -45,12 +45,12 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  * If all elements are less than [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index of the first such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param element the element to search for.
  * @param comparator the comparator used to compare list elements with the element being searched.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element that is greater than or equal to [element] according to [comparator],
  *         or [toIndex] if all elements are less than [element].
@@ -104,12 +104,12 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * If all element keys are less than [key], returns the end index ([toIndex]).
  * If the list contains multiple elements with the specified [key], returns the index of the first such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param key the key to search for.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  * @param selector the function to extract the key from a list element.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element whose key is greater than or equal to [key],
  *         or [toIndex] if all element keys are less than [key].
@@ -134,11 +134,11 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * If all elements are less than or equal to [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index immediately after the last such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param element the element to search for.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element that is strictly greater than [element],
  *         or [toIndex] if all elements are less than or equal to [element].
@@ -162,12 +162,12 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  * If all elements are less than or equal to [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index immediately after the last such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param element the element to search for.
  * @param comparator the comparator used to compare list elements with the element being searched.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element that is strictly greater than [element] according to [comparator],
  *         or [toIndex] if all elements are less than or equal to [element].
@@ -221,12 +221,12 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * If all element keys are less than or equal to [key], returns the end index ([toIndex]).
  * If the list contains multiple elements with the specified [key], returns the index immediately after the last such element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @param key the key to search for.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  * @param selector the function to extract the key from a list element.
- *
- * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element whose key is strictly greater than [key],
  *         or [toIndex] if all element keys are less than or equal to [key].

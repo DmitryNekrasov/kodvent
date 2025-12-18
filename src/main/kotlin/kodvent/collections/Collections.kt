@@ -7,3 +7,9 @@
 
 package kodvent.collections
 
+private fun rangeCheck(size: Int, fromIndex: Int, toIndex: Int) {
+    when {
+        fromIndex < 0 -> throw IndexOutOfBoundsException("fromIndex ($fromIndex) is less than zero.")
+        toIndex > size -> throw IndexOutOfBoundsException("toIndex ($toIndex) is greater than size ($size).")
+    }
+}

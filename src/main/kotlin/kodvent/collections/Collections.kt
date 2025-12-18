@@ -31,6 +31,28 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
     crossinline selector: (T) -> K?
 ): Int = lowerBound(fromIndex, toIndex) { compareValues(selector(it), key) }
 
+public fun <T : Comparable<T>> List<T>.upperBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
+    rangeCheck(size, fromIndex, toIndex)
+    return partitionPoint(fromIndex, toIndex) { get(it) <= element }
+}
+
+public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
+    rangeCheck(size, fromIndex, toIndex)
+    return partitionPoint(fromIndex, toIndex) { comparator.compare(get(it), element) <= 0 }
+}
+
+public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
+    rangeCheck(size, fromIndex, toIndex)
+    return partitionPoint(fromIndex, toIndex) { comparison(get(it)) <= 0 }
+}
+
+public inline fun <T, K : Comparable<K>> List<T>.upperBoundBy(
+    key: K?,
+    fromIndex: Int = 0,
+    toIndex: Int = size,
+    crossinline selector: (T) -> K?
+): Int = upperBound(fromIndex, toIndex) { compareValues(selector(it), key) }
+
 private fun rangeCheck(size: Int, fromIndex: Int, toIndex: Int) {
     when {
         fromIndex < 0 -> throw IndexOutOfBoundsException("fromIndex ($fromIndex) is less than zero.")

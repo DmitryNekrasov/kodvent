@@ -102,7 +102,7 @@ Efficient binary search functions to find the partition point where a monotonic 
 
 - **`partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int`** - Finds the first index in `[fromIndex, toIndex)` where predicate returns `false`
   - Uses binary search for O(log n) time complexity
-  - The predicate must be monotonic: once it returns `false`, it must return `false` for all subsequent indices
+  - The predicate must be monotonic: once it returns `false`, it must return `false` for all later indices
   - Returns `toIndex` if predicate is `true` for all indices in the range
   - Useful for: binary search in arrays, finding insertion points, lower/upper bounds, binary search on answer
 - **`partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long`** - Long version for searching large ranges
@@ -285,7 +285,7 @@ val data = listOf(5, 2, 8, 1, 9, 3, 7, 4)
 val minTree = SegmentTree(data, ::minOf)
 
 val minRange = minTree[0, 3]  // min of [5, 2, 8, 1] = 1
-val minAll = minTree[0, 7]    // min of entire array = 1
+val minAll = minTree[0, 7]    // min of an entire array = 1
 
 // Range maximum queries
 val maxTree = SegmentTree(data, ::maxOf)
@@ -333,7 +333,7 @@ val s = "abacaba"
 val pi = s.prefixFunction()  // [0, 0, 1, 0, 1, 2, 3]
 // pi[6] = 3 means "aba" is both prefix and suffix of "abacaba"
 
-// Use prefix function for period detection
+// Use a prefix function for period detection
 val periodic = "abababab"
 val prefixArray = periodic.prefixFunction()
 val period = periodic.length - prefixArray.last()  // 2
@@ -396,7 +396,7 @@ The project includes comprehensive tests for all extension functions. Test repor
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 – see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 

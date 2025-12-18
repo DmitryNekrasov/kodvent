@@ -105,6 +105,8 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  * @param selector the function to extract the key from a list element.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @return the index of the first element whose key is greater than or equal to [key],
  *         or [toIndex] if all element keys are less than [key].
  *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
@@ -215,6 +217,8 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  * @param selector the function to extract the key from a list element.
+ *
+ * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element whose key is strictly greater than [key],
  *         or [toIndex] if all element keys are less than or equal to [key].

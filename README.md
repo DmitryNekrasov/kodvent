@@ -117,6 +117,36 @@ Efficient binary search functions to find the partition point where a monotonic 
 - **Insertion point**: Same as lower bound
 - **Binary search on answer**: Search over possible answer values (e.g., "find maximum distance" → try different distances, check if achievable)
 
+### Lower Bound and Upper Bound
+
+Convenient extension functions for `List` that provide standard binary search operations for sorted sequences:
+
+#### Lower Bound
+Finds the first position where an element could be inserted while maintaining sorted order (first element ≥ target):
+
+- **`List<T>.lowerBound(element: T): Int`** - Uses natural ordering (Comparable)
+- **`List<T>.lowerBound(element: T, comparator: Comparator<in T>): Int`** - Uses custom comparator
+- **`List<T>.lowerBound(comparison: (T) -> Int): Int`** - Uses custom comparison function
+- **`List<T>.lowerBoundBy(key: K, selector: (T) -> K): Int`** - Searches by extracted key
+
+All functions support optional `fromIndex` and `toIndex` parameters to search within a specific range.
+
+#### Upper Bound
+Finds the last position where an element could be inserted while maintaining sorted order (first element > target):
+
+- **`List<T>.upperBound(element: T): Int`** - Uses natural ordering (Comparable)
+- **`List<T>.upperBound(element: T, comparator: Comparator<in T>): Int`** - Uses custom comparator
+- **`List<T>.upperBound(comparison: (T) -> Int): Int`** - Uses custom comparison function
+- **`List<T>.upperBoundBy(key: K, selector: (T) -> K): Int`** - Searches by extracted key
+
+All functions support optional `fromIndex` and `toIndex` parameters to search within a specific range.
+
+**Key features**:
+- Always return non-negative insertion points (unlike `binarySearch` which returns negative values for missing elements)
+- Handle `null` values correctly (`null` is considered less than any non-null value)
+- Work with duplicate elements: `lowerBound` finds the first occurrence, `upperBound` finds the position after the last occurrence
+- Together, `lowerBound` and `upperBound` can be used to count occurrences or find the range of equal elements
+
 ## Installation
 
 Add the dependency to your project:
@@ -371,6 +401,24 @@ val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
     canPlaceBalls(positions, m, distance)
 }
 val maxMinDistance = partitionPoint - 1  // 3
+```
+
+### Counting Occurrences with Lower and Upper Bound
+
+```kotlin
+// Use lowerBound and upperBound together to count occurrences in a sorted list
+val list = listOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
+
+val target = 9
+val lower = list.lowerBound(target)  // 7 - index of first 9
+val upper = list.upperBound(target)  // 11 - index after last 9
+val count = upper - lower  // 4
+
+// For elements that don't exist, lower == upper
+val nonExistent = 8
+val lowerNE = list.lowerBound(nonExistent)  // 7
+val upperNE = list.upperBound(nonExistent)  // 7
+val countNE = upperNE - lowerNE  // 0
 ```
 
 ## Development

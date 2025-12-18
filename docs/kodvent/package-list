@@ -1,5 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:kodvent.boundsearch////PointingToDeclaration/kodvent/kodvent.boundsearch/index.html
+$dokka.location:kodvent.boundsearch//partitionPoint/#kotlin.Int#kotlin.Int#kotlin.Function1[kotlin.Int,kotlin.Boolean]/PointingToDeclaration/kodvent/kodvent.boundsearch/partition-point.html
+$dokka.location:kodvent.boundsearch//partitionPoint/#kotlin.Long#kotlin.Long#kotlin.Function1[kotlin.Long,kotlin.Boolean]/PointingToDeclaration/kodvent/kodvent.boundsearch/partition-point.html
 $dokka.location:kodvent.datastructures////PointingToDeclaration/kodvent/kodvent.datastructures/index.html
 $dokka.location:kodvent.datastructures/DisjointSetUnion///PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/index.html
 $dokka.location:kodvent.datastructures/DisjointSetUnion/DisjointSetUnion/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/-disjoint-set-union.html
@@ -33,6 +36,7 @@ $dokka.location:kodvent////PointingToDeclaration/kodvent/kodvent/index.html
 $dokka.location:kodvent//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/decrement.html
 $dokka.location:kodvent//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent/increment.html
 kodvent
+kodvent.boundsearch
 kodvent.datastructures
 kodvent.math
 kodvent.strings

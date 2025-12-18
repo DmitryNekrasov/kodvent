@@ -154,6 +154,15 @@ class BoundSearchTest {
     }
 
     @Test
+    fun `lowerBound - with reverse comparator and nulls`() {
+        val list = listOf(5, 1, null)
+        val reverseComparator = compareByDescending<Int?> { it }
+        assertEquals(0, list.lowerBound(5, reverseComparator))
+        assertEquals(1, list.lowerBound(3, reverseComparator))
+        assertEquals(2, list.lowerBound(null, reverseComparator))
+    }
+
+    @Test
     fun `lowerBound - with custom comparator for strings case-insensitive`() {
         val list = listOf("Apple", "Banana", "Cherry", "Date")
         val caseInsensitiveComparator = String.CASE_INSENSITIVE_ORDER

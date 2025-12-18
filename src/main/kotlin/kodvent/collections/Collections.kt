@@ -19,6 +19,11 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
     return partitionPoint(fromIndex, toIndex) { comparator.compare(get(it), element) < 0 }
 }
 
+public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
+    rangeCheck(size, fromIndex, toIndex)
+    return partitionPoint(fromIndex, toIndex) { comparison(get(it)) < 0 }
+}
+
 private fun rangeCheck(size: Int, fromIndex: Int, toIndex: Int) {
     when {
         fromIndex < 0 -> throw IndexOutOfBoundsException("fromIndex ($fromIndex) is less than zero.")

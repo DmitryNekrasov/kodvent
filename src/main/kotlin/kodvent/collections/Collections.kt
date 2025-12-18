@@ -24,6 +24,13 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
     return partitionPoint(fromIndex, toIndex) { comparison(get(it)) < 0 }
 }
 
+public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
+    key: K?,
+    fromIndex: Int = 0,
+    toIndex: Int = size,
+    crossinline selector: (T) -> K?
+): Int = lowerBound(fromIndex, toIndex) { compareValues(selector(it), key) }
+
 private fun rangeCheck(size: Int, fromIndex: Int, toIndex: Int) {
     when {
         fromIndex < 0 -> throw IndexOutOfBoundsException("fromIndex ($fromIndex) is less than zero.")

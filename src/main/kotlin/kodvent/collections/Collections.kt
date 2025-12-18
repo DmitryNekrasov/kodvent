@@ -28,7 +28,7 @@ import kodvent.boundsearch.partitionPoint
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -57,7 +57,7 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -87,7 +87,7 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -116,7 +116,7 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
     key: K?,
@@ -145,7 +145,7 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -174,7 +174,7 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -204,7 +204,7 @@ public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, from
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -233,7 +233,7 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]. This check is performed by [partitionPoint].
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public inline fun <T, K : Comparable<K>> List<T>.upperBoundBy(
     key: K?,

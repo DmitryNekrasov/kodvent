@@ -22,15 +22,17 @@ import kodvent.boundsearch.partitionPoint
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @return the index of the first element that is greater than or equal to [element], or [toIndex] if all elements are less than [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
-public fun <T : Comparable<T>> List<T>.lowerBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
+public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
-    return partitionPoint(fromIndex, toIndex) { get(it) < element }
+    return partitionPoint(fromIndex, toIndex) { compareValues(get(it), element) < 0 }
 }
 
 /**
@@ -134,6 +136,8 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @return the index of the first element that is strictly greater than [element],
  *         or [toIndex] if all elements are less than or equal to [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
@@ -141,9 +145,9 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
-public fun <T : Comparable<T>> List<T>.upperBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
+public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
-    return partitionPoint(fromIndex, toIndex) { get(it) <= element }
+    return partitionPoint(fromIndex, toIndex) { compareValues(get(it), element) <= 0 }
 }
 
 /**

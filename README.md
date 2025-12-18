@@ -165,9 +165,6 @@ val frequencies = mutableMapOf<Char, Int>()
 ### Mathematical Computations
 
 ```kotlin
-import kodvent.math.gcd
-import kodvent.math.lcm
-
 // Find the greatest common divisor
 val result1 = gcd(48, 18)  // 6
 
@@ -188,8 +185,6 @@ val nextSimultaneousArrival = lcm(12, 18)  // 36 minutes
 ### Power and Modular Exponentiation
 
 ```kotlin
-import kodvent.math.pow
-
 // Basic exponentiation using binary exponentiation
 val result1 = 2L.pow(10L)  // 1024
 val result2 = 5L.pow(3L)   // 125
@@ -216,8 +211,6 @@ val fermat = a.pow(p - 1, p)  // 1
 ### Computing Squares
 
 ```kotlin
-import kodvent.math.sqr
-
 val intSquare = 5.sqr()      // 25
 val longSquare = 10L.sqr()   // 100
 val doubleSquare = 3.5.sqr() // 12.25
@@ -238,8 +231,6 @@ val distanceSquared = dx.sqr() + dy.sqr()  // 25
 ### Graph Algorithms with Disjoint Set Union
 
 ```kotlin
-import kodvent.datastructures.DisjointSetUnion
-
 // Detect cycles in a graph
 val dsu = DisjointSetUnion(4)
 
@@ -271,9 +262,6 @@ val mst = edges.sortedBy { it.weight }
 ### Range Queries with Segment Tree
 
 ```kotlin
-import kodvent.datastructures.SegmentTree
-import kodvent.math.gcd
-
 // Range sum queries
 val numbers = listOf(1, 3, 5, 7, 9, 11)
 val sumTree = SegmentTree(numbers, Int::plus)
@@ -326,9 +314,6 @@ val volatility = maxPrice - minPrice  // 25
 ### String Matching with KMP Algorithm
 
 ```kotlin
-import kodvent.strings.allIndicesOf
-import kodvent.strings.prefixFunction
-
 // Find all occurrences of a pattern in text
 val text = "ababcababa"
 val pattern = "aba"
@@ -363,8 +348,6 @@ val numPi = prefixFunction(numbers.size, numbers::get)
 ### Binary Search with Partition Point
 
 ```kotlin
-import kodvent.boundsearch.partitionPoint
-
 // Binary search on answer: maximize minimum distance
 // LeetCode 1552: Magnetic Force Between Two Balls
 // https://leetcode.com/problems/magnetic-force-between-two-balls/

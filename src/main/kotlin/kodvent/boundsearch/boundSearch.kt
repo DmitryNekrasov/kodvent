@@ -23,6 +23,15 @@ package kodvent.boundsearch
  *         is `true` for all indices in the range.
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.PartitionPointSamples.insertionPointInSortedArray
+ * @sample samples.PartitionPointSamples.findFirstElementGreaterOrEqual
+ * @sample samples.PartitionPointSamples.lowerBoundAndUpperBoundWithDuplicates
+ * @sample samples.PartitionPointSamples.findFirstElementGreaterOrEqualNotFound
+ * @sample samples.PartitionPointSamples.longRangeSearch
+ * @sample samples.PartitionPointSamples.findFirstNegativeInFunction
+ * @sample samples.PartitionPointSamples.findFirstFailingTest
+ * @sample samples.PartitionPointSamples.searchInRange
  */
 @Suppress("DuplicatedCode")
 public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {
@@ -56,6 +65,8 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
  *         is `true` for all indices in the range.
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.PartitionPointSamples.squareRootFloor
  */
 @Suppress("DuplicatedCode")
 public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long {

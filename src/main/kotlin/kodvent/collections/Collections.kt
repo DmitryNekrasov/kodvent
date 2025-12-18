@@ -50,6 +50,8 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
  *
+ * `null` value is considered to be less than any non-null value.
+ *
  * @return the index of the first element that is greater than or equal to [element] according to [comparator],
  *         or [toIndex] if all elements are less than [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
@@ -164,6 +166,8 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  * @param comparator the comparator used to compare list elements with the element being searched.
  * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
  * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
+ *
+ * `null` value is considered to be less than any non-null value.
  *
  * @return the index of the first element that is strictly greater than [element] according to [comparator],
  *         or [toIndex] if all elements are less than or equal to [element].

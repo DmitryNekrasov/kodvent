@@ -32,6 +32,7 @@ package kodvent.boundsearch
  * @sample samples.PartitionPointSamples.findFirstNegativeInFunction
  * @sample samples.PartitionPointSamples.findFirstFailingTest
  * @sample samples.PartitionPointSamples.searchInRange
+ * @sample samples.PartitionPointSamples.maximumMinimumDistanceBetweenBalls
  */
 @Suppress("DuplicatedCode")
 public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {

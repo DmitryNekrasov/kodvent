@@ -135,4 +135,51 @@ class PartitionPointSamples {
         assertEquals(6, index)
         assertEquals(13, array[index])
     }
+
+    @Test
+    fun maximumMinimumDistanceBetweenBalls() {
+        // Binary search on answer: find maximum minimum distance between m balls
+        // placed in n positions (LeetCode 1552: Magnetic Force Between Two Balls)
+        // https://leetcode.com/problems/magnetic-force-between-two-balls/
+
+        fun canPlaceBalls(positions: IntArray, m: Int, minDistance: Int): Boolean {
+            var ballsPlaced = 1
+            var lastPosition = positions[0]
+            for (i in 1..positions.lastIndex) {
+                if (positions[i] - lastPosition >= minDistance) {
+                    ballsPlaced++
+                    lastPosition = positions[i]
+                }
+            }
+            return ballsPlaced >= m
+        }
+
+        // Example 1: positions = [1,2,3,4,7], m = 3
+        run {
+            val positions = intArrayOf(1, 2, 3, 4, 7)
+            val m = 3
+            positions.sort()
+
+            val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
+                canPlaceBalls(positions, m, distance)
+            }
+            val maxMinDistance = partitionPoint - 1
+
+            assertEquals(3, maxMinDistance)
+        }
+
+        // Example 2: positions = [5,4,3,2,1,1000000000], m = 2
+        run {
+            val positions = intArrayOf(5, 4, 3, 2, 1, 1000000000)
+            val m = 2
+            positions.sort()
+
+            val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
+                canPlaceBalls(positions, m, distance)
+            }
+            val maxMinDistance = partitionPoint - 1
+
+            assertEquals(999999999, maxMinDistance)
+        }
+    }
 }

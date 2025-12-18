@@ -96,6 +96,27 @@ Efficient string matching and analysis functions based on the prefix function an
   - Time complexity: O(n + m) where n is text length and m is pattern length
   - Returns all starting indices where the pattern occurs
 
+### Partition Point (Binary Search)
+
+Efficient binary search functions to find the partition point where a monotonic predicate transitions from `true` to `false`:
+
+- **`partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int`** - Finds the first index in `[fromIndex, toIndex)` where predicate returns `false`
+  - Uses binary search for O(log n) time complexity
+  - The predicate must be monotonic: once it returns `false`, it must return `false` for all subsequent indices
+  - Returns `toIndex` if predicate is `true` for all indices in the range
+  - Useful for: binary search in arrays, finding insertion points, lower/upper bounds, binary search on answer
+- **`partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Long) -> Boolean): Long`** - Long version for searching large ranges
+  - Same semantics as the Int version
+  - Essential for problems involving large numerical ranges (e.g., binary search on answer up to 10^18)
+
+**Key insight**: Partition point is a generalization of binary search. Instead of searching for a value in a sorted array, you search for the transition point in any monotonic boolean sequence.
+
+**Common patterns**:
+- **Lower bound** (first element ≥ target): `partitionPoint(0, array.size) { array[it] < target }`
+- **Upper bound** (first element > target): `partitionPoint(0, array.size) { array[it] <= target }`
+- **Insertion point**: Same as lower bound
+- **Binary search on answer**: Search over possible answer values (e.g., "find maximum distance" → try different distances, check if achievable)
+
 ## Installation
 
 Add the dependency to your project:
@@ -104,7 +125,7 @@ Add the dependency to your project:
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.2.0")
+    implementation("io.github.dmitrynekrasov:kodvent:0.2.1")
 }
 ```
 
@@ -112,7 +133,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.2.0'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.2.1'
 }
 ```
 
@@ -122,7 +143,7 @@ dependencies {
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
     <artifactId>kodvent</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 
@@ -337,6 +358,36 @@ val period = periodic.length - prefixArray.last()  // 2
 val numbers = listOf(1, 2, 1, 2, 1, 2, 3)
 val numPi = prefixFunction(numbers.size, numbers::get)
 // Works with any comparable elements
+```
+
+### Binary Search with Partition Point
+
+```kotlin
+import kodvent.boundsearch.partitionPoint
+
+// Binary search on answer: maximize minimum distance
+// LeetCode 1552: Magnetic Force Between Two Balls
+// https://leetcode.com/problems/magnetic-force-between-two-balls/
+fun canPlaceBalls(positions: IntArray, m: Int, minDistance: Int): Boolean {
+    var ballsPlaced = 1
+    var lastPosition = positions[0]
+    for (i in 1..positions.lastIndex) {
+        if (positions[i] - lastPosition >= minDistance) {
+            ballsPlaced++
+            lastPosition = positions[i]
+        }
+    }
+    return ballsPlaced >= m
+}
+
+val positions = intArrayOf(1, 2, 3, 4, 7)
+val m = 3
+positions.sort()
+
+val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
+    canPlaceBalls(positions, m, distance)
+}
+val maxMinDistance = partitionPoint - 1  // 3
 ```
 
 ## Development

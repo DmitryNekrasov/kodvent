@@ -29,6 +29,11 @@ import kodvent.boundsearch.partitionPoint
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.lowerBoundWithDuplicates
+ * @sample samples.BoundSearchSamples.countOccurrencesUsingBounds
+ * @sample samples.BoundSearchSamples.findRangeInSublist
+ * @sample samples.BoundSearchSamples.insertionPointMaintainsSortOrder
  */
 public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -58,6 +63,8 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.lowerBoundWithComparator
  */
 public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -88,6 +95,8 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.lowerBoundWithComparisonFunction
  */
 public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -117,6 +126,8 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.lowerBoundByWithSelector
  */
 public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
     key: K?,
@@ -146,6 +157,11 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.upperBoundWithDuplicates
+ * @sample samples.BoundSearchSamples.countOccurrencesUsingBounds
+ * @sample samples.BoundSearchSamples.upperBoundWithNulls
+ * @sample samples.BoundSearchSamples.findRangeInSublist
  */
 public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -175,6 +191,8 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.upperBoundWithComparator
  */
 public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -205,6 +223,8 @@ public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, from
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.upperBoundWithComparisonFunction
  */
 public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -234,6 +254,8 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ *
+ * @sample samples.BoundSearchSamples.upperBoundByWithSelector
  */
 public inline fun <T, K : Comparable<K>> List<T>.upperBoundBy(
     key: K?,

@@ -24,6 +24,9 @@ import kodvent.boundsearch.partitionPoint
  *
  * @return the index of the first element that is greater than or equal to [element], or [toIndex] if all elements are less than [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T : Comparable<T>> List<T>.lowerBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -48,6 +51,9 @@ public fun <T : Comparable<T>> List<T>.lowerBound(element: T, fromIndex: Int = 0
  * @return the index of the first element that is greater than or equal to [element] according to [comparator],
  *         or [toIndex] if all elements are less than [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -75,6 +81,9 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
  * @return the index of the first element for which [comparison] returns a non-negative value,
  *         or [toIndex] if [comparison] returns negative for all elements.
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -99,6 +108,9 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @return the index of the first element whose key is greater than or equal to [key],
  *         or [toIndex] if all element keys are less than [key].
  *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
     key: K?,
@@ -123,6 +135,9 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * @return the index of the first element that is strictly greater than [element],
  *         or [toIndex] if all elements are less than or equal to [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T : Comparable<T>> List<T>.upperBound(element: T, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -147,6 +162,9 @@ public fun <T : Comparable<T>> List<T>.upperBound(element: T, fromIndex: Int = 0
  * @return the index of the first element that is strictly greater than [element] according to [comparator],
  *         or [toIndex] if all elements are less than or equal to [element].
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -174,6 +192,9 @@ public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, from
  * @return the index of the first element for which [comparison] returns a positive value,
  *         or [toIndex] if [comparison] returns non-positive for all elements.
  *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -198,6 +219,9 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @return the index of the first element whose key is strictly greater than [key],
  *         or [toIndex] if all element keys are less than or equal to [key].
  *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
+ *
+ * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 public inline fun <T, K : Comparable<K>> List<T>.upperBoundBy(
     key: K?,

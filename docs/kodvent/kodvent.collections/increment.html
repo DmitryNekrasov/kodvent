@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>decrement</title>
+    <title>increment</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -46,7 +46,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.2        </div>
+0.2.3        </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
                 <button class="platform-tag platform-selector jvm-like" data-active=""
@@ -104,55 +104,50 @@
                 </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent</a><span class="delimiter">/</span><span class="current">decrement</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.collections//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration//769193423">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.collections</a><span class="delimiter">/</span><span class="current">increment</span></div>
   <div class="cover ">
-    <h1 class="cover"><span><span>decrement</span></span></h1>
+    <h1 class="cover"><span><span>increment</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="decrement.html"><span class="token function">decrement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="decrement.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><p class="paragraph">Decrements the count for the specified key by 1.</p><p class="paragraph">If the key's count is greater than 1, it will be decreased by 1. If the key's count is exactly 1, the key will be removed from the map. If the key does not exist in the map, no changes are made.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph"><code class="lang-kotlin">true</code> if the key existed and was decremented or removed, <code class="lang-kotlin">false</code> if the key was not found</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be decremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Increments the count for the specified key by 1.</p><p class="paragraph">If the key does not exist in the map, it will be added with a value of 1. If the key already exists, its value will be increased by 1.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":dokkaHtml/main" data-filterable-set=":dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>key</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The key whose count should be incremented</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.collections.decrement
+import kodvent.collections.increment
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val inventory = mutableMapOf(&quot;apple&quot; to 3, &quot;banana&quot; to 1)
+   val wordCounts = mutableMapOf&lt;String, Int&gt;()
 
-// Decrement reduces the count
-inventory.decrement(&quot;apple&quot;)
-assertEquals(2, inventory[&quot;apple&quot;])
+// Adding a new key starts at 1
+wordCounts.increment(&quot;hello&quot;)
+assertEquals(1, wordCounts[&quot;hello&quot;])
 
-// Decrement returns true when the key exists
-val removed = inventory.decrement(&quot;banana&quot;)
-assertEquals(true, removed)
+// Incrementing again increases the count
+wordCounts.increment(&quot;hello&quot;)
+assertEquals(2, wordCounts[&quot;hello&quot;])
 
-// When the count reaches 0, the key is removed
-assertEquals(false, inventory.containsKey(&quot;banana&quot;))
-
-// Decrement returns false for non-existent keys
-val found = inventory.decrement(&quot;orange&quot;)
-assertEquals(false, found) 
+// Different keys are tracked independently
+wordCounts.increment(&quot;world&quot;)
+assertEquals(1, wordCounts[&quot;world&quot;])
+assertEquals(2, wordCounts[&quot;hello&quot;]) 
    //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.decrement
-import kodvent.increment
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.collections.decrement
+import kodvent.collections.increment
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 fun main() { 
    //sampleStart 
-   val stock = mutableMapOf(&quot;laptop&quot; to 5, &quot;mouse&quot; to 10, &quot;keyboard&quot; to 3)
+   val text = &quot;the quick brown fox jumps over the lazy dog&quot;
+val wordFrequency = mutableMapOf&lt;String, Int&gt;()
 
-// Sell 3 laptops
-repeat(3) { stock.decrement(&quot;laptop&quot;) }
-assertEquals(2, stock[&quot;laptop&quot;])
+text.split(&quot; &quot;).forEach { word -&gt;
+    wordFrequency.increment(word)
+}
 
-// Sell all keyboards
-repeat(3) { stock.decrement(&quot;keyboard&quot;) }
-assertEquals(false, stock.containsKey(&quot;keyboard&quot;))
-
-// Try to sell a non-existent item
-val success = stock.decrement(&quot;monitor&quot;)
-assertEquals(false, success) 
+assertEquals(2, wordFrequency[&quot;the&quot;])
+assertEquals(1, wordFrequency[&quot;quick&quot;])
+assertEquals(1, wordFrequency[&quot;fox&quot;]) 
    //sampleEnd
 }</code></pre></div></div></div>
 </div>

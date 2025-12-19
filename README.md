@@ -437,11 +437,6 @@ val countNE = upperNE - lowerNE  // 0
 
 The project includes comprehensive tests for all extension functions. Test reports are generated at `build/reports/tests/test/index.html`.
 
-## Requirements
-
-- Kotlin 2.2.20+
-- JVM 23+
-
 ## License
 
 This project is licensed under the Apache License 2.0 – see the [LICENSE](LICENSE) file for details.

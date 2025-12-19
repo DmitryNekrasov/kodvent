@@ -5,8 +5,8 @@
 
 package samples
 
-import kodvent.decrement
-import kodvent.increment
+import kodvent.collections.decrement
+import kodvent.collections.increment
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -5,7 +5,7 @@
 
 @file:Suppress("RedundantVisibilityModifier")
 
-package kodvent
+package kodvent.collections
 
 /**
  * Increments the count for the specified key by 1.

@@ -11,7 +11,7 @@ import kodvent.boundsearch.partitionPoint
 
 /**
  * Finds the first position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
- * The list is expected to be sorted into ascending order according to the Comparable natural ordering of its elements,
+ * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element that is NOT less than [element].
@@ -42,7 +42,7 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
 
 /**
  * Finds the first position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
- * The list is expected to be sorted into ascending order according to the specified [comparator],
+ * The list is expected to be sorted in a non-descending order according to the specified [comparator],
  * otherwise the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element that is NOT less than [element]
@@ -106,7 +106,7 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
 /**
  * Finds the first position in this sorted list or its range where an element having the key equal to the provided [key] value
  * could be inserted while maintaining sorted order, using the binary search algorithm.
- * The list is expected to be sorted into ascending order according to the Comparable natural ordering of keys of its elements,
+ * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of keys of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element whose key is NOT less than [key].
@@ -138,7 +138,7 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
 
 /**
  * Finds the last position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
- * The list is expected to be sorted into ascending order according to the Comparable natural ordering of its elements,
+ * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element that is GREATER than [element].
@@ -170,7 +170,7 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
 
 /**
  * Finds the last position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
- * The list is expected to be sorted into ascending order according to the specified [comparator],
+ * The list is expected to be sorted in a non-descending order according to the specified [comparator],
  * otherwise the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element that is GREATER than [element]
@@ -234,7 +234,7 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
 /**
  * Finds the last position in this sorted list or its range where an element having the key equal to the provided [key] value
  * could be inserted while maintaining sorted order, using the binary search algorithm.
- * The list is expected to be sorted into ascending order according to the Comparable natural ordering of keys of its elements,
+ * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of keys of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element whose key is GREATER than [key].

@@ -20,6 +20,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     explicitApi()
     jvmToolchain(25)

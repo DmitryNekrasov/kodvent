@@ -22,7 +22,7 @@ tasks.test {
 }
 kotlin {
     explicitApi()
-    jvmToolchain(23)
+    jvmToolchain(25)
     compilerOptions {
         allWarningsAsErrors.set(true)
         freeCompilerArgs.add("-Xreturn-value-checker=full")

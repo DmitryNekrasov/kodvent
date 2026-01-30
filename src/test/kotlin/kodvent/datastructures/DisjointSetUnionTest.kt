@@ -494,8 +494,9 @@ class DisjointSetUnionTest {
         dsu.union(5, 6)
 
         // Trigger path compression by finding a deep element
-        dsu.find(6)
-        dsu.find(0)
+        val root6BeforeIsolate = dsu.find(6)
+        val root0BeforeIsolate = dsu.find(0)
+        assertEquals(root6BeforeIsolate, root0BeforeIsolate, "All elements should share the same root before isolate(3)")
 
         // Now isolate element 3
         dsu.isolate(3)

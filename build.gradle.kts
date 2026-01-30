@@ -21,6 +21,7 @@ tasks.test {
     useJUnitPlatform()
 }
 kotlin {
+    explicitApi()
     jvmToolchain(23)
     compilerOptions {
         allWarningsAsErrors.set(true)

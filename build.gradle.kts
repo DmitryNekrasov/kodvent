@@ -26,6 +26,7 @@ kotlin {
     compilerOptions {
         allWarningsAsErrors.set(true)
         freeCompilerArgs.add("-Xreturn-value-checker=full")
+        freeCompilerArgs.add("-jvm-target=1.8")
     }
 }
 

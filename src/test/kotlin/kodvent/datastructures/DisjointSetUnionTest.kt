@@ -494,8 +494,8 @@ class DisjointSetUnionTest {
         dsu.union(5, 6)
 
         // Trigger path compression by finding a deep element
-        dsu.find(6)
-        dsu.find(0)
+        val _ = dsu.find(6)
+        val _ = dsu.find(0)
 
         // Now isolate element 3
         dsu.isolate(3)

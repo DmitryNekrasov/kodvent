@@ -36,6 +36,7 @@ public fun <T> MutableMap<T, Int>.increment(key: T) {
  * @sample samples.IncrementAndDecrementSamples.decrementBasicUsage
  * @sample samples.IncrementAndDecrementSamples.decrementInventoryManagement
  */
+@IgnorableReturnValue
 public fun <T> MutableMap<T, Int>.decrement(key: T): Boolean {
     val count = this[key] ?: return false
     if (count > 1) {

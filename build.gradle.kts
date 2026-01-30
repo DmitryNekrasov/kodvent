@@ -22,6 +22,10 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(23)
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+        freeCompilerArgs.add("-Xreturn-value-checker=full")
+    }
 }
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {

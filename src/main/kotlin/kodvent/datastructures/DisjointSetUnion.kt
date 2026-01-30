@@ -57,13 +57,17 @@ public class DisjointSetUnion(size: Int) {
      * @sample samples.DisjointSetUnionSamples.findingRepresentatives
      */
     public fun find(x: Int): Int {
+        compress(x)
+        return parent[x]
+    }
+
+    private fun compress(x: Int) {
         if (x !in parent.indices) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
         if (parent[x] != x) {
             parent[x] = find(parent[x])
         }
-        return parent[x]
     }
 
     /**
@@ -87,6 +91,7 @@ public class DisjointSetUnion(size: Int) {
      * @sample samples.DisjointSetUnionSamples.basicUsage
      * @sample samples.DisjointSetUnionSamples.detectingCycles
      */
+    @IgnorableReturnValue
     public fun union(x: Int, y: Int): Boolean {
         val rootX = find(x)
         val rootY = find(y)
@@ -159,7 +164,7 @@ public class DisjointSetUnion(size: Int) {
             throw IndexOutOfBoundsException("Element ($x) is out of disjoint set bounds: [0, ${parent.size})")
         }
 
-        parent.indices.forEach { find(it) }
+        parent.indices.forEach { compress(it) }
 
         val oldRoot = parent[x]
         val elementsInSet = parent.indices.filter { parent[it] == oldRoot }

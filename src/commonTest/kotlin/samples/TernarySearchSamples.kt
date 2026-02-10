@@ -6,6 +6,7 @@
 package samples
 
 import kodvent.boundsearch.ternarySearch
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.sin
 import kotlin.test.Test
@@ -30,9 +31,9 @@ class TernarySearchSamples {
     @Test
     fun maximizeSinFunction() {
         // Find the maximum of sin(x) on [0, π], which occurs at x = π/2
-        val x = ternarySearch(0.0, Math.PI) { x -> sin(x) }
+        val x = ternarySearch(0.0, PI) { x -> sin(x) }
 
-        assertApprox(Math.PI / 2, x)
+        assertApprox(PI / 2, x)
     }
 
     @Test

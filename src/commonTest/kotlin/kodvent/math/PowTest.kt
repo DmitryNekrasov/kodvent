@@ -243,7 +243,7 @@ class PowTest {
     }
 
     @Test
-    fun `pow with modulo should handle negative base correctly using mod()`() {
+    fun `pow with modulo should handle negative base correctly using mod`() {
         // Using mod() ensures the result is always in the range [0, modulo)
         // This is different from % which can return negative results
 

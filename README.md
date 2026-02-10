@@ -8,7 +8,14 @@
 
 ![kodvent](kodvent-logo.png)
 
-A Kotlin utility library for Advent of Code challenges, featuring efficient data structures, algorithms, and convenient extension functions.
+A Kotlin Multiplatform utility library for Advent of Code challenges, featuring efficient data structures, algorithms, and convenient extension functions.
+
+### Supported platforms
+
+- **JVM** (target 1.8+)
+- **JS** (IR, Node.js & Browser)
+- **Wasm** (wasmJs, wasmWasi)
+- **Native** — Linux (x64, arm64), macOS (x64, arm64), Windows (mingwX64), iOS, watchOS, tvOS
 
 ## Features
 
@@ -161,11 +168,25 @@ A function for finding the maximum of an unimodal function on a given interval:
 
 Add the dependency to your project:
 
-### Gradle (Kotlin DSL)
+### Kotlin Multiplatform
+
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation("io.github.dmitrynekrasov:kodvent:0.3.0")
+            }
+        }
+    }
+}
+```
+
+### Gradle (Kotlin DSL, JVM only)
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.2.4")
+    implementation("io.github.dmitrynekrasov:kodvent:0.3.0")
 }
 ```
 
@@ -173,7 +194,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.2.4'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.3.0'
 }
 ```
 
@@ -182,8 +203,8 @@ dependencies {
 ```xml
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
-    <artifactId>kodvent</artifactId>
-    <version>0.2.4</version>
+    <artifactId>kodvent-jvm</artifactId>
+    <version>0.3.0</version>
 </dependency>
 ```
 

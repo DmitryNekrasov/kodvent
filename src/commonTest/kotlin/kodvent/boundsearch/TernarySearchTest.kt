@@ -5,6 +5,7 @@
 
 package kodvent.boundsearch
 
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
@@ -51,13 +52,13 @@ class TernarySearchTest {
 
     @Test
     fun `finds maximum of sine function on 0 to pi`() {
-        val result = ternarySearch(0.0, Math.PI) { x -> sin(x) }
-        assertApprox(Math.PI / 2, result)
+        val result = ternarySearch(0.0, PI) { x -> sin(x) }
+        assertApprox(PI / 2, result)
     }
 
     @Test
     fun `finds maximum of cosine function on negative pi to pi`() {
-        val result = ternarySearch(-Math.PI, Math.PI) { x -> cos(x) }
+        val result = ternarySearch(-PI, PI) { x -> cos(x) }
         assertApprox(0.0, result)
     }
 

@@ -42,7 +42,11 @@ public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
  * @sample samples.GcdAndLcmSamples.lcmBasicUsage
  * @sample samples.GcdAndLcmSamples.lcmSchedulingProblem
  */
-public fun lcm(a: Int, b: Int): Int = a / gcd(a, b) * b
+public fun lcm(a: Int, b: Int): Int {
+    val g = gcd(a, b)
+    if (g == 0) throw ArithmeticException("LCM is undefined when both arguments are zero")
+    return a / g * b
+}
 
 /**
  * See [gcd] for Int parameters
@@ -52,7 +56,11 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
 /**
  * See [lcm] for Int parameters
  */
-public fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
+public fun lcm(a: Long, b: Long): Long {
+    val g = gcd(a, b)
+    if (g == 0L) throw ArithmeticException("LCM is undefined when both arguments are zero")
+    return a / g * b
+}
 
 /**
  * Raises this Long to the given power using binary exponentiation.

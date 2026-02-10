@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    kotlin("jvm") version "2.3.0"
+    kotlin("multiplatform") version "2.3.0"
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.gradleup.nmcp") version "1.4.4"
     id("com.gradleup.nmcp.aggregation") version "1.4.4"
@@ -15,32 +18,80 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     nmcpAggregation(project(":"))
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 kotlin {
     explicitApi()
+
     jvmToolchain(25)
+
     compilerOptions {
         allWarningsAsErrors.set(true)
         freeCompilerArgs.add("-Xreturn-value-checker=full")
-        freeCompilerArgs.add("-jvm-target=1.8")
+    }
+
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
+    }
+
+    js(IR) {
+        nodejs()
+        browser()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        nodejs()
+        browser()
+    }
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+    }
+
+    // Native - Linux
+    linuxX64()
+    linuxArm64()
+
+    // Native - macOS
+    macosX64()
+    macosArm64()
+
+    // Native - Windows
+    mingwX64()
+
+    // Native - iOS
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
+
+    // Native - watchOS
+    watchosArm32()
+    watchosArm64()
+    watchosX64()
+    watchosSimulatorArm64()
+
+    // Native - tvOS
+    tvosArm64()
+    tvosX64()
+    tvosSimulatorArm64()
+
+    sourceSets {
+        commonTest {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
     }
 }
 
 dokka {
     dokkaSourceSets.configureEach {
-        samples.from("src/test/kotlin/samples")
+        samples.from("src/commonTest/kotlin/samples")
     }
-}
-
-java {
-    withSourcesJar()
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
@@ -50,39 +101,35 @@ val dokkaJavadocJar by tasks.registering(Jar::class) {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            artifact(dokkaJavadocJar)
+    publications.withType<MavenPublication>().configureEach {
+        artifact(dokkaJavadocJar)
 
-            pom {
-                name.set("kodvent")
-                description.set("A Kotlin utility library for Advent of Code challenges")
+        pom {
+            name.set("kodvent")
+            description.set("A Kotlin utility library for Advent of Code challenges")
+            url.set("https://github.com/DmitryNekrasov/kodvent")
+
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+
+            developers {
+                developer {
+                    id.set("DmitryNekrasov")
+                    name.set("Dmitry Nekrasov")
+                }
+            }
+
+            scm {
+                connection.set("scm:git:git://github.com/DmitryNekrasov/kodvent.git")
+                developerConnection.set("scm:git:ssh://github.com/DmitryNekrasov/kodvent.git")
                 url.set("https://github.com/DmitryNekrasov/kodvent")
-
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("DmitryNekrasov")
-                        name.set("Dmitry Nekrasov")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git://github.com/DmitryNekrasov/kodvent.git")
-                    developerConnection.set("scm:git:ssh://github.com/DmitryNekrasov/kodvent.git")
-                    url.set("https://github.com/DmitryNekrasov/kodvent")
-                }
             }
         }
     }
-
 }
 
 signing {
@@ -97,7 +144,7 @@ signing {
         }
     }
 
-    sign(publishing.publications["maven"])
+    sign(publishing.publications)
 }
 
 nmcpAggregation {

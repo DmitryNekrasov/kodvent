@@ -100,6 +100,11 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
  *         with precision up to `1e-9`.
  *
  * @throws IllegalArgumentException if [left] > [right].
+ *
+ * @sample samples.TernarySearchSamples.maximizeQuadratic
+ * @sample samples.TernarySearchSamples.maximizeSinFunction
+ * @sample samples.TernarySearchSamples.minimizeByNegation
+ * @sample samples.TernarySearchSamples.maximumAreaRectangleWithFixedPerimeter
  */
 public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
     require(left <= right) { "Left bound ($left) is greater than right bound ($right)." }

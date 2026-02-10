@@ -1,0 +1,51 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:kodvent.boundsearch////PointingToDeclaration/kodvent/kodvent.boundsearch/index.html
+$dokka.location:kodvent.boundsearch//partitionPoint/#kotlin.Int#kotlin.Int#kotlin.Function1[kotlin.Int,kotlin.Boolean]/PointingToDeclaration/kodvent/kodvent.boundsearch/partition-point.html
+$dokka.location:kodvent.boundsearch//partitionPoint/#kotlin.Long#kotlin.Long#kotlin.Function1[kotlin.Long,kotlin.Boolean]/PointingToDeclaration/kodvent/kodvent.boundsearch/partition-point.html
+$dokka.location:kodvent.boundsearch//ternarySearch/#kotlin.Double#kotlin.Double#kotlin.Function1[kotlin.Double,kotlin.Double]/PointingToDeclaration/kodvent/kodvent.boundsearch/ternary-search.html
+$dokka.location:kodvent.collections////PointingToDeclaration/kodvent/kodvent.collections/index.html
+$dokka.location:kodvent.collections//decrement/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent.collections/decrement.html
+$dokka.location:kodvent.collections//increment/kotlin.collections.MutableMap[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent.collections/increment.html
+$dokka.location:kodvent.collections//lowerBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Any?])#java.util.Comparator[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.collections/lower-bound.html
+$dokka.location:kodvent.collections//lowerBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int#kotlin.Int#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]/PointingToDeclaration/kodvent/kodvent.collections/lower-bound.html
+$dokka.location:kodvent.collections//lowerBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Comparable[^]])?]#TypeParam(bounds=[kotlin.Comparable[^]])?#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.collections/lower-bound.html
+$dokka.location:kodvent.collections//lowerBoundBy/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Comparable[^]])?#kotlin.Int#kotlin.Int#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Comparable[^]])?]/PointingToDeclaration/kodvent/kodvent.collections/lower-bound-by.html
+$dokka.location:kodvent.collections//upperBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Any?])#java.util.Comparator[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.collections/upper-bound.html
+$dokka.location:kodvent.collections//upperBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int#kotlin.Int#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Int]/PointingToDeclaration/kodvent/kodvent.collections/upper-bound.html
+$dokka.location:kodvent.collections//upperBound/kotlin.collections.List[TypeParam(bounds=[kotlin.Comparable[^]])?]#TypeParam(bounds=[kotlin.Comparable[^]])?#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.collections/upper-bound.html
+$dokka.location:kodvent.collections//upperBoundBy/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Comparable[^]])?#kotlin.Int#kotlin.Int#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Comparable[^]])?]/PointingToDeclaration/kodvent/kodvent.collections/upper-bound-by.html
+$dokka.location:kodvent.datastructures////PointingToDeclaration/kodvent/kodvent.datastructures/index.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion///PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/index.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/DisjointSetUnion/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/-disjoint-set-union.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/connected/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/connected.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/count/#/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/count.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/find/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/find.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/isolate/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/isolate.html
+$dokka.location:kodvent.datastructures/DisjointSetUnion/union/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-disjoint-set-union/union.html
+$dokka.location:kodvent.datastructures/SegmentTree///PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/index.html
+$dokka.location:kodvent.datastructures/SegmentTree/SegmentTree/#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/-segment-tree.html
+$dokka.location:kodvent.datastructures/SegmentTree/get/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/get.html
+$dokka.location:kodvent.datastructures/SegmentTree/get/#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/get.html
+$dokka.location:kodvent.datastructures/SegmentTree/getOrDefault/#kotlin.Int#kotlin.Int#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/get-or-default.html
+$dokka.location:kodvent.datastructures/SegmentTree/getOrNull/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/get-or-null.html
+$dokka.location:kodvent.datastructures/SegmentTree/set/#kotlin.Int#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/kodvent/kodvent.datastructures/-segment-tree/set.html
+$dokka.location:kodvent.math////PointingToDeclaration/kodvent/kodvent.math/index.html
+$dokka.location:kodvent.math//gcd/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.math/gcd.html
+$dokka.location:kodvent.math//gcd/#kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/gcd.html
+$dokka.location:kodvent.math//lcm/#kotlin.Int#kotlin.Int/PointingToDeclaration/kodvent/kodvent.math/lcm.html
+$dokka.location:kodvent.math//lcm/#kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/lcm.html
+$dokka.location:kodvent.math//pow/kotlin.Long#kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/pow.html
+$dokka.location:kodvent.math//pow/kotlin.Long#kotlin.Long/PointingToDeclaration/kodvent/kodvent.math/pow.html
+$dokka.location:kodvent.math//sqr/kotlin.Double#/PointingToDeclaration/kodvent/kodvent.math/sqr.html
+$dokka.location:kodvent.math//sqr/kotlin.Int#/PointingToDeclaration/kodvent/kodvent.math/sqr.html
+$dokka.location:kodvent.math//sqr/kotlin.Long#/PointingToDeclaration/kodvent/kodvent.math/sqr.html
+$dokka.location:kodvent.strings////PointingToDeclaration/kodvent/kodvent.strings/index.html
+$dokka.location:kodvent.strings//allIndicesOf/kotlin.CharSequence#kotlin.CharSequence#kotlin.Char/PointingToDeclaration/kodvent/kodvent.strings/all-indices-of.html
+$dokka.location:kodvent.strings//prefixFunction/#kotlin.Int#kotlin.Function1[kotlin.Int,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kodvent/kodvent.strings/prefix-function.html
+$dokka.location:kodvent.strings//prefixFunction/kotlin.CharSequence#/PointingToDeclaration/kodvent/kodvent.strings/prefix-function.html
+kodvent.boundsearch
+kodvent.collections
+kodvent.datastructures
+kodvent.math
+kodvent.strings

@@ -165,7 +165,7 @@ Add the dependency to your project:
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.2.4")
+    implementation("io.github.dmitrynekrasov:kodvent:0.3.0")
 }
 ```
 
@@ -173,7 +173,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.2.4'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.3.0'
 }
 ```
 
@@ -183,7 +183,7 @@ dependencies {
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
     <artifactId>kodvent</artifactId>
-    <version>0.2.4</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 

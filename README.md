@@ -147,6 +147,16 @@ All functions support optional `fromIndex` and `toIndex` parameters to search wi
 - Work with duplicate elements: `lowerBound` finds the first occurrence, `upperBound` finds the position after the last occurrence
 - Together, `lowerBound` and `upperBound` can be used to count occurrences or find the range of equal elements
 
+### Ternary Search
+
+A function for finding the maximum of an unimodal function on a given interval:
+
+- **`ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double`** - Finds the `x` in `[left, right]` that maximizes `f(x)`
+  - The function `f` must be unimodal (first increases, then decreases) on the interval
+  - Uses an iterative approach with precision of 1e–9
+  - Time complexity: O(log((right - left) / eps))
+  - To minimize a function, negate it: `ternarySearch(a, b) { -f(it) }`
+
 ## Installation
 
 Add the dependency to your project:
@@ -419,6 +429,21 @@ val nonExistent = 8
 val lowerNE = list.lowerBound(nonExistent)  // 7
 val upperNE = list.upperBound(nonExistent)  // 7
 val countNE = upperNE - lowerNE  // 0
+```
+
+### Finding the Maximum of an Unimodal Function with Ternary Search
+
+```kotlin
+// A rectangle has a fixed perimeter P = 40.
+// Side lengths: x and (P/2 - x). Area = x * (20 - x).
+// Find x that maximizes area, with x in [0, 20].
+val perimeter = 40.0
+val halfP = perimeter / 2
+
+val x = ternarySearch(0.0, halfP) { x -> x * (halfP - x) }
+
+// Maximum area when the rectangle is a square: x = 10
+// x = 10.0
 ```
 
 ## Development

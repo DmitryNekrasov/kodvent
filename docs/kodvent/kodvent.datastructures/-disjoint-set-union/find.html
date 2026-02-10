@@ -44,11 +44,11 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.4        </div>
+0.3.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
-                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
-                        data-filter=":/main">jvm</button>
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
                         data-role="dropdown-toggle"
@@ -63,12 +63,12 @@
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
-                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
                             <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":/main"
-                                       data-filter=":/main"/>
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
                                 <span class="checkbox--icon"></span>
-                                jvm
+                                common
                             </label>
                         </li>
                 </ul>
@@ -104,12 +104,12 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.datastructures/DisjointSetUnion/find/#kotlin.Int/PointingToDeclaration//-251573632">
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.datastructures/DisjointSetUnion/find/#kotlin.Int/PointingToDeclaration//1558683979">
   <div class="breadcrumbs"><a href="../../../index.html">kodvent</a><span class="delimiter">/</span><a href="../index.html">kodvent.datastructures</a><span class="delimiter">/</span><a href="index.html">DisjointSetUnion</a><span class="delimiter">/</span><span class="current">find</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>find</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find.html"><span class="token function">find</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Finds the representative (root) of the set containing element <a href="find.html">x</a>.</p><p class="paragraph">This operation uses path compression: during the search, it makes every node on the path point directly to the root, which speeds up future queries.</p><p class="paragraph">Time complexity: O(α(n)) amortized, where α is the inverse <a href="https://en.wikipedia.org/wiki/Ackermann_function">Ackermann function</a> (nearly constant).</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The representative element of the set containing <a href="find.html">x</a>.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>x</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The element whose set representative to find. Must be in range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr></wbr><span>Out</span><wbr></wbr><span>Of</span><wbr></wbr><span>Bounds</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="find.html">x</a> is not in the valid range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find.html"><span class="token function">find</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Finds the representative (root) of the set containing element <a href="find.html">x</a>.</p><p class="paragraph">This operation uses path compression: during the search, it makes every node on the path point directly to the root, which speeds up future queries.</p><p class="paragraph">Time complexity: O(α(n)) amortized, where α is the inverse <a href="https://en.wikipedia.org/wiki/Ackermann_function">Ackermann function</a> (nearly constant).</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The representative element of the set containing <a href="find.html">x</a>.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>x</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The element whose set representative to find. Must be in range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr></wbr><span>Out</span><wbr></wbr><span>Of</span><wbr></wbr><span>Bounds</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="find.html">x</a> is not in the valid range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

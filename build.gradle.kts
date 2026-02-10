@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.3.0"
     id("org.jetbrains.dokka") version "2.1.0"
+    id("com.gradleup.nmcp") version "1.4.4"
     id("com.gradleup.nmcp.aggregation") version "1.4.4"
     `maven-publish`
     signing
@@ -15,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    nmcpAggregation(project(":"))
 }
 
 tasks.test {

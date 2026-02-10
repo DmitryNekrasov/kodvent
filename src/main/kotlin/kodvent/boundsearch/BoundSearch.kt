@@ -109,16 +109,16 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
 public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
     require(left <= right) { "Left bound ($left) is greater than right bound ($right)." }
     val eps = 1e-9
-    var left = left
-    var right = right
-    while (right - left > eps) {
-        val m1 = left + (right - left) / 3
-        val m2 = right - (right - left) / 3
+    var l = left
+    var r = right
+    while (r - l > eps) {
+        val m1 = l + (r - l) / 3
+        val m2 = r - (r - l) / 3
         if (f(m1) < f(m2)) {
-            left = m1
+            l = m1
         } else {
-            right = m2
+            r = m2
         }
     }
-    return left
+    return l
 }

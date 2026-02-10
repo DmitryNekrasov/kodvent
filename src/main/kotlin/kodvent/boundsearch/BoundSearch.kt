@@ -107,7 +107,7 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
  * @sample samples.TernarySearchSamples.maximumAreaRectangleWithFixedPerimeter
  */
 public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
-    require(left <= right) { "Left bound ($left) is greater than right bound ($right)." }
+    require(left <= right) { "left bound ($left) is greater than right bound ($right)." }
     val eps = 1e-9
     var l = left
     var r = right

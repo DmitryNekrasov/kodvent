@@ -147,6 +147,12 @@ signing {
     sign(publishing.publications)
 }
 
+// Ensure all signing tasks complete before any publish task starts,
+// because all publications share the same KDoc jar artifact and its .asc signature.
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    mustRunAfter(tasks.withType<Sign>())
+}
+
 nmcpAggregation {
     centralPortal {
         username = project.findProperty("sonatype.username") as String? ?: System.getenv("SONATYPE_USERNAME")

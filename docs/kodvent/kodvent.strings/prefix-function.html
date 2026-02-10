@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>prefixFunction</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kodvent
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.2.4        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/main"
+                                       data-filter=":/main"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kodvent
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.strings//prefixFunction/kotlin.CharSequence#/PointingToDeclaration//-251573632">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.strings</a><span class="delimiter">/</span><span class="current">prefixFunction</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>prefix</span><wbr></wbr><span><span>Function</span></span></h1>
+  </div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">.</span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a></div><p class="paragraph">Computes the prefix function for this character sequence.</p><p class="paragraph">The prefix function πi is defined as the length of the longest proper prefix of the substring <code class="lang-kotlin">s[0..i]</code> that is also a suffix of this substring. This is a fundamental component of the <a href="https://cp-algorithms.com/string/prefix-function.html">Knuth-Morris-Pratt (KMP) string matching algorithm</a>.</p><h2 class="">Complexity</h2><ul><li><p class="paragraph">Time: O(n) where n is the length of the character sequence</p></li><li><p class="paragraph">Space: O(n) for the result array</p></li></ul><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">an array where the i-th element contains the length of the longest proper prefix     of <code class="lang-kotlin">this[0..i]</code> that is also a suffix of <code class="lang-kotlin">this[0..i]</code></p></span><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="all-indices-of.html"><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.strings.allIndicesOf
+import kodvent.strings.prefixFunction
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   // Compute the prefix function for a string
+// The prefix function π[i] is the length of the longest proper prefix
+// of s[0..i] that is also a suffix of s[0..i]
+val result1 = &quot;abcabc&quot;.prefixFunction()
+assertContentEquals(intArrayOf(0, 0, 0, 1, 2, 3), result1)
+
+val result2 = &quot;aaaa&quot;.prefixFunction()
+assertContentEquals(intArrayOf(0, 1, 2, 3), result2)
+
+val result3 = &quot;abacaba&quot;.prefixFunction()
+assertContentEquals(intArrayOf(0, 0, 1, 0, 1, 2, 3), result3) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.strings.allIndicesOf
+import kodvent.strings.prefixFunction
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   // For string &quot;aabaaab&quot;, let's understand the prefix function values
+val text = &quot;aabaaab&quot;
+val pi = text.prefixFunction()
+
+// pi[0] = 0: &quot;a&quot; has no proper prefix
+assertEquals(0, pi[0])
+
+// pi[1] = 1: &quot;aa&quot; has the longest proper prefix-suffix &quot;a&quot; (length 1)
+assertEquals(1, pi[1])
+
+// pi[2] = 0: &quot;aab&quot; has no proper prefix that is also a suffix
+assertEquals(0, pi[2])
+
+// pi[3] = 1: &quot;aaba&quot; has proper prefix-suffix &quot;a&quot; (length 1)
+assertEquals(1, pi[3])
+
+// pi[4] = 2: &quot;aabaa&quot; has proper prefix-suffix &quot;aa&quot; (length 2)
+assertEquals(2, pi[4])
+
+// pi[5] = 2: &quot;aabaaa&quot; has proper prefix-suffix &quot;aa&quot; (length 2)
+assertEquals(2, pi[5])
+
+// pi[6] = 3: &quot;aabaaab&quot; has proper prefix-suffix &quot;aab&quot; (length 3)
+assertEquals(3, pi[6]) 
+   //sampleEnd
+}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="prefix-function.html">T</a><span class="token operator">&gt; </span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">length<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">at<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="prefix-function.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a></div><p class="paragraph">Computes the prefix function for a generic sequence.</p><p class="paragraph">This is a generalized version of the prefix function that works with any type of sequence where elements can be accessed by index and compared for equality. The prefix function πi represents the length of the longest proper prefix that is also a suffix for the sequence up to position i.</p><h2 class="">Complexity</h2><ul><li><p class="paragraph">Time: O(n) where n is the length parameter</p></li><li><p class="paragraph">Space: O(n) for the result array</p></li></ul><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">an array where the i-th element contains the length of the longest proper prefix     that is also a suffix for the subsequence <code class="lang-kotlin">[0..i]</code></p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>T</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the type of elements in the sequence</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>length</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the length of the sequence</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>at</span></span></u></div></span></div><div><div class="title"><p class="paragraph">a function that returns the element at a given index</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/main" data-filterable-set=":/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="all-indices-of.html"><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.strings.allIndicesOf
+import kodvent.strings.prefixFunction
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   // Use the generic prefix function with a list of integers
+val sequence = listOf(1, 2, 1, 2, 1, 2)
+val result = prefixFunction(sequence.size, sequence::get)
+
+// The pattern &quot;1, 2&quot; repeats three times
+assertContentEquals(intArrayOf(0, 0, 1, 2, 3, 4), result) 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.strings.allIndicesOf
+import kodvent.strings.prefixFunction
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+
+fun main() { 
+   //sampleStart 
+   // Use the generic prefix function with custom objects
+data class Point(val x: Int, val y: Int)
+
+val sequence = listOf(
+    Point(1, 2),
+    Point(3, 4),
+    Point(1, 2),
+    Point(3, 4)
+)
+
+val result = prefixFunction(sequence.size, sequence::get)
+
+// The pattern repeats at positions 2 and 3
+assertContentEquals(intArrayOf(0, 0, 1, 2), result) 
+   //sampleEnd
+}</code></pre></div></div></div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

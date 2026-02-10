@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.3.0"
-    id("org.jetbrains.dokka") version "2.0.0"
+    id("org.jetbrains.dokka") version "2.1.0"
     id("com.gradleup.nmcp") version "0.0.9"
     `maven-publish`
     signing
@@ -31,7 +31,7 @@ kotlin {
     }
 }
 
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+dokka {
     dokkaSourceSets.configureEach {
         samples.from("src/test/kotlin/samples")
     }
@@ -42,8 +42,8 @@ java {
 }
 
 val dokkaJavadocJar by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
+    dependsOn(tasks.named("dokkaGeneratePublicationHtml"))
+    from(layout.buildDirectory.dir("dokka/html"))
     archiveClassifier.set("javadoc")
 }
 

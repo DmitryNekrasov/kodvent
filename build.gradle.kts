@@ -89,7 +89,7 @@ kotlin {
 }
 
 dokka {
-    dokkaSourceSets.configureEach {
+    dokkaSourceSets.named("commonMain") {
         samples.from("src/commonTest/kotlin/samples")
     }
 }

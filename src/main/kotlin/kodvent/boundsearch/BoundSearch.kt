@@ -7,6 +7,23 @@
 
 package kodvent.boundsearch
 
+public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
+    require(left <= right) { "Left bound ($left) is greater than right bound ($right)." }
+    val eps = 1e-9
+    var left = left
+    var right = right
+    while (right - left > eps) {
+        val m1 = left + (right - left) / 3
+        val m2 = right - (right - left) / 3
+        if (f(m1) < f(m2)) {
+            left = m1
+        } else {
+            right = m2
+        }
+    }
+    return left
+}
+
 /**
  * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
  *

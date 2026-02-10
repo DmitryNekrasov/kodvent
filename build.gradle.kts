@@ -1,13 +1,13 @@
 plugins {
     kotlin("jvm") version "2.3.0"
     id("org.jetbrains.dokka") version "2.1.0"
-    id("com.gradleup.nmcp") version "0.0.9"
+    id("com.gradleup.nmcp.aggregation") version "1.4.4"
     `maven-publish`
     signing
 }
 
 group = "io.github.dmitrynekrasov"
-version = "0.2.3"
+version = "0.2.4"
 
 repositories {
     mavenCentral()
@@ -98,10 +98,10 @@ signing {
     sign(publishing.publications["maven"])
 }
 
-nmcp {
-    publishAllProjectsProbablyBreakingProjectIsolation {
+nmcpAggregation {
+    centralPortal {
         username = project.findProperty("sonatype.username") as String? ?: System.getenv("SONATYPE_USERNAME")
         password = project.findProperty("sonatype.password") as String? ?: System.getenv("SONATYPE_PASSWORD")
-        publicationType = "USER_MANAGED"
+        publishingType = "USER_MANAGED"
     }
 }

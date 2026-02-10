@@ -85,6 +85,22 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
     return low
 }
 
+/**
+ * Finds the argument that maximizes [f] on the interval [[left], [right]]
+ * using ternary search.
+ *
+ * The function [f] must be **unimodal** on the given interval,
+ * i.e., strictly increasing then strictly decreasing.
+ *
+ * @param left the left bound of the search interval.
+ * @param right the right bound of the search interval; must be >= [left].
+ * @param f the unimodal function to maximize.
+ *
+ * @return the argument `x` in [[left], [right]] at which [f] attains its maximum,
+ *         with precision up to `1e-9`.
+ *
+ * @throws IllegalArgumentException if [left] > [right].
+ */
 public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
     require(left <= right) { "Left bound ($left) is greater than right bound ($right)." }
     val eps = 1e-9

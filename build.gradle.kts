@@ -24,13 +24,12 @@ dependencies {
 kotlin {
     explicitApi()
 
-    jvmToolchain(25)
-
     compilerOptions {
         allWarningsAsErrors.set(true)
         freeCompilerArgs.add("-Xreturn-value-checker=full")
     }
 
+    jvmToolchain(25)
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_1_8)
@@ -47,6 +46,7 @@ kotlin {
         nodejs()
         browser()
     }
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmWasi {
         nodejs()

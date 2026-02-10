@@ -120,5 +120,5 @@ public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Doub
             r = m2
         }
     }
-    return l
+    return (l + r) / 2
 }

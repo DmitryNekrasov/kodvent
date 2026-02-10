@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Dmitry Nekrasov and kodvent library contributors.
+ * Copyright 2025-2026 Dmitry Nekrasov and kodvent library contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
@@ -83,4 +83,42 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
         }
     }
     return low
+}
+
+/**
+ * Finds the argument that maximizes [f] on the interval [[left], [right]]
+ * using ternary search.
+ *
+ * The function [f] must be **unimodal** on the given interval,
+ * i.e., strictly increasing then strictly decreasing.
+ *
+ * @param left the left bound of the search interval.
+ * @param right the right bound of the search interval; must be >= [left].
+ * @param f the unimodal function to maximize.
+ *
+ * @return the argument `x` in [[left], [right]] at which [f] attains its maximum,
+ *         with precision up to `1e-9`.
+ *
+ * @throws IllegalArgumentException if [left] > [right].
+ *
+ * @sample samples.TernarySearchSamples.maximizeQuadratic
+ * @sample samples.TernarySearchSamples.maximizeSinFunction
+ * @sample samples.TernarySearchSamples.minimizeByNegation
+ * @sample samples.TernarySearchSamples.maximumAreaRectangleWithFixedPerimeter
+ */
+public inline fun ternarySearch(left: Double, right: Double, f: (Double) -> Double): Double {
+    require(left <= right) { "left bound ($left) is greater than right bound ($right)." }
+    val eps = 1e-9
+    var l = left
+    var r = right
+    while (r - l > eps) {
+        val m1 = l + (r - l) / 3
+        val m2 = r - (r - l) / 3
+        if (f(m1) < f(m2)) {
+            l = m1
+        } else {
+            r = m2
+        }
+    }
+    return (l + r) / 2
 }

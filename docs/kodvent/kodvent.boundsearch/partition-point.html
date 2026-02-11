@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/main.css" rel="Stylesheet">
@@ -109,15 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span>partition</span><wbr></wbr><span><span>Point</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="partition-point.html"><span class="token function">partitionPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fromIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">toIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Finds the partition point in the range <code class="lang-kotlin">[[fromIndex], [toIndex])</code> where a predicate transitions from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p><p class="paragraph">This function uses binary search to efficiently locate the first index in the range where the <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>. The predicate must be monotonic: if it returns <code class="lang-kotlin">false</code> for some index, it must return <code class="lang-kotlin">false</code> for all later indices in the range.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The partition point: the first index where <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>, or <a href="partition-point.html">toIndex</a> if <a href="partition-point.html">predicate</a>     is <code class="lang-kotlin">true</code> for all indices in the range.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>from</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The start of the range (inclusive). Must not be greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>to</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The end of the range (exclusive). Must not be less than <a href="partition-point.html">fromIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>predicate</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A monotonic predicate function that takes an index and returns <code class="lang-kotlin">true</code> for all indices     before the partition point and <code class="lang-kotlin">false</code> from the partition point onwards.</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="partition-point.html">fromIndex</a> is greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find where to insert a value to maintain sorted order
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="partition-point.html"><span class="token function">partitionPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fromIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">toIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Finds the partition point in the range <code class="lang-kotlin">[[fromIndex], [toIndex])</code> where a predicate transitions from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p><p class="paragraph">This function uses binary search to efficiently locate the first index in the range where the <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>. The predicate must be monotonic: if it returns <code class="lang-kotlin">false</code> for some index, it must return <code class="lang-kotlin">false</code> for all later indices in the range.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The partition point: the first index where <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>, or <a href="partition-point.html">toIndex</a> if <a href="partition-point.html">predicate</a>          is <code class="lang-kotlin">true</code> for all indices in the range.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>from</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The start of the range (inclusive). Must not be greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>to</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The end of the range (exclusive). Must not be less than <a href="partition-point.html">fromIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>predicate</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A monotonic predicate function that takes an index and returns <code class="lang-kotlin">true</code> for all indices                   before the partition point and <code class="lang-kotlin">false</code> from the partition point onwards.</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="partition-point.html">fromIndex</a> is greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find where to insert a value to maintain sorted order
 val sortedArray = intArrayOf(10, 20, 30, 40, 50)
 val valueToInsert = 35
 
@@ -125,34 +116,14 @@ val insertionIndex = partitionPoint(0, sortedArray.size) { i -&gt;
     sortedArray[i] &lt; valueToInsert
 }
 
-assertEquals(3, insertionIndex) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find the first element in a sorted array that is &gt;= target value
+assertEquals(3, insertionIndex)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the first element in a sorted array that is &gt;= target value
 val sortedArray = intArrayOf(5, 10, 15, 20, 25, 30, 35, 40)
 val target = 22
 
 val index = partitionPoint(0, sortedArray.size) { sortedArray[it] &lt; target }
 
 assertEquals(4, index)
-assertEquals(25, sortedArray[index]) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find lower bound and upper bound in an array with duplicates
+assertEquals(25, sortedArray[index])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find lower bound and upper bound in an array with duplicates
 val sortedArray = intArrayOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
 val target = 9
 
@@ -166,17 +137,7 @@ assertEquals(11, upperBound)
 assertEquals(11, sortedArray[upperBound])
 
 val count = upperBound - lowerBound
-assertEquals(4, count) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // When no element satisfies the condition, returns toIndex
+assertEquals(4, count)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// When no element satisfies the condition, returns toIndex
 val sortedArray = intArrayOf(5, 10, 15, 20, 25)
 val target = 100
 
@@ -184,17 +145,7 @@ val index = partitionPoint(0, sortedArray.size) { i -&gt;
     sortedArray[i] &lt; target
 }
 
-assertEquals(sortedArray.size, index) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find the first power of 2 that exceeds a large number
+assertEquals(sortedArray.size, index)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the first power of 2 that exceeds a large number
 val threshold = 1_000_000_000L
 
 val exponent = partitionPoint(0, 64) { exp: Int -&gt;
@@ -202,34 +153,14 @@ val exponent = partitionPoint(0, 64) { exp: Int -&gt;
 }
 
 assertEquals(30, exponent)
-assertEquals(1_073_741_824L, 1L shl exponent) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find where a function transitions from positive to negative
+assertEquals(1_073_741_824L, 1L shl exponent)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find where a function transitions from positive to negative
 fun f(x: Int): Int = 100 - x * x
 
 val firstNegative = partitionPoint(-20, 20) { x: Int -&gt; f(x) &gt;= 0 }
 
 assertEquals(11, firstNegative)
 assertEquals(0, f(10))
-assertEquals(-21, f(11)) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Simulate finding the first failing version in a release sequence
+assertEquals(-21, f(11))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Simulate finding the first failing version in a release sequence
 val versions = listOf(&quot;1.0&quot;, &quot;1.1&quot;, &quot;1.2&quot;, &quot;1.3&quot;, &quot;1.4&quot;, &quot;1.5&quot;)
 val brokenVersions = setOf(&quot;1.3&quot;, &quot;1.4&quot;, &quot;1.5&quot;)
 
@@ -238,17 +169,7 @@ val firstBrokenIndex = partitionPoint(0, versions.size) { i -&gt;
 }
 
 assertEquals(3, firstBrokenIndex)
-assertEquals(&quot;1.3&quot;, versions[firstBrokenIndex]) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Search only in a subrange of an array
+assertEquals(&quot;1.3&quot;, versions[firstBrokenIndex])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Search only in a subrange of an array
 val array = intArrayOf(1, 3, 5, 7, 9, 11, 13, 15, 17, 19)
 val target = 12
 
@@ -258,17 +179,7 @@ val toIndex = 8
 val index = partitionPoint(fromIndex, toIndex) { i -&gt; array[i] &lt; target }
 
 assertEquals(6, index)
-assertEquals(13, array[index]) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Binary search on answer: find maximum minimum distance between m balls
+assertEquals(13, array[index])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Binary search on answer: find maximum minimum distance between m balls
 // placed in n positions (LeetCode 1552: Magnetic Force Between Two Balls)
 // https://leetcode.com/problems/magnetic-force-between-two-balls/
 
@@ -310,26 +221,14 @@ run {
     val maxMinDistance = partitionPoint - 1
 
     assertEquals(999999999, maxMinDistance)
-} 
-   //sampleEnd
-}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="partition-point.html"><span class="token function">partitionPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fromIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">toIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Finds the partition point in the range <code class="lang-kotlin">[[fromIndex], [toIndex])</code> where a predicate transitions from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p><p class="paragraph">This function uses binary search to efficiently locate the first index in the range where the <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>. The predicate must be monotonic: if it returns <code class="lang-kotlin">false</code> for some index, it must return <code class="lang-kotlin">false</code> for all later indices in the range.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The partition point: the first index where <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>, or <a href="partition-point.html">toIndex</a> if <a href="partition-point.html">predicate</a>     is <code class="lang-kotlin">true</code> for all indices in the range.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>from</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The start of the range (inclusive). Must not be greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>to</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The end of the range (exclusive). Must not be less than <a href="partition-point.html">fromIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>predicate</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A monotonic predicate function that takes an index and returns <code class="lang-kotlin">true</code> for all indices     before the partition point and <code class="lang-kotlin">false</code> from the partition point onwards.</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="partition-point.html">fromIndex</a> is greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.boundsearch.partitionPoint
-import kodvent.math.sqr
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   // Find floor(sqrt(n)) using binary search with a Long version
+}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="partition-point.html"><span class="token function">partitionPoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fromIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">toIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Finds the partition point in the range <code class="lang-kotlin">[[fromIndex], [toIndex])</code> where a predicate transitions from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p><p class="paragraph">This function uses binary search to efficiently locate the first index in the range where the <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>. The predicate must be monotonic: if it returns <code class="lang-kotlin">false</code> for some index, it must return <code class="lang-kotlin">false</code> for all later indices in the range.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">The partition point: the first index where <a href="partition-point.html">predicate</a> returns <code class="lang-kotlin">false</code>, or <a href="partition-point.html">toIndex</a> if <a href="partition-point.html">predicate</a>          is <code class="lang-kotlin">true</code> for all indices in the range.</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>from</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The start of the range (inclusive). Must not be greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>to</span><wbr></wbr><span><span>Index</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The end of the range (exclusive). Must not be less than <a href="partition-point.html">fromIndex</a>.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>predicate</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A monotonic predicate function that takes an index and returns <code class="lang-kotlin">true</code> for all indices                   before the partition point and <code class="lang-kotlin">false</code> from the partition point onwards.</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="partition-point.html">fromIndex</a> is greater than <a href="partition-point.html">toIndex</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find floor(sqrt(n)) using binary search with a Long version
 val n = 12_345_678_912_345L
 
 val sqrtFloor = partitionPoint(0L, 10_000_000L) { x -&gt; x * x &lt;= n } - 1
 
 assertEquals(3_513_641L, sqrtFloor)
 assertEquals(12_345_673_076_881L, sqrtFloor.sqr())
-assertTrue((sqrtFloor + 1).sqr() &gt; n) 
-   //sampleEnd
-}</code></pre></div></div></div>
+assertTrue((sqrtFloor + 1).sqr() &gt; n)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

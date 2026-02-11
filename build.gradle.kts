@@ -91,6 +91,9 @@ kotlin {
 dokka {
     dokkaSourceSets.named("commonMain") {
         samples.from("src/commonTest/kotlin/samples")
+        sourceLink {
+            remoteUrl("https://github.com/DmitryNekrasov/kodvent/tree/v$version")
+        }
     }
 }
 

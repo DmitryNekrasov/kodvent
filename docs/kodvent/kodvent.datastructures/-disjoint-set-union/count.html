@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -109,15 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span><span>count</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="count.html">count</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">The number of disjoint sets.</p><p class="paragraph">Time complexity: O(1).</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   val dsu = DisjointSetUnion(6)
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="count.html">count</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">The number of disjoint sets.</p><p class="paragraph">Time complexity: O(1).</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val dsu = DisjointSetUnion(6)
 
 // Build a network step by step
 assertEquals(6, dsu.count) // Initially 6 separate components
@@ -141,9 +132,7 @@ assertEquals(1, dsu.count) // All connected: {0,1,2,3,4,5}
 // Verify everything is connected
 assertTrue(dsu.connected(0, 5))
 assertTrue(dsu.connected(1, 4))
-assertTrue(dsu.connected(2, 5)) 
-   //sampleEnd
-}</code></pre></div></div></div>
+assertTrue(dsu.connected(2, 5))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

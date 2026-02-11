@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -109,15 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span><span>isolate</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="isolate.html"><span class="token function">isolate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Resets element <a href="isolate.html">x</a> to be in its own singleton set.</p><p class="paragraph">This operation makes <a href="isolate.html">x</a> the representative of a new set containing only itself, effectively removing it from any set it was previously part of. Other elements that were in the same set remain connected.</p><p class="paragraph">Time complexity: O(n), where n is the <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span> of the disjoint set, as it may need     to find all elements in the set and reconnect them.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>x</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The element to reset. Must be in range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr></wbr><span>Out</span><wbr></wbr><span>Of</span><wbr></wbr><span>Bounds</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="isolate.html">x</a> is not in the valid range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.datastructures.DisjointSetUnion
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
-
-fun main() { 
-   //sampleStart 
-   val dsu = DisjointSetUnion(5)
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="isolate.html"><span class="token function">isolate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><p class="paragraph">Resets element <a href="isolate.html">x</a> to be in its own singleton set.</p><p class="paragraph">This operation makes <a href="isolate.html">x</a> the representative of a new set containing only itself, effectively removing it from any set it was previously part of. Other elements that were in the same set remain connected.</p><p class="paragraph">Time complexity: O(n), where n is the <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span> of the disjoint set, as it may need                   to find all elements in the set and reconnect them.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>x</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The element to reset. Must be in range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-index-out-of-bounds-exception/index.html"><span>Index</span><wbr></wbr><span>Out</span><wbr></wbr><span>Of</span><wbr></wbr><span>Bounds</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="isolate.html">x</a> is not in the valid range [0, <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span>).</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val dsu = DisjointSetUnion(5)
 
 // Create a set {0, 1, 2}
 dsu.union(0, 1)
@@ -138,9 +129,7 @@ assertFalse(dsu.connected(0, 1))
 assertFalse(dsu.connected(1, 2))
 
 // But 0 and 2 remain connected
-assertTrue(dsu.connected(0, 2)) 
-   //sampleEnd
-}</code></pre></div></div></div>
+assertTrue(dsu.connected(0, 2))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

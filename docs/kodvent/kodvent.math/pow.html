@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/main.css" rel="Stylesheet">
@@ -109,28 +108,14 @@
   <div class="cover ">
     <h1 class="cover"><span><span>pow</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Raises this Long to the given power using binary exponentiation.</p><p class="paragraph">This function uses the fast binary exponentiation algorithm (also known as <a href="https://en.wikipedia.org/wiki/Exponentiation_by_squaring">exponentiation by squaring</a>), which computes the result in O(log n) time, where n is the exponent.</p><p class="paragraph"><strong>Warning</strong>: This function does not check for overflow. For large bases or exponents, the result may overflow and wrap around.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">this number raised to the power of <a href="pow.html">power</a></p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>power</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the exponent (must be non-negative)</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="pow.html"><span><span>pow</span></span></a></div></span></div><div><div class="title"><p class="paragraph">overload with modulo parameter for modular exponentiation</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   val result1 = 2L.pow(3L)
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">infix </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Raises this Long to the given power using binary exponentiation.</p><p class="paragraph">This function uses the fast binary exponentiation algorithm (also known as <a href="https://en.wikipedia.org/wiki/Exponentiation_by_squaring">exponentiation by squaring</a>), which computes the result in O(log n) time, where n is the exponent.</p><p class="paragraph"><strong>Warning</strong>: This function does not check for overflow. For large bases or exponents, the result may overflow and wrap around.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">this number raised to the power of <a href="pow.html">power</a></p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>power</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the exponent (must be non-negative)</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="pow.html"><span><span>pow</span></span></a></div></span></div><div><div class="title"><p class="paragraph">overload with modulo parameter for modular exponentiation</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val result1 = 2L.pow(3L)
 assertEquals(8L, result1)
 
 val result2 = 5L.pow(3L)
 assertEquals(125L, result2)
 
 val result3 = 10L.pow(6L)
-assertEquals(1000000L, result3) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Use infix notation for cleaner syntax
+assertEquals(1000000L, result3)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use infix notation for cleaner syntax
 val result1 = 2L pow 10L
 assertEquals(1024L, result1)
 
@@ -138,29 +123,13 @@ val result2 = 3L pow 4L
 assertEquals(81L, result2)
 
 val area = 5L pow 2L
-assertEquals(25L, area) 
-   //sampleEnd
-}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">modulo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Raises this Long to the given power modulo a specified value using binary exponentiation.</p><p class="paragraph">This function uses the fast binary exponentiation algorithm with modular arithmetic, computing the result in O(log n) time, where n is the exponent. The modulo operation is applied at each step to prevent overflow.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">this number raised to the power of <a href="pow.html">power</a>, modulo <a href="pow.html">modulo</a>; the result is in the range [0, modulo)</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>power</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the exponent (must be non-negative)</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>modulo</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the modulus value (must be positive)</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="pow.html"><span><span>pow</span></span></a></div></span></div><div><div class="title"><p class="paragraph">overload without a modulo parameter for regular exponentiation</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Compute powers modulo a number to prevent overflow
+assertEquals(25L, area)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="pow.html"><span class="token function">pow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">power<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">modulo<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">Raises this Long to the given power modulo a specified value using binary exponentiation.</p><p class="paragraph">This function uses the fast binary exponentiation algorithm with modular arithmetic, computing the result in O(log n) time, where n is the exponent. The modulo operation is applied at each step to prevent overflow.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">this number raised to the power of <a href="pow.html">power</a>, modulo <a href="pow.html">modulo</a>; the result is in the range [0, modulo)</p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>power</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the exponent (must be non-negative)</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>modulo</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the modulus value (must be positive)</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="pow.html"><span><span>pow</span></span></a></div></span></div><div><div class="title"><p class="paragraph">overload without a modulo parameter for regular exponentiation</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Compute powers modulo a number to prevent overflow
 val base = 2L
 val power = 100L
 val modulo = 1000000007L
 
 val result = base.pow(power, modulo)
-assertEquals(976371285L, result) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Find the last digit of a large power
+assertEquals(976371285L, result)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the last digit of a large power
 val base = 7L
 val power = 100L
 val modulo = 10L  // The last digit is the number mod 10
@@ -168,24 +137,14 @@ val modulo = 10L  // The last digit is the number mod 10
 val lastDigit = base.pow(power, modulo)
 
 // The last digit of 7^100 is 1
-assertEquals(1L, lastDigit) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.pow
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Verify Fermat's Little Theorem: a^(p-1) ≡ 1 (mod p) for prime p
+assertEquals(1L, lastDigit)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Verify Fermat's Little Theorem: a^(p-1) ≡ 1 (mod p) for prime p
 // https://en.wikipedia.org/wiki/Fermat%27s_little_theorem
 val a = 5L
 val p = 13L
 
 val result = a.pow(p - 1, p)
 
-assertEquals(1L, result) 
-   //sampleEnd
-}</code></pre></div></div></div>
+assertEquals(1L, result)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

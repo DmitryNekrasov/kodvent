@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../styles/style.css" rel="Stylesheet">
 <link href="../../styles/main.css" rel="Stylesheet">
@@ -109,14 +108,7 @@
   <div class="cover ">
     <h1 class="cover"><span><span>gcd</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">tailrec </span><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Computes the greatest common divisor (GCD) of two integers using the Euclidean algorithm.</p><p class="paragraph">The GCD is the largest positive integer that divides both numbers without a remainder.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the greatest common divisor of <a href="gcd.html">a</a> and <a href="gcd.html">b</a></p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>a</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the first integer</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>b</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the second integer</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="lcm.html"><span><span>lcm</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
-import kodvent.math.lcm
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Find the greatest common divisor of two numbers
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">tailrec </span><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><p class="paragraph">Computes the greatest common divisor (GCD) of two integers using the Euclidean algorithm.</p><p class="paragraph">The GCD is the largest positive integer that divides both numbers without a remainder.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">the greatest common divisor of <a href="gcd.html">a</a> and <a href="gcd.html">b</a></p></span><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>a</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the first integer</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>b</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the second integer</p></div></div></div></div></div><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="lcm.html"><span><span>lcm</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the greatest common divisor of two numbers
 val result1 = gcd(48, 18)
 assertEquals(6, result1)
 
@@ -125,16 +117,7 @@ assertEquals(5, result2)
 
 // GCD of coprime numbers is 1
 val result3 = gcd(7, 13)
-assertEquals(1, result3) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
-import kodvent.math.lcm
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Use GCD to simplify a fraction
+assertEquals(1, result3)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use GCD to simplify a fraction
 val numerator = 48
 val denominator = 180
 
@@ -144,16 +127,7 @@ val simplifiedDenominator = denominator / divisor
 
 // 48/180 simplifies to 4/15
 assertEquals(4, simplifiedNumerator)
-assertEquals(15, simplifiedDenominator) 
-   //sampleEnd
-}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import kodvent.math.gcd
-import kodvent.math.lcm
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-fun main() { 
-   //sampleStart 
-   // Use GCD to reduce a ratio to its simplest form
+assertEquals(15, simplifiedDenominator)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use GCD to reduce a ratio to its simplest form
 val width = 1920
 val height = 1080
 
@@ -163,9 +137,7 @@ val aspectHeight = height / divisor
 
 // 1920:1080 reduces to 16:9
 assertEquals(16, aspectWidth)
-assertEquals(9, aspectHeight) 
-   //sampleEnd
-}</code></pre></div><hr><div class="symbol monospace"><span class="token keyword">tailrec </span><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">See <a href="gcd.html">gcd</a> for Int parameters</p></div></div>
+assertEquals(9, aspectHeight)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">tailrec </span><span class="token keyword">fun </span><a href="gcd.html"><span class="token function">gcd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><p class="paragraph">See <a href="gcd.html">gcd</a> for Int parameters</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

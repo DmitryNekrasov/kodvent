@@ -89,6 +89,11 @@ kotlin {
 }
 
 dokka {
+    dokkaPublications.html {
+        failOnWarning.set(true)
+        outputDirectory.set(rootDir.resolve("docs"))
+    }
+
     dokkaSourceSets.named("commonMain") {
         samples.from("src/commonTest/kotlin/samples")
         sourceLink {

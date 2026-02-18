@@ -1,5 +1,6 @@
 # 🌲 Kodvent: Kotlin toolkit for AoC and CP
 
+[![JetBrains team project](https://jb.gg/badges/team-plastic.svg)](https://github.com/JetBrains#702702--jetbrains-open-source-projects)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/Heapy/awesome-kotlin)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.3.0-blue.svg?logo=kotlin)](http://kotlinlang.org)

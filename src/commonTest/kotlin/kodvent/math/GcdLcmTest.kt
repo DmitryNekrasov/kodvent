@@ -7,7 +7,6 @@ package kodvent.math
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class GcdLcmTest {
@@ -139,8 +138,8 @@ class GcdLcmTest {
     }
 
     @Test
-    fun `lcm should throw ArithmeticException when both parameters are zero`() {
-        assertFailsWith<ArithmeticException> { lcm(0, 0) }
+    fun `lcm should return 0 when both parameters are zero`() {
+        assertEquals(0, lcm(0, 0))
     }
 
     @Test
@@ -204,8 +203,8 @@ class GcdLcmTest {
     }
 
     @Test
-    fun `lcm should throw ArithmeticException when both parameters are zero for longs`() {
-        assertFailsWith<ArithmeticException> { lcm(0L, 0L) }
+    fun `lcm should return 0 when both parameters are zero for longs`() {
+        assertEquals(0L, lcm(0L, 0L))
     }
 
     @Test

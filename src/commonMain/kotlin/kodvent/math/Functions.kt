@@ -43,9 +43,7 @@ public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
  * @sample samples.GcdAndLcmSamples.lcmSchedulingProblem
  */
 public fun lcm(a: Int, b: Int): Int {
-    val g = gcd(a, b)
-    if (g == 0) throw ArithmeticException("LCM is undefined when both arguments are zero")
-    return a / g * b
+    return if (a == 0 || b == 0) 0 else a / gcd(a, b) * b
 }
 
 /**
@@ -57,9 +55,7 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
  * See [lcm] for Int parameters
  */
 public fun lcm(a: Long, b: Long): Long {
-    val g = gcd(a, b)
-    if (g == 0L) throw ArithmeticException("LCM is undefined when both arguments are zero")
-    return a / g * b
+    return if (a == 0L || b == 0L) 0L else a / gcd(a, b) * b
 }
 
 /**

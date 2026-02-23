@@ -42,9 +42,7 @@ public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
  * @sample samples.GcdAndLcmSamples.lcmBasicUsage
  * @sample samples.GcdAndLcmSamples.lcmSchedulingProblem
  */
-public fun lcm(a: Int, b: Int): Int {
-    return if (a == 0 || b == 0) 0 else a / gcd(a, b) * b
-}
+public fun lcm(a: Int, b: Int): Int = if (a == 0 || b == 0) 0 else a / gcd(a, b) * b
 
 /**
  * See [gcd] for Int parameters
@@ -54,9 +52,7 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
 /**
  * See [lcm] for Int parameters
  */
-public fun lcm(a: Long, b: Long): Long {
-    return if (a == 0L || b == 0L) 0L else a / gcd(a, b) * b
-}
+public fun lcm(a: Long, b: Long): Long = if (a == 0L || b == 0L) 0L else a / gcd(a, b) * b
 
 /**
  * Raises this Long to the given power using binary exponentiation.

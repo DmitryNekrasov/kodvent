@@ -64,7 +64,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("io.github.dmitrynekrasov:kodvent:0.3.0")
+                implementation("io.github.dmitrynekrasov:kodvent:0.3.1")
             }
         }
     }
@@ -75,7 +75,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.3.0")
+    implementation("io.github.dmitrynekrasov:kodvent:0.3.1")
 }
 ```
 
@@ -83,7 +83,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.3.0'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.3.1'
 }
 ```
 
@@ -93,7 +93,7 @@ dependencies {
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
     <artifactId>kodvent-jvm</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 

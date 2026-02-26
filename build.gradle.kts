@@ -93,10 +93,13 @@ kotlin {
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 powerAssert {
     functions = listOf(
-        "kotlin.assert",
+        "kotlin.check",
         "kotlin.test.assertTrue",
+        "kotlin.test.assertFalse",
         "kotlin.test.assertEquals",
+        "kotlin.test.assertNotEquals",
         "kotlin.test.assertNull",
+        "kotlin.test.assertNotNull"
     )
 }
 

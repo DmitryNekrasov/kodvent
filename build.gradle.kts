@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("multiplatform") version "2.3.10"
-    kotlin("plugin.power-assert") version "2.3.10"
+    kotlin("multiplatform") version "2.3.20"
+    kotlin("plugin.power-assert") version "2.3.20"
     id("org.jetbrains.dokka") version "2.2.0-Beta"
     id("com.gradleup.nmcp") version "1.4.4"
     id("com.gradleup.nmcp.aggregation") version "1.4.4"

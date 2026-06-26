@@ -8,12 +8,8 @@
 package kodvent.boundsearch
 
 /**
- * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
- *
- * This function uses binary search to efficiently locate the first index in the range where the [predicate]
- * returns `false`, or [toIndex] if [predicate] is `true` for all indices. The predicate must be monotonic:
- * if it returns `false` for some index, it must return `false` for all later indices in the range.
- * [fromIndex] is the inclusive start of the range and [toIndex] the exclusive end.
+ * Binary-searches the range `[[fromIndex], [toIndex])` for the partition point: the first index where the
+ * monotonic [predicate] turns from `true` to `false`, or [toIndex] if it is `true` throughout.
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  *
@@ -44,12 +40,8 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
 }
 
 /**
- * Finds the partition point in the range `[[fromIndex], [toIndex])` where a predicate transitions from `true` to `false`.
- *
- * This function uses binary search to efficiently locate the first index in the range where the [predicate]
- * returns `false`, or [toIndex] if [predicate] is `true` for all indices. The predicate must be monotonic:
- * if it returns `false` for some index, it must return `false` for all later indices in the range.
- * [fromIndex] is the inclusive start of the range and [toIndex] the exclusive end.
+ * Binary-searches the range `[[fromIndex], [toIndex])` for the partition point: the first index where the
+ * monotonic [predicate] turns from `true` to `false`, or [toIndex] if it is `true` throughout.
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  *
@@ -72,11 +64,8 @@ public inline fun partitionPoint(fromIndex: Long, toIndex: Long, predicate: (Lon
 }
 
 /**
- * Finds the argument that maximizes [f] on the interval [[left], [right]]
- * using ternary search, with precision up to `1e-9`.
- *
- * The function [f] must be **unimodal** on the given interval,
- * i.e., strictly increasing then strictly decreasing.
+ * Returns the argument in [[left], [right]] that maximizes the unimodal function [f] (strictly increasing
+ * then strictly decreasing), found by ternary search to within `1e-9`.
  *
  * @throws IllegalArgumentException if [left] > [right].
  *

@@ -8,9 +8,7 @@
 package kodvent.math
 
 /**
- * Computes the greatest common divisor (GCD) of two integers, [a] and [b], using the Euclidean algorithm.
- *
- * The GCD is the largest positive integer that divides both numbers without a remainder.
+ * Computes the greatest common divisor of [a] and [b] using the Euclidean algorithm.
  *
  * @see lcm
  *
@@ -21,11 +19,7 @@ package kodvent.math
 public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
 /**
- * Computes the least common multiple (LCM) of two integers, [a] and [b].
- *
- * The LCM is the smallest positive integer that is divisible by both numbers.
- * This function uses the relationship: `lcm(a, b) = (a * b) / gcd(a, b)`,
- * but calculates it as `(a / gcd(a, b)) * b` to reduce the risk of integer overflow.
+ * Computes the least common multiple of [a] and [b], as `(a / gcd(a, b)) * b` to reduce the risk of overflow.
  *
  * @see gcd
  *
@@ -45,14 +39,10 @@ public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % 
 public fun lcm(a: Long, b: Long): Long = if (a == 0L || b == 0L) 0L else a / gcd(a, b) * b
 
 /**
- * Raises this Long to the given [power] (which must be non-negative) using binary exponentiation.
+ * Raises this Long to the given [power] (which must be non-negative) using
+ * [binary exponentiation](https://en.wikipedia.org/wiki/Exponentiation_by_squaring), in O(log n) time.
  *
- * This function uses the fast binary exponentiation algorithm
- * (also known as [exponentiation by squaring](https://en.wikipedia.org/wiki/Exponentiation_by_squaring)),
- * which computes the result in O(log n) time, where n is the exponent.
- *
- * **Warning**: This function does not check for overflow. For large bases or exponents,
- * the result may overflow and wrap around.
+ * **Warning**: does not check for overflow — large values wrap around.
  *
  * @see pow overload with modulo parameter for modular exponentiation
  *
@@ -65,12 +55,9 @@ public infix fun Long.pow(power: Long): Long {
 }
 
 /**
- * Raises this Long to the given [power] (which must be non-negative), modulo [modulo] (which must be
- * positive), using binary exponentiation; the result is in the range `[0, modulo)`.
- *
- * This function uses the fast binary exponentiation algorithm with modular arithmetic,
- * computing the result in O(log n) time, where n is the exponent. The modulo operation
- * is applied at each step to prevent overflow.
+ * Raises this Long to the given [power] (non-negative) modulo [modulo] (positive), using binary
+ * exponentiation in O(log n) time; the result is in `[0, modulo)`. The modulus is applied at each
+ * step to avoid overflow.
  *
  * @see pow overload without a modulo parameter for regular exponentiation
  *

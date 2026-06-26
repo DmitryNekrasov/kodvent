@@ -8,25 +8,15 @@
 package kodvent.datastructures
 
 /**
- * A [Disjoint Set Union](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
- * (DSU) data structure, also known as Union-Find.
+ * A [Disjoint Set Union](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) (DSU, or Union-Find):
+ * maintains a partition of the integers in `[0, size)` into disjoint sets.
  *
- * This data structure efficiently maintains a partition of a set of elements into disjoint subsets
- * and supports two primary operations: finding which subset an element belongs to (find) and
- * merging two subsets into one (union).
+ * Path compression and union by rank give near-constant
+ * [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time per operation — O(α(n)), where α is
+ * the inverse [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function). Initially each
+ * element is in its own singleton set.
  *
- * The implementation uses two key optimizations:
- * - **Path compression** during find operations: makes elements point directly to the root
- * - **Union by rank**: attaches the smaller tree under the root of the larger tree
- *
- * These optimizations provide near-constant
- * [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time complexity for both operations.
- *
- * Elements are represented by integers in the range [0, [size]); initially each element is in its
- * own singleton set.
- *
- * @constructor Creates a DisjointSetUnion with [size] elements, where each element is initially
- *              in its own singleton set.
+ * @constructor Creates a DSU of [size] singleton elements.
  *
  * @sample samples.DisjointSetUnionSamples.basicUsage
  * @sample samples.DisjointSetUnionSamples.networkConnectivity
@@ -40,15 +30,9 @@ public class DisjointSetUnion(size: Int) {
     private var _count = size
 
     /**
-     * Finds the representative (root) of the set containing element [x].
+     * Returns the representative (root) of the set containing [x]. O(α(n)) amortized.
      *
-     * This operation uses path compression: during the search, it makes every node on the path
-     * point directly to the root, which speeds up future queries.
-     *
-     * Time complexity: O(α(n)) amortized, where α is the inverse
-     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
-     *
-     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, [size]).
+     * @throws IndexOutOfBoundsException if [x] is not in `[0, size)`.
      *
      * @sample samples.DisjointSetUnionSamples.findingRepresentatives
      */
@@ -63,17 +47,10 @@ public class DisjointSetUnion(size: Int) {
     }
 
     /**
-     * Merges the sets containing elements [x] and [y], returning `true` if a merge occurred (they were
-     * previously disjoint) or `false` if [x] and [y] were already in the same set.
+     * Merges the sets containing [x] and [y]. Returns `true` if they were merged, or `false` if they were
+     * already in the same set. O(α(n)) amortized.
      *
-     * This operation uses union by rank: the tree with a smaller rank is attached under the root
-     * of the tree with a larger rank. If ranks are equal, one tree is attached to the other and
-     * the rank of the new root is increased.
-     *
-     * Time complexity: O(α(n)) amortized, where α is the inverse
-     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
-     *
-     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, [size]).
+     * @throws IndexOutOfBoundsException if [x] or [y] is not in `[0, size)`.
      *
      * @sample samples.DisjointSetUnionSamples.basicUsage
      * @sample samples.DisjointSetUnionSamples.detectingCycles
@@ -104,21 +81,16 @@ public class DisjointSetUnion(size: Int) {
     }
 
     /**
-     * Checks whether elements [x] and [y] are in the same set; returns `true` if they are, `false` otherwise.
+     * Returns `true` if [x] and [y] are in the same set. O(α(n)) amortized.
      *
-     * Time complexity: O(α(n)) amortized, where α is the inverse
-     * [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function) (nearly constant).
-     *
-     * @throws IndexOutOfBoundsException if [x] or [y] is not in the valid range [0, [size]).
+     * @throws IndexOutOfBoundsException if [x] or [y] is not in `[0, size)`.
      *
      * @sample samples.DisjointSetUnionSamples.networkConnectivity
      */
     public fun connected(x: Int, y: Int): Boolean = find(x) == find(y)
 
     /**
-     * The number of disjoint sets.
-     *
-     * Time complexity: O(1).
+     * The number of disjoint sets. O(1).
      *
      * @sample samples.DisjointSetUnionSamples.dynamicConnectivityUpdates
      */
@@ -126,16 +98,10 @@ public class DisjointSetUnion(size: Int) {
         get() = _count
 
     /**
-     * Resets element [x] to be in its own singleton set.
+     * Removes [x] from its current set, putting it in its own singleton; the other members of that set
+     * stay connected. O(n), since it may rebuild the set.
      *
-     * This operation makes [x] the representative of a new set containing only itself,
-     * effectively removing it from any set it was previously part of. Other elements
-     * that were in the same set remain connected.
-     *
-     * Time complexity: O(n), where n is the [size] of the disjoint set, as it may need
-     *                  to find all elements in the set and reconnect them.
-     *
-     * @throws IndexOutOfBoundsException if [x] is not in the valid range [0, [size]).
+     * @throws IndexOutOfBoundsException if [x] is not in `[0, size)`.
      *
      * @sample samples.DisjointSetUnionSamples.isolateUsage
      */

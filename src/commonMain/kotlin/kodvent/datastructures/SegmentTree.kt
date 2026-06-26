@@ -8,24 +8,11 @@
 package kodvent.datastructures
 
 /**
- * A [segment tree data structure](https://en.wikipedia.org/wiki/Segment_tree)
- * that supports efficient range queries and point updates.
+ * A [segment tree](https://en.wikipedia.org/wiki/Segment_tree) over a [source] list of elements of
+ * type [T], supporting range queries and point updates via an associative [operation] (e.g. sum, min,
+ * max, gcd): `operation(a, operation(b, c)) == operation(operation(a, b), c)`.
  *
- * A segment tree is a binary tree used for storing intervals or segments. It allows querying
- * which of the stored segments contain a given point and supports efficient range queries
- * using an associative binary operation.
- *
- * ## Time Complexity
- * - Construction: O(n)
- * - Range query: O(log n)
- * - Point update: O(log n)
- *
- * ## Space Complexity
- * - O(4n) internal storage (O(n) in Big-O notation) where n is the size of the [source] list
- *
- * The tree is built from a [source] list of elements of type [T] and combines them with
- * [operation], an associative binary operation (e.g. sum, min, max, gcd) satisfying
- * `operation(a, operation(b, c)) == operation(operation(a, b), c)`.
+ * Construction is O(n); range query and point update are O(log n). Uses O(n) space.
  *
  * @sample samples.SegmentTreeSamples.basicRangeSumQuery
  * @sample samples.SegmentTreeSamples.rangeMinimumQuery
@@ -46,9 +33,7 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     }
 
     /**
-     * Queries the result of applying the operation over the range [[start], [end]] (inclusive).
-     *
-     * This operator function allows using bracket notation for range queries.
+     * Returns the [operation] applied over the inclusive range [[start], [end]].
      *
      * @throws IllegalArgumentException if the tree is empty or [start] > [end]
      * @throws IndexOutOfBoundsException if [start] is negative or [end] is out of bounds
@@ -67,10 +52,7 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     }
 
     /**
-     * Queries the value at a single [index] position, which must be in the range [0, [size]).
-     *
-     * This is a convenience operator function that allows using bracket notation with a single index
-     * to query individual elements. It is equivalent to calling `get(index, index)`.
+     * Returns the value at [index], equivalent to `get(index, index)`. [index] must be in `[0, size)`.
      *
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
@@ -80,11 +62,8 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     public operator fun get(index: Int): T = get(index, index)
 
     /**
-     * Queries the result of applying the operation over the range [[start], [end]] (inclusive),
-     * returning null if the indices are invalid — that is, if [start] < 0, [end] >= [size], or [start] > [end].
-     *
-     * This is a safe version of [get] that returns null instead of throwing an exception
-     * when the indices are out of bounds or invalid.
+     * Like [get] over the inclusive range [[start], [end]], but returns null for out-of-range or inverted
+     * ([start] > [end]) indices instead of throwing.
      *
      * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
@@ -94,26 +73,16 @@ public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T)
     }
 
     /**
-     * Queries the result of applying the operation over the range [[start], [end]] (inclusive),
-     * returning [defaultValue] if the indices are invalid — that is, if [start] < 0, [end] >= [size],
-     * or [start] > [end].
-     *
-     * This is a safe version of [get] that returns a [defaultValue] instead of throwing an exception
-     * when the indices are out of bounds or invalid.
+     * Like [get] over the inclusive range [[start], [end]], but returns [defaultValue] for out-of-range or
+     * inverted ([start] > [end]) indices instead of throwing.
      *
      * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
     public fun getOrDefault(start: Int, end: Int, defaultValue: T): T = getOrNull(start, end) ?: defaultValue
 
     /**
-     * Updates the value at the specified [index] (which must be in the range [0, [size])) to [value].
-     *
-     * This operator function allows using assignment syntax to update elements.
-     * The operation updates a single element in the segment tree and propagates
-     * the change up through all affected nodes in O(log n) time.
-     *
-     * Since both [get] and [set] operators are defined, compound assignment operators
-     * (`+=`, `-=`, `*=`, `/=`, `%=`) work automatically by combining get and set operations.
+     * Sets the value at [index] (which must be in `[0, size)`) to [value], in O(log n) time. Since [get]
+     * and [set] are both defined, compound assignments (`+=`, `-=`, `*=`, `/=`, `%=`) work too.
      *
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds

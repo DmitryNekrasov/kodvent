@@ -8,12 +8,10 @@
 package kodvent.collections
 
 /**
- * Increments the count for the specified key by 1.
+ * Increments the count for the specified [key] by 1.
  *
  * If the key does not exist in the map, it will be added with a value of 1.
  * If the key already exists, its value will be increased by 1.
- *
- * @param key The key whose count should be incremented
  *
  * @sample samples.IncrementAndDecrementSamples.incrementBasicUsage
  * @sample samples.IncrementAndDecrementSamples.incrementCountingWords
@@ -23,15 +21,12 @@ public fun <T> MutableMap<T, Int>.increment(key: T) {
 }
 
 /**
- * Decrements the count for the specified key by 1.
+ * Decrements the count for the specified [key] by 1, returning `true` if the [key] existed (and was
+ * decremented or removed) or `false` if it was not found.
  *
  * If the key's count is greater than 1, it will be decreased by 1.
  * If the key's count is exactly 1, the key will be removed from the map.
  * If the key does not exist in the map, no changes are made.
- *
- * @param key The key whose count should be decremented
- *
- * @return `true` if the key existed and was decremented or removed, `false` if the key was not found
  *
  * @sample samples.IncrementAndDecrementSamples.decrementBasicUsage
  * @sample samples.IncrementAndDecrementSamples.decrementInventoryManagement

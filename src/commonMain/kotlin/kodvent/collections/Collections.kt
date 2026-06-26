@@ -10,22 +10,18 @@ package kodvent.collections
 import kodvent.boundsearch.partitionPoint
 
 /**
- * Finds the first position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
+ * Finds the first position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where [element] could be
+ * inserted while maintaining sorted order.
  * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element that is NOT less than [element].
  * If all elements are less than [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index of the first such element.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param element the element to search for.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * @return the index of the first element that is greater than or equal to [element], or [toIndex] if all elements are less than [element].
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -41,7 +37,9 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
 }
 
 /**
- * Finds the first position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
+ * Finds the first position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where [element] could be
+ * inserted while maintaining sorted order.
  * The list is expected to be sorted in a non-descending order according to the specified [comparator],
  * otherwise the result is undefined.
  *
@@ -49,17 +47,9 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  * according to the [comparator].
  * If all elements are less than [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index of the first such element.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param element the element to search for.
- * @param comparator the comparator used to compare list elements with the element being searched.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * @return the index of the first element that is greater than or equal to [element] according to [comparator],
- *         or [toIndex] if all elements are less than [element].
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -72,26 +62,21 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
 }
 
 /**
- * Finds the first position in this sorted list or its range where an element could be inserted while maintaining sorted order,
- * using the binary search algorithm with a custom [comparison] function.
+ * Finds the first position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where an element could be
+ * inserted while maintaining sorted order, using the binary search algorithm with a custom [comparison] function.
  *
- * The list is expected to be sorted so that the signs of the [comparison] function's return values ascend on the list elements,
- * i.e., negative values come before zero and zeroes come before positive values.
+ * [comparison] should return a negative value for elements before the insertion point, zero for elements
+ * equal to the target, and a positive value for elements after it. The list is expected to be sorted so that
+ * the signs of the [comparison] function's return values ascend on the list elements, i.e., negative values
+ * come before zero and zeroes come before positive values.
  * Otherwise, the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element for which [comparison] returns
  * a non-negative value (zero or positive).
  * If [comparison] returns negative for all elements, returns the end index ([toIndex]).
  * If the list contains multiple elements for which [comparison] returns zero, returns the index of the first such element.
- *
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- * @param comparison function that returns negative values for elements before the insertion point,
- *                   zero for elements equal to the target, and positive values for elements after the target.
- *
- * @return the index of the first element for which [comparison] returns a non-negative value,
- *         or [toIndex] if [comparison] returns negative for all elements.
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -104,25 +89,19 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
 }
 
 /**
- * Finds the first position in this sorted list or its range where an element having the key equal to the provided [key] value
- * could be inserted while maintaining sorted order, using the binary search algorithm.
+ * Finds the first position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where an element whose key
+ * equals the provided [key] could be inserted while maintaining sorted order, using the binary search
+ * algorithm. The key of each element is obtained via [selector].
  * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of keys of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the lower bound algorithm: it returns the index of the first element whose key is NOT less than [key].
  * If all element keys are less than [key], returns the end index ([toIndex]).
  * If the list contains multiple elements with the specified [key], returns the index of the first such element.
+ * Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param key the key to search for.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- * @param selector the function to extract the key from a list element.
- *
- * @return the index of the first element whose key is greater than or equal to [key],
- *         or [toIndex] if all element keys are less than [key].
- *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -137,23 +116,18 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
 ): Int = lowerBound(fromIndex, toIndex) { compareValues(selector(it), key) }
 
 /**
- * Finds the last position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
+ * Finds the last position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where [element] could be
+ * inserted while maintaining sorted order.
  * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element that is GREATER than [element].
  * If all elements are less than or equal to [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index immediately after the last such element.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param element the element to search for.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * @return the index of the first element that is strictly greater than [element],
- *         or [toIndex] if all elements are less than or equal to [element].
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -169,7 +143,9 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
 }
 
 /**
- * Finds the last position in this sorted list or its range where [element] could be inserted while maintaining sorted order.
+ * Finds the last position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where [element] could be
+ * inserted while maintaining sorted order.
  * The list is expected to be sorted in a non-descending order according to the specified [comparator],
  * otherwise the result is undefined.
  *
@@ -177,17 +153,9 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  * according to the [comparator].
  * If all elements are less than or equal to [element], returns the end index ([toIndex]).
  * If the list contains multiple elements equal to [element], returns the index immediately after the last such element.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param element the element to search for.
- * @param comparator the comparator used to compare list elements with the element being searched.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- *
- * @return the index of the first element that is strictly greater than [element] according to [comparator],
- *         or [toIndex] if all elements are less than or equal to [element].
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -200,26 +168,21 @@ public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, from
 }
 
 /**
- * Finds the last position in this sorted list or its range where an element could be inserted while maintaining sorted order,
- * using the binary search algorithm with a custom [comparison] function.
+ * Finds the last position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where an element could be
+ * inserted while maintaining sorted order, using the binary search algorithm with a custom [comparison] function.
  *
- * The list is expected to be sorted so that the signs of the [comparison] function's return values ascend on the list elements,
- * i.e., negative values come before zero and zeroes come before positive values.
+ * [comparison] should return a negative value for elements before the target, zero for elements equal to
+ * the target, and a positive value for elements after it. The list is expected to be sorted so that the
+ * signs of the [comparison] function's return values ascend on the list elements, i.e., negative values
+ * come before zero and zeroes come before positive values.
  * Otherwise, the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element for which [comparison] returns
  * a positive value.
  * If [comparison] returns non-positive (negative or zero) for all elements, returns the end index ([toIndex]).
  * If the list contains multiple elements for which [comparison] returns zero, returns the index immediately after the last such element.
- *
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- * @param comparison function that returns negative values for elements before the target,
- *                   zero for elements equal to the target, and positive values for elements after the target.
- *
- * @return the index of the first element for which [comparison] returns a positive value,
- *         or [toIndex] if [comparison] returns non-positive for all elements.
- *         Unlike [binarySearch], this always returns a non-negative insertion point.
+ * Unlike [binarySearch], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
@@ -232,25 +195,19 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
 }
 
 /**
- * Finds the last position in this sorted list or its range where an element having the key equal to the provided [key] value
- * could be inserted while maintaining sorted order, using the binary search algorithm.
+ * Finds the last position in this sorted list — or in the sub-range from [fromIndex] (inclusive) to
+ * [toIndex] (exclusive), which default to 0 and the list size respectively — where an element whose key
+ * equals the provided [key] could be inserted while maintaining sorted order, using the binary search
+ * algorithm. The key of each element is obtained via [selector].
  * The list is expected to be sorted in a non-descending order according to the Comparable natural ordering of keys of its elements,
  * otherwise the result is undefined.
  *
  * This function implements the upper bound algorithm: it returns the index of the first element whose key is GREATER than [key].
  * If all element keys are less than or equal to [key], returns the end index ([toIndex]).
  * If the list contains multiple elements with the specified [key], returns the index immediately after the last such element.
+ * Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * `null` value is considered to be less than any non-null value.
- *
- * @param key the key to search for.
- * @param fromIndex the start of the range (inclusive) to search in, 0 by default.
- * @param toIndex the end of the range (exclusive) to search in, size of this list by default.
- * @param selector the function to extract the key from a list element.
- *
- * @return the index of the first element whose key is strictly greater than [key],
- *         or [toIndex] if all element keys are less than or equal to [key].
- *         Unlike [binarySearchBy], this always returns a non-negative insertion point.
  *
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this list.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].

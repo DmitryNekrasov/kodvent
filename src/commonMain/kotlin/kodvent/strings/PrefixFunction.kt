@@ -8,7 +8,8 @@
 package kodvent.strings
 
 /**
- * Computes the prefix function for this character sequence.
+ * Computes the prefix function for this character sequence, returning an array whose i-th element is
+ * the length of the longest proper prefix of `this[0..i]` that is also a suffix of `this[0..i]`.
  *
  * The prefix function π_i is defined as the length of the longest proper prefix
  * of the substring `s[0..i]` that is also a suffix of this substring.
@@ -19,9 +20,6 @@ package kodvent.strings
  * - Time: O(n) where n is the length of the character sequence
  * - Space: O(n) for the result array
  *
- * @return an array where the i-th element contains the length of the longest proper prefix
- *         of `this[0..i]` that is also a suffix of `this[0..i]`
- *
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionBasicUsage
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionUnderstandingTheResult
  *
@@ -30,7 +28,9 @@ package kodvent.strings
 public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::get)
 
 /**
- * Computes the prefix function for a generic sequence.
+ * Computes the prefix function for a generic sequence of [length] elements of type [T], where [at]
+ * returns the element at a given index. Returns an array whose i-th element is the length of the
+ * longest proper prefix that is also a suffix for the subsequence `[0..i]`.
  *
  * This is a generalized version of the prefix function that works with any type of sequence
  * where elements can be accessed by index and compared for equality. The prefix function π_i
@@ -39,13 +39,6 @@ public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::ge
  * ## Complexity
  * - Time: O(n) where n is the length parameter
  * - Space: O(n) for the result array
- *
- * @param T the type of elements in the sequence
- * @param length the length of the sequence
- * @param at a function that returns the element at a given index
- *
- * @return an array where the i-th element contains the length of the longest proper prefix
- *         that is also a suffix for the subsequence `[0..i]`
  *
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithCustomObjects
@@ -68,17 +61,12 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  * This function uses the
  * [Knuth-Morris-Pratt (KMP) algorithm](https://cp-algorithms.com/string/prefix-function.html)
  * to efficiently find all occurrences of the needle string within the text.
- * It concatenates the needle, a delimiter, and the text, then uses the prefix function to identify matches.
+ * It concatenates the needle, the [delimiter] character, and the text, then uses the prefix function to
+ * identify matches. The [delimiter] (default `'#'`) must not appear in either the needle or the text.
  *
  * ## Complexity
  * - Time: O(n + m) where n is the length of this sequence and m is the length of the needle
  * - Space: O(n + m) for the concatenated string and prefix array
- *
- * @param needle the substring to search for
- * @param delimiter a character used to separate the needle from the text in the internal representation.
- *                  Must not appear in either the needle or the text. Defaults to '#'.
- *
- * @return a list of all starting indices where the needle occurs in this character sequence
  *
  * @throws IllegalArgumentException if the delimiter appears in the needle or in this text
  *

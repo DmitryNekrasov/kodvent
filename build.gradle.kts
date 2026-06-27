@@ -59,7 +59,6 @@ kotlin {
     linuxArm64()
 
     // Native - macOS
-    macosX64()
     macosArm64()
 
     // Native - Windows
@@ -73,12 +72,10 @@ kotlin {
     // Native - watchOS
     watchosArm32()
     watchosArm64()
-    watchosX64()
     watchosSimulatorArm64()
 
     // Native - tvOS
     tvosArm64()
-    tvosX64()
     tvosSimulatorArm64()
 
     sourceSets {

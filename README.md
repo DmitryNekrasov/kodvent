@@ -37,7 +37,7 @@ val answer = cycleLengths.reduce(::lcm)
 - **JVM** (target 1.8+)
 - **JS** (IR, Node.js & Browser)
 - **Wasm** (wasmJs, wasmWasi)
-- **Native** — Linux (x64, arm64), macOS (x64, arm64), Windows (mingwX64), iOS, watchOS, tvOS
+- **Native** — Linux (x64, arm64), macOS (arm64), Windows (mingwX64), iOS, watchOS, tvOS
 
 ## Features
 

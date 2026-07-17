@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kodvent-js-0.3.1">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="kodvent-js-0.3.1.jar" />
+  </artifact>
+</component>

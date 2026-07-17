@@ -43,13 +43,13 @@ val answer = cycleLengths.reduce(::lcm)
 
 | Module | What you get | Complexity |
 |--------|-------------|------------|
-| **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | O(log n) for pow |
-| **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | O(α(n)) amortized |
-| **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | O(log n) query/update |
-| **String Algorithms** | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | O(n + m) |
-| **Binary Search** | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | O(log n) |
-| **Ternary Search** | Find the maximum of a unimodal function on an interval | O(log((r−l)/ε)) |
-| **Map Counters** | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | O(1) |
+| **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ for pow |
+| **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | $O(\alpha(n))$ amortized |
+| **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
+| **String Algorithms** | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
+| **Binary Search** | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
+| **Ternary Search** | Find the maximum of a unimodal function on an interval | $O(\log((r-l)/\varepsilon))$ |
+| **Map Counters** | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | $O(1)$ |
 
 For full API details and parameter descriptions, see the [KDoc reference](https://dmitrynekrasov.github.io/kodvent/).
 

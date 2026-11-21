@@ -1,0 +1,55 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, mingwX64, tvosArm64, tvosSimulatorArm64, wasmJs, wasmWasi, watchosArm32, watchosArm64, watchosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <io.github.dmitrynekrasov:kodvent>
+final class <#A: kotlin/Any?> kodvent.datastructures/SegmentTree { // kodvent.datastructures/SegmentTree|null[0]
+    constructor <init>(kotlin.collections/List<#A>, kotlin/Function2<#A, #A, #A>) // kodvent.datastructures/SegmentTree.<init>|<init>(kotlin.collections.List<1:0>;kotlin.Function2<1:0,1:0,1:0>){}[0]
+
+    final fun get(kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int){}[0]
+    final fun get(kotlin/Int, kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int;kotlin.Int){}[0]
+    final fun getOrDefault(kotlin/Int, kotlin/Int, #A): #A // kodvent.datastructures/SegmentTree.getOrDefault|getOrDefault(kotlin.Int;kotlin.Int;1:0){}[0]
+    final fun getOrNull(kotlin/Int, kotlin/Int): #A? // kodvent.datastructures/SegmentTree.getOrNull|getOrNull(kotlin.Int;kotlin.Int){}[0]
+    final fun set(kotlin/Int, #A) // kodvent.datastructures/SegmentTree.set|set(kotlin.Int;1:0){}[0]
+}
+
+final class kodvent.datastructures/DisjointSetUnion { // kodvent.datastructures/DisjointSetUnion|null[0]
+    constructor <init>(kotlin/Int) // kodvent.datastructures/DisjointSetUnion.<init>|<init>(kotlin.Int){}[0]
+
+    final val count // kodvent.datastructures/DisjointSetUnion.count|{}count[0]
+        final fun <get-count>(): kotlin/Int // kodvent.datastructures/DisjointSetUnion.count.<get-count>|<get-count>(){}[0]
+
+    final fun connected(kotlin/Int, kotlin/Int): kotlin/Boolean // kodvent.datastructures/DisjointSetUnion.connected|connected(kotlin.Int;kotlin.Int){}[0]
+    final fun find(kotlin/Int): kotlin/Int // kodvent.datastructures/DisjointSetUnion.find|find(kotlin.Int){}[0]
+    final fun isolate(kotlin/Int) // kodvent.datastructures/DisjointSetUnion.isolate|isolate(kotlin.Int){}[0]
+    final fun union(kotlin/Int, kotlin/Int): kotlin/Boolean // kodvent.datastructures/DisjointSetUnion.union|union(kotlin.Int;kotlin.Int){}[0]
+}
+
+final fun (kotlin/CharSequence).kodvent.strings/allIndicesOf(kotlin/CharSequence, kotlin/Char = ...): kotlin.collections/List<kotlin/Int> // kodvent.strings/allIndicesOf|allIndicesOf@kotlin.CharSequence(kotlin.CharSequence;kotlin.Char){}[0]
+final fun (kotlin/CharSequence).kodvent.strings/prefixFunction(): kotlin/IntArray // kodvent.strings/prefixFunction|prefixFunction@kotlin.CharSequence(){}[0]
+final fun (kotlin/Double).kodvent.math/sqr(): kotlin/Double // kodvent.math/sqr|sqr@kotlin.Double(){}[0]
+final fun (kotlin/Int).kodvent.math/sqr(): kotlin/Int // kodvent.math/sqr|sqr@kotlin.Int(){}[0]
+final fun (kotlin/Long).kodvent.math/pow(kotlin/Long): kotlin/Long // kodvent.math/pow|pow@kotlin.Long(kotlin.Long){}[0]
+final fun (kotlin/Long).kodvent.math/pow(kotlin/Long, kotlin/Long): kotlin/Long // kodvent.math/pow|pow@kotlin.Long(kotlin.Long;kotlin.Long){}[0]
+final fun (kotlin/Long).kodvent.math/sqr(): kotlin/Long // kodvent.math/sqr|sqr@kotlin.Long(){}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/List<#A>).kodvent.collections/lowerBound(#A, kotlin/Comparator<in #A>, kotlin/Int = ..., kotlin/Int = ...): kotlin/Int // kodvent.collections/lowerBound|lowerBound@kotlin.collections.List<0:0>(0:0;kotlin.Comparator<in|0:0>;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/List<#A>).kodvent.collections/lowerBound(kotlin/Int = ..., kotlin/Int = ..., kotlin/Function1<#A, kotlin/Int>): kotlin/Int // kodvent.collections/lowerBound|lowerBound@kotlin.collections.List<0:0>(kotlin.Int;kotlin.Int;kotlin.Function1<0:0,kotlin.Int>){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/List<#A>).kodvent.collections/upperBound(#A, kotlin/Comparator<in #A>, kotlin/Int = ..., kotlin/Int = ...): kotlin/Int // kodvent.collections/upperBound|upperBound@kotlin.collections.List<0:0>(0:0;kotlin.Comparator<in|0:0>;kotlin.Int;kotlin.Int){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/List<#A>).kodvent.collections/upperBound(kotlin/Int = ..., kotlin/Int = ..., kotlin/Function1<#A, kotlin/Int>): kotlin/Int // kodvent.collections/upperBound|upperBound@kotlin.collections.List<0:0>(kotlin.Int;kotlin.Int;kotlin.Function1<0:0,kotlin.Int>){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/MutableMap<#A, kotlin/Int>).kodvent.collections/decrement(#A): kotlin/Boolean // kodvent.collections/decrement|decrement@kotlin.collections.MutableMap<0:0,kotlin.Int>(0:0){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (kotlin.collections/MutableMap<#A, kotlin/Int>).kodvent.collections/increment(#A) // kodvent.collections/increment|increment@kotlin.collections.MutableMap<0:0,kotlin.Int>(0:0){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Comparable<#A>> (kotlin.collections/List<#A?>).kodvent.collections/lowerBound(#A?, kotlin/Int = ..., kotlin/Int = ...): kotlin/Int // kodvent.collections/lowerBound|lowerBound@kotlin.collections.List<0:0?>(0:0?;kotlin.Int;kotlin.Int){0§<kotlin.Comparable<0:0>>}[0]
+final fun <#A: kotlin/Comparable<#A>> (kotlin.collections/List<#A?>).kodvent.collections/upperBound(#A?, kotlin/Int = ..., kotlin/Int = ...): kotlin/Int // kodvent.collections/upperBound|upperBound@kotlin.collections.List<0:0?>(0:0?;kotlin.Int;kotlin.Int){0§<kotlin.Comparable<0:0>>}[0]
+final fun kodvent.math/gcd(kotlin/Int, kotlin/Int): kotlin/Int // kodvent.math/gcd|gcd(kotlin.Int;kotlin.Int){}[0]
+final fun kodvent.math/gcd(kotlin/Long, kotlin/Long): kotlin/Long // kodvent.math/gcd|gcd(kotlin.Long;kotlin.Long){}[0]
+final fun kodvent.math/lcm(kotlin/Int, kotlin/Int): kotlin/Int // kodvent.math/lcm|lcm(kotlin.Int;kotlin.Int){}[0]
+final fun kodvent.math/lcm(kotlin/Long, kotlin/Long): kotlin/Long // kodvent.math/lcm|lcm(kotlin.Long;kotlin.Long){}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Comparable<#B>> (kotlin.collections/List<#A>).kodvent.collections/lowerBoundBy(#B?, kotlin/Int = ..., kotlin/Int = ..., crossinline kotlin/Function1<#A, #B?>): kotlin/Int // kodvent.collections/lowerBoundBy|lowerBoundBy@kotlin.collections.List<0:0>(0:1?;kotlin.Int;kotlin.Int;kotlin.Function1<0:0,0:1?>){0§<kotlin.Any?>;1§<kotlin.Comparable<0:1>>}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Comparable<#B>> (kotlin.collections/List<#A>).kodvent.collections/upperBoundBy(#B?, kotlin/Int = ..., kotlin/Int = ..., crossinline kotlin/Function1<#A, #B?>): kotlin/Int // kodvent.collections/upperBoundBy|upperBoundBy@kotlin.collections.List<0:0>(0:1?;kotlin.Int;kotlin.Int;kotlin.Function1<0:0,0:1?>){0§<kotlin.Any?>;1§<kotlin.Comparable<0:1>>}[0]
+final inline fun <#A: kotlin/Any?> kodvent.strings/prefixFunction(kotlin/Int, kotlin/Function1<kotlin/Int, #A>): kotlin/IntArray // kodvent.strings/prefixFunction|prefixFunction(kotlin.Int;kotlin.Function1<kotlin.Int,0:0>){0§<kotlin.Any?>}[0]
+final inline fun kodvent.boundsearch/partitionPoint(kotlin/Int, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Boolean>): kotlin/Int // kodvent.boundsearch/partitionPoint|partitionPoint(kotlin.Int;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Boolean>){}[0]
+final inline fun kodvent.boundsearch/partitionPoint(kotlin/Long, kotlin/Long, kotlin/Function1<kotlin/Long, kotlin/Boolean>): kotlin/Long // kodvent.boundsearch/partitionPoint|partitionPoint(kotlin.Long;kotlin.Long;kotlin.Function1<kotlin.Long,kotlin.Boolean>){}[0]
+final inline fun kodvent.boundsearch/ternarySearch(kotlin/Double, kotlin/Double, kotlin/Function1<kotlin/Double, kotlin/Double>): kotlin/Double // kodvent.boundsearch/ternarySearch|ternarySearch(kotlin.Double;kotlin.Double;kotlin.Function1<kotlin.Double,kotlin.Double>){}[0]

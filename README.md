@@ -266,6 +266,14 @@ val x = ternarySearch(0.0, halfP) { x -> x * (halfP - x) }
 
 The project includes comprehensive tests for all functions. Test reports are generated at `build/reports/tests/test/index.html`.
 
+### Changing the Public API
+
+`./gradlew build` compares the public API with the dumps in the `api` directory. After an intended change, update the dumps and commit them:
+
+```bash
+./gradlew updateKotlinAbi
+```
+
 ## License
 
 This project is licensed under the Apache License 2.0 – see the [LICENSE](LICENSE) file for details.

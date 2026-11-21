@@ -43,6 +43,7 @@ val answer = cycleLengths.reduce(::lcm)
 
 | Module | What you get | Complexity |
 |--------|-------------|------------|
+| **Grid** | `Grid` / `MutableGrid` addressed by `Position(x, y)` or `grid[x, y]`, `Direction` and `Direction8`, `toGrid()` parsing, `neighbors`, `ray`, rotation, wrap-around | $O(1)$ cell access |
 | **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ for pow |
 | **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | $O(\alpha(n))$ amortized |
 | **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
@@ -98,6 +99,54 @@ dependencies {
 ```
 
 ## Usage
+
+### 2D Grids
+
+```kotlin
+// input: List<String>, the puzzle input lines; input[y][x] is the cell at Position(x, y)
+val grid = input.toGrid()
+
+// Before: bounds checks by hand in every grid puzzle
+var count = 0
+for (k in (i - 1)..(i + 1)) for (l in (j - 1)..(j + 1))
+    if ((k != i || l != j) && k in input.indices && l in input[k].indices && input[k][l] == '@') count++
+
+// After
+val count = grid.neighbors8(position).count { grid[it] == '@' }
+```
+
+```kotlin
+// Walk from '^', turning right at every '#', until a step leaves the grid
+var position = grid.positionOf('^')
+var direction = Direction.UP
+val visited = mutableSetOf(position)
+while (true) {
+    val ahead = position + direction
+    when (grid.getOrNull(ahead)) {
+        null -> break                              // the step leaves the grid
+        '#' -> direction = direction.turnRight()
+        else -> { position = ahead; visited += ahead }
+    }
+}
+
+// Digits, mutation, and a snapshot of the grid as a map key
+// levels: List<String>, lines of digits such as "5483"
+val energy = levels.toMutableGrid { it.digitToInt() }
+energy[0, 0] += 1                             // the same cell as energy[Position(0, 0)]
+val seen = mutableMapOf(energy.toGrid() to 0)
+
+// The first non-empty cell along a direction, diagonals included
+val firstSeen = grid.ray(position, Direction8.UP_RIGHT).firstOrNull { grid[it] != '.' }
+
+// Rotation, and a pattern that repeats endlessly in every direction
+val turned = grid.rotatedClockwise()
+val repeated = grid[Position(-1, 1000).wrap(grid)]
+```
+
+`x` counts columns from the left and `y` counts lines from the top, so a puzzle's `x,y` pair goes into
+`Position(x, y)` unchanged, and `grid[x, y]` is `grid[Position(x, y)]`. Lines must have the same length and
+nothing is trimmed, because a space can be a cell; a whole text is
+`text.lines().dropLastWhile { it.isEmpty() }.toGrid()`.
 
 ### Counting Elements
 

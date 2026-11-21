@@ -46,6 +46,7 @@ val answer = cycleLengths.reduce(::lcm)
 | **Grid** | `Grid` / `MutableGrid` addressed by `Position(x, y)` or `grid[x, y]`, `Direction` and `Direction8`, `toGrid()` parsing, `neighbors`, `ray`, rotation, wrap-around | $O(1)$ cell access |
 | **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ for pow |
 | **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | $O(\alpha(n))$ amortized |
+| **Heap** | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
 | **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
 | **String Algorithms** | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
 | **Binary Search** | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
@@ -210,6 +211,56 @@ val edges = listOf(
 val dsuMst = DisjointSetUnion(4)
 val mst = edges.sortedBy { it.weight }.filter { dsuMst.union(it.from, it.to) }
 ```
+
+### Priority Queue with Heap
+
+`Heap` is not released yet, it will be available in the next version.
+
+```kotlin
+// The smallest element is on top
+val heap = Heap<Int>()
+heap.push(5)
+heap.push(1)
+heap.push(3)
+
+heap.peek()  // 1
+heap.pop()   // 1
+heap.pop()   // 3
+
+// A max-heap, and a heap ordered by a property
+val largestFirst = Heap<Int>(reverseOrder())
+val byPriority = Heap<Task>(compareBy { it.priority })
+
+// From a collection in O(n)
+val numbers = listOf(7, 2, 9, 4).toHeap()
+```
+
+```kotlin
+// Dijkstra's algorithm on a grid where entering a cell costs its digit
+// grid: Grid<Int>, e.g. input.toGrid { it.digitToInt() }
+fun lowestTotalRisk(grid: Grid<Int>, start: Position, end: Position): Int {
+    val dist = MutableGrid(grid.width, grid.height) { Int.MAX_VALUE }
+    val heap = Heap<Pair<Int, Position>>(compareBy { it.first })
+    dist[start] = 0
+    heap.push(0 to start)
+    while (heap.isNotEmpty()) {
+        val (d, p) = heap.pop()
+        if (d > dist[p]) continue // stale entry: p was reached cheaper after this push
+        if (p == end) return d
+        for (q in grid.neighbors(p)) {
+            val nd = d + grid[q]
+            if (nd < dist[q]) {
+                dist[q] = nd
+                heap.push(nd to q)
+            }
+        }
+    }
+    error("$end is unreachable from $start")
+}
+```
+
+The entries are `(distance, position)` pairs because the order of an element must not change while it is in
+the heap: a comparator that reads a distance array the search keeps lowering breaks that rule.
 
 ### Range Queries with Segment Tree
 

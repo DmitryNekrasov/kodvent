@@ -102,6 +102,8 @@ dependencies {
 
 ### 2D Grids
 
+The `kodvent.grid` package is not released yet, it will be available in the next version.
+
 ```kotlin
 // input: List<String>, the puzzle input lines; input[y][x] is the cell at Position(x, y)
 val grid = input.toGrid()

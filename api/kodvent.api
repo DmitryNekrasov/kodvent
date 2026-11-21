@@ -46,6 +46,117 @@ public final class kodvent/datastructures/SegmentTree {
 	public final fun set (ILjava/lang/Object;)V
 }
 
+public final class kodvent/grid/Direction : java/lang/Enum {
+	public static final field DOWN Lkodvent/grid/Direction;
+	public static final field LEFT Lkodvent/grid/Direction;
+	public static final field RIGHT Lkodvent/grid/Direction;
+	public static final field UP Lkodvent/grid/Direction;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getOpposite ()Lkodvent/grid/Direction;
+	public final fun times (I)Lkodvent/grid/Position;
+	public final fun turnLeft ()Lkodvent/grid/Direction;
+	public final fun turnRight ()Lkodvent/grid/Direction;
+	public static fun valueOf (Ljava/lang/String;)Lkodvent/grid/Direction;
+	public static fun values ()[Lkodvent/grid/Direction;
+}
+
+public final class kodvent/grid/Direction8 : java/lang/Enum {
+	public static final field DOWN Lkodvent/grid/Direction8;
+	public static final field DOWN_LEFT Lkodvent/grid/Direction8;
+	public static final field DOWN_RIGHT Lkodvent/grid/Direction8;
+	public static final field LEFT Lkodvent/grid/Direction8;
+	public static final field RIGHT Lkodvent/grid/Direction8;
+	public static final field UP Lkodvent/grid/Direction8;
+	public static final field UP_LEFT Lkodvent/grid/Direction8;
+	public static final field UP_RIGHT Lkodvent/grid/Direction8;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getOpposite ()Lkodvent/grid/Direction8;
+	public final fun times (I)Lkodvent/grid/Position;
+	public static fun valueOf (Ljava/lang/String;)Lkodvent/grid/Direction8;
+	public static fun values ()[Lkodvent/grid/Direction8;
+}
+
+public final class kodvent/grid/DirectionKt {
+	public static final fun toDirection (C)Lkodvent/grid/Direction;
+	public static final fun toDirectionOrNull (C)Lkodvent/grid/Direction;
+}
+
+public abstract interface class kodvent/grid/Grid {
+	public abstract fun contains (Lkodvent/grid/Position;)Z
+	public abstract fun equals (Ljava/lang/Object;)Z
+	public abstract fun get (II)Ljava/lang/Object;
+	public abstract fun get (Lkodvent/grid/Position;)Ljava/lang/Object;
+	public abstract fun getColumns ()Ljava/util/List;
+	public abstract fun getHeight ()I
+	public abstract fun getOrDefault (Lkodvent/grid/Position;Ljava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getOrNull (Lkodvent/grid/Position;)Ljava/lang/Object;
+	public abstract fun getPositions ()Ljava/util/List;
+	public abstract fun getRows ()Ljava/util/List;
+	public abstract fun getValues ()Ljava/util/List;
+	public abstract fun getWidth ()I
+	public abstract fun hashCode ()I
+	public abstract fun positionOf (Ljava/lang/Object;)Lkodvent/grid/Position;
+	public abstract fun positionOfOrNull (Ljava/lang/Object;)Lkodvent/grid/Position;
+	public abstract fun positionsOf (Ljava/lang/Object;)Ljava/util/List;
+	public abstract fun toString ()Ljava/lang/String;
+}
+
+public final class kodvent/grid/GridExtensionsKt {
+	public static final fun count (Lkodvent/grid/Grid;Lkotlin/jvm/functions/Function1;)I
+	public static final fun forEachIndexed (Lkodvent/grid/Grid;Lkotlin/jvm/functions/Function2;)V
+	public static final fun getOrElse (Lkodvent/grid/Grid;Lkodvent/grid/Position;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun map (Lkodvent/grid/Grid;Lkotlin/jvm/functions/Function1;)Lkodvent/grid/Grid;
+	public static final fun mapIndexed (Lkodvent/grid/Grid;Lkotlin/jvm/functions/Function2;)Lkodvent/grid/Grid;
+	public static final fun neighbors (Lkodvent/grid/Grid;Lkodvent/grid/Position;)Ljava/util/List;
+	public static final fun neighbors8 (Lkodvent/grid/Grid;Lkodvent/grid/Position;)Ljava/util/List;
+	public static final fun ray (Lkodvent/grid/Grid;Lkodvent/grid/Position;Lkodvent/grid/Direction8;)Ljava/util/List;
+	public static final fun ray (Lkodvent/grid/Grid;Lkodvent/grid/Position;Lkodvent/grid/Direction;)Ljava/util/List;
+	public static final fun rotatedClockwise (Lkodvent/grid/Grid;)Lkodvent/grid/Grid;
+	public static final fun rotatedCounterclockwise (Lkodvent/grid/Grid;)Lkodvent/grid/Grid;
+	public static final fun toGrid (Ljava/util/List;)Lkodvent/grid/Grid;
+	public static final fun toGrid (Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lkodvent/grid/Grid;
+	public static final fun toGrid (Lkodvent/grid/Grid;)Lkodvent/grid/Grid;
+	public static final fun toMutableGrid (Ljava/util/List;)Lkodvent/grid/MutableGrid;
+	public static final fun toMutableGrid (Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lkodvent/grid/MutableGrid;
+	public static final fun toMutableGrid (Lkodvent/grid/Grid;)Lkodvent/grid/MutableGrid;
+	public static final fun transposed (Lkodvent/grid/Grid;)Lkodvent/grid/Grid;
+	public static final fun wrap (Lkodvent/grid/Position;Lkodvent/grid/Grid;)Lkodvent/grid/Position;
+}
+
+public final class kodvent/grid/GridKt {
+	public static final fun Grid (IILkotlin/jvm/functions/Function1;)Lkodvent/grid/Grid;
+	public static final fun MutableGrid (IILkotlin/jvm/functions/Function1;)Lkodvent/grid/MutableGrid;
+	public static final fun gridOfCells (IILjava/util/List;)Lkodvent/grid/Grid;
+	public static final fun mutableGridOfCells (IILjava/util/List;)Lkodvent/grid/MutableGrid;
+}
+
+public abstract interface class kodvent/grid/MutableGrid : kodvent/grid/Grid {
+	public abstract fun set (IILjava/lang/Object;)V
+	public abstract fun set (Lkodvent/grid/Position;Ljava/lang/Object;)V
+}
+
+public final class kodvent/grid/Position {
+	public fun <init> (II)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun copy (II)Lkodvent/grid/Position;
+	public static synthetic fun copy$default (Lkodvent/grid/Position;IIILjava/lang/Object;)Lkodvent/grid/Position;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getX ()I
+	public final fun getY ()I
+	public fun hashCode ()I
+	public final fun manhattanDistanceTo (Lkodvent/grid/Position;)I
+	public final fun minus (Lkodvent/grid/Direction8;)Lkodvent/grid/Position;
+	public final fun minus (Lkodvent/grid/Direction;)Lkodvent/grid/Position;
+	public final fun minus (Lkodvent/grid/Position;)Lkodvent/grid/Position;
+	public final fun plus (Lkodvent/grid/Direction8;)Lkodvent/grid/Position;
+	public final fun plus (Lkodvent/grid/Direction;)Lkodvent/grid/Position;
+	public final fun plus (Lkodvent/grid/Position;)Lkodvent/grid/Position;
+	public final fun times (I)Lkodvent/grid/Position;
+	public fun toString ()Ljava/lang/String;
+	public final fun wrap (II)Lkodvent/grid/Position;
+}
+
 public final class kodvent/math/FunctionsKt {
 	public static final fun gcd (II)I
 	public static final fun gcd (JJ)J

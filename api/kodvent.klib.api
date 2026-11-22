@@ -76,6 +76,16 @@ sealed interface <#A: out kotlin/Any?> kodvent.grid/Grid { // kodvent.grid/Grid|
     abstract fun toString(): kotlin/String // kodvent.grid/Grid.toString|toString(){}[0]
 }
 
+final class <#A: kotlin/Any> kodvent.datastructures/SegmentTree { // kodvent.datastructures/SegmentTree|null[0]
+    constructor <init>(kotlin.collections/List<#A>, kotlin/Function2<#A, #A, #A>) // kodvent.datastructures/SegmentTree.<init>|<init>(kotlin.collections.List<1:0>;kotlin.Function2<1:0,1:0,1:0>){}[0]
+
+    final fun get(kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int){}[0]
+    final fun get(kotlin/Int, kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int;kotlin.Int){}[0]
+    final fun getOrDefault(kotlin/Int, kotlin/Int, #A): #A // kodvent.datastructures/SegmentTree.getOrDefault|getOrDefault(kotlin.Int;kotlin.Int;1:0){}[0]
+    final fun getOrNull(kotlin/Int, kotlin/Int): #A? // kodvent.datastructures/SegmentTree.getOrNull|getOrNull(kotlin.Int;kotlin.Int){}[0]
+    final fun set(kotlin/Int, #A) // kodvent.datastructures/SegmentTree.set|set(kotlin.Int;1:0){}[0]
+}
+
 final class <#A: kotlin/Any?> kodvent.datastructures/Heap { // kodvent.datastructures/Heap|null[0]
     constructor <init>(kotlin/Comparator<in #A>) // kodvent.datastructures/Heap.<init>|<init>(kotlin.Comparator<in|1:0>){}[0]
 
@@ -93,16 +103,6 @@ final class <#A: kotlin/Any?> kodvent.datastructures/Heap { // kodvent.datastruc
     final fun replace(#A): #A // kodvent.datastructures/Heap.replace|replace(1:0){}[0]
     final fun toSortedList(): kotlin.collections/List<#A> // kodvent.datastructures/Heap.toSortedList|toSortedList(){}[0]
     final fun toString(): kotlin/String // kodvent.datastructures/Heap.toString|toString(){}[0]
-}
-
-final class <#A: kotlin/Any?> kodvent.datastructures/SegmentTree { // kodvent.datastructures/SegmentTree|null[0]
-    constructor <init>(kotlin.collections/List<#A>, kotlin/Function2<#A, #A, #A>) // kodvent.datastructures/SegmentTree.<init>|<init>(kotlin.collections.List<1:0>;kotlin.Function2<1:0,1:0,1:0>){}[0]
-
-    final fun get(kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int){}[0]
-    final fun get(kotlin/Int, kotlin/Int): #A // kodvent.datastructures/SegmentTree.get|get(kotlin.Int;kotlin.Int){}[0]
-    final fun getOrDefault(kotlin/Int, kotlin/Int, #A): #A // kodvent.datastructures/SegmentTree.getOrDefault|getOrDefault(kotlin.Int;kotlin.Int;1:0){}[0]
-    final fun getOrNull(kotlin/Int, kotlin/Int): #A? // kodvent.datastructures/SegmentTree.getOrNull|getOrNull(kotlin.Int;kotlin.Int){}[0]
-    final fun set(kotlin/Int, #A) // kodvent.datastructures/SegmentTree.set|set(kotlin.Int;1:0){}[0]
 }
 
 final class kodvent.datastructures/DisjointSetUnion { // kodvent.datastructures/DisjointSetUnion|null[0]

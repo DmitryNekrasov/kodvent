@@ -6,9 +6,9 @@ import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 plugins {
     kotlin("multiplatform") version "2.4.21"
     kotlin("plugin.power-assert") version "2.4.21"
-    id("org.jetbrains.dokka") version "2.2.0"
-    id("com.gradleup.nmcp") version "1.4.4"
-    id("com.gradleup.nmcp.aggregation") version "1.4.4"
+    id("org.jetbrains.dokka") version "2.3.0"
+    id("com.gradleup.nmcp") version "1.6.2"
+    id("com.gradleup.nmcp.aggregation") version "1.6.2"
     `maven-publish`
     signing
 }
@@ -118,7 +118,7 @@ dokka {
     }
 }
 
-val dokkaJavadocJar by tasks.registering(Jar::class) {
+val dokkaJavadocJar = tasks.register<Jar>("dokkaJavadocJar") {
     dependsOn(tasks.named("dokkaGeneratePublicationHtml"))
     from(layout.buildDirectory.dir("dokka/html"))
     archiveClassifier.set("javadoc")

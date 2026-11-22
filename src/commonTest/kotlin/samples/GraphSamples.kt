@@ -31,8 +31,6 @@ class GraphSamples {
         val steps = bfs(Position(0, 0)) { p -> maze.neighbors(p).filter { maze[it] == '.' } }
 
         assertEquals(12, steps[Position(4, 4)])
-
-        // A cell that cannot be reached is not in the map
         assertNull(steps[Position(1, 4)])
         assertEquals(-1, steps[Position(1, 4)] ?: -1)
     }
@@ -102,7 +100,7 @@ class GraphSamples {
 
     @Test
     fun dijkstraOverStates() {
-        // With a limit on steps in a row a cell can be worth reaching twice: the search runs over states
+        // With a limit on steps in a row, one cell can be worth reaching twice
         data class Cart(val position: Position, val direction: Direction, val run: Int)
 
         fun cheapestRoute(grid: Grid<Int>, maxRun: Int): Int {
@@ -131,7 +129,6 @@ class GraphSamples {
 
     @Test
     fun cellsOnAnyCheapestPath() {
-        // A step costs 1 and a turn on the spot costs 10
         data class Walker(val position: Position, val direction: Direction)
 
         val maze = listOf(

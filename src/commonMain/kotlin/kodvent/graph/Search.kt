@@ -14,12 +14,12 @@ import kodvent.datastructures.Heap
  * fewest steps from [start] to every state it reaches, with [start] at 0. A state that cannot be reached is
  * not in the map, so `steps[end] ?: -1` gives -1 for it and `steps.getValue(end)` throws.
  *
- * [neighbors] returns the states one step away from a state; it is called once for every reached state.
- * A state is any value whose `equals` and `hashCode` do not change, such as a `Position`, a data class or a
- * list. An array compares by identity, so use a list where states with the same contents must be equal. A
- * state that is itself a collection needs a named argument, `bfs(start = listOf(0, 0))`.
- * The search visits every reachable state, so [neighbors] has to keep an endless space finite. The order of
- * the map is unspecified. O(V + E) for V reached states and E steps out of them.
+ * [neighbors] returns the states one step away from a state and is called once for every reached state. A
+ * state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a list. An
+ * array compares by identity, not by contents. A state that is itself a collection needs a named argument,
+ * `bfs(start = listOf(0, 0))`. The search visits every reachable state, so in an endless space [neighbors]
+ * has to set a bound. The order of the map is unspecified. O(V + E) for V reached states and E steps out of
+ * them.
  *
  * @sample samples.GraphSamples.shortestPathInMaze
  * @sample samples.GraphSamples.floodFill
@@ -29,16 +29,16 @@ public fun <S> bfs(start: S, neighbors: (state: S) -> Iterable<S>): Map<S, Int> 
     bfs(starts = listOf(start), neighbors = neighbors)
 
 /**
- * [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) from all of [starts] at once:
- * returns the fewest steps from the nearest start to every state the search reaches, with each start at 0.
- * A start that repeats counts once, and no starts give an empty map. Otherwise it works like [bfs] from a
- * single start. A collection of starts with a lambda that does not give the type of its parameter fits both
- * overloads, so name the argument: `bfs(starts = sources) { ... }`. O(V + E).
+ * [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) from all of [starts] at once,
+ * each at 0: like [bfs] from a single start, but the distance of a state is to the nearest of them. A
+ * repeated start counts once, and no starts give an empty map. With a lambda that does not give the type of
+ * its parameter, a collection of starts fits both overloads, so name the argument:
+ * `bfs(starts = sources) { ... }`. O(V + E).
  *
  * @sample samples.GraphSamples.severalStarts
  */
 public fun <S> bfs(starts: Iterable<S>, neighbors: (state: S) -> Iterable<S>): Map<S, Int> {
-    // A LinkedHashMap iterates in insertion order on every platform; the order of a HashMap differs between them.
+    // Unlike a HashMap, a LinkedHashMap iterates in the same order on every platform.
     val distances = LinkedHashMap<S, Int>()
     val queue = ArrayDeque<S>()
     for (start in starts) if (distances.put(start, 0) == null) queue.addLast(start)
@@ -62,13 +62,12 @@ public fun <S> bfs(starts: Iterable<S>, neighbors: (state: S) -> Iterable<S>): M
  * cost of a cheapest path from [start] to every state it reaches, with [start] at 0. A state that cannot be
  * reached is not in the map.
  *
- * [neighbors] returns the steps out of a state as `next to cost` pairs; it is called once for every reached
- * state, when its cost is final. A cost may be zero but not negative. States follow the same rules as in
- * [bfs], and the order of the map is unspecified. O((V + E) log(V + E)) for V reached states and E steps
- * out of them.
+ * [neighbors] returns the steps out of a state as `next to cost` pairs, with costs of zero or more. It is
+ * called once for every reached state, when its cost is final. States and the order of the map are as in
+ * [bfs]. O((V + E) log(V + E)) for V reached states and E steps out of them.
  *
  * @throws IllegalArgumentException if a step has a negative cost
- * @throws ArithmeticException if the cost of a cheapest path to a reachable state exceeds [Int.MAX_VALUE]
+ * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]
  *
  * @sample samples.GraphSamples.dijkstraOnGraph
  * @sample samples.GraphSamples.cellsOnAnyCheapestPath
@@ -77,15 +76,14 @@ public fun <S> dijkstra(start: S, neighbors: (state: S) -> Iterable<Pair<S, Int>
     dijkstra(starts = listOf(start), neighbors = neighbors)
 
 /**
- * [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) from all of [starts] at once:
- * returns the cost of a cheapest path from the nearest start to every state the search reaches, with each
- * start at 0. A start that repeats counts once, and no starts give an empty map. Otherwise it works like
- * [dijkstra] from a single start. A collection of starts with a lambda that does not give the type of its
- * parameter fits both overloads, so name the argument: `dijkstra(starts = sources) { ... }`.
- * O((V + E) log(V + E)).
+ * [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) from all of [starts] at once,
+ * each at 0: like [dijkstra] from a single start, but the cost of a state is the cheapest from any of them.
+ * A repeated start counts once, and no starts give an empty map. With a lambda that does not give the type
+ * of its parameter, a collection of starts fits both overloads, so name the argument:
+ * `dijkstra(starts = sources) { ... }`. O((V + E) log(V + E)).
  *
  * @throws IllegalArgumentException if a step has a negative cost
- * @throws ArithmeticException if the cost of a cheapest path to a reachable state exceeds [Int.MAX_VALUE]
+ * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]
  *
  * @sample samples.GraphSamples.dijkstraOverStates
  * @sample samples.GraphSamples.cellsOnAnyCheapestPath
@@ -104,8 +102,7 @@ public fun <S> dijkstra(starts: Iterable<S>, neighbors: (state: S) -> Iterable<P
             require(step >= 0) { "The step from $state to $next has a negative cost: $step" }
             val candidate = cost + step
             val known = costs[next]
-            // Both terms are non-negative, so a negative sum is an overflow. It is an error only if no other
-            // path reaches next, which is known when the search ends.
+            // A negative sum of non-negative terms is an overflow. It is an error only if no other path reaches next.
             if (candidate < 0) {
                 if (known == null) overflowed = (overflowed ?: mutableSetOf()).apply { add(next) }
             } else if (known == null || candidate < known) {

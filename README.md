@@ -270,20 +270,20 @@ the heap: a comparator that reads a distance array the search keeps lowering bre
 The `kodvent.graph` package is not released yet, it will be available in the next version.
 
 ```kotlin
-// Fewest steps through a maze: a state is a Position, and its neighbors are the open cells next to it
+// Fewest steps through a maze
 // maze: Grid<Char>, e.g. input.toGrid()
 val steps = bfs(start) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
-val answer = steps[end] ?: -1  // a cell that cannot be reached is not in the map
+val answer = steps[end] ?: -1  // an unreachable cell is not in the map
 
-// Flood fill: the region of equal letters around a cell
+// Flood fill
 val region = bfs(position) { p -> garden.neighbors(p).filter { garden[it] == garden[p] } }.keys
 
-// From several starts at once: the distance to the nearest one
+// The distance to the nearest of several starts
 val toNearestExit = bfs(starts = maze.positionsOf('E')) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
 ```
 
 ```kotlin
-// Dijkstra over states that carry more than a cell: at most three steps in a row in one direction
+// Dijkstra over states: at most three steps in a row in one direction
 // grid: Grid<Int>, where entering a cell costs its digit
 data class Cart(val position: Position, val direction: Direction, val run: Int)
 
@@ -298,9 +298,9 @@ val costs = dijkstra(starts = starts) { (position, direction, run) ->
 val cheapest = costs.filterKeys { it.position == grid.positions.last() }.values.min()
 ```
 
-Both functions return the distance to every state the search reaches. A state is any value whose `equals` and
-`hashCode` do not change: a `Position`, a data class, a pair. Name the argument `starts =` when you pass a
-collection of starts: with a lambda that does not give the type of its parameter, the call fits both overloads.
+A state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a pair. With a
+lambda that does not give the type of its parameter, a collection of starts fits both overloads, so name the
+argument `starts =`.
 
 ### Range Queries with Segment Tree
 

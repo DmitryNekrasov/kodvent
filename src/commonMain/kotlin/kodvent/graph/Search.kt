@@ -12,7 +12,7 @@ import kodvent.datastructures.Heap
 /**
  * [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) from [start]: returns the
  * fewest steps from [start] to every state it reaches, with [start] at 0. A state that cannot be reached is
- * not in the map, so read it with `[end] ?: -1`, or with `getValue(end)`, which throws.
+ * not in the map, so `steps[end] ?: -1` gives -1 for it and `steps.getValue(end)` throws.
  *
  * [neighbors] returns the states one step away from a state; it is called once for every reached state.
  * A state is any value whose `equals` and `hashCode` do not change, such as a `Position`, a data class or a

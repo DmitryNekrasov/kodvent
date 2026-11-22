@@ -3,10 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
+@file:OptIn(ExperimentalKotlinTestApi::class)
+
 package kodvent.datastructures
 
 import kodvent.grid.Position
 import kotlin.random.Random
+import kotlin.test.ExperimentalKotlinTestApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -143,9 +146,9 @@ class HeapTest {
             val pushed = Heap<Int>()
             for (element in input) pushed.push(element)
 
-            assertEquals(input.sorted(), pushed.drain(), "pushed $input")
-            assertEquals(input.sorted(), input.toHeap().drain(), "toHeap of $input")
-            assertEquals(input.sorted(), input.notACollection().toHeap().drain(), "toHeap of a sequence of $input")
+            assertEquals(input.sorted(), pushed.drain())
+            assertEquals(input.sorted(), input.toHeap().drain())
+            assertEquals(input.sorted(), input.notACollection().toHeap().drain())
         }
     }
 
@@ -430,7 +433,7 @@ class HeapTest {
             var heap = model.toHeap(byKey)
 
             repeat(1500) { step ->
-                val at = "seed $seed step $step"
+                val at = { "seed $seed step $step" }
                 val pushChance = if (step / 250 % 2 == 0) 550 else 150
                 val roll = random.nextInt(1000)
                 when {
@@ -443,7 +446,7 @@ class HeapTest {
                     roll < 750 -> if (model.isEmpty()) {
                         assertNull(heap.peekOrNull(), at)
                         assertNull(heap.popOrNull(), at)
-                        assertFailsWith<NoSuchElementException>(at) { heap.pop() }
+                        assertFailsWith<NoSuchElementException>(at()) { heap.pop() }
                     } else {
                         val top = heap.peek()
                         val popped = heap.pop()
@@ -481,8 +484,8 @@ class HeapTest {
             }
 
             val drained = heap.drain()
-            assertEquals(model.map { it.first }.sorted(), drained.map { it.first }, "seed $seed")
-            assertEquals(model.map { it.second }.sorted(), drained.map { it.second }.sorted(), "seed $seed")
+            assertEquals(model.map { it.first }.sorted(), drained.map { it.first }) { "seed $seed" }
+            assertEquals(model.map { it.second }.sorted(), drained.map { it.second }.sorted()) { "seed $seed" }
         }
     }
 

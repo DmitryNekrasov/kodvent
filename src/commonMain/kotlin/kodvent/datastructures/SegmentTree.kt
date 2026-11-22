@@ -22,7 +22,7 @@ package kodvent.datastructures
  * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
  * @sample samples.SegmentTreeSamples.slidingWindowMinimum
  */
-public class SegmentTree<T>(source: List<T>, private val operation: (T, T) -> T) {
+public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T) -> T) {
     private val size = source.size
     private val tree = MutableList<T?>(size * 4) { null }
 

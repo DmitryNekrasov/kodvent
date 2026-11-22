@@ -4,8 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
-    kotlin("multiplatform") version "2.3.20"
-    kotlin("plugin.power-assert") version "2.3.20"
+    kotlin("multiplatform") version "2.4.21"
+    kotlin("plugin.power-assert") version "2.4.21"
     id("org.jetbrains.dokka") version "2.2.0"
     id("com.gradleup.nmcp") version "1.4.4"
     id("com.gradleup.nmcp.aggregation") version "1.4.4"
@@ -28,9 +28,7 @@ kotlin {
     explicitApi()
 
     @OptIn(ExperimentalAbiValidation::class)
-    abiValidation {
-        enabled.set(true)
-    }
+    abiValidation()
 
     compilerOptions {
         allWarningsAsErrors.set(true)
@@ -44,7 +42,7 @@ kotlin {
         }
     }
 
-    js(IR) {
+    js {
         nodejs()
         browser()
     }

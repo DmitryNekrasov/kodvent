@@ -47,6 +47,7 @@ val answer = cycleLengths.reduce(::lcm)
 | **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ for pow |
 | **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | $O(\alpha(n))$ amortized |
 | **Heap** | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
+| **Graph Search** | `bfs` and `dijkstra` over any state with a `neighbors` lambda, from one start or several, giving the distance to every reachable state | $O(V + E)$ and $O((V + E) \log (V + E))$ |
 | **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
 | **String Algorithms** | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
 | **Binary Search** | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
@@ -261,6 +262,45 @@ fun lowestTotalRisk(grid: Grid<Int>, start: Position, end: Position): Int {
 
 The entries are `(distance, position)` pairs because the order of an element must not change while it is in
 the heap: a comparator that reads a distance array the search keeps lowering breaks that rule.
+
+`dijkstra` from `kodvent.graph`, below, runs this search for any kind of state.
+
+### Shortest Paths with BFS and Dijkstra
+
+The `kodvent.graph` package is not released yet, it will be available in the next version.
+
+```kotlin
+// Fewest steps through a maze
+// maze: Grid<Char>, e.g. input.toGrid()
+val steps = bfs(start) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
+val answer = steps[end] ?: -1  // an unreachable cell is not in the map
+
+// Flood fill
+val region = bfs(position) { p -> garden.neighbors(p).filter { garden[it] == garden[p] } }.keys
+
+// The distance to the nearest of several starts
+val toNearestExit = bfs(starts = maze.positionsOf('E')) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
+```
+
+```kotlin
+// Dijkstra over states: at most three steps in a row in one direction
+// grid: Grid<Int>, where entering a cell costs its digit
+data class Cart(val position: Position, val direction: Direction, val run: Int)
+
+val origin = Position(0, 0)
+val starts = listOf(Cart(origin, Direction.RIGHT, 0), Cart(origin, Direction.DOWN, 0))
+val costs = dijkstra(starts = starts) { (position, direction, run) ->
+    listOf(direction, direction.turnLeft(), direction.turnRight())
+        .map { Cart(position + it, it, if (it == direction) run + 1 else 1) }
+        .filter { it.position in grid && it.run <= 3 }
+        .map { it to grid[it.position] }  // next to cost
+}
+val cheapest = costs.filterKeys { it.position == grid.positions.last() }.values.min()
+```
+
+A state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a pair. With a
+lambda that does not give the type of its parameter, a collection of starts fits both overloads, so name the
+argument `starts =`.
 
 ### Range Queries with Segment Tree
 

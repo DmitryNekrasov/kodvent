@@ -14,7 +14,8 @@ package kodvent.datastructures
  * elements come out in no particular order, and that order may change between versions.
  *
  * [push], [pop] and [replace] are O(log n); [peek] and [size] are O(1). Where every step costs the same, a
- * breadth-first search with a plain queue does the job of a heap.
+ * breadth-first search with a plain queue does the job of a heap. [kodvent.graph.bfs] and
+ * [kodvent.graph.dijkstra] run both searches over any kind of state.
  *
  * A heap is not a collection: [toSortedList] is the way to see its elements, and two heaps are equal only
  * if they are the same object.

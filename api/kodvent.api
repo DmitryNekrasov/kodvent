@@ -68,6 +68,13 @@ public final class kodvent/datastructures/SegmentTree {
 	public final fun set (ILjava/lang/Object;)V
 }
 
+public final class kodvent/graph/SearchKt {
+	public static final fun bfs (Ljava/lang/Iterable;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun bfs (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun dijkstra (Ljava/lang/Iterable;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+	public static final fun dijkstra (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Ljava/util/Map;
+}
+
 public final class kodvent/grid/Direction : java/lang/Enum {
 	public static final field DOWN Lkodvent/grid/Direction;
 	public static final field LEFT Lkodvent/grid/Direction;

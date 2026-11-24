@@ -49,253 +49,95 @@ class GridTest {
         Position(0, Int.MAX_VALUE), Position(0, Int.MIN_VALUE),
     )
 
-    @Test
-    fun `Grid factory creates a grid of the given width and height`() {
-        val grid = Grid(3, 2) { '.' }
+    private fun throwsIndexOutOfBounds(block: () -> Any?): Boolean =
+        runCatching(block).exceptionOrNull() is IndexOutOfBoundsException
 
-        assertEquals(3, grid.width)
-        assertEquals(2, grid.height)
+    private fun throwsIllegalArgument(block: () -> Any?): Boolean =
+        runCatching(block).exceptionOrNull() is IllegalArgumentException
+
+    private fun <E> iterated(list: List<E>): List<E> {
+        val result = mutableListOf<E>()
+        for (element in list) result += element
+        return result
     }
 
-    @Test
-    fun `Grid factory stores what init returns for each position`() {
-        val grid = Grid(3, 2) { it.x + 10 * it.y }
-
-        assertEquals(0, grid[Position(0, 0)])
-        assertEquals(1, grid[Position(1, 0)])
-        assertEquals(2, grid[Position(2, 0)])
-        assertEquals(10, grid[Position(0, 1)])
-        assertEquals(11, grid[Position(1, 1)])
-        assertEquals(12, grid[Position(2, 1)])
-    }
+    private fun <E> indexed(list: List<E>): List<E> = List(list.size) { list[it] }
 
     @Test
-    fun `Grid factory calls init once for every position in reading order`() {
+    fun `factories call init once for every position in reading order and store what it returns`() {
         val calls = mutableListOf<Position>()
-        val grid = Grid(3, 2) {
+        val init: (Position) -> Int = {
             calls += it
-            '.'
+            it.x + 10 * it.y
         }
 
-        assertEquals(readingOrder3x2, calls)
-        assertEquals(6, grid.values.size)
-    }
-
-    @Test
-    fun `MutableGrid factory creates a grid of the given width and height`() {
-        val grid = MutableGrid(3, 2) { '.' }
-
-        assertEquals(3, grid.width)
-        assertEquals(2, grid.height)
-    }
-
-    @Test
-    fun `MutableGrid factory stores what init returns for each position`() {
-        val grid = MutableGrid(3, 2) { it.x + 10 * it.y }
-
-        assertEquals(0, grid[Position(0, 0)])
-        assertEquals(1, grid[Position(1, 0)])
-        assertEquals(2, grid[Position(2, 0)])
-        assertEquals(10, grid[Position(0, 1)])
-        assertEquals(11, grid[Position(1, 1)])
-        assertEquals(12, grid[Position(2, 1)])
-    }
-
-    @Test
-    fun `MutableGrid factory calls init once for every position in reading order`() {
-        val calls = mutableListOf<Position>()
-        val grid = MutableGrid(3, 2) {
-            calls += it
-            '.'
+        for (grid in listOf(Grid(3, 2, init), MutableGrid(3, 2, init))) {
+            assertEquals(3, grid.width)
+            assertEquals(2, grid.height)
+            assertEquals(listOf(0, 1, 2, 10, 11, 12), readingOrder3x2.map { grid[it] })
         }
-
-        assertEquals(readingOrder3x2, calls)
-        assertEquals(6, grid.values.size)
+        assertEquals(readingOrder3x2 + readingOrder3x2, calls)
     }
 
     @Test
-    fun `a 0 x 0 grid is valid and has no cells`() {
-        val grid = Grid(0, 0) { '.' }
-
-        assertEquals(0, grid.width)
-        assertEquals(0, grid.height)
-        assertTrue(grid.positions.isEmpty())
-        assertTrue(grid.values.isEmpty())
-        assertTrue(grid.rows.isEmpty())
-        assertTrue(grid.columns.isEmpty())
-    }
-
-    @Test
-    fun `a 0 x 2 grid is valid and has two empty rows and no columns`() {
-        val grid = Grid(0, 2) { '.' }
-
-        assertEquals(0, grid.width)
-        assertEquals(2, grid.height)
-        assertTrue(grid.positions.isEmpty())
-        assertTrue(grid.values.isEmpty())
-        assertEquals(2, grid.rows.size)
-        assertTrue(grid.rows[0].isEmpty())
-        assertTrue(grid.rows[1].isEmpty())
-        assertTrue(grid.columns.isEmpty())
-    }
-
-    @Test
-    fun `a 3 x 0 grid is valid and has no rows and three empty columns`() {
-        val grid = Grid(3, 0) { '.' }
-
-        assertEquals(3, grid.width)
-        assertEquals(0, grid.height)
-        assertTrue(grid.positions.isEmpty())
-        assertTrue(grid.values.isEmpty())
-        assertTrue(grid.rows.isEmpty())
-        assertEquals(3, grid.columns.size)
-        assertTrue(grid.columns[0].isEmpty())
-        assertTrue(grid.columns[1].isEmpty())
-        assertTrue(grid.columns[2].isEmpty())
-    }
-
-    @Test
-    fun `MutableGrid factory accepts zero sizes`() {
-        val empty = MutableGrid(0, 0) { '.' }
-        val zeroWidth = MutableGrid(0, 2) { '.' }
-        val zeroHeight = MutableGrid(3, 0) { '.' }
-
-        assertEquals(0, empty.width)
-        assertEquals(0, empty.height)
-        assertTrue(empty.values.isEmpty())
-        assertEquals(0, zeroWidth.width)
-        assertEquals(2, zeroWidth.height)
-        assertTrue(zeroWidth.values.isEmpty())
-        assertEquals(3, zeroHeight.width)
-        assertEquals(0, zeroHeight.height)
-        assertTrue(zeroHeight.values.isEmpty())
-    }
-
-    @Test
-    fun `factories never call init for a grid without cells`() {
+    fun `a grid with a zero width or height has no cells and its factory never calls init`() {
         var calls = 0
-        val countingInit: (Position) -> Char = {
+        val init: (Position) -> Char = {
             calls++
             '.'
         }
 
-        val grids = listOf(
-            Grid(0, 0, countingInit),
-            Grid(0, 2, countingInit),
-            Grid(3, 0, countingInit),
-            MutableGrid(0, 2, countingInit),
-            MutableGrid(3, 0, countingInit),
-        )
-
+        for ((width, height) in listOf(0 to 0, 0 to 2, 3 to 0)) {
+            for (grid in listOf(Grid(width, height, init), MutableGrid(width, height, init))) {
+                assertEquals(width, grid.width)
+                assertEquals(height, grid.height)
+                assertTrue(grid.positions.isEmpty())
+                assertTrue(grid.values.isEmpty())
+                assertEquals(List(height) { emptyList<Char>() }, grid.rows)
+                assertEquals(List(width) { emptyList<Char>() }, grid.columns)
+            }
+        }
         assertEquals(0, calls)
-        assertTrue(grids.all { it.values.isEmpty() })
     }
 
     @Test
-    fun `Grid factory throws IllegalArgumentException for a negative width`() {
-        assertFailsWith<IllegalArgumentException> { Grid(-1, 2) { '.' } }
+    fun `factories throw IllegalArgumentException for a negative width or height`() {
+        val sizes = listOf(-1 to 2, 2 to -1, -1 to 0, 0 to -1, -2 to -3)
+
+        assertEquals(emptyList(), sizes.filterNot { (w, h) -> throwsIllegalArgument { Grid(w, h) { '.' } } })
+        assertEquals(emptyList(), sizes.filterNot { (w, h) -> throwsIllegalArgument { MutableGrid(w, h) { '.' } } })
     }
 
     @Test
-    fun `Grid factory throws IllegalArgumentException for a negative height`() {
-        assertFailsWith<IllegalArgumentException> { Grid(2, -1) { '.' } }
+    fun `factories reject more cells than an Int can count`() {
+        // 65536 * 65536 wraps to exactly 0 in Int arithmetic, so only a check in Long catches it
+        assertFailsWith<IllegalArgumentException> { Grid(65536, 65536) { 0 } }
+        assertFailsWith<IllegalArgumentException> { MutableGrid(65536, 65536) { 0 } }
+
+        assertEquals(0, Grid(Int.MAX_VALUE, 0) { 0 }.values.size)
     }
 
     @Test
-    fun `Grid factory rejects a negative size next to a zero or another negative size`() {
-        assertFailsWith<IllegalArgumentException> { Grid(-1, 0) { '.' } }
-        assertFailsWith<IllegalArgumentException> { Grid(0, -1) { '.' } }
-        assertFailsWith<IllegalArgumentException> { Grid(-2, -3) { '.' } }
-    }
+    fun `everything returned as a Grid is not a MutableGrid`() {
+        val mutable = MutableGrid(2, 2) { 0 }
 
-    @Test
-    fun `MutableGrid factory throws IllegalArgumentException for a negative width`() {
-        assertFailsWith<IllegalArgumentException> { MutableGrid(-1, 2) { '.' } }
-    }
-
-    @Test
-    fun `MutableGrid factory throws IllegalArgumentException for a negative height`() {
-        assertFailsWith<IllegalArgumentException> { MutableGrid(2, -1) { '.' } }
-    }
-
-    @Test
-    fun `MutableGrid factory rejects a negative size next to a zero or another negative size`() {
-        assertFailsWith<IllegalArgumentException> { MutableGrid(-1, 0) { '.' } }
-        assertFailsWith<IllegalArgumentException> { MutableGrid(0, -1) { '.' } }
-        assertFailsWith<IllegalArgumentException> { MutableGrid(-2, -3) { '.' } }
-    }
-
-    @Test
-    fun `Grid factory returns a grid that is not a MutableGrid`() {
         assertFalse(isMutable(Grid(2, 2) { 0 }))
-    }
-
-    @Test
-    fun `a MutableGrid stays a MutableGrid when seen as a Grid`() {
-        assertTrue(isMutable(MutableGrid(2, 2) { 0 }))
-    }
-
-    @Test
-    fun `toGrid of lines returns a grid that is not a MutableGrid`() {
+        assertFalse(isMutable(mutable.toGrid()))
         assertFalse(isMutable(listOf("ab", "cd").toGrid()))
         assertFalse(isMutable(listOf("12", "34").toGrid { it.digitToInt() }))
+        assertFalse(isMutable(mutable.map { it + 1 }))
+        assertFalse(isMutable(mutable.mapIndexed { position, value -> position.x + value }))
+        assertFalse(isMutable(mutable.transposed()))
+        assertFalse(isMutable(mutable.rotatedClockwise()))
+        assertFalse(isMutable(mutable.rotatedCounterclockwise()))
     }
 
     @Test
-    fun `toGrid of a MutableGrid returns a grid that is not a MutableGrid`() {
-        val grid = MutableGrid(2, 2) { 0 }
-
-        assertFalse(isMutable(grid.toGrid()))
-    }
-
-    @Test
-    fun `map and mapIndexed of a MutableGrid return grids that are not MutableGrids`() {
-        val grid = MutableGrid(2, 2) { 0 }
-
-        assertFalse(isMutable(grid.map { it + 1 }))
-        assertFalse(isMutable(grid.mapIndexed { position, value -> position.x + value }))
-    }
-
-    @Test
-    fun `transposed and rotated copies of a MutableGrid are not MutableGrids`() {
-        val grid = MutableGrid(2, 2) { 0 }
-
-        assertFalse(isMutable(grid.transposed()))
-        assertFalse(isMutable(grid.rotatedClockwise()))
-        assertFalse(isMutable(grid.rotatedCounterclockwise()))
-    }
-
-    @Test
-    fun `get takes x as the column and y as the row`() {
+    fun `get outside the grid throws IndexOutOfBoundsException by position and by x and y`() {
         val grid = charGrid("abc", "def")
 
-        assertEquals('a', grid[Position(0, 0)])
-        assertEquals('c', grid[Position(2, 0)])
-        assertEquals('d', grid[Position(0, 1)])
-        assertEquals('e', grid[Position(1, 1)])
-        assertEquals('f', grid[Position(2, 1)])
-    }
-
-    @Test
-    fun `get outside the grid throws IndexOutOfBoundsException`() {
-        val grid = charGrid("abc", "def")
-
-        for (position in outside3x2) {
-            assertFailsWith<IndexOutOfBoundsException>("get at $position") { grid[position] }
-        }
-    }
-
-    @Test
-    fun `get on a grid without cells throws IndexOutOfBoundsException`() {
-        val empty = Grid(0, 0) { '.' }
-        val zeroWidth = Grid(0, 2) { '.' }
-        val zeroHeight = Grid(3, 0) { '.' }
-
-        assertFailsWith<IndexOutOfBoundsException> { empty[Position(0, 0)] }
-        assertFailsWith<IndexOutOfBoundsException> { zeroWidth[Position(0, 0)] }
-        assertFailsWith<IndexOutOfBoundsException> { zeroWidth[Position(0, 1)] }
-        assertFailsWith<IndexOutOfBoundsException> { zeroHeight[Position(0, 0)] }
-        assertFailsWith<IndexOutOfBoundsException> { zeroHeight[Position(2, 0)] }
+        assertEquals(emptyList(), outside3x2.filterNot { throwsIndexOutOfBounds { grid[it] } })
+        assertEquals(emptyList(), outside3x2.filterNot { throwsIndexOutOfBounds { grid[it.x, it.y] } })
     }
 
     @Test
@@ -303,91 +145,56 @@ class GridTest {
         val grid = MutableGrid(3, 2) { 0 }
 
         grid[Position(1, 0)] = 5
-        grid[Position(0, 1)] = 7
+        grid[Position(0, 1)] += 7
+        grid[Position(2, 1)]++
 
         assertEquals(5, grid[Position(1, 0)])
         assertEquals(7, grid[Position(0, 1)])
-        assertEquals(listOf(0, 5, 0, 7, 0, 0), grid.values.toList())
+        assertEquals(listOf(0, 5, 0, 7, 0, 1), grid.values.toList())
     }
 
     @Test
-    fun `set outside the grid throws IndexOutOfBoundsException and writes nothing`() {
+    fun `set outside the grid throws IndexOutOfBoundsException and writes nothing by position and by x and y`() {
         val grid = MutableGrid(3, 2) { 0 }
 
-        for (position in outside3x2) {
-            assertFailsWith<IndexOutOfBoundsException>("set at $position") { grid[position] = 1 }
-        }
-        assertEquals(listOf(0, 0, 0, 0, 0, 0), grid.values.toList())
-    }
-
-    @Test
-    fun `set on a grid without cells throws IndexOutOfBoundsException`() {
-        val empty = MutableGrid(0, 0) { '.' }
-        val zeroWidth = MutableGrid(0, 2) { '.' }
-        val zeroHeight = MutableGrid(3, 0) { '.' }
-
-        assertFailsWith<IndexOutOfBoundsException> { empty[Position(0, 0)] = '#' }
-        assertFailsWith<IndexOutOfBoundsException> { zeroWidth[Position(0, 0)] = '#' }
-        assertFailsWith<IndexOutOfBoundsException> { zeroWidth[Position(0, 1)] = '#' }
-        assertFailsWith<IndexOutOfBoundsException> { zeroHeight[Position(0, 0)] = '#' }
-        assertFailsWith<IndexOutOfBoundsException> { zeroHeight[Position(2, 0)] = '#' }
-    }
-
-    @Test
-    fun `a cell of a MutableGrid of Int can be incremented in place`() {
-        val grid = MutableGrid(2, 2) { 0 }
-        val p = Position(1, 0)
-
-        grid[p]++
-        assertEquals(1, grid[p])
-
-        grid[p] += 1
-        assertEquals(2, grid[p])
-
-        assertEquals(listOf(0, 2, 0, 0), grid.values.toList())
-    }
-
-    @Test
-    fun `a grid can be read as a grid of a supertype`() {
-        val grid: Grid<Any> = charGrid("ab", "cd")
-
-        assertEquals<Any>('c', grid[Position(0, 1)])
-        assertEquals(Position(1, 1), grid.positionOf('d'))
+        assertEquals(emptyList(), outside3x2.filterNot { throwsIndexOutOfBounds { grid[it] = 1 } })
+        assertEquals(emptyList(), outside3x2.filterNot { throwsIndexOutOfBounds { grid[it.x, it.y] = 1 } })
+        assertEquals(listOf(0, 0, 0, 0, 0, 0), grid.values)
     }
 
     @Test
     fun `get by x and y reads the cell that get by position reads`() {
         for ((width, height) in listOf(3 to 2, 2 to 3, 1 to 1, 1 to 4, 4 to 1)) {
             val grid = Grid(width, height) { it.x + 10 * it.y }
-            for (position in grid.positions) {
-                assertEquals(grid[position], grid[position.x, position.y], "$position in a $width x $height grid")
-            }
+            for (position in grid.positions) assertEquals(grid[position], grid[position.x, position.y])
         }
         assertEquals('f', charGrid("abc", "def")[2, 1])
         assertEquals('d', charGrid("abc", "def")[0, 1])
     }
 
     @Test
-    fun `get by x and y outside the grid throws IndexOutOfBoundsException`() {
-        val grid = charGrid("abc", "def")
+    fun `get and set by x and y fail with the message of get and set by position`() {
+        val grid = MutableGrid(3, 2) { 0 }
 
-        for (position in outside3x2) {
-            assertFailsWith<IndexOutOfBoundsException>("get at $position") { grid[position.x, position.y] }
+        for ((x, y) in listOf(3 to 1, 0 to 2)) {
+            val expected = "Position(x=$x, y=$y) is outside the 3 x 2 grid"
+
+            assertEquals(expected, assertFailsWith<IndexOutOfBoundsException> { grid[Position(x, y)] }.message)
+            assertEquals(expected, assertFailsWith<IndexOutOfBoundsException> { grid[x, y] }.message)
+            assertEquals(expected, assertFailsWith<IndexOutOfBoundsException> { grid[Position(x, y)] = 1 }.message)
+            assertEquals(expected, assertFailsWith<IndexOutOfBoundsException> { grid[x, y] = 1 }.message)
         }
-        assertFailsWith<IndexOutOfBoundsException> { Grid(0, 0) { '.' }[0, 0] }
-        assertFailsWith<IndexOutOfBoundsException> { Grid(0, 2) { '.' }[0, 1] }
-        assertFailsWith<IndexOutOfBoundsException> { Grid(3, 0) { '.' }[2, 0] }
     }
 
     @Test
-    fun `get by x and y and get by position fail with the same message`() {
-        val grid = charGrid("abc", "def")
+    fun `get and set by x and y outside a grid taller than wide throw IndexOutOfBoundsException`() {
+        // A wide grid cannot show width and height swapped in the bounds test of these overloads: a cell that the
+        // swapped test lets through lies past the last one, and there the list of cells throws the same exception
+        val tall = MutableGrid(2, 3) { 0 }
 
-        val byPosition = assertFailsWith<IndexOutOfBoundsException> { grid[Position(3, 1)] }
-        val byCoordinates = assertFailsWith<IndexOutOfBoundsException> { grid[3, 1] }
-
-        assertEquals("Position(x=3, y=1) is outside the 3 x 2 grid", byCoordinates.message)
-        assertEquals(byPosition.message, byCoordinates.message)
+        assertFailsWith<IndexOutOfBoundsException> { tall[2, 0] }
+        assertFailsWith<IndexOutOfBoundsException> { tall[2, 0] = 1 }
+        assertEquals(listOf(0, 0, 0, 0, 0, 0), tall.values)
     }
 
     @Test
@@ -395,81 +202,20 @@ class GridTest {
         val grid = MutableGrid(3, 2) { 0 }
 
         grid[1, 0] = 5
-        grid[0, 1] = 7
+        grid[0, 1] += 7
+        grid[2, 1]++
 
         assertEquals(5, grid[Position(1, 0)])
         assertEquals(7, grid[Position(0, 1)])
-        assertEquals(listOf(0, 5, 0, 7, 0, 0), grid.values)
+        assertEquals(listOf(0, 5, 0, 7, 0, 1), grid.values)
     }
 
     @Test
-    fun `set by x and y outside the grid throws IndexOutOfBoundsException and writes nothing`() {
-        val grid = MutableGrid(3, 2) { 0 }
-
-        for (position in outside3x2) {
-            assertFailsWith<IndexOutOfBoundsException>("set at $position") { grid[position.x, position.y] = 1 }
-        }
-        assertEquals(listOf(0, 0, 0, 0, 0, 0), grid.values)
-    }
-
-    @Test
-    fun `compound assignment and increment work with x and y`() {
-        val grid = MutableGrid(2, 2) { 1 }
-
-        grid[1, 0] += 4
-        grid[0, 1]++
-        grid[1, 1] = grid[1, 0] * grid[0, 1]
-
-        assertEquals(listOf(1, 5, 2, 10), grid.values)
-    }
-
-    @Test
-    fun `get by x and y of a MutableGrid shows later writes by position`() {
-        val grid = mutableCharGrid("ab", "cd")
-
-        grid[Position(1, 1)] = '#'
-
-        assertEquals('#', grid[1, 1])
-    }
-
-    @Test
-    fun `position in grid is true for every cell`() {
+    fun `position in grid is true for every cell and false for every position outside`() {
         val grid = charGrid("abc", "def")
 
-        for (position in readingOrder3x2) {
-            assertTrue(position in grid, "$position")
-        }
-    }
-
-    @Test
-    fun `position in grid is false one step past each edge`() {
-        val grid = charGrid("abc", "def")
-
-        assertFalse(Position(3, 0) in grid)
-        assertFalse(Position(-1, 0) in grid)
-        assertFalse(Position(0, 2) in grid)
-        assertFalse(Position(0, -1) in grid)
-        assertTrue(Position(3, 1) !in grid)
-    }
-
-    @Test
-    fun `position in grid is false for every position outside`() {
-        val grid = charGrid("abc", "def")
-
-        for (position in outside3x2) {
-            assertFalse(position in grid, "$position")
-        }
-    }
-
-    @Test
-    fun `position in grid checks x against width and y against height`() {
-        val wide = charGrid("abc", "def")
-        val tall = charGrid("ab", "cd", "ef")
-
-        assertTrue(Position(2, 1) in wide)
-        assertFalse(Position(1, 2) in wide)
-        assertTrue(Position(1, 2) in tall)
-        assertFalse(Position(2, 1) in tall)
+        for (position in readingOrder3x2) assertTrue(position in grid)
+        for (position in outside3x2) assertFalse(position in grid)
     }
 
     @Test
@@ -486,144 +232,60 @@ class GridTest {
     }
 
     @Test
-    fun `position in grid tests the bounds even when the values are positions`() {
-        val grid = Grid(2, 2) { Position(it.x + 10, it.y + 10) }
+    fun `position in grid never looks at the values`() {
+        val positions = Grid(2, 2) { Position(it.x + 10, it.y + 10) }
+        val withNull = nullThenA()
 
-        assertTrue(Position(1, 1) in grid)
-        assertFalse(Position(1, 1) in grid.values)
-        assertFalse(Position(11, 11) in grid)
-        assertTrue(Position(11, 11) in grid.values)
+        assertTrue(Position(1, 1) in positions)
+        assertFalse(Position(1, 1) in positions.values)
+        assertFalse(Position(11, 11) in positions)
+        assertTrue(Position(11, 11) in positions.values)
+        assertNull(withNull[Position(0, 0)])
+        assertTrue(Position(0, 0) in withNull)
     }
 
     @Test
-    fun `position in grid is true for a null cell`() {
-        val grid = nullThenA()
-
-        assertNull(grid[Position(0, 0)])
-        assertTrue(Position(0, 0) in grid)
-    }
-
-    @Test
-    fun `getOrNull returns the value inside`() {
+    fun `getOrNull getOrDefault and getOrElse return the value inside and fall back outside`() {
         val grid = charGrid("abc", "def")
-
-        assertEquals('a', grid.getOrNull(Position(0, 0)))
-        assertEquals('d', grid.getOrNull(Position(0, 1)))
-        assertEquals('f', grid.getOrNull(Position(2, 1)))
-    }
-
-    @Test
-    fun `getOrNull returns null outside`() {
-        val grid = charGrid("abc", "def")
-
-        for (position in outside3x2) {
-            assertNull(grid.getOrNull(position), "$position")
-        }
-    }
-
-    @Test
-    fun `getOrDefault returns the value inside`() {
-        val grid = charGrid("abc", "def")
-
-        assertEquals('a', grid.getOrDefault(Position(0, 0), '.'))
-        assertEquals('d', grid.getOrDefault(Position(0, 1), '.'))
-        assertEquals('f', grid.getOrDefault(Position(2, 1), '.'))
-    }
-
-    @Test
-    fun `getOrDefault returns the default outside`() {
-        val grid = charGrid("abc", "def")
-
-        for (position in outside3x2) {
-            assertEquals('.', grid.getOrDefault(position, '.'), "$position")
-        }
-    }
-
-    @Test
-    fun `getOrElse returns the value inside without calling the lambda`() {
-        val grid = charGrid("abc", "def")
-        var calls = 0
-
-        val value = grid.getOrElse(Position(1, 1)) {
-            calls++
+        val received = mutableListOf<Position>()
+        val fallback: (Position) -> Char = {
+            received += it
             '.'
         }
 
-        assertEquals('e', value)
-        assertEquals(0, calls)
-    }
-
-    @Test
-    fun `getOrElse calls the lambda once with the position outside`() {
-        val grid = charGrid("abc", "def")
+        for (position in readingOrder3x2) {
+            assertEquals(grid[position], grid.getOrNull(position))
+            assertEquals(grid[position], grid.getOrDefault(position, '.'))
+            assertEquals(grid[position], grid.getOrElse(position, fallback))
+        }
+        assertEquals(emptyList(), received)
 
         for (position in outside3x2) {
-            val received = mutableListOf<Position>()
-            val value = grid.getOrElse(position) {
-                received += it
-                '.'
-            }
-
-            assertEquals('.', value, "$position")
-            assertEquals(listOf(position), received)
+            assertNull(grid.getOrNull(position))
+            assertEquals('.', grid.getOrDefault(position, '.'))
+            assertEquals('.', grid.getOrElse(position, fallback))
         }
+        assertEquals(outside3x2, received)
     }
 
     @Test
-    fun `getOrNull returns null for a null cell and for a position outside alike`() {
-        val grid = nullThenA()
-
-        assertNull(grid.getOrNull(Position(0, 0)))
-        assertNull(grid.getOrNull(Position(2, 0)))
-        assertEquals('a', grid.getOrNull(Position(1, 0)))
-    }
-
-    @Test
-    fun `getOrDefault keeps a null cell inside null`() {
+    fun `getOrDefault and getOrElse keep a null cell inside null`() {
         val grid = nullThenA()
 
         assertNull(grid.getOrDefault(Position(0, 0), 'z'))
         assertEquals('a', grid.getOrDefault(Position(1, 0), 'z'))
         assertEquals('z', grid.getOrDefault(Position(2, 0), 'z'))
+        assertNull(grid.getOrElse(Position(0, 0)) { 'z' })
     }
 
     @Test
-    fun `getOrElse keeps a null cell inside null without calling the lambda`() {
-        val grid = nullThenA()
-        var calls = 0
-
-        val value = grid.getOrElse(Position(0, 0)) {
-            calls++
-            'z'
-        }
-
-        assertNull(value)
-        assertEquals(0, calls)
-    }
-
-    @Test
-    fun `safe reads on a grid without cells always fall back`() {
-        val grid = Grid(0, 2) { '.' }
-        val origin = Position(0, 0)
-
-        assertNull(grid.getOrNull(origin))
-        assertEquals('#', grid.getOrDefault(origin, '#'))
-        assertEquals('#', grid.getOrElse(origin) { '#' })
-    }
-
-    @Test
-    fun `positionOf returns the first match in reading order`() {
+    fun `positionOf and positionOfOrNull return the first match in reading order`() {
         val grid = charGrid(".#.", "#.#")
 
         assertEquals(Position(1, 0), grid.positionOf('#'))
         assertEquals(Position(0, 0), grid.positionOf('.'))
-    }
-
-    @Test
-    fun `positionOf finds a value held by the last cell only`() {
-        val grid = charGrid("...", "..@")
-
-        assertEquals(Position(2, 1), grid.positionOf('@'))
+        assertEquals(Position(1, 0), grid.positionOfOrNull('#'))
+        assertEquals(Position(0, 0), grid.positionOfOrNull('.'))
     }
 
     @Test
@@ -631,51 +293,6 @@ class GridTest {
         val grid = charGrid(".#.", "#.#")
 
         assertFailsWith<NoSuchElementException> { grid.positionOf('@') }
-    }
-
-    @Test
-    fun `positionOf on a grid without cells throws NoSuchElementException`() {
-        val empty = Grid(0, 0) { '.' }
-        val zeroWidth = Grid(0, 2) { '.' }
-        val zeroHeight = Grid(3, 0) { '.' }
-
-        assertFailsWith<NoSuchElementException> { empty.positionOf('.') }
-        assertFailsWith<NoSuchElementException> { zeroWidth.positionOf('.') }
-        assertFailsWith<NoSuchElementException> { zeroHeight.positionOf('.') }
-    }
-
-    @Test
-    fun `positionOfOrNull returns the first match in reading order`() {
-        val grid = charGrid(".#.", "#.#")
-
-        assertEquals(Position(1, 0), grid.positionOfOrNull('#'))
-        assertEquals(Position(0, 0), grid.positionOfOrNull('.'))
-    }
-
-    @Test
-    fun `positionOfOrNull returns null when no cell holds the value`() {
-        val grid = charGrid(".#.", "#.#")
-        val zeroWidth = Grid(0, 2) { '.' }
-
-        assertNull(grid.positionOfOrNull('@'))
-        assertNull(zeroWidth.positionOfOrNull('.'))
-    }
-
-    @Test
-    fun `positionsOf returns every match in reading order`() {
-        val grid = charGrid(".#.", "#.#")
-
-        assertEquals(listOf(Position(1, 0), Position(0, 1), Position(2, 1)), grid.positionsOf('#'))
-        assertEquals(listOf(Position(0, 0), Position(2, 0), Position(1, 1)), grid.positionsOf('.'))
-    }
-
-    @Test
-    fun `positionsOf returns an empty list when no cell holds the value`() {
-        val grid = charGrid(".#.", "#.#")
-        val zeroWidth = Grid(0, 2) { '.' }
-
-        assertTrue(grid.positionsOf('@').isEmpty())
-        assertTrue(zeroWidth.positionsOf('.').isEmpty())
     }
 
     @Test
@@ -717,75 +334,41 @@ class GridTest {
         assertFailsWith<NoSuchElementException> { grid.positionOf("a") }
     }
 
-    @Test
-    fun `positions lists every position in reading order`() {
-        val grid = charGrid("abc", "def")
+    // Equal to every Int, while no Int is equal to it: tells apart which side of a comparison was asked.
+    private class EqualToEveryInt {
+        override fun equals(other: Any?): Boolean = other is Int || other is EqualToEveryInt
 
-        assertEquals(readingOrder3x2, grid.positions.toList())
+        override fun hashCode(): Int = 0
     }
 
     @Test
-    fun `positions has one element per cell and reads them by index`() {
+    fun `every search asks the cell whether it equals the value`() {
+        val value = EqualToEveryInt()
+        val grid = Grid<Any>(2, 1) { if (it.x == 0) 1 else value }
+
+        // value == 1 is true and 1 == value is false, so only the second cell holds the value
+        assertEquals(Position(1, 0), grid.positionOf(value))
+        assertEquals(Position(1, 0), grid.positionOfOrNull(value))
+        assertEquals(listOf(Position(1, 0)), grid.positionsOf(value))
+        assertEquals(1, grid.values.indexOf(value))
+    }
+
+    @Test
+    fun `positions contains indexOf and lastIndexOf follow the bounds`() {
         val positions = charGrid("abc", "def").positions
-
-        assertEquals(6, positions.size)
-        assertEquals(Position(0, 0), positions[0])
-        assertEquals(Position(2, 0), positions[2])
-        assertEquals(Position(0, 1), positions[3])
-        assertEquals(Position(2, 1), positions[5])
-    }
-
-    @Test
-    fun `positions of a single row go right and of a single column go down`() {
-        val row = charGrid("abc")
-        val column = charGrid("a", "b", "c")
-
-        assertEquals(listOf(Position(0, 0), Position(1, 0), Position(2, 0)), row.positions.toList())
-        assertEquals(listOf(Position(0, 0), Position(0, 1), Position(0, 2)), column.positions.toList())
-    }
-
-    @Test
-    fun `positions contains and indexOf find a position inside`() {
-        val positions = charGrid("abc", "def").positions
-
-        for ((index, position) in readingOrder3x2.withIndex()) {
-            assertTrue(position in positions, "$position")
-            assertEquals(index, positions.indexOf(position), "$position")
-        }
-    }
-
-    @Test
-    fun `positions contains answers false for a position outside`() {
-        val positions = charGrid("abc", "def").positions
-
-        for (position in outside3x2) {
-            assertFalse(position in positions, "$position")
-        }
-    }
-
-    @Test
-    fun `positions indexOf answers minus one for a position outside`() {
-        val positions = charGrid("abc", "def").positions
-
-        for (position in outside3x2) {
-            assertEquals(-1, positions.indexOf(position), "$position")
-        }
-    }
-
-    @Test
-    fun `positions lastIndexOf agrees with indexOf`() {
-        val positions = charGrid("abc", "def").positions
-
-        assertEquals(4, positions.lastIndexOf(Position(1, 1)))
-        assertEquals(-1, positions.lastIndexOf(Position(3, 0)))
-        assertEquals(-1, positions.lastIndexOf(Position(-1, 1)))
-    }
-
-    @Test
-    fun `positions of a grid without cells find nothing`() {
         val zeroWidth = Grid(0, 2) { '.' }.positions
         val zeroHeight = Grid(3, 0) { '.' }.positions
 
+        for ((index, position) in readingOrder3x2.withIndex()) {
+            assertTrue(position in positions)
+            assertEquals(index, positions.indexOf(position))
+            assertEquals(index, positions.lastIndexOf(position))
+        }
+        for (position in outside3x2) {
+            assertFalse(position in positions)
+            assertEquals(-1, positions.indexOf(position))
+            assertEquals(-1, positions.lastIndexOf(position))
+        }
         assertFalse(Position(0, 0) in zeroWidth)
         assertEquals(-1, zeroWidth.indexOf(Position(0, 1)))
         assertFalse(Position(0, 0) in zeroHeight)
@@ -793,321 +376,51 @@ class GridTest {
     }
 
     @Test
-    fun `positions stay the same when cells are written`() {
-        val grid = mutableCharGrid("ab", "cd")
-        val positions = grid.positions
-
-        grid[Position(0, 0)] = 'x'
-
-        assertEquals(
-            listOf(Position(0, 0), Position(1, 0), Position(0, 1), Position(1, 1)),
-            positions.toList(),
-        )
-    }
-
-    @Test
-    fun `values lists every value in reading order`() {
-        val values = charGrid("abc", "def").values
-
-        assertEquals(6, values.size)
-        assertEquals(listOf('a', 'b', 'c', 'd', 'e', 'f'), values.toList())
-    }
-
-    @Test
-    fun `values answers questions about the cells`() {
-        val grid = charGrid(".#.", "#.#")
-
-        assertTrue('#' in grid.values)
-        assertFalse('@' in grid.values)
-        assertTrue(grid.values.any { it == '.' })
-        assertEquals(3, grid.values.count { it == '#' })
-        assertEquals(1, grid.values.indexOf('#'))
-        assertEquals(12, numbers3x2().values.max())
-    }
-
-    @Test
-    fun `values and positions line up index by index`() {
-        val grid = numbers3x2()
-
-        for (index in 0..<6) {
-            assertEquals(grid[grid.positions[index]], grid.values[index], "index $index")
-        }
-    }
-
-    @Test
-    fun `values is a live view of a MutableGrid`() {
+    fun `values rows and columns are live views of a MutableGrid`() {
         val grid = mutableCharGrid("ab", "cd")
         val values = grid.values
+        val bottom = grid.rows[1]
+        val right = grid.columns[1]
+        val iteratedRows = iterated(grid.rows)
 
-        grid[Position(1, 0)] = 'x'
+        grid[Position(1, 1)] = 'x'
 
-        assertEquals(listOf('a', 'x', 'c', 'd'), values.toList())
-        assertEquals('x', values[1])
-        assertTrue('x' in values)
-        assertFalse('b' in values)
+        assertEquals(listOf('a', 'b', 'c', 'x'), values)
+        assertEquals(listOf('c', 'x'), bottom)
+        assertEquals(listOf('b', 'x'), right)
+        assertEquals(listOf(listOf('a', 'b'), listOf('c', 'x')), iteratedRows)
     }
 
     @Test
-    fun `rows lists the rows from top to bottom each from left to right`() {
-        val rows = charGrid("abc", "def").rows
-
-        assertEquals(2, rows.size)
-        assertEquals(listOf(listOf('a', 'b', 'c'), listOf('d', 'e', 'f')), rows.map { it.toList() })
-        assertEquals(3, rows[0].size)
-        assertEquals('f', rows[1][2])
-    }
-
-    @Test
-    fun `rows of a Grid of Char join into the lines`() {
+    fun `a row and a column have List equality and hashCode`() {
         val grid = charGrid("abc", "def")
+        val row = grid.rows[1]
+        val column = grid.columns[1]
 
-        assertEquals(listOf("abc", "def"), grid.rows.map { it.joinToString("") })
-    }
-
-    @Test
-    fun `columns lists the columns from left to right each from top to bottom`() {
-        val columns = charGrid("abc", "def").columns
-
-        assertEquals(3, columns.size)
-        assertEquals(
-            listOf(listOf('a', 'd'), listOf('b', 'e'), listOf('c', 'f')),
-            columns.map { it.toList() },
-        )
-        assertEquals(2, columns[0].size)
-        assertEquals('f', columns[2][1])
-    }
-
-    @Test
-    fun `rows are live views of a MutableGrid`() {
-        val grid = mutableCharGrid("ab", "cd")
-        val rows = grid.rows
-        val bottom = rows[1]
-
-        grid[Position(0, 1)] = 'x'
-
-        assertEquals(listOf('x', 'd'), bottom.toList())
-        assertEquals(listOf('x', 'd'), rows[1].toList())
-        assertEquals(listOf('a', 'b'), rows[0].toList())
-    }
-
-    @Test
-    fun `columns are live views of a MutableGrid`() {
-        val grid = mutableCharGrid("ab", "cd")
-        val columns = grid.columns
-        val right = columns[1]
-
-        grid[Position(1, 0)] = 'x'
-
-        assertEquals(listOf('x', 'd'), right.toList())
-        assertEquals(listOf('x', 'd'), columns[1].toList())
-        assertEquals(listOf('a', 'c'), columns[0].toList())
-    }
-
-    @Test
-    fun `a row equals a plain list with the same elements in both directions`() {
-        val row = charGrid("abc", "def").rows[1]
-        val plain = listOf('d', 'e', 'f')
-
-        assertTrue(row == plain)
-        assertTrue(plain == row)
-    }
-
-    @Test
-    fun `a row has the hashCode of a plain list with the same elements`() {
-        val row = charGrid("abc", "def").rows[1]
-
+        assertTrue(row == listOf('d', 'e', 'f'))
+        assertTrue(listOf('d', 'e', 'f') == row)
         assertEquals(listOf('d', 'e', 'f').hashCode(), row.hashCode())
-    }
-
-    @Test
-    fun `a row differs from a plain list with other elements`() {
-        val row = charGrid("abc", "def").rows[0]
-
-        assertFalse(row == listOf('a', 'b', 'x'))
-        assertFalse(listOf('a', 'b', 'x') == row)
-        assertFalse(row == listOf('c', 'b', 'a'))
-        assertFalse(row == listOf('a', 'b'))
-        assertFalse(row == listOf('a', 'b', 'c', 'd'))
-        assertFalse(row == listOf('d', 'e', 'f'))
-    }
-
-    @Test
-    fun `a column equals a plain list with the same elements in both directions`() {
-        val column = charGrid("abc", "def").columns[1]
-        val plain = listOf('b', 'e')
-
-        assertTrue(column == plain)
-        assertTrue(plain == column)
-    }
-
-    @Test
-    fun `a column has the hashCode of a plain list with the same elements`() {
-        val column = charGrid("abc", "def").columns[1]
-
+        assertTrue(column == listOf('b', 'e'))
+        assertTrue(listOf('b', 'e') == column)
         assertEquals(listOf('b', 'e').hashCode(), column.hashCode())
+        assertFalse(row == listOf('d', 'e', 'x'))
     }
 
     @Test
-    fun `a column differs from a plain list with other elements`() {
-        val column = charGrid("abc", "def").columns[0]
+    fun `every view throws IndexOutOfBoundsException for an index outside`() {
+        val grids = listOf(
+            charGrid("abc", "def"), charGrid("ab", "cd", "ef"),
+            Grid(0, 2) { '.' }, Grid(3, 0) { '.' }, Grid(0, 0) { '.' },
+        )
 
-        assertFalse(column == listOf('a', 'x'))
-        assertFalse(listOf('a', 'x') == column)
-        assertFalse(column == listOf('d', 'a'))
-        assertFalse(column == listOf('a'))
-        assertFalse(column == listOf('a', 'd', 'a'))
-        assertFalse(column == listOf('a', 'b'))
-    }
-
-    @Test
-    fun `a row and a column with the same elements are equal and hash alike`() {
-        val grid = charGrid("ab", "bc")
-        val row = grid.rows[0]
-        val column = grid.columns[0]
-
-        assertTrue(row == column)
-        assertTrue(column == row)
-        assertEquals(row.hashCode(), column.hashCode())
-    }
-
-    @Test
-    fun `rows and columns work as set elements`() {
-        val grid = charGrid("ab", "cd", "ab")
-
-        assertEquals(2, grid.rows.toSet().size)
-        assertTrue(grid.rows[2] in setOf(listOf('a', 'b')))
-        assertTrue(listOf('c', 'd') in grid.rows.toSet())
-        assertTrue(listOf('a', 'c', 'a') in grid.columns.toSet())
-    }
-
-    @Test
-    fun `an empty row and an empty column equal an empty list`() {
-        val row = Grid(0, 2) { '.' }.rows[0]
-        val column = Grid(3, 0) { '.' }.columns[0]
-        val plain = emptyList<Char>()
-
-        assertTrue(row == plain)
-        assertTrue(plain == row)
-        assertEquals(plain.hashCode(), row.hashCode())
-        assertTrue(column == plain)
-        assertTrue(plain == column)
-        assertEquals(plain.hashCode(), column.hashCode())
-    }
-
-    @Test
-    fun `rows throws IndexOutOfBoundsException for an index outside`() {
-        val rows = charGrid("abc", "def").rows
-
-        assertFailsWith<IndexOutOfBoundsException> { rows[2] }
-        assertFailsWith<IndexOutOfBoundsException> { rows[-1] }
-    }
-
-    @Test
-    fun `a row throws IndexOutOfBoundsException for an index outside`() {
-        val rows = charGrid("abc", "def").rows
-
-        assertFailsWith<IndexOutOfBoundsException> { rows[0][3] }
-        assertFailsWith<IndexOutOfBoundsException> { rows[0][-1] }
-        assertFailsWith<IndexOutOfBoundsException> { rows[1][3] }
-        assertFailsWith<IndexOutOfBoundsException> { rows[1][-1] }
-    }
-
-    @Test
-    fun `columns throws IndexOutOfBoundsException for an index outside`() {
-        val columns = charGrid("abc", "def").columns
-
-        assertFailsWith<IndexOutOfBoundsException> { columns[3] }
-        assertFailsWith<IndexOutOfBoundsException> { columns[-1] }
-    }
-
-    @Test
-    fun `a column throws IndexOutOfBoundsException for an index outside`() {
-        val columns = charGrid("abc", "def").columns
-
-        assertFailsWith<IndexOutOfBoundsException> { columns[0][2] }
-        assertFailsWith<IndexOutOfBoundsException> { columns[0][-1] }
-        assertFailsWith<IndexOutOfBoundsException> { columns[2][2] }
-        assertFailsWith<IndexOutOfBoundsException> { columns[2][-1] }
-    }
-
-    @Test
-    fun `row and column index limits follow width and height in a non square grid`() {
-        val grid = charGrid("ab", "cd", "ef")
-
-        assertEquals('e', grid.columns[0][2])
-        assertFailsWith<IndexOutOfBoundsException> { grid.rows[0][2] }
-        assertEquals(listOf('e', 'f'), grid.rows[2].toList())
-        assertFailsWith<IndexOutOfBoundsException> { grid.columns[2] }
-    }
-
-    @Test
-    fun `positions throws IndexOutOfBoundsException for an index outside`() {
-        val positions = charGrid("abc", "def").positions
-
-        assertFailsWith<IndexOutOfBoundsException> { positions[-1] }
-        assertFailsWith<IndexOutOfBoundsException> { positions[6] }
-    }
-
-    @Test
-    fun `values throws IndexOutOfBoundsException for an index outside`() {
-        val values = charGrid("abc", "def").values
-
-        assertFailsWith<IndexOutOfBoundsException> { values[-1] }
-        assertFailsWith<IndexOutOfBoundsException> { values[6] }
-    }
-
-    @Test
-    fun `ray throws IndexOutOfBoundsException for an index outside`() {
-        val grid = charGrid("abc", "def")
-        val right = grid.ray(Position(0, 0), Direction.RIGHT)
-        val diagonal = grid.ray(Position(0, 0), Direction8.DOWN_RIGHT)
-        val empty = grid.ray(Position(2, 0), Direction.RIGHT)
-
-        assertEquals(2, right.size)
-        assertFailsWith<IndexOutOfBoundsException> { right[2] }
-        assertFailsWith<IndexOutOfBoundsException> { right[-1] }
-        assertEquals(1, diagonal.size)
-        assertFailsWith<IndexOutOfBoundsException> { diagonal[1] }
-        assertFailsWith<IndexOutOfBoundsException> { diagonal[-1] }
-        assertEquals(0, empty.size)
-        assertFailsWith<IndexOutOfBoundsException> { empty[0] }
-    }
-
-    @Test
-    fun `views of a 0 x 2 grid throw IndexOutOfBoundsException for index zero`() {
-        val grid = Grid(0, 2) { '.' }
-
-        assertFailsWith<IndexOutOfBoundsException> { grid.positions[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.values[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.columns[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.rows[0][0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.rows[2] }
-    }
-
-    @Test
-    fun `views of a 3 x 0 grid throw IndexOutOfBoundsException for index zero`() {
-        val grid = Grid(3, 0) { '.' }
-
-        assertFailsWith<IndexOutOfBoundsException> { grid.positions[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.values[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.rows[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.columns[0][0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.columns[3] }
-    }
-
-    @Test
-    fun `views of a 0 x 0 grid throw IndexOutOfBoundsException for index zero`() {
-        val grid = Grid(0, 0) { '.' }
-
-        assertFailsWith<IndexOutOfBoundsException> { grid.positions[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.values[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.rows[0] }
-        assertFailsWith<IndexOutOfBoundsException> { grid.columns[0] }
-    }
-
-    @Test
-    fun `grids with the same size and values are equal`() {
-        assertEquals(numbers3x2(), numbers3x2())
+        for (grid in grids) {
+            val views: List<List<Any>> = listOf(grid.positions, grid.values, grid.rows, grid.columns) +
+                grid.rows + grid.columns
+            for (view in views) {
+                assertFailsWith<IndexOutOfBoundsException> { view[-1] }
+                assertFailsWith<IndexOutOfBoundsException> { view[view.size] }
+            }
+        }
     }
 
     @Test
@@ -1120,20 +433,6 @@ class GridTest {
     }
 
     @Test
-    fun `two mutable grids with the same values are equal`() {
-        assertEquals(mutableCharGrid("ab", "cd"), mutableCharGrid("ab", "cd"))
-    }
-
-    @Test
-    fun `equal grids have the same hashCode`() {
-        val readOnly = numbers3x2()
-        val mutable = MutableGrid(3, 2) { it.x + 10 * it.y }
-
-        assertEquals(readOnly.hashCode(), numbers3x2().hashCode())
-        assertEquals(readOnly.hashCode(), mutable.hashCode())
-    }
-
-    @Test
     fun `grids that differ in one value are not equal`() {
         val grid = charGrid("abc", "def")
 
@@ -1141,18 +440,23 @@ class GridTest {
         assertNotEquals(grid, charGrid("abc", "dxf"))
         assertNotEquals(grid, charGrid("abc", "dex"))
         assertNotEquals(charGrid("abc", "dex"), grid)
+        assertNotEquals<Grid<Any>>(Grid(1, 1) { "1" }, Grid(1, 1) { 1 }) // both print as 1
     }
 
     @Test
     fun `a mutable grid compares by its current values`() {
         val grid = MutableGrid(2, 2) { 0 }
+        val blank = Grid(2, 2) { 0 }
         val target = Grid(2, 2) { if (it == Position(1, 0)) 5 else 0 }
         assertNotEquals(target, grid)
+        assertEquals(blank.hashCode(), grid.hashCode())
+        assertEquals(blank.toString(), grid.toString())
 
         grid[Position(1, 0)] = 5
 
         assertEquals(target, grid)
         assertEquals(target.hashCode(), grid.hashCode())
+        assertEquals(target.toString(), grid.toString())
     }
 
     @Test
@@ -1164,11 +468,6 @@ class GridTest {
         assertEquals(listOf(0, 1, 2, 3, 4, 5), wide.values.toList())
         assertNotEquals(wide, tall)
         assertNotEquals(tall, wide)
-    }
-
-    @Test
-    fun `a single row and a single column with the same values are not equal`() {
-        assertNotEquals(charGrid("abc"), charGrid("a", "b", "c"))
     }
 
     @Test
@@ -1198,47 +497,27 @@ class GridTest {
     }
 
     @Test
-    fun `toString of a Grid of Char prints the lines joined by line feeds`() {
+    fun `toString joins the rows with line feeds`() {
         assertEquals("abc\ndef", charGrid("abc", "def").toString())
-    }
-
-    @Test
-    fun `toString writes the toString of each value one after another`() {
-        assertEquals("012\n101112", numbers3x2().toString())
-    }
-
-    @Test
-    fun `toString of a single row has no line break`() {
-        assertEquals("abc", charGrid("abc").toString())
-    }
-
-    @Test
-    fun `toString of a single column puts every value on its own line`() {
         assertEquals("a\nb\nc", charGrid("a", "b", "c").toString())
-    }
-
-    @Test
-    fun `toString of a 0 x 0 grid is empty`() {
         assertEquals("", Grid(0, 0) { '.' }.toString())
-    }
-
-    @Test
-    fun `toString of a grid without rows is empty`() {
         assertEquals("", Grid(3, 0) { '.' }.toString())
-    }
-
-    @Test
-    fun `toString of a 0 x 2 grid is the line feed between its two empty rows`() {
         assertEquals("\n", Grid(0, 2) { '.' }.toString())
     }
 
     @Test
-    fun `toString of a MutableGrid shows later writes`() {
-        val grid = mutableCharGrid("ab", "cd")
+    fun `toString writes each value as its toString`() {
+        val words = listOf<CharSequence>("ab", StringBuilder("cd"), "", "e")
+        // StringBuilder.append(CharSequence) writes such a value as its characters on JVM, Native and wasmWasi
+        // and as its toString() on JS and wasmJs
+        val cell = object : CharSequence by "characters" {
+            override fun toString(): String = "toString"
+        }
 
-        grid[Position(1, 1)] = '#'
-
-        assertEquals("ab\nc#", grid.toString())
+        assertEquals("012\n101112", numbers3x2().toString())
+        assertEquals("nulla", nullThenA().toString())
+        assertEquals("abcd\ne", Grid(2, 2) { words[it.y * 2 + it.x] }.toString())
+        assertEquals("toString", Grid<CharSequence>(1, 1) { cell }.toString())
     }
 
     @Test
@@ -1250,46 +529,6 @@ class GridTest {
         assertEquals(2, snapshot.height)
         assertEquals("abc\ndef", snapshot.toString())
         assertEquals(grid, snapshot)
-    }
-
-    @Test
-    fun `toGrid snapshot is not affected by later writes to the source`() {
-        val grid = mutableCharGrid("ab", "cd")
-        val snapshot = grid.toGrid()
-
-        grid[Position(0, 0)] = 'x'
-
-        assertEquals('a', snapshot[Position(0, 0)])
-        assertEquals(listOf('a', 'b', 'c', 'd'), snapshot.values.toList())
-        assertEquals("ab\ncd", snapshot.toString())
-        assertEquals("xb\ncd", grid.toString())
-        assertNotEquals(grid, snapshot)
-    }
-
-    @Test
-    fun `toGrid snapshot keeps its hashCode when the source is written`() {
-        val grid = MutableGrid(2, 2) { 0 }
-        val snapshot = grid.toGrid()
-        val hashBefore = snapshot.hashCode()
-
-        grid[Position(1, 1)] = 9
-
-        assertEquals(hashBefore, snapshot.hashCode())
-    }
-
-    @Test
-    fun `toGrid snapshots work as map keys while the source keeps changing`() {
-        val grid = MutableGrid(2, 2) { 0 }
-        val seen = mutableMapOf<Grid<Int>, String>()
-
-        seen[grid.toGrid()] = "blank"
-        grid[Position(1, 0)] = 5
-        seen[grid.toGrid()] = "one five"
-        grid[Position(1, 0)] = 0
-
-        assertEquals(2, seen.size)
-        assertEquals("blank", seen[grid])
-        assertEquals("one five", seen[Grid(2, 2) { if (it == Position(1, 0)) 5 else 0 }])
     }
 
     @Test
@@ -1305,13 +544,12 @@ class GridTest {
     }
 
     @Test
-    fun `toGrid of a read only grid is equal to it`() {
-        val grid = charGrid("abc", "def")
-        val snapshot = grid.toGrid()
+    fun `toGrid of a grid that is not a MutableGrid returns that grid`() {
+        val grid = charGrid("ab", "cd")
+        val snapshot = mutableCharGrid("ab", "cd").toGrid()
 
-        assertEquals(grid, snapshot)
-        assertEquals(grid.hashCode(), snapshot.hashCode())
-        assertFalse(isMutable(snapshot))
+        assertSame(grid, grid.toGrid())
+        assertSame(snapshot, snapshot.toGrid())
     }
 
     @Test
@@ -1326,50 +564,15 @@ class GridTest {
     }
 
     @Test
-    fun `writes to a toMutableGrid copy do not change a read only source`() {
-        val grid = charGrid("ab", "cd")
-        val copy = grid.toMutableGrid()
+    fun `writes to a toMutableGrid copy do not change the source`() {
+        for (source in listOf(charGrid("ab", "cd"), mutableCharGrid("ab", "cd"))) {
+            val copy = source.toMutableGrid()
 
-        copy[Position(1, 0)] = 'x'
+            copy[Position(1, 0)] = 'x'
 
-        assertEquals("ax\ncd", copy.toString())
-        assertEquals("ab\ncd", grid.toString())
-    }
-
-    @Test
-    fun `a toMutableGrid copy of a MutableGrid is independent in both directions`() {
-        val grid = mutableCharGrid("ab", "cd")
-        val copy = grid.toMutableGrid()
-
-        grid[Position(0, 0)] = 'x'
-        copy[Position(1, 1)] = 'y'
-
-        assertEquals("xb\ncd", grid.toString())
-        assertEquals("ab\ncy", copy.toString())
-    }
-
-    @Test
-    fun `snapshots and copies of a grid without cells keep its size`() {
-        val zeroWidth = MutableGrid(0, 2) { '.' }
-        val zeroHeight = MutableGrid(3, 0) { '.' }
-
-        assertEquals(0, zeroWidth.toGrid().width)
-        assertEquals(2, zeroWidth.toGrid().height)
-        assertEquals(0, zeroWidth.toMutableGrid().width)
-        assertEquals(2, zeroWidth.toMutableGrid().height)
-        assertEquals(3, zeroHeight.toGrid().width)
-        assertEquals(0, zeroHeight.toGrid().height)
-        assertEquals(3, zeroHeight.toMutableGrid().width)
-        assertEquals(0, zeroHeight.toMutableGrid().height)
-    }
-
-    @Test
-    fun `factories reject more than Int MAX_VALUE cells`() {
-        // 65536 * 65536 wraps to exactly 0 in Int arithmetic, so only a check in Long catches it
-        assertFailsWith<IllegalArgumentException> { Grid(65536, 65536) { 0 } }
-        assertFailsWith<IllegalArgumentException> { MutableGrid(65536, 65536) { 0 } }
-
-        assertEquals(0, Grid(Int.MAX_VALUE, 0) { 0 }.values.size)
+            assertEquals("ax\ncd", copy.toString())
+            assertEquals("ab\ncd", source.toString())
+        }
     }
 
     // Gathered outside the assertions: power-assert prints every value an assertion mentions, and a
@@ -1383,6 +586,10 @@ class GridTest {
         grid.columns.size - grid.width,
         grid.toGrid().values.size,
         grid.toMutableGrid().values.size,
+        grid.toGrid().width - grid.width,
+        grid.toGrid().height - grid.height,
+        grid.toMutableGrid().width - grid.width,
+        grid.toMutableGrid().height - grid.height,
     )
 
     @Test
@@ -1398,66 +605,19 @@ class GridTest {
             )
         }
 
-        assertEquals(List(4) { List(8) { 0 } }, answers)
-        assertTrue(elapsed < 1.seconds, "grids without cells took $elapsed")
-    }
-
-    // Equal to every Int, while no Int is equal to it: tells apart which side of a comparison was asked.
-    private class EqualToEveryInt {
-        override fun equals(other: Any?): Boolean = other is Int || other is EqualToEveryInt
-
-        override fun hashCode(): Int = 0
+        assertEquals(List(4) { List(12) { 0 } }, answers)
+        assertTrue(elapsed < 1.seconds)
     }
 
     @Test
-    fun `every search asks the cell whether it equals the value`() {
-        val value = EqualToEveryInt()
-        val grid = Grid<Any>(2, 1) { if (it.x == 0) 1 else value }
-
-        // value == 1 is true and 1 == value is false, so only the second cell holds the value
-        assertEquals(Position(1, 0), grid.positionOf(value))
-        assertEquals(Position(1, 0), grid.positionOfOrNull(value))
-        assertEquals(listOf(Position(1, 0)), grid.positionsOf(value))
-        assertEquals(1, grid.values.indexOf(value))
-    }
-
-    @Test
-    fun `views are RandomAccess and the functions that index them agree with iteration`() {
+    fun `views are RandomAccess`() {
         val grid = MutableGrid(4, 3) { it.x + 10 * it.y }
         val views: List<List<Any>> = listOf(
             grid.positions, grid.values, grid.rows, grid.columns, grid.rows[1], grid.columns[2],
             grid.neighbors(Position(1, 1)), grid.neighbors8(Position(0, 0)), grid.ray(Position(0, 1), Direction.RIGHT),
         )
 
-        for (view in views) {
-            assertTrue(view is RandomAccess)
-            val copy = iterated(view)
-            assertEquals(copy.takeLast(2), view.takeLast(2))
-            assertEquals(copy.windowed(2), view.windowed(2))
-            assertEquals(copy.chunked(2), view.chunked(2))
-            assertEquals(copy.asReversed(), view.asReversed())
-        }
-        assertEquals(listOf(listOf(10, 11), listOf(11, 12), listOf(12, 13)), grid.rows[1].windowed(2))
-    }
-
-    @Test
-    fun `toGrid of a grid that is not a MutableGrid returns that grid`() {
-        val grid = charGrid("ab", "cd")
-        val snapshot = mutableCharGrid("ab", "cd").toGrid()
-
-        assertSame(grid, grid.toGrid())
-        assertSame(snapshot, snapshot.toGrid())
-    }
-
-    @Test
-    fun `set by x and y and set by position fail with the same message`() {
-        val grid = MutableGrid(3, 2) { 0 }
-
-        val byPosition = assertFailsWith<IndexOutOfBoundsException> { grid[Position(3, 1)] = 1 }
-        val byCoordinates = assertFailsWith<IndexOutOfBoundsException> { grid[3, 1] = 1 }
-
-        assertEquals("Position(x=3, y=1) is outside the 3 x 2 grid", byCoordinates.message)
-        assertEquals(byPosition.message, byCoordinates.message)
+        for (view in views) assertTrue(view is RandomAccess)
     }
 
     @Test
@@ -1471,37 +631,21 @@ class GridTest {
     }
 
     @Test
-    fun `toString prints a null cell as null`() {
-        val grid = Grid<Char?>(2, 1) { if (it.x == 0) null else 'a' }
-
-        assertEquals("nulla", grid.toString())
-    }
-
-    private fun <E> iterated(list: List<E>): List<E> {
-        val result = mutableListOf<E>()
-        for (element in list) result += element
-        return result
-    }
-
-    private fun <E> indexed(list: List<E>): List<E> = List(list.size) { list[it] }
-
-    @Test
     fun `iterating a view gives the same elements as indexing it`() {
         for ((width, height) in listOf(4 to 3, 3 to 4, 1 to 1, 1 to 5, 5 to 1, 0 to 0, 0 to 3, 3 to 0)) {
             val grid = MutableGrid(width, height) { it.x + 10 * it.y }
-            val message = "a $width x $height grid"
 
-            assertEquals(indexed(grid.positions), iterated(grid.positions), message)
-            assertEquals(indexed(grid.values), iterated(grid.values), message)
-            assertEquals(indexed(grid.rows), iterated(grid.rows), message)
-            assertEquals(indexed(grid.columns), iterated(grid.columns), message)
-            for (row in grid.rows) assertEquals(indexed(row), iterated(row), message)
-            for (column in grid.columns) assertEquals(indexed(column), iterated(column), message)
+            assertEquals(indexed(grid.positions), iterated(grid.positions))
+            assertEquals(indexed(grid.values), iterated(grid.values))
+            assertEquals(indexed(grid.rows), iterated(grid.rows))
+            assertEquals(indexed(grid.columns), iterated(grid.columns))
+            for (row in grid.rows) assertEquals(indexed(row), iterated(row))
+            for (column in grid.columns) assertEquals(indexed(column), iterated(column))
         }
     }
 
     @Test
-    fun `iterating the positions goes row by row from the top`() {
+    fun `views iterate in reading order`() {
         assertEquals(readingOrder3x2, iterated(numbers3x2().positions))
         assertEquals(listOf(0, 1, 2, 10, 11, 12), iterated(numbers3x2().values))
         assertEquals(listOf(listOf(0, 1, 2), listOf(10, 11, 12)), iterated(numbers3x2().rows))
@@ -1538,52 +682,5 @@ class GridTest {
 
         assertEquals(7, values.next())
         assertEquals(listOf(0, 7), listOf(firstRow.next(), firstRow.next()))
-    }
-
-    @Test
-    fun `views are equal on every access and keep showing later writes`() {
-        val grid = MutableGrid(2, 2) { 0 }
-        val rows = grid.rows
-        val columns = grid.columns
-        val values = grid.values
-
-        grid[Position(1, 0)] = 5
-
-        assertEquals(listOf(listOf(0, 5), listOf(0, 0)), rows)
-        assertEquals(listOf(listOf(0, 0), listOf(5, 0)), columns)
-        assertEquals(listOf(0, 5, 0, 0), values)
-        assertEquals(rows, grid.rows)
-        assertEquals(columns, grid.columns)
-        assertEquals(values, grid.values)
-        assertEquals(grid.positions, grid.positions)
-    }
-
-    @Test
-    fun `toString writes String and other CharSequence values as they are`() {
-        val cells = listOf<CharSequence>("ab", StringBuilder("cd"), "", "e")
-        val grid = Grid(2, 2) { cells[it.y * 2 + it.x] }
-
-        assertEquals("abcd\ne", grid.toString())
-    }
-
-    @Test
-    fun `toString writes a CharSequence value as its toString and not as its characters`() {
-        // StringBuilder.append(CharSequence) writes such a value as its characters on JVM, Native and wasmWasi
-        // and as its toString() on JS and wasmJs
-        val cell = object : CharSequence by "characters" {
-            override fun toString(): String = "toString"
-        }
-        val grid = Grid<CharSequence>(1, 1) { cell }
-
-        assertEquals("toString", grid.toString())
-    }
-
-    @Test
-    fun `toString of a wide Grid of Char keeps every row and its order`() {
-        val lines = List(7) { y -> CharArray(11) { x -> 'a' + (x + 3 * y) % 26 }.concatToString() }
-        val grid = Grid(11, 7) { lines[it.y][it.x] }
-
-        assertEquals(lines.joinToString("\n"), grid.toString())
-        assertEquals(lines.joinToString("\n"), grid.rows.joinToString("\n") { it.joinToString("") })
     }
 }

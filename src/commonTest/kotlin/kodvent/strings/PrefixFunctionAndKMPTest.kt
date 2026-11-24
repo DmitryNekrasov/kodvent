@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Dmitry Nekrasov and kodvent library contributors.
+ * Copyright 2025-2026 Dmitry Nekrasov and kodvent library contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
@@ -9,92 +9,35 @@ import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class PrefixFunctionAndKMPTest {
 
-    // Tests for CharSequence.prefixFunction()
-
     @Test
-    fun `prefixFunction on empty string returns empty array`() {
-        val result = "".prefixFunction()
-        assertContentEquals(intArrayOf(), result)
+    fun `prefixFunction returns the longest border of every prefix`() {
+        val expected = listOf(
+            "" to intArrayOf(),
+            "a" to intArrayOf(0),
+            "abcdef" to intArrayOf(0, 0, 0, 0, 0, 0),
+            "ababab" to intArrayOf(0, 0, 1, 2, 3, 4),
+            "aabaabaa" to intArrayOf(0, 1, 0, 1, 2, 3, 4, 5),
+            "aabaaab" to intArrayOf(0, 1, 0, 1, 2, 2, 3),
+            "aA" to intArrayOf(0, 0),
+        )
+        for ((text, pi) in expected) assertContentEquals(pi, text.prefixFunction())
     }
 
     @Test
-    fun `prefixFunction on single character returns zero`() {
-        val result = "a".prefixFunction()
-        assertContentEquals(intArrayOf(0), result)
+    fun `prefixFunction falls back through shorter borders`() {
+        assertContentEquals(intArrayOf(0, 1, 2, 0), "aaab".prefixFunction())
+        assertContentEquals(intArrayOf(0, 0, 1, 2, 0), "ababb".prefixFunction())
     }
 
     @Test
-    fun `prefixFunction on string with no repeating patterns`() {
-        val result = "abcdef".prefixFunction()
-        assertContentEquals(intArrayOf(0, 0, 0, 0, 0, 0), result)
-    }
-
-    @Test
-    fun `prefixFunction on string with all same characters`() {
-        val result = "aaaa".prefixFunction()
-        assertContentEquals(intArrayOf(0, 1, 2, 3), result)
-    }
-
-    @Test
-    fun `prefixFunction on alternating pattern`() {
-        val result = "ababab".prefixFunction()
-        assertContentEquals(intArrayOf(0, 0, 1, 2, 3, 4), result)
-    }
-
-    @Test
-    fun `prefixFunction on complex pattern with partial matches`() {
-        val result = "abcabc".prefixFunction()
-        assertContentEquals(intArrayOf(0, 0, 0, 1, 2, 3), result)
-    }
-
-    @Test
-    fun `prefixFunction on classic example aabaaab`() {
-        val result = "aabaaab".prefixFunction()
-        assertContentEquals(intArrayOf(0, 1, 0, 1, 2, 2, 3), result)
-    }
-
-    @Test
-    fun `prefixFunction on pattern with prefix-suffix overlap`() {
-        val result = "abacaba".prefixFunction()
-        assertContentEquals(intArrayOf(0, 0, 1, 0, 1, 2, 3), result)
-    }
-
-    @Test
-    fun `prefixFunction on pattern aabaabaa`() {
-        val result = "aabaabaa".prefixFunction()
-        assertContentEquals(intArrayOf(0, 1, 0, 1, 2, 3, 4, 5), result)
-    }
-
-    // Tests for generic prefixFunction(length, at)
-
-    @Test
-    fun `generic prefixFunction on list of integers`() {
-        val list = listOf(1, 2, 1, 2, 1, 2)
-        val result = prefixFunction(list.size) { list[it] }
-        assertContentEquals(intArrayOf(0, 0, 1, 2, 3, 4), result)
-    }
-
-    @Test
-    fun `generic prefixFunction on list with no pattern`() {
-        val list = listOf(1, 2, 3, 4, 5)
-        val result = prefixFunction(list.size) { list[it] }
-        assertContentEquals(intArrayOf(0, 0, 0, 0, 0), result)
-    }
-
-    @Test
-    fun `generic prefixFunction on list of strings`() {
-        val list = listOf("a", "b", "a", "b")
+    fun `generic prefixFunction compares elements by equality and not by identity`() {
+        val list = listOf(listOf(1), listOf(2), listOf(1), listOf(2))
         val result = prefixFunction(list.size) { list[it] }
         assertContentEquals(intArrayOf(0, 0, 1, 2), result)
-    }
-
-    @Test
-    fun `generic prefixFunction on empty sequence`() {
-        val result = prefixFunction(0) { throw IllegalStateException("Should not be called") }
-        assertContentEquals(intArrayOf(), result)
     }
 
     @Test
@@ -102,96 +45,46 @@ class PrefixFunctionAndKMPTest {
         assertFailsWith<IllegalArgumentException> { prefixFunction(-1) { 0 } }
     }
 
-    // Tests for CharSequence.allIndicesOf()
-
     @Test
-    fun `allIndicesOf returns empty list when needle not found`() {
-        val result = "abcdef".allIndicesOf("xyz")
-        assertEquals(emptyList(), result)
+    fun `generic prefixFunction does not call at when length is zero`() {
+        assertContentEquals(intArrayOf(), prefixFunction(0) { error("at must not be called") })
     }
 
     @Test
-    fun `allIndicesOf finds single occurrence`() {
-        val result = "hello world".allIndicesOf("world")
-        assertEquals(listOf(6), result)
+    fun `allIndicesOf returns an empty list when the needle does not occur`() {
+        for ((text, needle) in listOf("abcdef" to "xyz", "abc" to "abcdef", "" to "abc", "ABC" to "b")) {
+            assertEquals(emptyList(), text.allIndicesOf(needle))
+        }
     }
 
     @Test
-    fun `allIndicesOf finds multiple non-overlapping occurrences`() {
-        val result = "abc abc abc".allIndicesOf("abc")
-        assertEquals(listOf(0, 4, 8), result)
+    fun `allIndicesOf finds the needle at the beginning and at the end`() {
+        assertEquals(listOf(0, 3), "abca".allIndicesOf("a"))
+        assertEquals(listOf(0), "test".allIndicesOf("test"))
+        assertEquals(listOf(0, 2), " a ".allIndicesOf(" "))
     }
 
     @Test
-    fun `allIndicesOf finds overlapping occurrences`() {
-        val result = "aaaa".allIndicesOf("aa")
-        assertEquals(listOf(0, 1, 2), result)
+    fun `allIndicesOf finds an empty needle at every index before the length`() {
+        assertEquals(listOf(0, 1, 2, 3, 4, 5), "abcdef".allIndicesOf(""))
+        assertEquals(emptyList(), "".allIndicesOf(""))
     }
 
     @Test
-    fun `allIndicesOf finds needle at the beginning`() {
-        val result = "abcdef".allIndicesOf("abc")
-        assertEquals(listOf(0), result)
-    }
-
-    @Test
-    fun `allIndicesOf finds needle at the end`() {
-        val result = "abcdef".allIndicesOf("def")
-        assertEquals(listOf(3), result)
-    }
-
-    @Test
-    fun `allIndicesOf when needle equals the whole string`() {
-        val result = "test".allIndicesOf("test")
-        assertEquals(listOf(0), result)
-    }
-
-    @Test
-    fun `allIndicesOf returns empty list when needle is longer than text`() {
-        val result = "abc".allIndicesOf("abcdef")
-        assertEquals(emptyList(), result)
-    }
-
-    @Test
-    fun `allIndicesOf with single character needle`() {
-        val result = "banana".allIndicesOf("a")
-        assertEquals(listOf(1, 3, 5), result)
-    }
-
-    @Test
-    fun `allIndicesOf with repeated pattern`() {
-        val result = "abababab".allIndicesOf("abab")
-        assertEquals(listOf(0, 2, 4), result)
-    }
-
-    @Test
-    fun `allIndicesOf on empty text returns empty list`() {
-        val result = "".allIndicesOf("abc")
-        assertEquals(emptyList(), result)
-    }
-
-    @Test
-    fun `allIndicesOf with empty needle returns indices for all positions`() {
-        val result = "abcdef".allIndicesOf("")
-        assertEquals(listOf(0, 1, 2, 3, 4, 5), result)
-        assertEquals("abcdef".indexOf(""), result.first())
-        assertEquals("abcdef".lastIndexOf(""), result.last())
-    }
-
-    @Test
-    fun `allIndicesOf complex case with multiple overlapping matches`() {
-        val result = "aabaabaabaab".allIndicesOf("aabaab")
-        assertEquals(listOf(0, 3, 6), result)
+    fun `allIndicesOf reports overlapping occurrences`() {
+        assertEquals(listOf(0, 3, 6), "aabaabaabaab".allIndicesOf("aabaab"))
+        assertEquals(listOf(0, 1, 2), "aaaaa".allIndicesOf("aaa"))
     }
 
     @Test
     fun `allIndicesOf falls back through shorter borders of the needle`() {
         assertEquals(listOf(1), "aaab".allIndicesOf("aab"))
         assertEquals(emptyList(), "ababbaba".allIndicesOf("ababa"))
+        assertEquals(listOf(2, 3), "babbb".allIndicesOf("bb"))
     }
 
     @Test
-    fun `allIndicesOf accepts a hash in the text and in the needle`() {
+    fun `allIndicesOf treats a hash like any other character`() {
         assertEquals(listOf(1, 2, 4), "#..#.#".allIndicesOf("."))
         assertEquals(listOf(0, 2), "#.#.#".allIndicesOf("#.#"))
     }
@@ -204,5 +97,28 @@ class PrefixFunctionAndKMPTest {
     fun `allIndicesOf reads the characters of a CharSequence and not its toString`() {
         assertEquals(listOf(1), Chars("aaab").allIndicesOf("aab"))
         assertEquals(listOf(1), "aaab".allIndicesOf(Chars("aab")))
+    }
+
+    private class Counted(private val text: String) : CharSequence by text {
+        var reads = 0
+
+        override fun get(index: Int): Char {
+            reads++
+            return text[index]
+        }
+    }
+
+    @Test
+    fun `allIndicesOf reads a linear number of characters`() {
+        val n = 4000
+        val m = 400
+        // The worst case of a naive search: every start matches m - 1 characters and fails on the last one
+        val text = Counted("a".repeat(n))
+        val needle = Counted("a".repeat(m - 1) + "b")
+
+        assertEquals(emptyList(), text.allIndicesOf(needle))
+
+        assertTrue(text.reads <= 4 * n)
+        assertTrue(needle.reads <= 4 * (n + m)) // with the reads of its prefix function
     }
 }

@@ -9,7 +9,6 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
 
 class SearchTest {
 
@@ -53,32 +52,15 @@ class SearchTest {
     }
 
     @Test
-    fun `bfs from a state without neighbors returns only the start`() {
-        assertEquals(mapOf(7 to 0), bfs(7) { emptyList() })
-    }
-
-    @Test
     fun `bfs agrees with Floyd-Warshall on random graphs`() {
         for (seed in 0..<300) {
             val random = Random(seed)
             val graph = randomGraph(random, maxCost = 0)
-            val start = random.nextInt(graph.size)
-
-            assertEquals(floydWarshall(graph, listOf(start), unitCosts = true), bfs(start) { graph.steps(it) })
-        }
-    }
-
-    @Test
-    fun `bfs from several starts agrees with Floyd-Warshall on random graphs`() {
-        for (seed in 0..<300) {
-            val random = Random(seed)
-            val graph = randomGraph(random, maxCost = 0)
             val starts = List(random.nextInt(0, 4)) { random.nextInt(graph.size) }
+            val steps = bfs(starts = starts) { graph.steps(it) }
 
-            assertEquals(
-                floydWarshall(graph, starts, unitCosts = true),
-                bfs(starts = starts) { graph.steps(it) },
-            )
+            assertEquals(floydWarshall(graph, starts, unitCosts = true), steps)
+            if (starts.size == 1) assertEquals(steps, bfs(starts.single()) { graph.steps(it) })
         }
     }
 
@@ -96,11 +78,6 @@ class SearchTest {
     }
 
     @Test
-    fun `bfs from no starts returns an empty map`() {
-        assertTrue(bfs(starts = emptyList<Int>()) { listOf(it + 1) }.isEmpty())
-    }
-
-    @Test
     fun `bfs calls neighbors once for every reached state`() {
         val calls = mutableMapOf<Int, Int>()
 
@@ -115,7 +92,9 @@ class SearchTest {
 
     @Test
     fun `bfs takes a list as a single state when the argument is named start`() {
-        val steps = bfs(start = listOf(0, 0)) { (x, y) -> listOf(listOf(x + 1, y), listOf(x, y + 1)).filter { it.max() <= 2 } }
+        val steps = bfs(start = listOf(0, 0)) { (x, y) ->
+            listOf(listOf(x + 1, y), listOf(x, y + 1)).filter { it.max() <= 2 }
+        }
 
         assertEquals(4, steps[listOf(2, 2)])
         assertEquals(9, steps.size)
@@ -151,31 +130,12 @@ class SearchTest {
         for (seed in 0..<300) {
             val random = Random(seed)
             val graph = randomGraph(random, maxCost = 9)
-            val start = random.nextInt(graph.size)
-
-            assertEquals(floydWarshall(graph, listOf(start), unitCosts = false), dijkstra(start) { graph.edges[it] })
-        }
-    }
-
-    @Test
-    fun `dijkstra from several starts agrees with Floyd-Warshall on random graphs`() {
-        for (seed in 0..<300) {
-            val random = Random(seed)
-            val graph = randomGraph(random, maxCost = 9)
             val starts = List(random.nextInt(0, 4)) { random.nextInt(graph.size) }
+            val costs = dijkstra(starts = starts) { graph.edges[it] }
 
-            assertEquals(
-                floydWarshall(graph, starts, unitCosts = false),
-                dijkstra(starts = starts) { graph.edges[it] },
-            )
+            assertEquals(floydWarshall(graph, starts, unitCosts = false), costs)
+            if (starts.size == 1) assertEquals(costs, dijkstra(starts.single()) { graph.edges[it] })
         }
-    }
-
-    @Test
-    fun `dijkstra accepts zero costs`() {
-        val edges = listOf(listOf(1 to 0, 2 to 4), listOf(2 to 0, 0 to 0), listOf(3 to 0), emptyList())
-
-        assertEquals(mapOf(0 to 0, 1 to 0, 2 to 0, 3 to 0), dijkstra(0) { edges[it] })
     }
 
     @Test
@@ -203,11 +163,6 @@ class SearchTest {
 
         assertEquals(mapOf(0 to 0, 1 to 0, 2 to 5), costs)
         assertEquals(mapOf(0 to 1, 1 to 1, 2 to 1), calls)
-    }
-
-    @Test
-    fun `dijkstra from no starts returns an empty map`() {
-        assertTrue(dijkstra(starts = emptyList<Int>()) { listOf(it + 1 to 1) }.isEmpty())
     }
 
     @Test
@@ -246,6 +201,25 @@ class SearchTest {
         val edges = listOf(listOf(1 to 1, 2 to 2), listOf(3 to Int.MAX_VALUE), listOf(3 to 1), emptyList())
 
         assertEquals(mapOf(0 to 0, 1 to 1, 2 to 2, 3 to 3), dijkstra(0) { edges[it] })
+    }
+
+    @Test
+    fun `dijkstra ignores an overflowing step to a null state that a cheaper path reaches later`() {
+        val edges: Map<Int?, List<Pair<Int?, Int>>> = mapOf(
+            0 to listOf(1 to 1, 2 to 2),
+            1 to listOf(null to Int.MAX_VALUE),
+            2 to listOf(null to 1),
+            null to emptyList(),
+        )
+
+        assertEquals(mapOf(0 to 0, 1 to 1, 2 to 2, null to 3), dijkstra<Int?>(0) { edges.getValue(it) })
+    }
+
+    @Test
+    fun `bfs and dijkstra take null as a state`() {
+        assertEquals(mapOf(null to 0, 1 to 1), bfs<Int?>(null) { if (it == null) listOf(1) else listOf(null) })
+        assertEquals(mapOf(0 to 0, null to 1, 2 to 2), bfs<Int?>(0) { if (it == 0) listOf(null) else listOf(2) })
+        assertEquals(mapOf(null to 0, 1 to 4), dijkstra<Int?>(null) { if (it == null) listOf(1 to 4) else emptyList() })
     }
 
     @Test

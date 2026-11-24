@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,58 +108,10 @@
   <div class="cover ">
     <h1 class="cover"><span>prefix</span><wbr></wbr><span><span>Function</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">.</span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L21">source</a>)</span></span></div><p class="paragraph">Computes the <a href="https://cp-algorithms.com/string/prefix-function.html">prefix function</a> of this character sequence: an array whose i-th element is the length of the longest proper prefix of <code class="lang-kotlin">this[0..i]</code> that is also a suffix of it. A building block of the Knuth-Morris-Pratt algorithm. O(n) time and space.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="all-indices-of.html"><span>Char</span><wbr></wbr><span>Sequence.</span><wbr></wbr><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Compute the prefix function for a string
-// The prefix function π[i] is the length of the longest proper prefix
-// of s[0..i] that is also a suffix of s[0..i]
-val result1 = &quot;abcabc&quot;.prefixFunction()
-assertContentEquals(intArrayOf(0, 0, 0, 1, 2, 3), result1)
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">.</span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L19">source</a>)</span></span></div><p class="paragraph">Returns the <a href="https://cp-algorithms.com/string/prefix-function.html">prefix function</a> of this character sequence. Element <code class="lang-kotlin">i</code> of the result is the length of the longest proper prefix of <code class="lang-kotlin">this[0..i]</code> that is also its suffix. O(n) time and space.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="all-indices-of.html"><span>Char</span><wbr></wbr><span>Sequence.</span><wbr></wbr><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// The last element is 3: &quot;aab&quot; is the longest proper prefix of &quot;aabaaab&quot; that is also its suffix
+assertContentEquals(intArrayOf(0, 1, 0, 1, 2, 2, 3), &quot;aabaaab&quot;.prefixFunction())</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="prefix-function.html">T</a><span class="token operator">&gt; </span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">length<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">at<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="prefix-function.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L30">source</a>)</span></span></div><p class="paragraph">Returns the <a href="https://cp-algorithms.com/string/prefix-function.html">prefix function</a> of the <a href="prefix-function.html">length</a> elements given by <a href="prefix-function.html">at</a>, which are compared with <code class="lang-kotlin">==</code>. Element <code class="lang-kotlin">i</code> of the result is the length of the longest proper prefix of elements <code class="lang-kotlin">0..i</code> that is also their suffix. O(n) time and space.</p><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="prefix-function.html">length</a> is negative</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val numbers = listOf(1, 2, 1, 2, 1, 2)
 
-val result2 = &quot;aaaa&quot;.prefixFunction()
-assertContentEquals(intArrayOf(0, 1, 2, 3), result2)
-
-val result3 = &quot;abacaba&quot;.prefixFunction()
-assertContentEquals(intArrayOf(0, 0, 1, 0, 1, 2, 3), result3)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// For string &quot;aabaaab&quot;, let's understand the prefix function values
-val text = &quot;aabaaab&quot;
-val pi = text.prefixFunction()
-
-// pi[0] = 0: &quot;a&quot; has no proper prefix
-assertEquals(0, pi[0])
-
-// pi[1] = 1: &quot;aa&quot; has the longest proper prefix-suffix &quot;a&quot; (length 1)
-assertEquals(1, pi[1])
-
-// pi[2] = 0: &quot;aab&quot; has no proper prefix that is also a suffix
-assertEquals(0, pi[2])
-
-// pi[3] = 1: &quot;aaba&quot; has proper prefix-suffix &quot;a&quot; (length 1)
-assertEquals(1, pi[3])
-
-// pi[4] = 2: &quot;aabaa&quot; has proper prefix-suffix &quot;aa&quot; (length 2)
-assertEquals(2, pi[4])
-
-// pi[5] = 2: &quot;aabaaa&quot; has proper prefix-suffix &quot;aa&quot; (length 2)
-assertEquals(2, pi[5])
-
-// pi[6] = 3: &quot;aabaaab&quot; has proper prefix-suffix &quot;aab&quot; (length 3)
-assertEquals(3, pi[6])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="prefix-function.html">T</a><span class="token operator">&gt; </span><a href="prefix-function.html"><span class="token function">prefixFunction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">length<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">at<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="prefix-function.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L33">source</a>)</span></span></div><p class="paragraph">Generic <a href="https://cp-algorithms.com/string/prefix-function.html">prefix function</a> over <a href="prefix-function.html">length</a> elements of type <a href="prefix-function.html">T</a> accessed by index via <a href="prefix-function.html">at</a> (compared with <code class="lang-kotlin">==</code>). Returns an array whose i-th element is the length of the longest proper prefix that is also a suffix of the subsequence <code class="lang-kotlin">[0..i]</code>. O(n) time and space.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="all-indices-of.html"><span>Char</span><wbr></wbr><span>Sequence.</span><wbr></wbr><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use the generic prefix function with a list of integers
-val sequence = listOf(1, 2, 1, 2, 1, 2)
-val result = prefixFunction(sequence.size, sequence::get)
-
-// The pattern &quot;1, 2&quot; repeats three times
-assertContentEquals(intArrayOf(0, 0, 1, 2, 3, 4), result)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use the generic prefix function with custom objects
-data class Point(val x: Int, val y: Int)
-
-val sequence = listOf(
-    Point(1, 2),
-    Point(3, 4),
-    Point(1, 2),
-    Point(3, 4)
-)
-
-val result = prefixFunction(sequence.size, sequence::get)
-
-// The pattern repeats at positions 2 and 3
-assertContentEquals(intArrayOf(0, 0, 1, 2), result)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+assertContentEquals(intArrayOf(0, 0, 1, 2, 3, 4), prefixFunction(numbers.size, numbers::get))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

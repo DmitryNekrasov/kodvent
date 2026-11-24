@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>ternarySearch</title>
+    <title>rotatedCounterclockwise</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
         <script>var pathToRoot = "../../";</script>
     <script>document.documentElement.classList.replace("no-js", "js");</script>
@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -103,32 +103,27 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.boundsearch//ternarySearch/#kotlin.Double#kotlin.Double#kotlin.Function1[kotlin.Double,kotlin.Double]/PointingToDeclaration//1558683979">
-  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.boundsearch</a><span class="delimiter">/</span><span class="current">ternarySearch</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.grid//rotatedCounterclockwise/kodvent.grid.Grid[TypeParam(bounds=[kotlin.Any?])]#/PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.grid</a><span class="delimiter">/</span><span class="current">rotatedCounterclockwise</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>ternary</span><wbr></wbr><span><span>Search</span></span></h1>
+    <h1 class="cover"><span>rotated</span><wbr></wbr><span><span>Counterclockwise</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="ternary-search.html"><span class="token function">ternarySearch</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">left<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">right<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">f<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/boundsearch/BoundSearch.kt#L77">source</a>)</span></span></div><p class="paragraph">Returns the argument in [<a href="ternary-search.html">left</a>, <a href="ternary-search.html">right</a>] that maximizes the unimodal function <a href="ternary-search.html">f</a> (strictly increasing then strictly decreasing), found by ternary search to within <code class="lang-kotlin">1e-9</code>.</p><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <a href="ternary-search.html">left</a>><a href="ternary-search.html">right</a>.</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the peak of a downward-opening parabola f(x) = -(x - 3)^2 + 9
-val x = ternarySearch(0.0, 10.0) { x -&gt; -(x - 3) * (x - 3) + 9 }
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="rotated-counterclockwise.html"><span class="token function">rotatedCounterclockwise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt;</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/grid/GridExtensions.kt#L201">source</a>)</span></span></div><p class="paragraph">Returns a new read-only grid turned 90 degrees counterclockwise: the right column becomes the top row, and width and height swap.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val grid = listOf(
+    &quot;abc&quot;,
+    &quot;def&quot;,
+).toGrid()
 
-assertApprox(3.0, x)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the maximum of sin(x) on [0, π], which occurs at x = π/2
-val x = ternarySearch(0.0, PI) { x -&gt; sin(x) }
+// The value at (x, y) moves to (y, x)
+assertEquals(&quot;ad\nbe\ncf&quot;, grid.transposed().toString())
 
-assertApprox(PI / 2, x)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Ternary search finds the maximum, but we can minimize f(x)
-// by maximizing -f(x).
-// Find the x that minimizes f(x) = (x - 4)^2 + 1 on [0, 10]
-val x = ternarySearch(0.0, 10.0) { x -&gt; -((x - 4) * (x - 4) + 1) }
+// The top row becomes the right column; width and height swap
+assertEquals(&quot;da\neb\nfc&quot;, grid.rotatedClockwise().toString())
 
-assertApprox(4.0, x)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// A rectangle has a fixed perimeter P = 40.
-// Side lengths: x and (P/2 - x). Area = x * (20 - x).
-// Find x that maximizes area, with x in [0, 20].
-val perimeter = 40.0
-val halfP = perimeter / 2
+// The right column becomes the top row
+assertEquals(&quot;cf\nbe\nad&quot;, grid.rotatedCounterclockwise().toString())
 
-val x = ternarySearch(0.0, halfP) { x -&gt; x * (halfP - x) }
-
-// Maximum area when the rectangle is a square: x = 10
-assertApprox(10.0, x)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+// A mirror image, left to right
+assertEquals(&quot;cba\nfed&quot;, grid.transposed().rotatedClockwise().toString())</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

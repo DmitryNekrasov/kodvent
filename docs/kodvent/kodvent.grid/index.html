@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>kodvent.grid</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    kodvent
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.4.0        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":/commonMain"
+                                       data-filter=":/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    kodvent
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="kodvent::kodvent.grid////PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><span class="current">kodvent.grid</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><p class="paragraph">Rectangular grids for puzzle maps: a read-only <a href="-grid/index.html">Grid</a> and a <a href="-mutable-grid/index.html">MutableGrid</a>, whose cells are addressed by a <a href="-position/index.html">Position</a>, and the directions of a step, <a href="-direction/index.html">Direction</a> and <a href="-direction8/index.html">Direction8</a>. <a href="to-grid.html">toGrid</a> parses input lines, and there are functions for neighbors, rays, rotation and wrap-around.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1395435934%2FClasslikes%2F1558683979" anchor-label="Direction" id="-1395435934%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-direction/index.html"><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1395435934%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum class </span><a href="-direction/index.html">Direction</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-direction/index.html">Direction</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">One of the four orthogonal directions, listed clockwise from <a href="-direction/-u-p/index.html">UP</a>. y grows downward, so <a href="-direction/-u-p/index.html">UP</a> is <code class="lang-kotlin">y - 1</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2074839784%2FClasslikes%2F1558683979" anchor-label="Direction8" id="2074839784%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-direction8/index.html"><span><span>Direction8</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2074839784%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">enum class </span><a href="-direction8/index.html">Direction8</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-direction8/index.html">Direction8</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">One of the eight directions to a surrounding cell, diagonals included, listed clockwise from <a href="-direction8/-u-p/index.html">UP</a>. It is a separate type, so <code class="lang-kotlin">Direction.entries</code> always means four.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1513981733%2FClasslikes%2F1558683979" anchor-label="Grid" id="-1513981733%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-grid/index.html"><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1513981733%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="-grid/index.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A read-only rectangular grid of <a href="-grid/width.html">width</a> x <a href="-grid/height.html">height</a> cells addressed by <a href="-position/index.html">Position</a>, where row y holds input line y. It relates to <a href="-mutable-grid/index.html">MutableGrid</a> as List does to MutableList, and a grid that is not a MutableGrid never changes. Like a List, it does not freeze a value that is a mutable object.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1503276789%2FClasslikes%2F1558683979" anchor-label="MutableGrid" id="1503276789%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mutable-grid/index.html"><span>Mutable</span><wbr></wbr><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1503276789%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-mutable-grid/index.html">MutableGrid</a><span class="token operator">&lt;</span><a href="-mutable-grid/index.html">T</a><span class="token operator">&gt;</span> : <a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="-mutable-grid/index.html">T</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A <a href="-grid/index.html">Grid</a> whose cells can be overwritten. Its size never changes, and its views show later writes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1372542888%2FClasslikes%2F1558683979" anchor-label="Position" id="-1372542888%2FClasslikes%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-position/index.html"><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1372542888%2FClasslikes%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-position/index.html">Position</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">A cell position, also used as the offset between two cells. <a href="-position/x.html">x</a> is the column counted from the left and <a href="-position/y.html">y</a> is the input line counted from the top, so y grows downward and <code class="lang-kotlin">input[y][x]</code> is the cell at <code class="lang-kotlin">Position(x, y)</code>: code written as <code class="lang-kotlin">a[row][column]</code> becomes <code class="lang-kotlin">grid[Position(x = column, y = row)]</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="405353633%2FFunctions%2F1558683979" anchor-label="count" id="405353633%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="count.html"><span><span>count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="405353633%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="count.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="count.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="count.html"><span class="token function">count</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">predicate<span class="token operator">: </span><span class="token punctuation">(</span><a href="count.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Returns the number of cells whose value matches <a href="count.html">predicate</a>, as in <code class="lang-kotlin">grid.count { it == '#' }</code>. It is the one shortcut: every other question about values goes through <code class="lang-kotlin">values</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="14759894%2FFunctions%2F1558683979" anchor-label="forEachIndexed" id="14759894%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="for-each-indexed.html"><span>for</span><wbr></wbr><span>Each</span><wbr></wbr><span><span>Indexed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="14759894%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="for-each-indexed.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="for-each-indexed.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="for-each-indexed.html"><span class="token function">forEachIndexed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><span class="token punctuation">(</span>position<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">, </span>value<span class="token operator">: </span><a href="for-each-indexed.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Calls <a href="for-each-indexed.html">action</a> with the position and the value of every cell, in reading order.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1648569000%2FFunctions%2F1558683979" anchor-label="getOrElse" id="1648569000%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-or-else.html"><span>get</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Else</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1648569000%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="get-or-else.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="get-or-else.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="get-or-else.html"><span class="token function">getOrElse</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><span class="token punctuation">(</span><a href="-position/index.html">Position</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="get-or-else.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="get-or-else.html">T</a></div><div class="brief "><p class="paragraph">Returns the value at <a href="get-or-else.html">position</a>, or the result of calling <a href="get-or-else.html">defaultValue</a> with it if <a href="get-or-else.html">position</a> is outside this grid, like <code class="lang-kotlin">List.getOrElse</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-625721842%2FFunctions%2F1558683979" anchor-label="Grid" id="-625721842%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-grid.html"><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-625721842%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="-grid.html">T</a><span class="token operator">&gt; </span><a href="-grid.html"><span class="token function">Grid</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">width<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">height<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">init<span class="token operator">: </span><span class="token punctuation">(</span>position<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-grid.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Creates a read-only grid of <a href="-grid.html">width</a> x <a href="-grid.html">height</a> cells, calling <a href="-grid.html">init</a> once for every position in reading order, like <code class="lang-kotlin">List(size) { }</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1815272013%2FFunctions%2F1558683979" anchor-label="map" id="-1815272013%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="map.html"><span><span>map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1815272013%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="map.html">T</a><span class="token punctuation">, </span><a href="map.html">R</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="map.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="map.html"><span class="token function">map</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transform<span class="token operator">: </span><span class="token punctuation">(</span><a href="map.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="map.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="map.html">R</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new read-only grid of the same size holding <a href="map.html">transform</a> of every value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="79893111%2FFunctions%2F1558683979" anchor-label="mapIndexed" id="79893111%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="map-indexed.html"><span>map</span><wbr></wbr><span><span>Indexed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="79893111%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="map-indexed.html">T</a><span class="token punctuation">, </span><a href="map-indexed.html">R</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="map-indexed.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="map-indexed.html"><span class="token function">mapIndexed</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transform<span class="token operator">: </span><span class="token punctuation">(</span>position<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">, </span>value<span class="token operator">: </span><a href="map-indexed.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="map-indexed.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="map-indexed.html">R</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new read-only grid of the same size holding <a href="map-indexed.html">transform</a> of every position and its value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-468142282%2FFunctions%2F1558683979" anchor-label="MutableGrid" id="-468142282%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mutable-grid.html"><span>Mutable</span><wbr></wbr><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-468142282%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="-mutable-grid.html">T</a><span class="token operator">&gt; </span><a href="-mutable-grid.html"><span class="token function">MutableGrid</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">width<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">height<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">init<span class="token operator">: </span><span class="token punctuation">(</span>position<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="-mutable-grid.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-mutable-grid/index.html">MutableGrid</a><span class="token operator">&lt;</span><a href="-mutable-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Creates a mutable grid of <a href="-mutable-grid.html">width</a> x <a href="-mutable-grid.html">height</a> cells, calling <a href="-mutable-grid.html">init</a> once for every position in reading order, as in <code class="lang-kotlin">MutableGrid(71, 71) { '.' }</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-274029482%2FFunctions%2F1558683979" anchor-label="neighbors" id="-274029482%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="neighbors.html"><span><span>neighbors</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-274029482%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="neighbors.html"><span class="token function">neighbors</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="-position/index.html">Position</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-position/index.html">Position</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the orthogonal neighbors of <a href="neighbors.html">position</a> that are inside this grid, in <code class="lang-kotlin">Direction.entries</code> order: up, right, down, left. <a href="neighbors.html">position</a> itself is not included and may be outside.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1418681738%2FFunctions%2F1558683979" anchor-label="neighbors8" id="1418681738%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="neighbors8.html"><span><span>neighbors8</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1418681738%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="neighbors8.html"><span class="token function">neighbors8</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">position<span class="token operator">: </span><a href="-position/index.html">Position</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-position/index.html">Position</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the neighbors of <a href="neighbors8.html">position</a>, diagonals included, that are inside this grid, in <code class="lang-kotlin">Direction8.entries</code> order: clockwise from up. <a href="neighbors8.html">position</a> itself is not included and may be outside.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1467508682%2FFunctions%2F1558683979" anchor-label="ray" id="-1467508682%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ray.html"><span><span>ray</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1467508682%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="ray.html"><span class="token function">ray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">from<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">, </span></span><span class="parameter ">direction<span class="token operator">: </span><a href="-direction/index.html">Direction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-position/index.html">Position</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the positions <code class="lang-kotlin">from + direction</code>, <code class="lang-kotlin">from + direction * 2</code>, and so on up to the edge of this grid, nearest first. <a href="ray.html">from</a> need not be inside: <code class="lang-kotlin">ray(Position(-1, y), Direction.RIGHT)</code> is the whole row y, and the list is empty if <code class="lang-kotlin">from + direction</code> is outside.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="ray.html"><span class="token function">ray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">from<span class="token operator">: </span><a href="-position/index.html">Position</a><span class="token punctuation">, </span></span><span class="parameter ">direction<span class="token operator">: </span><a href="-direction8/index.html">Direction8</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="-position/index.html">Position</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the positions <code class="lang-kotlin">from + direction</code>, <code class="lang-kotlin">from + direction * 2</code>, and so on up to the edge of this grid, nearest first. <a href="ray.html">from</a> need not be inside, and the list is empty if <code class="lang-kotlin">from + direction</code> is outside.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1697446220%2FFunctions%2F1558683979" anchor-label="rotatedClockwise" id="-1697446220%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="rotated-clockwise.html"><span>rotated</span><wbr></wbr><span><span>Clockwise</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1697446220%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="rotated-clockwise.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-clockwise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="rotated-clockwise.html"><span class="token function">rotatedClockwise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-clockwise.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new read-only grid turned 90 degrees clockwise: the top row becomes the right column, and width and height swap.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="533594396%2FFunctions%2F1558683979" anchor-label="rotatedCounterclockwise" id="533594396%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="rotated-counterclockwise.html"><span>rotated</span><wbr></wbr><span><span>Counterclockwise</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="533594396%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="rotated-counterclockwise.html"><span class="token function">rotatedCounterclockwise</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="rotated-counterclockwise.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new read-only grid turned 90 degrees counterclockwise: the right column becomes the top row, and width and height swap.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-550095577%2FFunctions%2F1558683979" anchor-label="toDirection" id="-550095577%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-direction.html"><span>to</span><wbr></wbr><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-550095577%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">.</span><a href="to-direction.html"><span class="token function">toDirection</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-direction/index.html">Direction</a></div><div class="brief "><p class="paragraph">Returns the direction this arrow points in: <code class="lang-kotlin">^</code> is UP, <code class="lang-kotlin">&gt;</code> is RIGHT, <code class="lang-kotlin">v</code> is DOWN and <code class="lang-kotlin">&lt;</code> is LEFT.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1379218065%2FFunctions%2F1558683979" anchor-label="toDirectionOrNull" id="1379218065%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-direction-or-null.html"><span>to</span><wbr></wbr><span>Direction</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Null</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1379218065%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">.</span><a href="to-direction-or-null.html"><span class="token function">toDirectionOrNull</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-direction/index.html">Direction</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the direction this arrow points in (<code class="lang-kotlin">^</code>, <code class="lang-kotlin">&gt;</code>, <code class="lang-kotlin">v</code> or <code class="lang-kotlin">&lt;</code>), or <code class="lang-kotlin">null</code> for any other character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1933375861%2FFunctions%2F1558683979" anchor-label="toGrid" id="1933375861%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-grid.html"><span>to</span><wbr></wbr><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1933375861%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-grid.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="to-grid.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-grid.html"><span class="token function">toGrid</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="to-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a read-only snapshot that later writes to this grid do not affect. It holds the same value objects, so it is a safe map key only while they do not change. A grid that is not a MutableGrid is returned as it is.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-grid.html"><span class="token function">toGrid</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a grid of the characters of these lines, so <code class="lang-kotlin">lines[y][x]</code> is at <code class="lang-kotlin">Position(x, y)</code>. Nothing is trimmed and a space is a cell like any other. An empty list gives a 0 x 0 grid.</p></div><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-grid.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-grid.html"><span class="token function">toGrid</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transform<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="to-grid.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="to-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a grid holding <a href="to-grid.html">transform</a> of every character of these lines, as in <code class="lang-kotlin">input.toGrid { it.digitToInt() }</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2145209847%2FFunctions%2F1558683979" anchor-label="toMutableGrid" id="-2145209847%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-mutable-grid.html"><span>to</span><wbr></wbr><span>Mutable</span><wbr></wbr><span><span>Grid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2145209847%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-mutable-grid.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="to-mutable-grid.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-mutable-grid.html"><span class="token function">toMutableGrid</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-mutable-grid/index.html">MutableGrid</a><span class="token operator">&lt;</span><a href="to-mutable-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new mutable grid with the same values. Later writes to either grid do not affect the other.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-mutable-grid.html"><span class="token function">toMutableGrid</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-mutable-grid/index.html">MutableGrid</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a mutable grid of the characters of these lines, so <code class="lang-kotlin">lines[y][x]</code> is at <code class="lang-kotlin">Position(x, y)</code>.</p></div><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-mutable-grid.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="to-mutable-grid.html"><span class="token function">toMutableGrid</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transform<span class="token operator">: </span><span class="token punctuation">(</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="to-mutable-grid.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-mutable-grid/index.html">MutableGrid</a><span class="token operator">&lt;</span><a href="to-mutable-grid.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a mutable grid holding <a href="to-mutable-grid.html">transform</a> of every character of these lines.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-647656654%2FFunctions%2F1558683979" anchor-label="transposed" id="-647656654%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="transposed.html"><span><span>transposed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-647656654%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="transposed.html">T</a><span class="token operator">&gt; </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="transposed.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="transposed.html"><span class="token function">transposed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><a href="transposed.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a new read-only grid with rows and columns exchanged: the value at <code class="lang-kotlin">(x, y)</code> moves to <code class="lang-kotlin">(y, x)</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1989754809%2FFunctions%2F1558683979" anchor-label="wrap" id="-1989754809%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="wrap.html"><span><span>wrap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1989754809%2FFunctions%2F1558683979"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="-position/index.html">Position</a><span class="token punctuation">.</span><a href="wrap.html"><span class="token function">wrap</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">grid<span class="token operator">: </span><a href="-grid/index.html">Grid</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-position/index.html">Position</a></div><div class="brief "><p class="paragraph">Returns the position inside <a href="wrap.html">grid</a> that this position falls on when the grid repeats endlessly in every direction, the same as <code class="lang-kotlin">wrap(grid.width, grid.height)</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

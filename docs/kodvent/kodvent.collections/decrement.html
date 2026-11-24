@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,34 +108,13 @@
   <div class="cover ">
     <h1 class="cover"><span><span>decrement</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-ignorable-return-value/index.html"><span class="token annotation builtin">IgnorableReturnValue</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="decrement.html"><span class="token function">decrement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="decrement.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/collections/MapExtensions.kt#L28">source</a>)</span></span></div><p class="paragraph">Decrements the count for <a href="decrement.html">key</a> by 1, removing it when the count reaches 0. Returns <code class="lang-kotlin">true</code> if <a href="decrement.html">key</a> was present, <code class="lang-kotlin">false</code> otherwise.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val inventory = mutableMapOf(&quot;apple&quot; to 3, &quot;banana&quot; to 1)
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-ignorable-return-value/index.html"><span class="token annotation builtin">IgnorableReturnValue</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="decrement.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="decrement.html"><span class="token function">decrement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="decrement.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/collections/MapExtensions.kt#L26">source</a>)</span></span></div><p class="paragraph">Decrements the count for <a href="decrement.html">key</a> by 1, removing it when the count drops to 0 or below. Returns <code class="lang-kotlin">true</code> if <a href="decrement.html">key</a> was present, <code class="lang-kotlin">false</code> otherwise.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val inventory = mutableMapOf(&quot;apple&quot; to 2, &quot;banana&quot; to 1)
 
-// Decrement reduces the count
-inventory.decrement(&quot;apple&quot;)
-assertEquals(2, inventory[&quot;apple&quot;])
+inventory.decrement(&quot;apple&quot;) // 2 becomes 1
+assertTrue(inventory.decrement(&quot;banana&quot;)) // 1 becomes 0, so the key is removed
+assertFalse(inventory.decrement(&quot;orange&quot;)) // absent: nothing changes
 
-// Decrement returns true when the key exists
-val removed = inventory.decrement(&quot;banana&quot;)
-assertEquals(true, removed)
-
-// When the count reaches 0, the key is removed
-assertEquals(false, inventory.containsKey(&quot;banana&quot;))
-
-// Decrement returns false for non-existent keys
-val found = inventory.decrement(&quot;orange&quot;)
-assertEquals(false, found)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val stock = mutableMapOf(&quot;laptop&quot; to 5, &quot;mouse&quot; to 10, &quot;keyboard&quot; to 3)
-
-// Sell 3 laptops
-repeat(3) { stock.decrement(&quot;laptop&quot;) }
-assertEquals(2, stock[&quot;laptop&quot;])
-
-// Sell all keyboards
-repeat(3) { stock.decrement(&quot;keyboard&quot;) }
-assertEquals(false, stock.containsKey(&quot;keyboard&quot;))
-
-// Try to sell a non-existent item
-val success = stock.decrement(&quot;monitor&quot;)
-assertEquals(false, success)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+assertEquals(mapOf(&quot;apple&quot; to 1), inventory)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

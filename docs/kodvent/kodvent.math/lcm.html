@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,24 +108,13 @@
   <div class="cover ">
     <h1 class="cover"><span><span>lcm</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/math/Functions.kt#L29">source</a>)</span></span></div><p class="paragraph">Computes the least common multiple of <a href="lcm.html">a</a> and <a href="lcm.html">b</a>, as <code class="lang-kotlin">(a / gcd(a, b)) * b</code> to reduce the risk of overflow.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="gcd.html"><span><span>gcd</span></span></a></div></span></div><div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find the least common multiple of two numbers
-val result1 = lcm(8, 12)
-assertEquals(24, result1)
-
-val result2 = lcm(15, 20)
-assertEquals(60, result2)
-
-// LCM of coprime numbers is their product
-val result3 = lcm(7, 13)
-assertEquals(91, result3)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Two buses arrive at a station: one every 12 minutes, another every 18 minutes
-// Find when they will arrive at the same time again
-val bus1Interval = 12
-val bus2Interval = 18
-
-val nextSimultaneousArrival = lcm(bus1Interval, bus2Interval)
-
-// They will both arrive after 36 minutes
-assertEquals(36, nextSimultaneousArrival)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/math/Functions.kt#L39">source</a>)</span></span></div><p class="paragraph">See <a href="lcm.html">lcm</a> for Int parameters</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/math/Functions.kt#L26">source</a>)</span></span></div><p class="paragraph">Returns the least common multiple of <a href="lcm.html">a</a> and <a href="lcm.html">b</a>, or 0 if either is 0. It wraps around only when it does not fit in an Int, and it is never negative otherwise.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">assertEquals(24, lcm(8, 12))
+assertEquals(24, lcm(-8, 12))
+assertEquals(0, lcm(0, 5))
+assertEquals(12_000_000_000L, lcm(6_000_000_000L, 4_000_000_000L))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><hr><div class="symbol monospace"><span class="token keyword">fun </span><a href="lcm.html"><span class="token function">lcm</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/math/Functions.kt#L42">source</a>)</span></span></div><p class="paragraph">Returns the least common multiple of <a href="lcm.html">a</a> and <a href="lcm.html">b</a>, or 0 if either is 0. It wraps around only when it does not fit in a Long, and it is never negative otherwise.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">assertEquals(24, lcm(8, 12))
+assertEquals(24, lcm(-8, 12))
+assertEquals(0, lcm(0, 5))
+assertEquals(12_000_000_000L, lcm(6_000_000_000L, 4_000_000_000L))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

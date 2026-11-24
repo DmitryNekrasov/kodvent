@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,29 +108,10 @@
   <div class="cover ">
     <h1 class="cover"><span><span>increment</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/collections/MapExtensions.kt#L16">source</a>)</span></span></div><p class="paragraph">Increments the count for <a href="increment.html">key</a> by 1, treating a missing <a href="increment.html">key</a> as 0.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val wordCounts = mutableMapOf&lt;String, Int&gt;()
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="increment.html">T</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="increment.html"><span class="token function">increment</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="increment.html">T</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/collections/MapExtensions.kt#L15">source</a>)</span></span></div><p class="paragraph">Increments the count for <a href="increment.html">key</a> by 1, treating a missing <a href="increment.html">key</a> as 0.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val counts = mutableMapOf&lt;String, Int&gt;()
+&quot;the cat and the dog&quot;.split(&quot; &quot;).forEach { counts.increment(it) }
 
-// Adding a new key starts at 1
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(1, wordCounts[&quot;hello&quot;])
-
-// Incrementing again increases the count
-wordCounts.increment(&quot;hello&quot;)
-assertEquals(2, wordCounts[&quot;hello&quot;])
-
-// Different keys are tracked independently
-wordCounts.increment(&quot;world&quot;)
-assertEquals(1, wordCounts[&quot;world&quot;])
-assertEquals(2, wordCounts[&quot;hello&quot;])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val text = &quot;the quick brown fox jumps over the lazy dog&quot;
-val wordFrequency = mutableMapOf&lt;String, Int&gt;()
-
-text.split(&quot; &quot;).forEach { word -&gt;
-    wordFrequency.increment(word)
-}
-
-assertEquals(2, wordFrequency[&quot;the&quot;])
-assertEquals(1, wordFrequency[&quot;quick&quot;])
-assertEquals(1, wordFrequency[&quot;fox&quot;])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+assertEquals(mapOf(&quot;the&quot; to 2, &quot;cat&quot; to 1, &quot;and&quot; to 1, &quot;dog&quot; to 1), counts)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

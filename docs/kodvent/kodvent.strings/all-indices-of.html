@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -103,94 +103,13 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.strings//allIndicesOf/kotlin.CharSequence#kotlin.CharSequence#kotlin.Char/PointingToDeclaration//1558683979">
+<div class="main-content" data-page-type="member" id="content" pageIds="kodvent::kodvent.strings//allIndicesOf/kotlin.CharSequence#kotlin.CharSequence/PointingToDeclaration//1558683979">
   <div class="breadcrumbs"><a href="../../index.html">kodvent</a><span class="delimiter">/</span><a href="index.html">kodvent.strings</a><span class="delimiter">/</span><span class="current">allIndicesOf</span></div>
   <div class="cover ">
     <h1 class="cover"><span>all</span><wbr></wbr><span>Indices</span><wbr></wbr><span><span>Of</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">.</span><a href="all-indices-of.html"><span class="token function">allIndicesOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">needle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">, </span></span><span class="parameter ">delimiter<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/index.html">Char</a><span class="token operator"> = </span>'#'</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L61">source</a>)</span></span></div><p class="paragraph">Returns the starting indices of every occurrence of <a href="all-indices-of.html">needle</a> in this character sequence, using the Knuth-Morris-Pratt algorithm (via the prefix function) in O(n + m) time. The <a href="all-indices-of.html">delimiter</a> (default <code class="lang-kotlin">'#'</code>) is used internally and must not appear in <a href="all-indices-of.html">needle</a> or in this sequence.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="prefix-function.html"><span>prefix</span><wbr></wbr><span><span>Function</span></span></a></div></span></div><div></div></div></div></div><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if the delimiter appears in the needle or in this text</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find all occurrences of a substring in a text
-val text1 = &quot;hello world&quot;
-val result1 = text1.allIndicesOf(&quot;world&quot;)
-assertEquals(listOf(6), result1)
-
-val text2 = &quot;abc abc abc&quot;
-val result2 = text2.allIndicesOf(&quot;abc&quot;)
-assertEquals(listOf(0, 4, 8), result2)
-
-val text3 = &quot;banana&quot;
-val result3 = text3.allIndicesOf(&quot;ana&quot;)
-// Finds overlapping occurrences at positions 1 and 3
-assertEquals(listOf(1, 3), result3)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// KMP algorithm finds all occurrences, including overlapping ones
-val text = &quot;aaaa&quot;
-val pattern = &quot;aa&quot;
-
-val indices = text.allIndicesOf(pattern)
-
-// Finds &quot;aa&quot; at positions 0, 1, and 2
-assertEquals(listOf(0, 1, 2), indices)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Count how many times a word appears in a sentence
-val sentence = &quot;the quick brown fox jumps over the lazy dog&quot;
-val wordToFind = &quot;the&quot;
-
-val occurrences = sentence.allIndicesOf(wordToFind)
-
-// &quot;the&quot; appears twice at positions 0 and 31
-assertEquals(2, occurrences.size)
-assertEquals(listOf(0, 31), occurrences)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Search for a DNA sequence pattern in a genome
-val genome = &quot;ACGTACGTACGT&quot;
-val pattern = &quot;ACGT&quot;
-
-val positions = genome.allIndicesOf(pattern)
-
-// Pattern appears at positions 0, 4, and 8
-assertEquals(listOf(0, 4, 8), positions)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// If your text or pattern contains '#', use a different delimiter
-val text = &quot;a#b#c#a#b&quot;
-val pattern = &quot;a#b&quot;
-
-// Use '$' as a delimiter since '#' appears in the text
-val result = text.allIndicesOf(pattern, delimiter = '$')
-
-assertEquals(listOf(0, 6), result)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Detect a repeated pattern in a string
-val text = &quot;abababab&quot;
-val pattern = &quot;abab&quot;
-
-val occurrences = text.allIndicesOf(pattern)
-
-// Overlapping occurrences at positions 0, 2, and 4
-assertEquals(listOf(0, 2, 4), occurrences)
-assertEquals(3, occurrences.size)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Pattern not found returns an empty list
-val result1 = &quot;hello world&quot;.allIndicesOf(&quot;xyz&quot;)
-assertEquals(emptyList(), result1)
-
-// Single character search
-val result2 = &quot;banana&quot;.allIndicesOf(&quot;a&quot;)
-assertEquals(listOf(1, 3, 5), result2)
-
-// Pattern equals entire text
-val result3 = &quot;test&quot;.allIndicesOf(&quot;test&quot;)
-assertEquals(listOf(0), result3)
-
-// Empty text returns an empty list
-val result4 = &quot;&quot;.allIndicesOf(&quot;abc&quot;)
-assertEquals(emptyList(), result4)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Understanding how the prefix function powers the KMP algorithm
-val needle = &quot;abc&quot;
-val text = &quot;xabcyabcz&quot;
-
-// The algorithm concatenates needle + delimiter + text
-val combined = &quot;$needle#$text&quot;
-val pi = combined.prefixFunction()
-
-// When pi[i] == needle.length, we found a match
-val matches = mutableListOf&lt;Int&gt;()
-for (i in (needle.length + 1)..pi.lastIndex) {
-    if (pi[i] == needle.length) {
-        // Convert from combined string index to text index
-        matches.add(i - 2 * needle.length)
-    }
-}
-
-// This is essentially what allIndicesOf does internally
-assertEquals(listOf(1, 5), matches)
-assertEquals(matches, text.allIndicesOf(needle))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token punctuation">.</span><a href="all-indices-of.html"><span class="token function">allIndicesOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">needle<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/strings/PrefixFunction.kt#L47">source</a>)</span></span></div><p class="paragraph">Returns the start index of every occurrence of <a href="all-indices-of.html">needle</a> in this character sequence, overlapping ones included, in ascending order. An empty <a href="all-indices-of.html">needle</a> is found at every index in <code class="lang-kotlin">0..&lt;length</code>. O(n + m).</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">assertEquals(listOf(1, 3), &quot;banana&quot;.allIndicesOf(&quot;ana&quot;)) // occurrences may overlap
+assertEquals(emptyList(), &quot;banana&quot;.allIndicesOf(&quot;xyz&quot;))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

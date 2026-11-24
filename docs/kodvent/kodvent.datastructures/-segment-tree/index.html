@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -107,172 +107,30 @@
   <div class="breadcrumbs"><a href="../../../index.html">kodvent</a><span class="delimiter">/</span><a href="../index.html">kodvent.datastructures</a><span class="delimiter">/</span><span class="current">SegmentTree</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Segment</span><wbr></wbr><span><span>Tree</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SegmentTree</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">operation<span class="token operator">: </span><span class="token punctuation">(</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/datastructures/SegmentTree.kt#L25">source</a>)</span></span></div><p class="paragraph">A <a href="https://en.wikipedia.org/wiki/Segment_tree">segment tree</a> over a <span data-unresolved-link="kodvent.datastructures/SegmentTree//#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToCallableParameters(0)/">source</span> list of elements of type <a href="index.html">T</a>, supporting range queries and point updates via an associative <span data-unresolved-link="kodvent.datastructures/SegmentTree//#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToCallableParameters(1)/">operation</span> (e.g. sum, min, max, gcd): <code class="lang-kotlin">operation(a, operation(b, c)) == operation(operation(a, b), c)</code>.</p><p class="paragraph">Construction is O(n); range query and point update are O(log n). Uses O(n) space.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Create a segment tree for range sum queries
-val numbers = listOf(1, 3, 5, 7, 9, 11)
-val segmentTree = SegmentTree(numbers, Int::plus)
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SegmentTree</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">operation<span class="token operator">: </span><span class="token punctuation">(</span><a href="index.html">T</a><span class="token punctuation">, </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/datastructures/SegmentTree.kt#L20">source</a>)</span></span></div><p class="paragraph">A <a href="https://en.wikipedia.org/wiki/Segment_tree">segment tree</a> over a copy of <span data-unresolved-link="kodvent.datastructures/SegmentTree//#kotlin.collections.List[TypeParam(bounds=[kotlin.Any])]#kotlin.Function2[TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[kotlin.Any]),TypeParam(bounds=[kotlin.Any])]/PointingToCallableParameters(0)/">source</span>. <code class="lang-kotlin">tree[start, end]</code> combines the elements from <code class="lang-kotlin">start</code> to <code class="lang-kotlin">end</code>, both included and in that order, with <span data-unresolved-link="kodvent.datastructures/SegmentTree/operation/#/PointingToDeclaration/">operation</span>, and <code class="lang-kotlin">tree[index] = value</code> replaces one element. <span data-unresolved-link="kodvent.datastructures/SegmentTree/operation/#/PointingToDeclaration/">operation</span> must be associative, like sum, min, max or gcd.</p><p class="paragraph">Construction is O(n); range query and point update are O(log n). Uses O(n) space.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val tree = SegmentTree(listOf(1, 3, 5, 7, 9, 11), Int::plus)
+assertEquals(24, tree[1, 4]) // 3 + 5 + 7 + 9
 
-// Query the sum of elements from index 1 to 4 (inclusive)
-// Elements: 3, 5, 7, 9
-val sum = segmentTree[1, 4]
-assertEquals(24, sum)
+tree[2] = 15
+assertEquals(34, tree[1, 4]) // 3 + 15 + 7 + 9
 
-// Query the sum of the entire array
-val totalSum = segmentTree[0, 5]
-assertEquals(36, totalSum)
+tree[2] += 10
+assertEquals(25, tree[2])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val numbers = listOf(12, 18, 8, 30, 36, 42)
 
-// Query a single element (range of size 1)
-val single = segmentTree[2, 2]
-assertEquals(5, single)
-
-// Use compound assignment operators to update values
-segmentTree[2] += 10  // 5 + 10 = 15
-assertEquals(15, segmentTree[2])
-assertEquals(46, segmentTree[0, 5])
-
-segmentTree[3] -= 2   // 7 - 2 = 5
-assertEquals(5, segmentTree[3])
-assertEquals(44, segmentTree[0, 5])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Create a segment tree for finding minimum values in ranges
-val numbers = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-val segmentTree = SegmentTree(numbers, ::minOf)
-
-// Find minimum in range [0, 3]
-// Elements: 5, 2, 8, 1
-val min1 = segmentTree[0, 3]
-assertEquals(1, min1)
-
-// Find minimum in range [4, 7]
-// Elements: 9, 3, 7, 4
-val min2 = segmentTree[4, 7]
-assertEquals(3, min2)
-
-// Find minimum in the entire array
-val minAll = segmentTree[0, 7]
-assertEquals(1, minAll)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Create a segment tree for finding maximum values in ranges
-val numbers = listOf(5, 2, 8, 1, 9, 3, 7, 4)
-val segmentTree = SegmentTree(numbers, ::maxOf)
-
-// Find maximum in range [0, 3]
-// Elements: 5, 2, 8, 1
-val max1 = segmentTree[0, 3]
-assertEquals(8, max1)
-
-// Find maximum in range [4, 7]
-// Elements: 9, 3, 7, 4
-val max2 = segmentTree[4, 7]
-assertEquals(9, max2)
-
-// Find maximum in the entire array
-val maxAll = segmentTree[0, 7]
-assertEquals(9, maxAll)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Create a segment tree for finding GCD of ranges
-val numbers = listOf(12, 18, 24, 30, 36, 42)
-val segmentTree = SegmentTree(numbers, ::gcd)
-
-// Find GCD of range [0, 2]
-// Elements: 12, 18, 24 -&gt; GCD = 6
-val gcd1 = segmentTree[0, 2]
-assertEquals(6, gcd1)
-
-// Find GCD of range [3, 5]
-// Elements: 30, 36, 42 -&gt; GCD = 6
-val gcd2 = segmentTree[3, 5]
-assertEquals(6, gcd2)
-
-// Find GCD of the entire array
-// All elements are multiples of 6, so GCD = 6
-val gcdAll = segmentTree[0, 5]
-assertEquals(6, gcdAll)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Analyze stock prices to find min/max in time ranges
-// Stock prices for 7 days: [100, 120, 95, 110, 105, 130, 125]
-val prices = listOf(100, 120, 95, 110, 105, 130, 125)
-
-val minTree = SegmentTree(prices, ::minOf)
-val maxTree = SegmentTree(prices, ::maxOf)
-
-// Find min and max prices for the first 3 days (indices 0-2)
-val minFirstThreeDays = minTree[0, 2]
-val maxFirstThreeDays = maxTree[0, 2]
-assertEquals(95, minFirstThreeDays)
-assertEquals(120, maxFirstThreeDays)
-
-// Find min and max prices for the last 4 days (indices 3-6)
-val minLastFourDays = minTree[3, 6]
-val maxLastFourDays = maxTree[3, 6]
-assertEquals(105, minLastFourDays)
-assertEquals(130, maxLastFourDays)
-
-// Calculate price volatility (max - min) for the entire week
-val weekMin = minTree[0, 6]
-val weekMax = maxTree[0, 6]
-val volatility = weekMax - weekMin
-assertEquals(35, volatility) // 130 - 95 = 35
-
-// Apply price corrections using compound assignment operators
-maxTree[2] += 5  // Day 2 price increased by 5: 95 + 5 = 100
-assertEquals(100, maxTree[2])
-assertEquals(130, maxTree[0, 6])  // Max is still 130
-
-maxTree[5] -= 20  // Day 5 price decreased by 20: 130 - 20 = 110
-assertEquals(110, maxTree[5])
-assertEquals(125, maxTree[0, 6])  // Max is now 125 (day 6)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Solve a typical competitive programming problem:
-// Given an array, answer queries for a range minimum and support updates
-val initialArray = listOf(8, 3, 9, 5, 1, 7, 4, 6, 2)
-val segmentTree = SegmentTree(initialArray, ::minOf)
-
-// Query 1: Find minimum in range [2, 5]
-// Elements: 9, 5, 1, 7 -&gt; minimum is 1
-assertEquals(1, segmentTree[2, 5])
-
-// Update: Change element at index 4 from 1 to 10
-segmentTree[4] = 10
-
-// Query 2: Find minimum in range [2, 5] after update
-// Elements: 9, 5, 10, 7 -&gt; minimum is now 5
-assertEquals(5, segmentTree[2, 5])
-
-// Query 3: Find minimum in range [0, 3]
-// Elements: 8, 3, 9, 5 -&gt; minimum is 3
-assertEquals(3, segmentTree[0, 3])
-
-// Update: Change element at index 1 from 3 to 1
-segmentTree[1] = 1
-
-// Query 4: Find minimum in range [0, 3] after update
-// Elements: 8, 1, 9, 5 -&gt; minimum is now 1
-assertEquals(1, segmentTree[0, 3])
-
-// Query 5: Find minimum in an entire array
-assertEquals(1, segmentTree[0, 8])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Find minimum in sliding windows of size 3
-val array = listOf(4, 2, 7, 1, 5, 8, 3, 6)
-val segmentTree = SegmentTree(array, ::minOf)
-
-// Window [0, 2]: elements 4, 2, 7 -&gt; min = 2
-assertEquals(2, segmentTree[0, 2])
-
-// Window [1, 3]: elements 2, 7, 1 -&gt; min = 1
-assertEquals(1, segmentTree[1, 3])
-
-// Window [2, 4]: elements 7, 1, 5 -&gt; min = 1
-assertEquals(1, segmentTree[2, 4])
-
-// Window [3, 5]: elements 1, 5, 8 -&gt; min = 1
-assertEquals(1, segmentTree[3, 5])
-
-// Window [4, 6]: elements 5, 8, 3 -&gt; min = 3
-assertEquals(3, segmentTree[4, 6])
-
-// Window [5, 7]: elements 8, 3, 6 -&gt; min = 3
-assertEquals(3, segmentTree[5, 7])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+assertEquals(8, SegmentTree(numbers, ::minOf)[0, 3])
+assertEquals(30, SegmentTree(numbers, ::maxOf)[0, 3])
+assertEquals(2, SegmentTree(numbers, ::gcd)[0, 3])</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="-1613887438%2FConstructors%2F1558683979" anchor-label="SegmentTree" id="-1613887438%2FConstructors%2F1558683979" data-filterable-set=":/commonMain"></a>
+        <div class="table"><a data-name="-2134499446%2FConstructors%2F1558683979" anchor-label="SegmentTree" id="-2134499446%2FConstructors%2F1558683979" data-filterable-set=":/commonMain"></a>
           <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-segment-tree.html"><span>Segment</span><wbr></wbr><span><span>Tree</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1613887438%2FConstructors%2F1558683979"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2134499446%2FConstructors%2F1558683979"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -296,22 +154,22 @@ assertEquals(3, segmentTree[5, 7])</code></pre><span class="copy-tooltip"><div c
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">index<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Returns the value at <a href="get.html">index</a>, equivalent to <code class="lang-kotlin">get(index, index)</code>. <a href="get.html">index</a> must be in <code class="lang-kotlin">[0, size)</code>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Returns the <span data-unresolved-link="kodvent.datastructures/SegmentTree//#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToCallableParameters(1)/">operation</span> applied over the inclusive range [<a href="get.html">start</a>, <a href="get.html">end</a>].</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">index<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Returns the value at <a href="get.html">index</a>, the same as <code class="lang-kotlin">get(index, index)</code>. O(log n).</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Returns the <span data-unresolved-link="kodvent.datastructures/SegmentTree/operation/#/PointingToDeclaration/">operation</span> applied over the inclusive range [<a href="get.html">start</a>, <a href="get.html">end</a>]. O(log n).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2043700947%2FFunctions%2F1558683979" anchor-label="getOrDefault" id="2043700947%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+<a data-name="1144135288%2FFunctions%2F1558683979" anchor-label="getOrDefault" id="1144135288%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-or-default.html"><span>get</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Default</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2043700947%2FFunctions%2F1558683979"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1144135288%2FFunctions%2F1558683979"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-or-default.html"><span class="token function">getOrDefault</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Like <a href="get.html">get</a> over the inclusive range [<a href="get-or-default.html">start</a>, <a href="get-or-default.html">end</a>], but returns <a href="get-or-default.html">defaultValue</a> for out-of-range or inverted (<a href="get-or-default.html">start</a>><a href="get-or-default.html">end</a>) indices instead of throwing.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-or-default.html"><span class="token function">getOrDefault</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">defaultValue<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">Returns the <span data-unresolved-link="kodvent.datastructures/SegmentTree/operation/#/PointingToDeclaration/">operation</span> applied over the inclusive range [<a href="get-or-default.html">start</a>, <a href="get-or-default.html">end</a>], or <a href="get-or-default.html">defaultValue</a> if <a href="get-or-default.html">start</a> is negative, <a href="get-or-default.html">end</a> is out of bounds or <a href="get-or-default.html">start</a> is greater than <a href="get-or-default.html">end</a>. O(log n).</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -326,22 +184,22 @@ assertEquals(3, segmentTree[5, 7])</code></pre><span class="copy-tooltip"><div c
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-or-null.html"><span class="token function">getOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Like <a href="get.html">get</a> over the inclusive range [<a href="get-or-null.html">start</a>, <a href="get-or-null.html">end</a>], but returns null for out-of-range or inverted (<a href="get-or-null.html">start</a>><a href="get-or-null.html">end</a>) indices instead of throwing.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-or-null.html"><span class="token function">getOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">start<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">end<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the <span data-unresolved-link="kodvent.datastructures/SegmentTree/operation/#/PointingToDeclaration/">operation</span> applied over the inclusive range [<a href="get-or-null.html">start</a>, <a href="get-or-null.html">end</a>], or <code class="lang-kotlin">null</code> if <a href="get-or-null.html">start</a> is negative, <a href="get-or-null.html">end</a> is out of bounds or <a href="get-or-null.html">start</a> is greater than <a href="get-or-null.html">end</a>. O(log n).</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-718601790%2FFunctions%2F1558683979" anchor-label="set" id="-718601790%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
+<a data-name="2024860073%2FFunctions%2F1558683979" anchor-label="set" id="2024860073%2FFunctions%2F1558683979" data-filterable-set=":/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="set.html"><span><span>set</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-718601790%2FFunctions%2F1558683979"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2024860073%2FFunctions%2F1558683979"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">index<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the value at <a href="set.html">index</a> (which must be in <code class="lang-kotlin">[0, size)</code>) to <a href="set.html">value</a>, in O(log n) time. Since <a href="get.html">get</a> and <a href="set.html">set</a> are both defined, compound assignments (<code class="lang-kotlin">+=</code>, <code class="lang-kotlin">-=</code>, <code class="lang-kotlin">*=</code>, <code class="lang-kotlin">/=</code>, <code class="lang-kotlin">%=</code>) work too.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">index<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the value at <a href="set.html">index</a> to <a href="set.html">value</a>, which also makes <code class="lang-kotlin">tree[index] += 1</code> work. O(log n).</p></div></div></div>
                 </div>
               </div>
             </div>

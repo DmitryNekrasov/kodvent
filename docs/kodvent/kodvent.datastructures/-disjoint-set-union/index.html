@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.3.1        </div>
+0.4.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -107,134 +107,26 @@
   <div class="breadcrumbs"><a href="../../../index.html">kodvent</a><span class="delimiter">/</span><a href="../index.html">kodvent.datastructures</a><span class="delimiter">/</span><span class="current">DisjointSetUnion</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Disjoint</span><wbr></wbr><span>Set</span><wbr></wbr><span><span>Union</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DisjointSetUnion</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.3.1/src/commonMain/kotlin/kodvent/datastructures/DisjointSetUnion.kt#L27">source</a>)</span></span></div><p class="paragraph">A <a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">Disjoint Set Union</a> (DSU, or Union-Find): maintains a partition of the integers in <code class="lang-kotlin">[0, size)</code> into disjoint sets.</p><p class="paragraph">Path compression and union by rank give near-constant <a href="https://en.wikipedia.org/wiki/Amortized_analysis">amortized</a> time per operation — O(α(n)), where α is the inverse <a href="https://en.wikipedia.org/wiki/Ackermann_function">Ackermann function</a>. Initially each element is in its own singleton set.</p><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Create a DSU with 5 elements (0, 1, 2, 3, 4)
-val dsu = DisjointSetUnion(5)
-
-// Initially, each element is in its own set
-assertEquals(5, dsu.count)
-
-// Union elements 0 and 1
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DisjointSetUnion</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/DmitryNekrasov/kodvent/tree/v0.4.0/src/commonMain/kotlin/kodvent/datastructures/DisjointSetUnion.kt#L23">source</a>)</span></span></div><p class="paragraph">A <a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">Disjoint Set Union</a> (DSU, or Union-Find): maintains a partition of the integers in <code class="lang-kotlin">0..&lt;size</code> into disjoint sets.</p><p class="paragraph"><a href="find.html">find</a>, <a href="union.html">union</a> and <a href="connected.html">connected</a> take near-constant amortized time, O(α(n)) with the inverse Ackermann function α; <a href="isolate.html">isolate</a> is O(n).</p><h4 class="tableheader">Throws</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":/commonMain" data-filterable-set=":/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-argument-exception/index.html"><span>Illegal</span><wbr></wbr><span>Argument</span><wbr></wbr><span><span>Exception</span></span></a></div></span></div><div><div class="title"><p class="paragraph">if <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span> is negative</p></div></div></div></div></div><h4 class="">Samples</h4><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">val dsu = DisjointSetUnion(5)
 assertTrue(dsu.union(0, 1))
-assertEquals(4, dsu.count)
+assertTrue(dsu.union(1, 2))
+assertFalse(dsu.union(0, 2)) // already in one set
 
-// Union elements 2 and 3
-assertTrue(dsu.union(2, 3))
-assertEquals(3, dsu.count)
-
-// Elements 0 and 1 are now connected
-assertTrue(dsu.connected(0, 1))
-
-// Elements 0 and 2 are not connected
-assertFalse(dsu.connected(0, 2))</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Model a network with 6 computers (0-5)
-val dsu = DisjointSetUnion(6)
-
-// Connect computers with network cables
-dsu.union(0, 1) // Computer 0 &lt;-&gt; Computer 1
-dsu.union(1, 2) // Computer 1 &lt;-&gt; Computer 2
-dsu.union(3, 4) // Computer 3 &lt;-&gt; Computer 4
-
-// Check connectivity
-assertTrue(dsu.connected(0, 2)) // 0 and 2 are connected through 1
-assertFalse(dsu.connected(0, 3)) // 0 and 3 are in different networks
-
-// We have 3 separate networks: {0,1,2}, {3,4}, {5}
-assertEquals(3, dsu.count)
-
-// Connect the networks
-dsu.union(2, 3) // Bridge the first two networks
-assertTrue(dsu.connected(0, 4)) // Now 0 and 4 are connected
-assertEquals(2, dsu.count)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use DSU to detect cycles in a graph
-val dsu = DisjointSetUnion(4)
-
-// Add edges to the graph
-// Edge 0-1
-val edge1Added = dsu.union(0, 1)
-assertTrue(edge1Added) // Successfully added
-
-// Edge 1-2
-val edge2Added = dsu.union(1, 2)
-assertTrue(edge2Added) // Successfully added
-
-// Edge 2-3
-val edge3Added = dsu.union(2, 3)
-assertTrue(edge3Added) // Successfully added
-
-// Try to add edge 0-3
-// This would create a cycle because 0 and 3 are already connected
-val edge4Added = dsu.union(0, 3)
-assertFalse(edge4Added) // Returns false, indicating they are already in the same set</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Model a social network with 8 people (0-7)
-val dsu = DisjointSetUnion(8)
-
-// Form friendships
-dsu.union(0, 1) // Person 0 and 1 are friends
-dsu.union(1, 2) // Person 1 and 2 are friends
-dsu.union(3, 4) // Person 3 and 4 are friends
-dsu.union(4, 5) // Person 4 and 5 are friends
-dsu.union(6, 7) // Person 6 and 7 are friends
-
-// We have 3 friend groups: {0,1,2}, {3,4,5}, {6,7}
-assertEquals(3, dsu.count)
-
-// Check if people are in the same friend group
-assertTrue(dsu.connected(0, 2)) // In the same group
-assertTrue(dsu.connected(3, 5)) // In the same group
-assertFalse(dsu.connected(0, 3)) // In different groups
-
-// Two groups merge when members become friends
-dsu.union(2, 3) // Person 2 and 3 become friends
-assertTrue(dsu.connected(0, 5)) // Now in the same group
-assertEquals(2, dsu.count) // Only 2 groups remain</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">// Use DSU to implement Kruskal's algorithm for finding Minimum Spanning Tree (MST)
-// Graph with 6 vertices (0-5) and weighted edges
-// edge = listOf(from, to, weight)
-val n = 6
+assertTrue(dsu.connected(0, 2))
+assertFalse(dsu.connected(0, 3))
+assertEquals(3, dsu.count) // {0, 1, 2}, {3}, {4}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><div class="sample-container"><pre><code class="monospace block lang-kotlin" theme="idea">data class Edge(val from: Int, val to: Int, val weight: Int)
 
 val edges = listOf(
-    listOf(0, 1, 4),
-    listOf(0, 2, 2),
-    listOf(1, 2, 1),
-    listOf(1, 3, 5),
-    listOf(2, 3, 8),
-    listOf(2, 4, 10),
-    listOf(3, 4, 2),
-    listOf(3, 5, 6),
-    listOf(4, 5, 3)
+    Edge(0, 1, 4), Edge(0, 2, 2), Edge(1, 2, 1), Edge(1, 3, 5), Edge(2, 3, 8),
+    Edge(2, 4, 10), Edge(3, 4, 2), Edge(3, 5, 6), Edge(4, 5, 3),
 )
 
-// Kruskal's algorithm: sort edges by weight (ascending)
-val sortedEdges = edges.sortedBy { it[2] }
+// Kruskal's algorithm: take the edges from the lightest, skipping one that would close a cycle
+val dsu = DisjointSetUnion(6)
+val tree = edges.sortedBy { it.weight }.filter { dsu.union(it.from, it.to) }
 
-val dsu = DisjointSetUnion(n)
-val mstEdges = mutableListOf&lt;List&lt;Int&gt;&gt;()
-var totalWeight = 0
-
-// Process edges in order of increasing weight
-for (edge in sortedEdges) {
-    val from = edge[0]
-    val to = edge[1]
-    val weight = edge[2]
-
-    // Try to add edge to MST
-    // If the vertices are not connected, add the edge (no cycle is created)
-    if (dsu.union(from, to)) {
-        mstEdges.add(edge)
-        totalWeight += weight
-    }
-    // If union returns false, the edge would create a cycle, so skip it
-}
-
-// MST should have exactly n-1 edges for n vertices
-assertEquals(n - 1, mstEdges.size)
-
-// Verify the minimum total weight
-// MST edges: (1,2,1), (0,2,2), (3,4,2), (4,5,3), (1,3,5) = total 13
-assertEquals(13, totalWeight)
-
-// All vertices should be in one connected part
-assertEquals(1, dsu.count)
-
-// Verify the MST contains the correct edges (sorted by weight)
-val mstWeights = mstEdges.map { it[2] }.sorted()
-assertEquals(listOf(1, 2, 2, 3, 5), mstWeights)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
+assertEquals(13, tree.sumOf { it.weight })
+assertEquals(1, dsu.count)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -251,7 +143,7 @@ assertEquals(listOf(1, 2, 2, 3, 5), mstWeights)</code></pre><span class="copy-to
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a DSU of <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span> singleton elements.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a DSU of <span data-unresolved-link="kodvent.datastructures/DisjointSetUnion//#kotlin.Int/PointingToCallableParameters(0)/">size</span> elements, each in its own set.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -319,7 +211,7 @@ assertEquals(listOf(1, 2, 2, 3, 5), mstWeights)</code></pre><span class="copy-to
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="isolate.html"><span class="token function">isolate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Removes <a href="isolate.html">x</a> from its current set, putting it in its own singleton; the other members of that set stay connected. O(n), since it may rebuild the set.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="isolate.html"><span class="token function">isolate</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Moves <a href="isolate.html">x</a> into a set of its own. The rest of its old set stays connected. O(n).</p></div></div></div>
                 </div>
               </div>
             </div>

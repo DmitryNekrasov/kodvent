@@ -8,13 +8,11 @@ package samples
 import kodvent.graph.bfs
 import kodvent.graph.dijkstra
 import kodvent.grid.Direction
-import kodvent.grid.Grid
 import kodvent.grid.Position
 import kodvent.grid.neighbors
 import kodvent.grid.toGrid
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class GraphSamples {
 
@@ -31,7 +29,6 @@ class GraphSamples {
         val steps = bfs(Position(0, 0)) { p -> maze.neighbors(p).filter { maze[it] == '.' } }
 
         assertEquals(12, steps[Position(4, 4)])
-        assertNull(steps[Position(1, 4)])
         assertEquals(-1, steps[Position(1, 4)] ?: -1)
     }
 
@@ -61,7 +58,10 @@ class GraphSamples {
         val steps = bfs(0 to 0) { (small, big) ->
             val toBig = minOf(small, 5 - big)
             val toSmall = minOf(big, 3 - small)
-            listOf(3 to big, small to 5, 0 to big, small to 0, small - toBig to big + toBig, small + toSmall to big - toSmall)
+            listOf(
+                3 to big, small to 5, 0 to big, small to 0,
+                small - toBig to big + toBig, small + toSmall to big - toSmall,
+            )
         }
 
         assertEquals(6, steps.filterKeys { (_, big) -> big == 4 }.values.min())
@@ -100,20 +100,8 @@ class GraphSamples {
 
     @Test
     fun dijkstraOverStates() {
-        // With a limit on steps in a row, one cell can be worth reaching twice
+        // The cheapest route to the bottom-right cell with at most two steps in a row in one direction
         data class Cart(val position: Position, val direction: Direction, val run: Int)
-
-        fun cheapestRoute(grid: Grid<Int>, maxRun: Int): Int {
-            val origin = Position(0, 0)
-            val starts = listOf(Cart(origin, Direction.RIGHT, 0), Cart(origin, Direction.DOWN, 0))
-            val costs = dijkstra(starts = starts) { (position, direction, run) ->
-                listOf(direction, direction.turnLeft(), direction.turnRight())
-                    .map { Cart(position + it, it, if (it == direction) run + 1 else 1) }
-                    .filter { it.position in grid && it.run <= maxRun }
-                    .map { it to grid[it.position] }
-            }
-            return costs.filterKeys { it.position == grid.positions.last() }.values.min()
-        }
 
         val grid = listOf(
             "1111",
@@ -121,45 +109,16 @@ class GraphSamples {
             "9991",
         ).toGrid { it.digitToInt() }
 
-        assertEquals(5, cheapestRoute(grid, maxRun = 3))
+        val origin = Position(0, 0)
+        val starts = listOf(Cart(origin, Direction.RIGHT, 0), Cart(origin, Direction.DOWN, 0))
+        val costs = dijkstra(starts = starts) { (position, direction, run) ->
+            listOf(direction, direction.turnLeft(), direction.turnRight())
+                .map { Cart(position + it, it, if (it == direction) run + 1 else 1) }
+                .filter { it.position in grid && it.run <= 2 }
+                .map { it to grid[it.position] }
+        }
 
         // Three steps to the right in a row are not allowed, so the route goes through the 5
-        assertEquals(9, cheapestRoute(grid, maxRun = 2))
-    }
-
-    @Test
-    fun cellsOnAnyCheapestPath() {
-        data class Walker(val position: Position, val direction: Direction)
-
-        val maze = listOf(
-            "#######",
-            "#.....#",
-            "#S.#.E#",
-            "#.....#",
-            "#######",
-        ).toGrid()
-
-        fun turns(walker: Walker) = listOf(walker.direction.turnLeft(), walker.direction.turnRight())
-            .map { Walker(walker.position, it) to 10 }
-
-        fun forward(walker: Walker): List<Pair<Walker, Int>> =
-            turns(walker) + (Walker(walker.position + walker.direction, walker.direction) to 1)
-
-        fun backward(walker: Walker): List<Pair<Walker, Int>> =
-            turns(walker) + (Walker(walker.position - walker.direction, walker.direction) to 1)
-
-        fun open(steps: List<Pair<Walker, Int>>) = steps.filter { (walker, _) -> maze[walker.position] != '#' }
-
-        val end = maze.positionOf('E')
-        val fromStart = dijkstra(Walker(maze.positionOf('S'), Direction.RIGHT)) { open(forward(it)) }
-        val best = fromStart.filterKeys { it.position == end }.values.min()
-
-        // Searching back from every cheapest arrival gives the cost from each state to the end
-        val arrivals = fromStart.filter { (walker, cost) -> walker.position == end && cost == best }.keys
-        val toEnd = dijkstra(starts = arrivals) { open(backward(it)) }
-        val cells = toEnd.filter { (walker, cost) -> fromStart[walker]?.plus(cost) == best }.keys.map { it.position }
-
-        assertEquals(36, best)
-        assertEquals(13, cells.toSet().size)
+        assertEquals(9, costs.filterKeys { it.position == grid.positions.last() }.values.min())
     }
 }

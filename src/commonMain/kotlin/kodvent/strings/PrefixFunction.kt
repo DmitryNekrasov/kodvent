@@ -14,7 +14,6 @@ package kodvent.strings
  * O(n) time and space.
  *
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionBasicUsage
- * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionUnderstandingTheResult
  *
  * @see CharSequence.allIndicesOf
  */
@@ -28,7 +27,6 @@ public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::ge
  * @throws IllegalArgumentException if [length] is negative
  *
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
- * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithCustomObjects
  *
  * @see CharSequence.allIndicesOf
  */
@@ -48,12 +46,6 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
  * Knuth-Morris-Pratt algorithm (via the prefix function) in O(n + m) time.
  *
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfBasicUsage
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfFindingOverlappingPatterns
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfCountingOccurrences
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfSearchInDNA
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfRepeatedPatternDetection
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfEdgeCases
- * @sample samples.PrefixFunctionAndKMPSamples.combiningPrefixFunctionAndKMP
  *
  * @see prefixFunction
  */

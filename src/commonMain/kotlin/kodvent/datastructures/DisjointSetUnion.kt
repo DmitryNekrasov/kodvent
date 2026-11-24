@@ -20,9 +20,6 @@ package kodvent.datastructures
  * @throws IllegalArgumentException if [size] is negative.
  *
  * @sample samples.DisjointSetUnionSamples.basicUsage
- * @sample samples.DisjointSetUnionSamples.networkConnectivity
- * @sample samples.DisjointSetUnionSamples.detectingCycles
- * @sample samples.DisjointSetUnionSamples.socialNetworkClusters
  * @sample samples.DisjointSetUnionSamples.kruskalMinimumSpanningTree
  */
 public class DisjointSetUnion(size: Int) {
@@ -58,7 +55,7 @@ public class DisjointSetUnion(size: Int) {
      * @throws IndexOutOfBoundsException if [x] or [y] is not in `[0, size)`.
      *
      * @sample samples.DisjointSetUnionSamples.basicUsage
-     * @sample samples.DisjointSetUnionSamples.detectingCycles
+     * @sample samples.DisjointSetUnionSamples.kruskalMinimumSpanningTree
      */
     @IgnorableReturnValue
     public fun union(x: Int, y: Int): Boolean {
@@ -90,14 +87,14 @@ public class DisjointSetUnion(size: Int) {
      *
      * @throws IndexOutOfBoundsException if [x] or [y] is not in `[0, size)`.
      *
-     * @sample samples.DisjointSetUnionSamples.networkConnectivity
+     * @sample samples.DisjointSetUnionSamples.basicUsage
      */
     public fun connected(x: Int, y: Int): Boolean = find(x) == find(y)
 
     /**
      * The number of disjoint sets. O(1).
      *
-     * @sample samples.DisjointSetUnionSamples.dynamicConnectivityUpdates
+     * @sample samples.DisjointSetUnionSamples.basicUsage
      */
     public val count: Int
         get() = _count

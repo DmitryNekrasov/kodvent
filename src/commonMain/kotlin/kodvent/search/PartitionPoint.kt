@@ -13,15 +13,7 @@ package kodvent.search
  *
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  *
- * @sample samples.PartitionPointSamples.insertionPointInSortedArray
  * @sample samples.PartitionPointSamples.findFirstElementGreaterOrEqual
- * @sample samples.PartitionPointSamples.lowerBoundAndUpperBoundWithDuplicates
- * @sample samples.PartitionPointSamples.findFirstElementGreaterOrEqualNotFound
- * @sample samples.PartitionPointSamples.longRangeSearch
- * @sample samples.PartitionPointSamples.findFirstNegativeInFunction
- * @sample samples.PartitionPointSamples.findFirstFailingTest
- * @sample samples.PartitionPointSamples.searchInRange
- * @sample samples.PartitionPointSamples.maximumMinimumDistanceBetweenBalls
  */
 @Suppress("DuplicatedCode")
 public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) -> Boolean): Int {

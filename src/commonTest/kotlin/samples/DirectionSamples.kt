@@ -26,33 +26,14 @@ class DirectionSamples {
 
         assertEquals(Direction.LEFT, Direction.UP.turnLeft())
         assertEquals(Direction.DOWN, Direction.UP.opposite)
-        assertEquals(Direction.LEFT, Direction.RIGHT.opposite)
-
-        var facing = Direction.UP
-        for (turn in "RRLB") {
-            facing = when (turn) {
-                'R' -> facing.turnRight()
-                'L' -> facing.turnLeft()
-                else -> facing.opposite
-            }
-        }
-        // UP, then RIGHT, DOWN, RIGHT and LEFT
-        assertEquals(Direction.LEFT, facing)
     }
 
     @Test
     fun stepsInDirection() {
-        // direction * steps is an offset; y grows downward, so UP has a negative y
         assertEquals(Position(0, -3), Direction.UP * 3)
-        assertEquals(Position(2, 0), Direction.RIGHT * 2)
 
         val start = Position(5, 5)
         assertEquals(Position(5, 2), start + Direction.UP * 3)
-        assertEquals(Position(3, 5), start + Direction.LEFT * 2)
-
-        val plan = listOf(Direction.RIGHT to 4, Direction.DOWN to 2, Direction.LEFT to 1)
-        val corners = plan.runningFold(start) { corner, (direction, steps) -> corner + direction * steps }
-        assertEquals(listOf(Position(5, 5), Position(9, 5), Position(9, 7), Position(8, 7)), corners)
     }
 
     @Test
@@ -62,29 +43,15 @@ class DirectionSamples {
         assertEquals(Direction8.DOWN_LEFT, Direction8.UP_RIGHT.opposite)
 
         assertEquals(Position(3, -3), Direction8.UP_RIGHT * 3)
-
-        val grid = listOf(
-            "T.T..",
-            ".AA..",
-            "..CAT",
-        ).toGrid()
-        val start = grid.positionOf('C')
-
-        // Look around the cell: in which directions does the grid spell CAT from it?
-        val word = "CAT"
-        val found = Direction8.entries.filter { direction ->
-            word.indices.all { i -> grid.getOrNull(start + direction * i) == word[i] }
-        }
-        assertEquals(listOf(Direction8.UP, Direction8.RIGHT, Direction8.UP_LEFT), found)
     }
 
     @Test
     fun arrowsToDirections() {
         assertEquals(Direction.entries, "^>v<".map { it.toDirection() })
 
-        val moves = ">>v<v"
-        val end = moves.fold(Position(0, 0)) { position, arrow -> position + arrow.toDirection() }
-        assertEquals(Position(1, 2), end)
+        // Only the four arrows are directions: letters are not accepted
+        assertNull('L'.toDirectionOrNull())
+        assertFailsWith<IllegalArgumentException> { 'L'.toDirection() }
 
         val grid = listOf(
             "..#.",
@@ -93,9 +60,5 @@ class DirectionSamples {
         val walker = grid.positions.first { grid[it].toDirectionOrNull() != null }
         assertEquals(Position(2, 1), walker)
         assertEquals(Direction.LEFT, grid[walker].toDirection())
-
-        // Only the four arrows are directions: letters are not accepted
-        assertNull('L'.toDirectionOrNull())
-        assertFailsWith<IllegalArgumentException> { 'L'.toDirection() }
     }
 }

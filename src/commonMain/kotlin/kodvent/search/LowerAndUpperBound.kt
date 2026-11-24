@@ -5,9 +5,7 @@
 
 @file:Suppress("RedundantVisibilityModifier")
 
-package kodvent.collections
-
-import kodvent.boundsearch.partitionPoint
+package kodvent.search
 
 /**
  * Returns the lower bound of [element] in this naturally-sorted list: the index of the first element
@@ -18,10 +16,10 @@ import kodvent.boundsearch.partitionPoint
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.lowerBoundWithDuplicates
- * @sample samples.BoundSearchSamples.countOccurrencesUsingBounds
- * @sample samples.BoundSearchSamples.findRangeInSublist
- * @sample samples.BoundSearchSamples.insertionPointMaintainsSortOrder
+ * @sample samples.LowerAndUpperBoundSamples.lowerBoundWithDuplicates
+ * @sample samples.LowerAndUpperBoundSamples.countOccurrencesUsingBounds
+ * @sample samples.LowerAndUpperBoundSamples.findRangeInSublist
+ * @sample samples.LowerAndUpperBoundSamples.insertionPointMaintainsSortOrder
  */
 public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -37,7 +35,7 @@ public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int =
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.lowerBoundWithComparator
+ * @sample samples.LowerAndUpperBoundSamples.lowerBoundWithComparator
  */
 public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -53,7 +51,7 @@ public fun <T> List<T>.lowerBound(element: T, comparator: Comparator<in T>, from
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.lowerBoundWithComparisonFunction
+ * @sample samples.LowerAndUpperBoundSamples.lowerBoundWithComparisonFunction
  */
 public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -69,7 +67,7 @@ public fun <T> List<T>.lowerBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.lowerBoundByWithSelector
+ * @sample samples.LowerAndUpperBoundSamples.lowerBoundByWithSelector
  */
 public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
     key: K?,
@@ -87,10 +85,10 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.upperBoundWithDuplicates
- * @sample samples.BoundSearchSamples.countOccurrencesUsingBounds
- * @sample samples.BoundSearchSamples.upperBoundWithNulls
- * @sample samples.BoundSearchSamples.findRangeInSublist
+ * @sample samples.LowerAndUpperBoundSamples.upperBoundWithDuplicates
+ * @sample samples.LowerAndUpperBoundSamples.countOccurrencesUsingBounds
+ * @sample samples.LowerAndUpperBoundSamples.upperBoundWithNulls
+ * @sample samples.LowerAndUpperBoundSamples.findRangeInSublist
  */
 public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -106,7 +104,7 @@ public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int =
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.upperBoundWithComparator
+ * @sample samples.LowerAndUpperBoundSamples.upperBoundWithComparator
  */
 public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -122,7 +120,7 @@ public fun <T> List<T>.upperBound(element: T, comparator: Comparator<in T>, from
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.upperBoundWithComparisonFunction
+ * @sample samples.LowerAndUpperBoundSamples.upperBoundWithComparisonFunction
  */
 public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, comparison: (T) -> Int): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -138,7 +136,7 @@ public fun <T> List<T>.upperBound(fromIndex: Int = 0, toIndex: Int = size, compa
  * @throws IndexOutOfBoundsException if [fromIndex] is negative or [toIndex] exceeds the size.
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
- * @sample samples.BoundSearchSamples.upperBoundByWithSelector
+ * @sample samples.LowerAndUpperBoundSamples.upperBoundByWithSelector
  */
 public inline fun <T, K : Comparable<K>> List<T>.upperBoundBy(
     key: K?,

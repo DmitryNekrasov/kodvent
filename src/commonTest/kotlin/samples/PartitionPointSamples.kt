@@ -5,8 +5,8 @@
 
 package samples
 
-import kodvent.boundsearch.partitionPoint
 import kodvent.math.sqr
+import kodvent.search.partitionPoint
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

@@ -5,15 +5,15 @@
 
 package samples
 
-import kodvent.collections.lowerBound
-import kodvent.collections.lowerBoundBy
-import kodvent.collections.upperBound
-import kodvent.collections.upperBoundBy
 import kodvent.math.sqr
+import kodvent.search.lowerBound
+import kodvent.search.lowerBoundBy
+import kodvent.search.upperBound
+import kodvent.search.upperBoundBy
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class BoundSearchSamples {
+class LowerAndUpperBoundSamples {
 
     @Test
     fun lowerBoundWithDuplicates() {

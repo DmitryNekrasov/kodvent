@@ -3,13 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package kodvent.collections
+package kodvent.search
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class BoundSearchTest {
+class LowerAndUpperBoundTest {
 
     @Test
     fun `lowerBound - empty list returns 0`() {

@@ -186,8 +186,6 @@ The project includes comprehensive tests for all functions. Test reports are gen
 ./gradlew dokkaGeneratePublicationHtml
 ```
 
-It fails on a link that does not resolve and on a wrong `@sample`. The pages go to the `docs` directory, which is not tracked on `main`. The solutions that `Module.md` prints under "With kodvent" are also tests in `src/commonTest/kotlin/samples/PuzzleSamples.kt`, and the solution of Reindeer Maze is also at the top of this README, so change them together.
-
 ## License
 
 This project is licensed under the Apache License 2.0 – see the [LICENSE](LICENSE) file for details.

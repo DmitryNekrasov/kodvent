@@ -17,6 +17,8 @@ A Kotlin Multiplatform utility library for Advent of Code challenges, featuring 
 Every December, thousands of developers solve [Advent of Code](https://adventofcode.com/) puzzles. In Kotlin, that means writing the same GCD function, the same DSU boilerplate, and the same binary search wrapper – year after year. Kodvent gives you **battle-tested, zero-dependency implementations** so you can focus on the puzzle, not the plumbing.
 
 ```kotlin
+// cycleLengths: List<Long>, because their least common multiple may not fit in an Int
+
 // Before: writing it from scratch every year
 fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
 fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
@@ -41,18 +43,18 @@ val answer = cycleLengths.reduce(::lcm)
 
 ## Features
 
-| Module | What you get | Complexity |
-|--------|-------------|------------|
-| **Grid** | `Grid` / `MutableGrid` addressed by `Position(x, y)` or `grid[x, y]`, `Direction` and `Direction8`, `toGrid()` parsing, `neighbors`, `ray`, rotation, wrap-around | $O(1)$ cell access |
-| **Math** | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ for pow |
-| **Disjoint Set Union** | `find`, `union`, `connected`, `count`, `isolate` with path compression + union by rank | $O(\alpha(n))$ amortized |
-| **Heap** | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
-| **Graph Search** | `bfs` and `dijkstra` over any state with a `neighbors` lambda, from one start or several, giving the distance to every reachable state | $O(V + E)$ and $O((V + E) \log (V + E))$ |
-| **Segment Tree** | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
-| **String Algorithms** | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
-| **Binary Search** | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
-| **Ternary Search** | Find the maximum of a unimodal function on an interval | $O(\log((r-l)/\varepsilon))$ |
-| **Map Counters** | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | $O(1)$ |
+| Feature | Package | What you get | Complexity |
+|---------|---------|-------------|------------|
+| **Grid** | `kodvent.grid` | `Grid` / `MutableGrid` addressed by `Position(x, y)` or `grid[x, y]`, `Direction` and `Direction8`, `toGrid()` parsing, `neighbors`, `ray`, rotation, wrap-around | $O(1)$ cell access |
+| **Math** | `kodvent.math` | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ multiplications for pow |
+| **Disjoint Set Union** | `kodvent.datastructures` | `find`, `union`, `connected`, `count` with path compression + union by rank, `isolate` in $O(n)$ | $O(\alpha(n))$ amortized |
+| **Heap** | `kodvent.datastructures` | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
+| **Graph Search** | `kodvent.graph` | `bfs` and `dijkstra` over any state with a `neighbors` lambda, from one start or several, giving the distance to every reachable state | $O(V + E)$ and $O((V + E) \log (V + E))$ |
+| **Segment Tree** | `kodvent.datastructures` | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
+| **String Algorithms** | `kodvent.strings` | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
+| **Binary Search** | `kodvent.search` | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
+| **Ternary Search** | `kodvent.search` | Find the maximum of a unimodal function on an interval | $O(\log((r-l)/\varepsilon))$ |
+| **Map Counters** | `kodvent.collections` | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | $O(1)$ |
 
 For full API details and parameter descriptions, see the [KDoc reference](https://dmitrynekrasov.github.io/kodvent/).
 
@@ -158,11 +160,11 @@ nothing is trimmed, because a space can be a cell; a whole text is
 val frequencies = mutableMapOf<Char, Int>()
 
 // Count character occurrences
-"hello world".forEach { char ->
+"mississippi".forEach { char ->
     frequencies.increment(char)
 }
 
-// frequencies now contains: {h=1, e=1, l=3, o=2, w=1, r=1, d=1}
+// frequencies now contains: {m=1, i=4, s=4, p=2}
 ```
 
 ### Mathematical Computations
@@ -184,10 +186,11 @@ val modulo = 1000000007L
 val big = 2L.pow(100L, modulo)  // 976371285
 
 // Squared distance without temporary variables
+// dx, dy: Long, because their squares may not fit in an Int
 val distanceSquared = dx.sqr() + dy.sqr()
 ```
 
-### Graph Algorithms with Disjoint Set Union
+### Cycle Detection and Minimum Spanning Trees with Disjoint Set Union
 
 ```kotlin
 // Detect cycles in a graph
@@ -236,34 +239,8 @@ val byPriority = Heap<Task>(compareBy { it.priority })
 val numbers = listOf(7, 2, 9, 4).toHeap()
 ```
 
-```kotlin
-// Dijkstra's algorithm on a grid where entering a cell costs its digit
-// grid: Grid<Int>, e.g. input.toGrid { it.digitToInt() }
-fun lowestTotalRisk(grid: Grid<Int>, start: Position, end: Position): Int {
-    val dist = MutableGrid(grid.width, grid.height) { Int.MAX_VALUE }
-    val heap = Heap<Pair<Int, Position>>(compareBy { it.first })
-    dist[start] = 0
-    heap.push(0 to start)
-    while (heap.isNotEmpty()) {
-        val (d, p) = heap.pop()
-        if (d > dist[p]) continue // stale entry: p was reached cheaper after this push
-        if (p == end) return d
-        for (q in grid.neighbors(p)) {
-            val nd = d + grid[q]
-            if (nd < dist[q]) {
-                dist[q] = nd
-                heap.push(nd to q)
-            }
-        }
-    }
-    error("$end is unreachable from $start")
-}
-```
-
-The entries are `(distance, position)` pairs because the order of an element must not change while it is in
-the heap: a comparator that reads a distance array the search keeps lowering breaks that rule.
-
-`dijkstra` from `kodvent.graph`, below, runs this search for any kind of state.
+For shortest paths there is no need to write Dijkstra's algorithm with a heap by hand, since `dijkstra` from
+`kodvent.graph`, in the next section, runs it for any kind of state.
 
 ### Shortest Paths with BFS and Dijkstra
 
@@ -342,6 +319,8 @@ val numPi = prefixFunction(numbers.size, numbers::get)
 
 ### Binary Search with Partition Point
 
+The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `partitionPoint` is in `kodvent.boundsearch`.
+
 ```kotlin
 // Binary search on answer: maximize minimum distance
 // LeetCode 1552: Magnetic Force Between Two Balls
@@ -367,7 +346,12 @@ val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
 val maxMinDistance = partitionPoint - 1  // 3
 ```
 
+With two integer literals as bounds, both the `Int` and the `Long` overload fit, so give the lambda parameter
+a type, as in `partitionPoint(0, 100) { i: Int -> ... }`.
+
 ### Counting Occurrences with Lower and Upper Bound
+
+The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `lowerBound` and `upperBound` are in `kodvent.collections`.
 
 ```kotlin
 val list = listOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
@@ -380,7 +364,9 @@ val count = upper - lower       // 4
 list.upperBound(8) - list.lowerBound(8)  // 0
 ```
 
-### Finding the Maximum of an Unimodal Function with Ternary Search
+### Finding the Maximum of a Unimodal Function with Ternary Search
+
+The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `ternarySearch` is in `kodvent.boundsearch`.
 
 ```kotlin
 // A rectangle has a fixed perimeter P = 40.
@@ -389,7 +375,7 @@ list.upperBound(8) - list.lowerBound(8)  // 0
 val halfP = 40.0 / 2
 
 val x = ternarySearch(0.0, halfP) { x -> x * (halfP - x) }
-// x = 10.0 (maximum area when the rectangle is a square)
+// x is within about 1e-7 of 10.0 (maximum area when the rectangle is a square)
 ```
 
 ## Development
@@ -403,10 +389,11 @@ val x = ternarySearch(0.0, halfP) { x -> x * (halfP - x) }
 ### Running Tests
 
 ```bash
-./gradlew test
+./gradlew jvmTest    # JVM only, fast
+./gradlew allTests   # every target of the host (the Apple simulator tests need the simulator runtimes)
 ```
 
-The project includes comprehensive tests for all functions. Test reports are generated at `build/reports/tests/test/index.html`.
+The project includes comprehensive tests for all functions. Test reports are generated at `build/reports/tests/jvmTest/index.html` and `build/reports/tests/allTests/index.html`.
 
 ### Changing the Public API
 

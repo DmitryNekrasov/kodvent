@@ -10,16 +10,10 @@ package kodvent.grid
 /**
  * A read-only rectangular grid of [width] x [height] cells addressed by [Position], where row y holds
  * input line y. It relates to [MutableGrid] as List does to MutableList, and a grid that is not a
- * MutableGrid never changes: no cell ever gets another value. Like a List, it does not freeze a value that
- * is a mutable object itself.
+ * MutableGrid never changes. Like a List, it does not freeze a value that is a mutable object.
  *
- * A cell is read as `grid[position]` or, with the two numbers at hand, as `grid[x, y]`; every other
- * function takes a [Position].
- *
- * A grid is not a collection: `position in grid` tests the bounds, and questions about values go through
- * [values]. Every list of positions a grid hands out ([positions], [positionsOf], `neighbors`,
- * `neighbors8`, `ray`) stays the same when cells are written, while [values], [rows] and [columns] are
- * live views.
+ * A cell is addressed as `grid[position]` or `grid[x, y]`; every other function takes a [Position]. A grid
+ * is not a collection: `position in grid` tests the bounds, and questions about values go through [values].
  *
  * @sample samples.GridSamples.parseAndRead
  */
@@ -39,8 +33,8 @@ public sealed interface Grid<out T> {
     public val height: Int
 
     /**
-     * All positions in reading order: row by row from the top, each row from left to right. The list is
-     * computed on access, so obtaining it is O(1), and so are its `contains` and `indexOf`.
+     * All positions in reading order: row by row from the top, each row from left to right. Obtaining the
+     * list is O(1), and so are its `contains` and `indexOf`.
      *
      * @sample samples.GridSamples.positionsInReadingOrder
      */
@@ -56,8 +50,7 @@ public sealed interface Grid<out T> {
 
     /**
      * The rows from top to bottom, each from left to right, as read-only live views, so `rows[y][x]` is the
-     * value at `Position(x, y)`. Each row is a List with List equality and hashCode, and in a `Grid<Char>`
-     * `rows[y].joinToString("")` is input line y.
+     * value at `Position(x, y)`. Each row is a List with List equality and hashCode.
      *
      * @sample samples.GridSamples.rowsAndColumns
      */
@@ -65,8 +58,7 @@ public sealed interface Grid<out T> {
 
     /**
      * The columns from left to right, each from top to bottom, as read-only live views, so `columns[x][y]`
-     * is the value at `Position(x, y)`: x comes first here. Each column is a List with List equality and
-     * hashCode, like a row.
+     * is the value at `Position(x, y)`. Each column is a List with List equality and hashCode.
      *
      * @sample samples.GridSamples.rowsAndColumns
      */
@@ -82,8 +74,8 @@ public sealed interface Grid<out T> {
     public operator fun get(position: Position): T
 
     /**
-     * Returns the value at column [x] of row [y], the same as `grid[Position(x, y)]`. x comes first, as in
-     * [Position], so code written as `a[row][column]` becomes `grid[column, row]`.
+     * Returns the value at column [x] of row [y], the same as `grid[Position(x, y)]`. x comes first, so
+     * `a[row][column]` becomes `grid[column, row]`; a pair left in the old order may read another cell.
      *
      * @throws IndexOutOfBoundsException if the cell is outside this grid
      *
@@ -108,8 +100,7 @@ public sealed interface Grid<out T> {
     public fun getOrDefault(position: Position, defaultValue: @UnsafeVariance T): T
 
     /**
-     * Returns `true` if [position] is inside this grid, so `position in grid` is the bounds test. It never
-     * looks at values.
+     * Returns `true` if [position] is inside this grid, so `position in grid` is the bounds test.
      *
      * @sample samples.GridSamples.boundsCheck
      */
@@ -133,8 +124,7 @@ public sealed interface Grid<out T> {
 
     /**
      * Returns every position that holds [value], in reading order, as a new list that later writes to the
-     * grid do not change. It scans every cell on each call: for a test that can stop at the first match,
-     * write `positions.any { grid[it] == value && ... }`, which builds no list.
+     * grid do not change. It scans every cell on each call.
      *
      * @sample samples.GridSamples.findPositions
      */
@@ -157,9 +147,8 @@ public sealed interface Grid<out T> {
     override fun hashCode(): Int
 
     /**
-     * Returns the rows joined by `\n`, each row being its values written one after another: a Char as it is
-     * and any other value, null included, as its `toString()`. So a `Grid<Char>` prints as the puzzle
-     * input. There is no line break after the last row.
+     * Returns the rows joined by `\n`, each row the `toString()` of every value in it, one after another,
+     * so a `Grid<Char>` prints as the puzzle input.
      *
      * @sample samples.GridSamples.printing
      */
@@ -183,8 +172,7 @@ public sealed interface MutableGrid<T> : Grid<T> {
     public operator fun set(position: Position, value: T)
 
     /**
-     * Sets the cell at column [x] of row [y] to [value], the same as `grid[Position(x, y)] = value`, so
-     * `grid[x, y] += 1` works too.
+     * Sets the cell at column [x] of row [y] to [value], the same as `grid[Position(x, y)] = value`.
      *
      * @throws IndexOutOfBoundsException if the cell is outside this grid
      *

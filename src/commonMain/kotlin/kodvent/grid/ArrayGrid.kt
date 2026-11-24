@@ -145,7 +145,6 @@ internal fun <T> Grid<T>.asArrayGrid(): ArrayGrid<T> = this as ArrayGrid<T>
 internal fun requireGridLines(lines: List<CharSequence>): Int {
     if (lines.isEmpty()) return 0
     val width = lines[0].length
-    // Before the scan below, which would walk every line of a grid that cannot be built
     require(width.toLong() * lines.size <= Int.MAX_VALUE) { "A $width x ${lines.size} grid has too many cells" }
     for ((index, line) in lines.withIndex()) {
         val lineBreak = line.indexOfFirst { it == '\r' || it == '\n' }

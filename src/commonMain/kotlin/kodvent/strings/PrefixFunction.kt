@@ -8,10 +8,9 @@
 package kodvent.strings
 
 /**
- * Computes the [prefix function](https://cp-algorithms.com/string/prefix-function.html) of this
- * character sequence: an array whose i-th element is the length of the longest proper prefix of
- * `this[0..i]` that is also a suffix of it. A building block of the Knuth-Morris-Pratt algorithm.
- * O(n) time and space.
+ * Returns the [prefix function](https://cp-algorithms.com/string/prefix-function.html) of this character
+ * sequence. Element `i` of the result is the length of the longest proper prefix of `this[0..i]` that is also
+ * its suffix. O(n) time and space.
  *
  * @sample samples.PrefixFunctionAndKMPSamples.prefixFunctionBasicUsage
  *
@@ -20,15 +19,13 @@ package kodvent.strings
 public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::get)
 
 /**
- * Generic [prefix function](https://cp-algorithms.com/string/prefix-function.html) over [length] elements
- * of type [T] accessed by index via [at] (compared with `==`). Returns an array whose i-th element is the
- * length of the longest proper prefix that is also a suffix of the subsequence `[0..i]`. O(n) time and space.
+ * Returns the [prefix function](https://cp-algorithms.com/string/prefix-function.html) of the [length]
+ * elements given by [at], which are compared with `==`. Element `i` of the result is the length of the
+ * longest proper prefix of elements `0..i` that is also their suffix. O(n) time and space.
  *
  * @throws IllegalArgumentException if [length] is negative
  *
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
- *
- * @see CharSequence.allIndicesOf
  */
 public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
     require(length >= 0) { "Length must not be negative, but was $length" }
@@ -42,12 +39,10 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
 }
 
 /**
- * Returns the starting indices of every occurrence of [needle] in this character sequence, using the
- * Knuth-Morris-Pratt algorithm (via the prefix function) in O(n + m) time.
+ * Returns the start index of every occurrence of [needle] in this character sequence, overlapping ones
+ * included, in ascending order. An empty [needle] is found at every index in `0..<length`. O(n + m).
  *
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfBasicUsage
- *
- * @see prefixFunction
  */
 public fun CharSequence.allIndicesOf(needle: CharSequence): List<Int> {
     if (needle.isEmpty()) return (0..<length).toList()

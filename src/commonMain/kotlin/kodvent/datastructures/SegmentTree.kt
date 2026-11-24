@@ -8,9 +8,9 @@
 package kodvent.datastructures
 
 /**
- * A [segment tree](https://en.wikipedia.org/wiki/Segment_tree) over a [source] list of elements of
- * type [T], supporting range queries and point updates via an associative [operation] (e.g. sum, min,
- * max, gcd): `operation(a, operation(b, c)) == operation(operation(a, b), c)`.
+ * A [segment tree](https://en.wikipedia.org/wiki/Segment_tree) over a copy of [source]. `tree[start, end]`
+ * combines the elements from `start` to `end`, both included and in that order, with [operation], and
+ * `tree[index] = value` replaces one element. [operation] must be associative, like sum, min, max or gcd.
  *
  * Construction is O(n); range query and point update are O(log n). Uses O(n) space.
  *
@@ -28,9 +28,9 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
     }
 
     /**
-     * Returns the [operation] applied over the inclusive range [[start], [end]].
+     * Returns the [operation] applied over the inclusive range [[start], [end]]. O(log n).
      *
-     * @throws IllegalArgumentException if the tree is empty or [start] > [end]
+     * @throws IllegalArgumentException if the tree is empty or [start] is greater than [end]
      * @throws IndexOutOfBoundsException if [start] is negative or [end] is out of bounds
      *
      * @sample samples.SegmentTreeSamples.basicUsage
@@ -39,15 +39,19 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
         require(size > 0) { "Cannot query empty segment tree" }
         require(start <= end) { "Start index $start is greater than end index $end" }
 
-        if (start < 0) throw IndexOutOfBoundsException("Start index $start is negative. Valid range: [0, ${size - 1}]")
-        if (end >= size) throw IndexOutOfBoundsException("End index $end is out of bounds. Valid range: [0, ${size - 1}]")
+        if (start < 0) {
+            throw IndexOutOfBoundsException("Start index $start is negative. Valid range: [0, ${size - 1}]")
+        }
+        if (end >= size) {
+            throw IndexOutOfBoundsException("End index $end is out of bounds. Valid range: [0, ${size - 1}]")
+        }
 
         return queryRange(1, 0, size - 1, start, end)
             ?: error("Query returned null for valid range [$start, $end]")
     }
 
     /**
-     * Returns the value at [index], equivalent to `get(index, index)`. [index] must be in `[0, size)`.
+     * Returns the value at [index], the same as `get(index, index)`. O(log n).
      *
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
@@ -57,8 +61,8 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
     public operator fun get(index: Int): T = get(index, index)
 
     /**
-     * Like [get] over the inclusive range [[start], [end]], but returns null for out-of-range or inverted
-     * ([start] > [end]) indices instead of throwing.
+     * Returns the [operation] applied over the inclusive range [[start], [end]], or `null` if [start] is
+     * negative, [end] is out of bounds or [start] is greater than [end]. O(log n).
      *
      * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
@@ -68,16 +72,15 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
     }
 
     /**
-     * Like [get] over the inclusive range [[start], [end]], but returns [defaultValue] for out-of-range or
-     * inverted ([start] > [end]) indices instead of throwing.
+     * Returns the [operation] applied over the inclusive range [[start], [end]], or [defaultValue] if
+     * [start] is negative, [end] is out of bounds or [start] is greater than [end]. O(log n).
      *
      * @sample samples.SegmentTreeSamples.safeQueryMethods
      */
     public fun getOrDefault(start: Int, end: Int, defaultValue: T): T = getOrNull(start, end) ?: defaultValue
 
     /**
-     * Sets the value at [index] (which must be in `[0, size)`) to [value], in O(log n) time. Since [get]
-     * and [set] are both defined, compound assignments (`+=`, `-=`, `*=`, `/=`, `%=`) work too.
+     * Sets the value at [index] to [value], which also makes `tree[index] += 1` work. O(log n).
      *
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
@@ -86,7 +89,9 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
      */
     public operator fun set(index: Int, value: T) {
         require(size > 0) { "Cannot update empty segment tree" }
-        if (index !in 0..<size) throw IndexOutOfBoundsException("Index $index is out of bounds. Valid range: [0, ${size - 1}]")
+        if (index !in 0..<size) {
+            throw IndexOutOfBoundsException("Index $index is out of bounds. Valid range: [0, ${size - 1}]")
+        }
         update(1, 0, size - 1, index, value)
     }
 

@@ -113,8 +113,7 @@ public fun Char.toDirection(): Direction =
     toDirectionOrNull() ?: throw IllegalArgumentException("'$this' is not a direction: expected one of ^ > v <")
 
 /**
- * Returns the direction this arrow points in (`^`, `>`, `v` or `<`), or `null` for any other character,
- * so it also tells whether a cell holds an arrow.
+ * Returns the direction this arrow points in (`^`, `>`, `v` or `<`), or `null` for any other character.
  *
  * @sample samples.DirectionSamples.arrowsToDirections
  */

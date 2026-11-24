@@ -8,10 +8,14 @@
 package kodvent.search
 
 /**
- * Binary-searches the range `[[fromIndex], [toIndex])` for the partition point: the first index where the
- * monotonic [predicate] turns from `true` to `false`, or [toIndex] if it is `true` throughout.
+ * Returns the first index in `fromIndex..<toIndex` at which [predicate] is `false`, or [toIndex] if there is
+ * none. It is a binary search, so [predicate] must be `true` up to some index and `false` from it on.
  *
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ * [predicate] is called at most 32 times, for any range of Int. Two integer literals as bounds fit both
+ * overloads, so give the lambda parameter a type, as in `partitionPoint(0, 100) { i: Int -> ... }`, or write
+ * a bound as `0L` for the Long overload.
+ *
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]
  *
  * @sample samples.PartitionPointSamples.findFirstElementGreaterOrEqual
  */
@@ -33,10 +37,14 @@ public inline fun partitionPoint(fromIndex: Int, toIndex: Int, predicate: (Int) 
 }
 
 /**
- * Binary-searches the range `[[fromIndex], [toIndex])` for the partition point: the first index where the
- * monotonic [predicate] turns from `true` to `false`, or [toIndex] if it is `true` throughout.
+ * Returns the first index in `fromIndex..<toIndex` at which [predicate] is `false`, or [toIndex] if there is
+ * none. It is a binary search, so [predicate] must be `true` up to some index and `false` from it on.
  *
- * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
+ * [predicate] is called at most 64 times, for any range of Long. Two integer literals as bounds fit both
+ * overloads, so write a bound as `0L` or give the lambda parameter a type, as in
+ * `partitionPoint(0, 100) { i: Long -> ... }`.
+ *
+ * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex]
  *
  * @sample samples.PartitionPointSamples.squareRootFloor
  */

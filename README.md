@@ -106,24 +106,24 @@ dependencies {
 
 ```kotlin
 // Grids: parse the input, find a marker, look around
-val grid = input.toGrid()                                   // input: List<String>
+val grid = input.toGrid()  // input: List<String>
 val start = grid.positionOf('S')
 val walls = grid.neighbors8(start).count { grid[it] == '#' }
 
 // Shortest paths over any kind of state
 val steps = bfs(start) { p -> grid.neighbors(p).filter { grid[it] != '#' } }
-val costs = dijkstra(0) { vertex -> edges[vertex] }         // edges[vertex]: pairs of next vertex to cost
+val costs = dijkstra(0) { vertex -> edges[vertex] }  // edges[vertex]: pairs of next vertex to cost
 
 // Data structures
-val heap = listOf(7, 2, 9, 4).toHeap()                      // heap.pop() is 2
-val dsu = DisjointSetUnion(4)                               // dsu.union(0, 1) joins two sets
-val sums = SegmentTree(listOf(1, 3, 5, 7), Int::plus)       // sums[1, 2] is 8
+val heap = listOf(7, 2, 9, 4).toHeap()  // heap.pop() is 2
+val dsu = DisjointSetUnion(4)  // dsu.union(0, 1) joins two sets
+val sums = SegmentTree(listOf(1, 3, 5, 7), Int::plus)  // sums[1, 2] is 8
 
 // Binary search on the answer, number theory, string matching
 val root = partitionPoint(0, 100) { i: Int -> i * i < 50 }  // 8
-val divisor = gcd(48, 18)                                   // 6
-val power = 2L.pow(100, 1_000_000_007)                      // 976371285
-val found = "ababcababa".allIndicesOf("aba")                // [0, 5, 7]
+val divisor = gcd(48, 18)  // 6
+val power = 2L.pow(100, 1_000_000_007)  // 976371285
+val found = "ababcababa".allIndicesOf("aba")  // [0, 5, 7]
 ```
 
 The [documentation](https://dmitrynekrasov.github.io/kodvent/) describes every package with examples and shows real Advent of Code solutions as they look without kodvent and with it.
@@ -139,8 +139,8 @@ The [documentation](https://dmitrynekrasov.github.io/kodvent/) describes every p
 ### Running Tests
 
 ```bash
-./gradlew jvmTest    # JVM only, fast
-./gradlew allTests   # every target of the host (the Apple simulator tests need the simulator runtimes)
+./gradlew jvmTest  # JVM only, fast
+./gradlew allTests  # every target of the host (the Apple simulator tests need the simulator runtimes)
 ```
 
 The project includes comprehensive tests for all functions. Test reports are generated at `build/reports/tests/jvmTest/index.html` and `build/reports/tests/allTests/index.html`.

@@ -34,7 +34,7 @@ val visited = mutableSetOf(position)
 while (true) {
     val ahead = position + direction
     when (grid.getOrNull(ahead)) {
-        null -> break                              // the step leaves the grid
+        null -> break  // the step leaves the grid
         '#' -> direction = direction.turnRight()
         else -> { position = ahead; visited += ahead }
     }
@@ -47,7 +47,7 @@ The cells of a [MutableGrid][kodvent.grid.MutableGrid] can be overwritten. Grids
 // Digits, mutation, and a snapshot of the grid as a map key
 // levels: List<String>, lines of digits such as "5483"
 val energy = levels.toMutableGrid { it.digitToInt() }
-energy[0, 0] += 1                             // the same cell as energy[Position(0, 0)]
+energy[0, 0] += 1  // the same cell as energy[Position(0, 0)]
 val seen = mutableMapOf(energy.toGrid() to 0)
 
 // The first non-empty cell along a direction, diagonals included
@@ -470,8 +470,8 @@ heap.push(1)
 heap.push(3)
 
 heap.peek()  // 1
-heap.pop()   // 1
-heap.pop()   // 3
+heap.pop()  // 1
+heap.pop()  // 3
 
 // A max-heap, and a heap ordered by a property
 val largestFirst = Heap<Int>(reverseOrder())
@@ -506,17 +506,17 @@ val tree = edges.sortedBy { it.weight }.filter { forest.union(it.from, it.to) }
 val numbers = listOf(1, 3, 5, 7, 9, 11)
 val sums = SegmentTree(numbers, Int::plus)
 
-sums[1, 4]           // 24, the sum of 3, 5, 7 and 9
-sums[2] = 15         // a point update
-sums[2] += 10        // a compound assignment
+sums[1, 4]  // 24, the sum of 3, 5, 7 and 9
+sums[2] = 15  // a point update
+sums[2] += 10  // a compound assignment
 
 // Any associative operation
 val minimums = SegmentTree(numbers, ::minOf)
 val divisors = SegmentTree(numbers, ::gcd)
 
 // Queries with bounds that may be outside
-sums.getOrNull(0, 100)         // null
-sums.getOrDefault(0, 100, 0)   // 0
+sums.getOrNull(0, 100)  // null
+sums.getOrDefault(0, 100, 0)  // 0
 ```
 
 ## Binary and ternary search
@@ -529,7 +529,7 @@ The [kodvent.search] package has binary search in 3 forms and ternary search.
 import kodvent.search.*
 
 val sorted = intArrayOf(5, 10, 15, 20, 25, 30)
-partitionPoint(0, sorted.size) { sorted[it] < 22 }       // 4, the index of 25
+partitionPoint(0, sorted.size) { sorted[it] < 22 }  // 4, the index of 25
 
 // The floor of a square root: the last x with x * x <= n is one before the partition point
 val n = 12_345_678_912_345L
@@ -545,7 +545,7 @@ val list = listOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
 
 val lower = list.lowerBound(9)  // 7, the index of the first 9
 val upper = list.upperBound(9)  // 11, the index after the last 9
-val count = upper - lower       // 4
+val count = upper - lower  // 4
 
 // For an element that is not in the list both are the same index
 list.upperBound(8) - list.lowerBound(8)  // 0
@@ -566,8 +566,8 @@ The [kodvent.math] package has functions for number theory.
 ```kotlin
 import kodvent.math.*
 
-val g = gcd(48, 18)   // 6
-val l = lcm(12, 18)   // 36
+val g = gcd(48, 18)  // 6
+val l = lcm(12, 18)  // 36
 
 // The least common multiple of several numbers
 // cycleLengths: List<Long>, because the result may not fit in an Int

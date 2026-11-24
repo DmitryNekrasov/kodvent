@@ -179,40 +179,30 @@ class PrefixFunctionAndKMPTest {
     }
 
     @Test
-    fun `allIndicesOf with custom delimiter`() {
-        val result = "abc#def#abc".allIndicesOf("abc", delimiter = '$')
-        assertEquals(listOf(0, 8), result)
-    }
-
-    @Test
-    fun `allIndicesOf handles text containing default delimiter`() {
-        val result = "a#b#c#a#b".allIndicesOf("a#b", delimiter = '$')
-        assertEquals(listOf(0, 6), result)
-    }
-
-    @Test
     fun `allIndicesOf complex case with multiple overlapping matches`() {
         val result = "aabaabaabaab".allIndicesOf("aabaab")
         assertEquals(listOf(0, 3, 6), result)
     }
 
     @Test
-    fun `allIndicesOf throws when delimiter appears in needle`() {
-        assertFailsWith<IllegalArgumentException> { "hello world".allIndicesOf("hel#lo") }
+    fun `allIndicesOf falls back through shorter borders of the needle`() {
+        assertEquals(listOf(1), "aaab".allIndicesOf("aab"))
+        assertEquals(emptyList(), "ababbaba".allIndicesOf("ababa"))
     }
 
     @Test
-    fun `allIndicesOf throws when delimiter appears in text`() {
-        assertFailsWith<IllegalArgumentException> { "hel#lo world".allIndicesOf("hello") }
+    fun `allIndicesOf accepts a hash in the text and in the needle`() {
+        assertEquals(listOf(1, 2, 4), "#..#.#".allIndicesOf("."))
+        assertEquals(listOf(0, 2), "#.#.#".allIndicesOf("#.#"))
+    }
+
+    private class Chars(text: String) : CharSequence by text {
+        override fun toString(): String = "Chars"
     }
 
     @Test
-    fun `allIndicesOf throws when custom delimiter appears in needle`() {
-        assertFailsWith<IllegalArgumentException> { "hello world".allIndicesOf("hel\$lo", delimiter = '$') }
-    }
-
-    @Test
-    fun `allIndicesOf throws when custom delimiter appears in text`() {
-        assertFailsWith<IllegalArgumentException> { "hel\$lo world".allIndicesOf("hello", delimiter = '$') }
+    fun `allIndicesOf reads the characters of a CharSequence and not its toString`() {
+        assertEquals(listOf(1), Chars("aaab").allIndicesOf("aab"))
+        assertEquals(listOf(1), "aaab".allIndicesOf(Chars("aab")))
     }
 }

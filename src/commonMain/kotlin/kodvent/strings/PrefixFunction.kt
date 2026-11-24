@@ -45,33 +45,30 @@ public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
 
 /**
  * Returns the starting indices of every occurrence of [needle] in this character sequence, using the
- * Knuth-Morris-Pratt algorithm (via the prefix function) in O(n + m) time. The [delimiter] (default `'#'`)
- * is used internally and must not appear in [needle] or in this sequence.
- *
- * @throws IllegalArgumentException if the delimiter appears in the needle or in this text
+ * Knuth-Morris-Pratt algorithm (via the prefix function) in O(n + m) time.
  *
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfBasicUsage
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfFindingOverlappingPatterns
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfCountingOccurrences
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfSearchInDNA
- * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfWithCustomDelimiter
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfRepeatedPatternDetection
  * @sample samples.PrefixFunctionAndKMPSamples.allIndicesOfEdgeCases
  * @sample samples.PrefixFunctionAndKMPSamples.combiningPrefixFunctionAndKMP
  *
  * @see prefixFunction
  */
-public fun CharSequence.allIndicesOf(needle: CharSequence, delimiter: Char = '#'): List<Int> {
+public fun CharSequence.allIndicesOf(needle: CharSequence): List<Int> {
     if (needle.isEmpty()) return (0..<length).toList()
 
-    require(delimiter !in needle) { "Delimiter '$delimiter' must not appear in the needle string" }
-    require(delimiter !in this) { "Delimiter '$delimiter' must not appear in the text" }
-
-    val pi = "$needle$delimiter$this".prefixFunction()
+    val pi = needle.prefixFunction()
     val result = mutableListOf<Int>()
-    for (i in (needle.length + 1)..pi.lastIndex) {
-        if (pi[i] == needle.length) {
-            result.add(i - 2 * needle.length)
+    var j = 0
+    for (i in indices) {
+        while (j > 0 && this[i] != needle[j]) j = pi[j - 1]
+        if (this[i] == needle[j]) j++
+        if (j == needle.length) {
+            result.add(i - j + 1)
+            j = pi[j - 1]
         }
     }
     return result

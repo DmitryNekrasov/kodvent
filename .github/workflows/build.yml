@@ -28,3 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run gradlew build
         run: ./gradlew build
+
+      # The build does not run Dokka: this step fails on a broken link in KDoc or Module.md and on a wrong @sample
+      - name: Run gradlew dokkaGeneratePublicationHtml
+        run: ./gradlew dokkaGeneratePublicationHtml

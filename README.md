@@ -69,7 +69,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("io.github.dmitrynekrasov:kodvent:0.3.1")
+                implementation("io.github.dmitrynekrasov:kodvent:0.4.0")
             }
         }
     }
@@ -80,7 +80,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("io.github.dmitrynekrasov:kodvent:0.3.1")
+    implementation("io.github.dmitrynekrasov:kodvent:0.4.0")
 }
 ```
 
@@ -88,7 +88,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'io.github.dmitrynekrasov:kodvent:0.3.1'
+    implementation 'io.github.dmitrynekrasov:kodvent:0.4.0'
 }
 ```
 
@@ -98,285 +98,35 @@ dependencies {
 <dependency>
     <groupId>io.github.dmitrynekrasov</groupId>
     <artifactId>kodvent-jvm</artifactId>
-    <version>0.3.1</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
 ## Usage
 
-### 2D Grids
-
-The `kodvent.grid` package is not released yet, it will be available in the next version.
-
 ```kotlin
-// input: List<String>, the puzzle input lines; input[y][x] is the cell at Position(x, y)
-val grid = input.toGrid()
+// Grids: parse the input, find a marker, look around
+val grid = input.toGrid()                                   // input: List<String>
+val start = grid.positionOf('S')
+val walls = grid.neighbors8(start).count { grid[it] == '#' }
 
-// Before: bounds checks by hand in every grid puzzle
-var count = 0
-for (k in (i - 1)..(i + 1)) for (l in (j - 1)..(j + 1))
-    if ((k != i || l != j) && k in input.indices && l in input[k].indices && input[k][l] == '@') count++
+// Shortest paths over any kind of state
+val steps = bfs(start) { p -> grid.neighbors(p).filter { grid[it] != '#' } }
+val costs = dijkstra(0) { vertex -> edges[vertex] }         // edges[vertex]: pairs of next vertex to cost
 
-// After
-val count = grid.neighbors8(position).count { grid[it] == '@' }
+// Data structures
+val heap = listOf(7, 2, 9, 4).toHeap()                      // heap.pop() is 2
+val dsu = DisjointSetUnion(4)                               // dsu.union(0, 1) joins two sets
+val sums = SegmentTree(listOf(1, 3, 5, 7), Int::plus)       // sums[1, 2] is 8
+
+// Binary search on the answer, number theory, string matching
+val root = partitionPoint(0, 100) { i: Int -> i * i < 50 }  // 8
+val divisor = gcd(48, 18)                                   // 6
+val power = 2L.pow(100, 1_000_000_007)                      // 976371285
+val found = "ababcababa".allIndicesOf("aba")                // [0, 5, 7]
 ```
 
-```kotlin
-// Walk from '^', turning right at every '#', until a step leaves the grid
-var position = grid.positionOf('^')
-var direction = Direction.UP
-val visited = mutableSetOf(position)
-while (true) {
-    val ahead = position + direction
-    when (grid.getOrNull(ahead)) {
-        null -> break                              // the step leaves the grid
-        '#' -> direction = direction.turnRight()
-        else -> { position = ahead; visited += ahead }
-    }
-}
-
-// Digits, mutation, and a snapshot of the grid as a map key
-// levels: List<String>, lines of digits such as "5483"
-val energy = levels.toMutableGrid { it.digitToInt() }
-energy[0, 0] += 1                             // the same cell as energy[Position(0, 0)]
-val seen = mutableMapOf(energy.toGrid() to 0)
-
-// The first non-empty cell along a direction, diagonals included
-val firstSeen = grid.ray(position, Direction8.UP_RIGHT).firstOrNull { grid[it] != '.' }
-
-// Rotation, and a pattern that repeats endlessly in every direction
-val turned = grid.rotatedClockwise()
-val repeated = grid[Position(-1, 1000).wrap(grid)]
-```
-
-`x` counts columns from the left and `y` counts lines from the top, so a puzzle's `x,y` pair goes into
-`Position(x, y)` unchanged, and `grid[x, y]` is `grid[Position(x, y)]`. Lines must have the same length and
-nothing is trimmed, because a space can be a cell; a whole text is
-`text.lines().dropLastWhile { it.isEmpty() }.toGrid()`.
-
-### Counting Elements
-
-```kotlin
-val frequencies = mutableMapOf<Char, Int>()
-
-// Count character occurrences
-"mississippi".forEach { char ->
-    frequencies.increment(char)
-}
-
-// frequencies now contains: {m=1, i=4, s=4, p=2}
-```
-
-### Mathematical Computations
-
-```kotlin
-// Greatest common divisor and the least common multiple
-val g = gcd(48, 18)   // 6
-val l = lcm(12, 18)   // 36
-
-// Simplify a fraction
-val divisor = gcd(48, 180)
-val simplified = "${48 / divisor}/${180 / divisor}"  // "4/15"
-
-// Binary exponentiation with infix syntax
-val result = 2L pow 10L  // 1024
-
-// Modular exponentiation — useful for number theory problems
-val modulo = 1000000007L
-val big = 2L.pow(100L, modulo)  // 976371285
-
-// Squared distance without temporary variables
-// dx, dy: Long, because their squares may not fit in an Int
-val distanceSquared = dx.sqr() + dy.sqr()
-```
-
-### Cycle Detection and Minimum Spanning Trees with Disjoint Set Union
-
-```kotlin
-// Detect cycles in a graph
-val dsu = DisjointSetUnion(4)
-
-dsu.union(0, 1)
-dsu.union(1, 2)
-dsu.union(2, 3)
-
-val hasCycle = !dsu.union(0, 3)  // true - cycle detected!
-
-// Kruskal's algorithm for Minimum Spanning Tree
-data class Edge(val from: Int, val to: Int, val weight: Int)
-
-val edges = listOf(
-    Edge(0, 1, 4),
-    Edge(0, 2, 2),
-    Edge(1, 2, 1),
-    Edge(1, 3, 5)
-)
-
-val dsuMst = DisjointSetUnion(4)
-val mst = edges.sortedBy { it.weight }.filter { dsuMst.union(it.from, it.to) }
-```
-
-### Priority Queue with Heap
-
-`Heap` is not released yet, it will be available in the next version.
-
-```kotlin
-// The smallest element is on top
-val heap = Heap<Int>()
-heap.push(5)
-heap.push(1)
-heap.push(3)
-
-heap.peek()  // 1
-heap.pop()   // 1
-heap.pop()   // 3
-
-// A max-heap, and a heap ordered by a property
-val largestFirst = Heap<Int>(reverseOrder())
-val byPriority = Heap<Task>(compareBy { it.priority })
-
-// From a collection in O(n)
-val numbers = listOf(7, 2, 9, 4).toHeap()
-```
-
-For shortest paths there is no need to write Dijkstra's algorithm with a heap by hand, since `dijkstra` from
-`kodvent.graph`, in the next section, runs it for any kind of state.
-
-### Shortest Paths with BFS and Dijkstra
-
-The `kodvent.graph` package is not released yet, it will be available in the next version.
-
-```kotlin
-// Fewest steps through a maze
-// maze: Grid<Char>, e.g. input.toGrid()
-val steps = bfs(start) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
-val answer = steps[end] ?: -1  // an unreachable cell is not in the map
-
-// Flood fill
-val region = bfs(position) { p -> garden.neighbors(p).filter { garden[it] == garden[p] } }.keys
-
-// The distance to the nearest of several starts
-val toNearestExit = bfs(starts = maze.positionsOf('E')) { p -> maze.neighbors(p).filter { maze[it] != '#' } }
-```
-
-```kotlin
-// Dijkstra over states: at most three steps in a row in one direction
-// grid: Grid<Int>, where entering a cell costs its digit
-data class Cart(val position: Position, val direction: Direction, val run: Int)
-
-val origin = Position(0, 0)
-val starts = listOf(Cart(origin, Direction.RIGHT, 0), Cart(origin, Direction.DOWN, 0))
-val costs = dijkstra(starts = starts) { (position, direction, run) ->
-    listOf(direction, direction.turnLeft(), direction.turnRight())
-        .map { Cart(position + it, it, if (it == direction) run + 1 else 1) }
-        .filter { it.position in grid && it.run <= 3 }
-        .map { it to grid[it.position] }  // next to cost
-}
-val cheapest = costs.filterKeys { it.position == grid.positions.last() }.values.min()
-```
-
-A state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a pair. With a
-lambda that does not give the type of its parameter, a collection of starts fits both overloads, so name the
-argument `starts =`.
-
-### Range Queries with Segment Tree
-
-```kotlin
-// Range sum queries with bracket syntax
-val numbers = listOf(1, 3, 5, 7, 9, 11)
-val sumTree = SegmentTree(numbers, Int::plus)
-
-sumTree[1, 4]           // 24 (sum of 3 + 5 + 7 + 9)
-sumTree[2] = 15         // point update
-sumTree[2] += 10        // compound assignment
-
-// Works with any associative operation
-val minTree = SegmentTree(data, ::minOf)
-val maxTree = SegmentTree(data, ::maxOf)
-val gcdTree = SegmentTree(values, ::gcd)
-
-// Safe queries for bounds you can't guarantee
-sumTree.getOrNull(0, 100)         // null (out of bounds)
-sumTree.getOrDefault(0, 100, 0)   // 0
-```
-
-### String Matching with KMP Algorithm
-
-```kotlin
-// Find all occurrences of a pattern in text
-val indices = "ababcababa".allIndicesOf("aba")  // [0, 5, 7]
-
-// Finds overlapping patterns
-"aaaa".allIndicesOf("aa")  // [0, 1, 2]
-
-// Period detection via prefix function
-val pi = "abababab".prefixFunction()
-val period = "abababab".length - pi.last()  // 2
-
-// Generic prefix function works with any sequence
-val numPi = prefixFunction(numbers.size, numbers::get)
-```
-
-### Binary Search with Partition Point
-
-The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `partitionPoint` is in `kodvent.boundsearch`.
-
-```kotlin
-// Binary search on answer: maximize minimum distance
-// LeetCode 1552: Magnetic Force Between Two Balls
-fun canPlaceBalls(positions: IntArray, m: Int, minDistance: Int): Boolean {
-    var ballsPlaced = 1
-    var lastPosition = positions[0]
-    for (i in 1..positions.lastIndex) {
-        if (positions[i] - lastPosition >= minDistance) {
-            ballsPlaced++
-            lastPosition = positions[i]
-        }
-    }
-    return ballsPlaced >= m
-}
-
-val positions = intArrayOf(1, 2, 3, 4, 7)
-val m = 3
-positions.sort()
-
-val partitionPoint = partitionPoint(0, positions.last() + 1) { distance ->
-    canPlaceBalls(positions, m, distance)
-}
-val maxMinDistance = partitionPoint - 1  // 3
-```
-
-With two integer literals as bounds, both the `Int` and the `Long` overload fit, so give the lambda parameter
-a type, as in `partitionPoint(0, 100) { i: Int -> ... }`.
-
-### Counting Occurrences with Lower and Upper Bound
-
-The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `lowerBound` and `upperBound` are in `kodvent.collections`.
-
-```kotlin
-val list = listOf(1, 3, 3, 3, 5, 5, 7, 9, 9, 9, 9, 11)
-
-val lower = list.lowerBound(9)  // 7 - index of first 9
-val upper = list.upperBound(9)  // 11 - index after last 9
-val count = upper - lower       // 4
-
-// For elements that don't exist, lower == upper
-list.upperBound(8) - list.lowerBound(8)  // 0
-```
-
-### Finding the Maximum of a Unimodal Function with Ternary Search
-
-The `kodvent.search` package is not released yet, it will be available in the next version. In 0.3.1 `ternarySearch` is in `kodvent.boundsearch`.
-
-```kotlin
-// A rectangle has a fixed perimeter P = 40.
-// Side lengths: x and (P/2 - x). Area = x * (20 - x).
-// Find x that maximizes area, with x in [0, 20].
-val halfP = 40.0 / 2
-
-val x = ternarySearch(0.0, halfP) { x -> x * (halfP - x) }
-// x is within about 1e-7 of 10.0 (maximum area when the rectangle is a square)
-```
+The [documentation](https://dmitrynekrasov.github.io/kodvent/) describes every package with examples and shows real Advent of Code solutions as they look without kodvent and with it.
 
 ## Development
 
@@ -403,6 +153,16 @@ The project includes comprehensive tests for all functions. Test reports are gen
 ./gradlew updateKotlinAbi
 ```
 
+### Changing the Documentation
+
+`./gradlew build` does not run Dokka, but CI does. After a change of KDoc, of a sample or of `Module.md`, generate the documentation:
+
+```bash
+./gradlew dokkaGeneratePublicationHtml
+```
+
+It fails on a link that does not resolve and on a wrong `@sample`. The pages go to the `docs` directory, which is not tracked on `main`. The solutions that `Module.md` prints under "With kodvent" are also tests in `src/commonTest/kotlin/samples/PuzzleSamples.kt`, so change both together.
+
 ## License
 
 This project is licensed under the Apache License 2.0 – see the [LICENSE](LICENSE) file for details.
@@ -413,5 +173,5 @@ Contributions are welcome! Here's how to get started:
 
 1. Check [open issues](https://github.com/DmitryNekrasov/kodvent/issues) for things to work on
 2. Fork the repository and create a feature branch
-3. Make sure `./gradlew build` passes (the project uses `allWarningsAsErrors` and `explicitApi`)
+3. Make sure `./gradlew build` and `./gradlew dokkaGeneratePublicationHtml` pass (the project uses `allWarningsAsErrors` and `explicitApi`)
 4. Submit a Pull Request with a clear description of your changes

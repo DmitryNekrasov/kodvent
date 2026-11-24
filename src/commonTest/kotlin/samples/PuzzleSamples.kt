@@ -19,7 +19,8 @@ import kodvent.search.partitionPoint
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-// The solutions that Module.md prints under "With kodvent", on inputs made for these tests. Change both together.
+// The solutions that Module.md prints under "With kodvent", on inputs made for these tests. The README also prints
+// the solution of Reindeer Maze. Change them together.
 class PuzzleSamples {
 
     @Test

@@ -52,18 +52,6 @@ These are 16 lines of code, and the solution without the library takes 108. The 
 | [RAM Run](https://adventofcode.com/2024/day/18), day 18 of 2024 | grid, `bfs`, `partitionPoint` | [36 lines](https://github.com/DmitryNekrasov/AoC-2024/blob/47770b639b6daec5ff9a85e0cb34ca6fabbe3f82/src/day18/Day18.kt) | 12 lines |
 | [Reindeer Maze](https://adventofcode.com/2024/day/16), day 16 of 2024 | grid, `dijkstra` | [108 lines](https://github.com/DmitryNekrasov/AoC-2024/blob/47770b639b6daec5ff9a85e0cb34ca6fabbe3f82/src/day16/Day16.kt) | 16 lines |
 
-- **Zero dependencies** — pure Kotlin, nothing extra to pull in
-- **Multiplatform** — works on JVM, JS, Wasm, and Native
-- **Idiomatic API** — operator overloads, infix functions, extension functions
-- **Published to Maven Central** — one line in your `build.gradle.kts`
-
-### Supported platforms
-
-- **JVM** (target 1.8+)
-- **JS** (IR, Node.js & Browser)
-- **Wasm** (wasmJs, wasmWasi)
-- **Native** — Linux (x64, arm64), macOS (arm64), Windows (mingwX64), iOS, watchOS, tvOS
-
 ## Features
 
 | Feature | Package | What you get | Complexity |
@@ -155,35 +143,11 @@ The [documentation](https://dmitrynekrasov.github.io/kodvent/) describes every p
 
 ## Development
 
-### Building the Project
-
 ```bash
-./gradlew build
-```
-
-### Running Tests
-
-```bash
+./gradlew build  # every target of the host, the tests and the check of the public API
 ./gradlew jvmTest  # JVM only, fast
-./gradlew allTests  # every target of the host (the Apple simulator tests need the simulator runtimes)
-```
-
-The project includes comprehensive tests for all functions. Test reports are generated at `build/reports/tests/jvmTest/index.html` and `build/reports/tests/allTests/index.html`.
-
-### Changing the Public API
-
-`./gradlew build` compares the public API with the dumps in the `api` directory. After an intended change, update the dumps and commit them:
-
-```bash
-./gradlew updateKotlinAbi
-```
-
-### Changing the Documentation
-
-`./gradlew build` does not run Dokka, but CI does. After a change of KDoc, of a sample or of `Module.md`, generate the documentation:
-
-```bash
-./gradlew dokkaGeneratePublicationHtml
+./gradlew updateKotlinAbi  # after an intended change of the public API, then commit api/
+./gradlew dokkaGeneratePublicationHtml  # after a change of KDoc, of a sample or of Module.md
 ```
 
 ## License
@@ -192,9 +156,4 @@ This project is licensed under the Apache License 2.0 – see the [LICENSE](LICE
 
 ## Contributing
 
-Contributions are welcome! Here's how to get started:
-
-1. Check [open issues](https://github.com/DmitryNekrasov/kodvent/issues) for things to work on
-2. Fork the repository and create a feature branch
-3. Make sure `./gradlew build` and `./gradlew dokkaGeneratePublicationHtml` pass (the project uses `allWarningsAsErrors` and `explicitApi`)
-4. Submit a Pull Request with a clear description of your changes
+Contributions are welcome! Check [open issues](https://github.com/DmitryNekrasov/kodvent/issues) for things to work on, and make sure `./gradlew build` and `./gradlew dokkaGeneratePublicationHtml` pass before you submit a Pull Request: CI runs both.

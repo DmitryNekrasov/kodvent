@@ -5,7 +5,7 @@
 
 package samples
 
-import kodvent.boundsearch.ternarySearch
+import kodvent.search.ternarySearch
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.sin

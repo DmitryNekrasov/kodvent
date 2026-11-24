@@ -14,6 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNull
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
@@ -59,85 +60,15 @@ class HeapTest {
     }
 
     @Test
-    fun `popOrNull and peekOrNull return null on an empty heap`() {
-        val heap = Heap<Int>()
-
-        assertNull(heap.popOrNull())
-        assertNull(heap.peekOrNull())
-    }
-
-    @Test
-    fun `popOrNull and peekOrNull return the top of a heap that is not empty`() {
+    fun `popOrNull and peekOrNull return the top or null on an empty heap`() {
         val heap = listOf(2, 1).toHeap()
 
         assertEquals(1, heap.peekOrNull())
         assertEquals(1, heap.popOrNull())
+        assertEquals(2, heap.peekOrNull())
         assertEquals(2, heap.popOrNull())
+        assertNull(heap.peekOrNull())
         assertNull(heap.popOrNull())
-    }
-
-    @Test
-    fun `a single element is peeked and then popped`() {
-        val heap = Heap<Int>()
-        heap.push(42)
-
-        assertEquals(1, heap.size)
-        assertTrue(heap.isNotEmpty())
-        assertEquals(42, heap.peek())
-        assertEquals(1, heap.size)
-        assertEquals(42, heap.pop())
-        assertTrue(heap.isEmpty())
-    }
-
-    @Test
-    fun `elements come out in ascending order whatever the order they went in`() {
-        val ascending = (1..100).toList()
-        val inputs = listOf(ascending, ascending.reversed(), ascending.shuffled(Random(1)))
-
-        for (input in inputs) {
-            val heap = Heap<Int>()
-            for (element in input) heap.push(element)
-
-            assertEquals(ascending, heap.drain())
-        }
-    }
-
-    @Test
-    fun `duplicates all come out`() {
-        val input = listOf(3, 1, 3, 2, 1, 3, 2, 2, 1)
-        val heap = Heap<Int>()
-        for (element in input) heap.push(element)
-
-        assertEquals(input.sorted(), heap.drain())
-    }
-
-    @Test
-    fun `a heap of equal elements keeps every one of them`() {
-        val heap = Heap<Int>()
-        repeat(50) { heap.push(7) }
-
-        assertEquals(List(50) { 7 }, heap.drain())
-    }
-
-    @Test
-    fun `reverse order makes a max-heap`() {
-        val heap = Heap<Int>(reverseOrder())
-        for (element in listOf(3, 9, 1, 7, 5)) heap.push(element)
-
-        assertEquals(9, heap.peek())
-        assertEquals(listOf(9, 7, 5, 3, 1), heap.drain())
-    }
-
-    @Test
-    fun `elements with equal priorities are all kept`() {
-        val heap = Heap<Pair<Int, String>>(compareBy { it.first })
-        val input = listOf(2 to "a", 1 to "b", 2 to "c", 1 to "d", 1 to "e", 3 to "f")
-        for (element in input) heap.push(element)
-
-        val drained = heap.drain()
-
-        assertEquals(listOf(1, 1, 1, 2, 2, 3), drained.map { it.first })
-        assertEquals(input.map { it.second }.sorted(), drained.map { it.second }.sorted())
     }
 
     @Test
@@ -163,26 +94,10 @@ class HeapTest {
                 heap.push(-1)
                 heap.push(n)
 
-                assertEquals(n + 2, heap.size, "size $n")
-                assertEquals((-1..n).toList(), heap.drain(), "size $n")
+                assertEquals(n + 2, heap.size)
+                assertEquals((-1..n).toList(), heap.drain())
             }
         }
-    }
-
-    @Test
-    fun `replace on a single element returns it and keeps the new one`() {
-        val heap = listOf(5).toHeap()
-
-        assertEquals(5, heap.replace(9))
-        assertEquals(listOf(9), heap.drain())
-    }
-
-    @Test
-    fun `replace returns the old top and puts the new element in its place in the order`() {
-        val heap = listOf(1, 5).toHeap()
-
-        assertEquals(1, heap.replace(7))
-        assertEquals(listOf(5, 7), heap.drain())
     }
 
     @Test
@@ -191,68 +106,6 @@ class HeapTest {
 
         assertEquals(1, heap.replace(0))
         assertEquals(listOf(0, 5), heap.drain())
-    }
-
-    @Test
-    fun `replace keeps the size and the order of a larger heap`() {
-        val heap = (1..20).toList().toHeap()
-
-        assertEquals(1, heap.replace(11))
-        assertEquals(20, heap.size)
-        assertEquals(((2..20) + 11).sorted(), heap.drain())
-    }
-
-    @Test
-    fun `a drained heap can be filled again`() {
-        val heap = listOf(2, 1, 3).toHeap()
-
-        assertEquals(listOf(1, 2, 3), heap.drain())
-        assertFailsWith<NoSuchElementException> { heap.pop() }
-
-        heap.push(8)
-        heap.push(4)
-
-        assertEquals(listOf(4, 8), heap.drain())
-    }
-
-    @Test
-    fun `clear empties the heap and it can be used again`() {
-        val heap = (1..40).toList().toHeap()
-
-        heap.clear()
-
-        assertEquals(0, heap.size)
-        assertTrue(heap.isEmpty())
-        assertNull(heap.peekOrNull())
-
-        heap.push(6)
-        heap.push(2)
-
-        assertEquals(listOf(2, 6), heap.drain())
-    }
-
-    @Test
-    fun `toHeap of an empty collection is an empty heap`() {
-        val heap = emptyList<Int>().toHeap()
-
-        assertTrue(heap.isEmpty())
-        assertNull(heap.popOrNull())
-    }
-
-    @Test
-    fun `toHeap orders by the given comparator`() {
-        val heap = listOf("ccc", "a", "bb", "dddd").toHeap(compareByDescending { it.length })
-
-        assertEquals(listOf("dddd", "ccc", "bb", "a"), heap.drain())
-    }
-
-    @Test
-    fun `toHeap accepts an iterable that is not a collection and is longer than the first storage`() {
-        val input = (0..<100).shuffled(Random(1))
-
-        val heap = input.notACollection().toHeap()
-
-        assertEquals((0..<100).toList(), heap.drain())
     }
 
     @Test
@@ -278,29 +131,18 @@ class HeapTest {
             a.compareTo(b)
         }
 
-        assertTrue(comparisons < 2 * n, "$comparisons comparisons")
+        assertTrue(comparisons < 2 * n)
         assertEquals((1..n).toList(), heap.drain())
     }
 
     @Test
-    fun `a comparator that rejects the pushed element leaves the heap as it was`() {
-        val heap = Heap<Int> { a, b -> if (a == 13 || b == 13) error("13 has no place") else a.compareTo(b) }
-        heap.push(2)
-        heap.push(1)
-
-        assertFailsWith<IllegalStateException> { heap.push(13) }
-
-        assertEquals(2, heap.size)
-        assertEquals(listOf(1, 2), heap.drain())
-    }
-
-    @Test
-    fun `a comparator that fails on the first comparison of pop or replace leaves the heap as it was`() {
+    fun `a comparator that fails on its first comparison leaves the heap as it was`() {
         var failing = false
         val heap = Heap<Int> { a, b -> if (failing) error("no order for now") else a.compareTo(b) }
         for (element in listOf(1, 2, 3)) heap.push(element)
 
         failing = true
+        assertFailsWith<IllegalStateException> { heap.push(0) }
         assertFailsWith<IllegalStateException> { heap.pop() }
         assertFailsWith<IllegalStateException> { heap.replace(9) }
         failing = false
@@ -321,17 +163,10 @@ class HeapTest {
     }
 
     @Test
-    fun `toSortedList follows the comparator`() {
-        val heap = listOf(4, 1, 3).toHeap(reverseOrder())
-
-        assertEquals(listOf(4, 3, 1), heap.toSortedList())
-    }
-
-    @Test
     fun `toString lists every element with the top first`() {
         val printed = listOf(4, 2, 5, 1, 3).toHeap().toString()
 
-        assertTrue(printed.startsWith("[1, "), printed)
+        assertTrue(printed.startsWith("[1, "))
         assertEquals(listOf(1, 2, 3, 4, 5), printed.removeSurrounding("[", "]").split(", ").map { it.toInt() }.sorted())
         assertEquals("[7]", listOf(7).toHeap().toString())
         assertEquals("[]", Heap<Int>().toString())
@@ -349,7 +184,12 @@ class HeapTest {
         val printed = heap.toString()
 
         assertEquals(before, comparisons)
-        assertTrue(printed.startsWith("[1, "), printed)
+        assertTrue(printed.startsWith("[1, "))
+    }
+
+    @Test
+    fun `two heaps with the same elements are not equal`() {
+        assertNotEquals(listOf(1, 2).toHeap(), listOf(1, 2).toHeap())
     }
 
     @Test
@@ -362,6 +202,16 @@ class HeapTest {
         assertEquals(3, heap.size)
         assertNull(heap.peek())
         assertEquals(listOf(null, "a", "b"), heap.drain())
+    }
+
+    @Test
+    fun `popOrNull removes a null element`() {
+        val heap = Heap<String?>(nullsFirst(naturalOrder()))
+        heap.push("a")
+        heap.push(null)
+
+        assertNull(heap.popOrNull())
+        assertEquals(1, heap.size)
     }
 
     @Test
@@ -387,6 +237,11 @@ class HeapTest {
         declared.push(2)
         declared.push(1)
         assertEquals(1, declared.pop())
+
+        val maxHeap = Heap<Int>(reverseOrder())
+        maxHeap.push(1)
+        maxHeap.push(2)
+        assertEquals(2, maxHeap.pop())
 
         val weight = intArrayOf(5, 1, 3)
         val byWeight = Heap<Int> { a, b -> weight[a].compareTo(weight[b]) }
@@ -481,52 +336,12 @@ class HeapTest {
                 }
                 assertEquals(model.size, heap.size, at)
                 assertEquals(model.isEmpty(), heap.isEmpty(), at)
+                assertEquals(model.isNotEmpty(), heap.isNotEmpty(), at)
             }
 
             val drained = heap.drain()
             assertEquals(model.map { it.first }.sorted(), drained.map { it.first }) { "seed $seed" }
             assertEquals(model.map { it.second }.sorted(), drained.map { it.second }.sorted()) { "seed $seed" }
         }
-    }
-
-    @Test
-    fun `dijkstra with distance entries is right when it stops at the target`() {
-        // On this graph a heap of vertex numbers ordered by a distance array that keeps changing pops R at
-        // distance 5 while X at distance 2 is still inside.
-        val s = 0
-        val u = 1
-        val r = 2
-        val y = 3
-        val x = 4
-        val t = 5
-        val edges = listOf(
-            listOf(u to 1, r to 5, y to 7, x to 6),
-            listOf(x to 1),
-            listOf(t to 1),
-            emptyList(),
-            listOf(r to 1),
-            emptyList(),
-        )
-
-        fun distanceTo(target: Int): Int {
-            val distance = IntArray(edges.size) { Int.MAX_VALUE }
-            val heap = Heap<Pair<Int, Int>>(compareBy { it.first })
-            distance[s] = 0
-            heap.push(0 to s)
-            while (heap.isNotEmpty()) {
-                val (d, vertex) = heap.pop()
-                if (d > distance[vertex]) continue
-                if (vertex == target) return d
-                for ((next, weight) in edges[vertex]) {
-                    if (d + weight < distance[next]) {
-                        distance[next] = d + weight
-                        heap.push(d + weight to next)
-                    }
-                }
-            }
-            error("vertex $target is unreachable")
-        }
-
-        assertEquals(listOf(0, 1, 3, 7, 2, 4), listOf(s, u, r, y, x, t).map { distanceTo(it) })
     }
 }

@@ -139,18 +139,6 @@ class PrefixFunctionAndKMPSamples {
     }
 
     @Test
-    fun allIndicesOfWithCustomDelimiter() {
-        // If your text or pattern contains '#', use a different delimiter
-        val text = "a#b#c#a#b"
-        val pattern = "a#b"
-
-        // Use '$' as a delimiter since '#' appears in the text
-        val result = text.allIndicesOf(pattern, delimiter = '$')
-
-        assertEquals(listOf(0, 6), result)
-    }
-
-    @Test
     fun allIndicesOfRepeatedPatternDetection() {
         // Detect a repeated pattern in a string
         val text = "abababab"
@@ -188,7 +176,7 @@ class PrefixFunctionAndKMPSamples {
         val needle = "abc"
         val text = "xabcyabcz"
 
-        // The algorithm concatenates needle + delimiter + text
+        // One way to search with the prefix function: join the needle, a character neither string has, and the text
         val combined = "$needle#$text"
         val pi = combined.prefixFunction()
 
@@ -201,7 +189,7 @@ class PrefixFunctionAndKMPSamples {
             }
         }
 
-        // This is essentially what allIndicesOf does internally
+        // allIndicesOf finds the same occurrences and needs no delimiter
         assertEquals(listOf(1, 5), matches)
         assertEquals(matches, text.allIndicesOf(needle))
     }

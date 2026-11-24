@@ -199,8 +199,7 @@ public final class kodvent/math/FunctionsKt {
 }
 
 public final class kodvent/strings/PrefixFunctionKt {
-	public static final fun allIndicesOf (Ljava/lang/CharSequence;Ljava/lang/CharSequence;C)Ljava/util/List;
-	public static synthetic fun allIndicesOf$default (Ljava/lang/CharSequence;Ljava/lang/CharSequence;CILjava/lang/Object;)Ljava/util/List;
+	public static final fun allIndicesOf (Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/util/List;
 	public static final fun prefixFunction (ILkotlin/jvm/functions/Function1;)[I
 	public static final fun prefixFunction (Ljava/lang/CharSequence;)[I
 }

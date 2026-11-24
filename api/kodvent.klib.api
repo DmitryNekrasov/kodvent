@@ -151,7 +151,7 @@ final fun (kotlin.collections/List<kotlin/CharSequence>).kodvent.grid/toGrid(): 
 final fun (kotlin.collections/List<kotlin/CharSequence>).kodvent.grid/toMutableGrid(): kodvent.grid/MutableGrid<kotlin/Char> // kodvent.grid/toMutableGrid|toMutableGrid@kotlin.collections.List<kotlin.CharSequence>(){}[0]
 final fun (kotlin/Char).kodvent.grid/toDirection(): kodvent.grid/Direction // kodvent.grid/toDirection|toDirection@kotlin.Char(){}[0]
 final fun (kotlin/Char).kodvent.grid/toDirectionOrNull(): kodvent.grid/Direction? // kodvent.grid/toDirectionOrNull|toDirectionOrNull@kotlin.Char(){}[0]
-final fun (kotlin/CharSequence).kodvent.strings/allIndicesOf(kotlin/CharSequence, kotlin/Char = ...): kotlin.collections/List<kotlin/Int> // kodvent.strings/allIndicesOf|allIndicesOf@kotlin.CharSequence(kotlin.CharSequence;kotlin.Char){}[0]
+final fun (kotlin/CharSequence).kodvent.strings/allIndicesOf(kotlin/CharSequence): kotlin.collections/List<kotlin/Int> // kodvent.strings/allIndicesOf|allIndicesOf@kotlin.CharSequence(kotlin.CharSequence){}[0]
 final fun (kotlin/CharSequence).kodvent.strings/prefixFunction(): kotlin/IntArray // kodvent.strings/prefixFunction|prefixFunction@kotlin.CharSequence(){}[0]
 final fun (kotlin/Double).kodvent.math/sqr(): kotlin/Double // kodvent.math/sqr|sqr@kotlin.Double(){}[0]
 final fun (kotlin/Int).kodvent.math/sqr(): kotlin/Int // kodvent.math/sqr|sqr@kotlin.Int(){}[0]

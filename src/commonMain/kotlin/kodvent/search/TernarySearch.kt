@@ -8,11 +8,13 @@
 package kodvent.search
 
 /**
- * Returns the argument in [[left], [right]] that maximizes the unimodal function [f] (strictly increasing
- * then strictly decreasing), found by ternary search: the interval is narrowed to `1e-9`, or to two
- * adjacent doubles where they are more than `1e-9` apart.
+ * Returns an approximation of the argument in [[left], [right]] at which [f] is greatest. [f] must be
+ * unimodal: strictly increasing, then strictly decreasing. The interval is narrowed to `1e-9`, or to two
+ * adjacent doubles where they are more than `1e-9` apart. Near a smooth maximum the values of [f] can round
+ * to equal doubles, and the result is then less accurate: for `x * (20 - x)` on 0..20 it is off by about
+ * `1e-7`, and a large constant added to [f] makes it worse.
  *
- * @throws IllegalArgumentException if [left] > [right].
+ * @throws IllegalArgumentException if [left] is greater than [right]
  *
  * @sample samples.TernarySearchSamples.maximizeQuadratic
  * @sample samples.TernarySearchSamples.minimizeByNegation

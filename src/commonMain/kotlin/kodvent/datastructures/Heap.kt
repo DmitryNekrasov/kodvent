@@ -11,21 +11,18 @@ package kodvent.datastructures
  * A [binary heap](https://en.wikipedia.org/wiki/Binary_heap), the usual
  * [priority queue](https://en.wikipedia.org/wiki/Priority_queue): its top, which [peek] returns and [pop]
  * removes, is the smallest element by the comparator, so `Heap<Int>(reverseOrder())` is a max-heap. Equal
- * elements come out in no particular order, and that order may change between versions.
+ * elements come out in no particular order.
  *
- * [push], [pop] and [replace] are O(log n); [peek] and [size] are O(1). Where every step costs the same, a
- * breadth-first search with a plain queue does the job of a heap. [kodvent.graph.bfs] and
- * [kodvent.graph.dijkstra] run both searches over any kind of state.
+ * [push], [pop] and [replace] are O(log n), [peek] is O(1), and `toHeap()` builds a heap in O(n). For
+ * shortest paths there is [kodvent.graph.dijkstra].
  *
  * A heap is not a collection: [toSortedList] is the way to see its elements, and two heaps are equal only
  * if they are the same object.
  *
  * @constructor Creates an empty heap ordered by [comparator]; for the natural order write `Heap<Int>()`.
- * @param comparator must be a total order whose result for an element does not change while the element
- * is in the heap. A comparator that reads a distance array the caller keeps lowering breaks this: push
- * `(distance, state)` pairs instead and skip the stale ones on [pop]. Compare with `compareTo` or
- * `compareBy`, not with `a - b`, which overflows. If the comparator throws, the heap may have lost or
- * duplicated elements.
+ * @param comparator must be a total order in which the place of an element does not change while the
+ * element is in the heap. A comparator that reads a distance array the caller keeps lowering breaks this:
+ * push `(distance, state)` pairs instead and skip the stale ones on [pop].
  *
  * @sample samples.HeapSamples.basicUsage
  * @sample samples.HeapSamples.customOrder
@@ -51,14 +48,14 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
     public fun isEmpty(): Boolean = _size == 0
 
     /**
-     * Returns `true` if this heap has at least one element, as in `while (heap.isNotEmpty())`. O(1).
+     * Returns `true` if this heap has at least one element. O(1).
      *
      * @sample samples.HeapSamples.basicUsage
      */
     public fun isNotEmpty(): Boolean = _size != 0
 
     /**
-     * Adds [element]. O(log n) amortized: the storage grows when it is full.
+     * Adds [element]. O(log n) amortized.
      *
      * @sample samples.HeapSamples.basicUsage
      */
@@ -88,8 +85,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
     }
 
     /**
-     * Removes and returns the top, or returns `null` if this heap is empty. In a `Heap<T?>` a null element
-     * looks the same, so test [isEmpty] there. O(log n).
+     * Removes and returns the top, or returns `null` if this heap is empty. O(log n).
      *
      * @sample samples.HeapSamples.orNullVariants
      */
@@ -109,8 +105,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
     }
 
     /**
-     * Returns the top without removing it, or `null` if this heap is empty. In a `Heap<T?>` a null element
-     * looks the same, so test [isEmpty] there. O(1).
+     * Returns the top without removing it, or `null` if this heap is empty. O(1).
      *
      * @sample samples.HeapSamples.orNullVariants
      */
@@ -154,9 +149,8 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
     }
 
     /**
-     * Returns the elements in the order of the internal storage, in the format of a list, as in `[1, 3, 2]`:
-     * the top comes first and the rest follow in no particular order. It does not call the comparator; to
-     * print the elements in order, print [toSortedList]. O(n).
+     * Returns the elements in the format of a list, as in `[1, 3, 2]`: the top first, the rest in no
+     * particular order. It does not call the comparator; for sorted output print [toSortedList]. O(n).
      *
      * @sample samples.HeapSamples.sortedSnapshot
      */
@@ -222,8 +216,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
 }
 
 /**
- * Creates an empty heap of comparable elements in their natural order, smallest on top, as in
- * `Heap<Int>()`.
+ * Creates an empty heap with the natural order of its elements, smallest on top, as in `Heap<Int>()`.
  *
  * @sample samples.HeapSamples.basicUsage
  */
@@ -231,8 +224,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
 public fun <T : Comparable<T>> Heap(): Heap<T> = Heap(naturalOrder())
 
 /**
- * Returns a heap of these elements in their natural order, smallest on top. O(n), which is cheaper than
- * pushing them one by one.
+ * Returns a heap of these elements in their natural order, smallest on top. O(n).
  *
  * @sample samples.HeapSamples.buildFromCollection
  */
@@ -240,7 +232,7 @@ public fun <T : Comparable<T>> Iterable<T>.toHeap(): Heap<T> = toHeap(naturalOrd
 
 /**
  * Returns a heap of these elements ordered by [comparator], which must follow the rules the [Heap]
- * constructor states for it. O(n), which is cheaper than pushing them one by one.
+ * constructor states for it. O(n).
  *
  * @sample samples.HeapSamples.buildWithComparator
  */

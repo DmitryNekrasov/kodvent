@@ -12,11 +12,7 @@ import kotlin.math.abs
 /**
  * A cell position, also used as the offset between two cells. [x] is the column counted from the left and
  * [y] is the input line counted from the top, so y grows downward and `input[y][x]` is the cell at
- * `Position(x, y)`. A puzzle's `x,y` pair goes into `Position(x, y)` unchanged.
- *
- * Code written as `a[row][column]` becomes `grid[column, row]`: the two numbers change places. A pair left
- * in the old order compiles, and it reads another cell instead of failing whenever both numbers fit the
- * smaller side of the grid, so while porting it helps to name them: `grid[Position(x = column, y = row)]`.
+ * `Position(x, y)`: code written as `a[row][column]` becomes `grid[Position(x = column, y = row)]`.
  *
  * @sample samples.PositionSamples.coordinates
  */
@@ -81,7 +77,6 @@ public data class Position(public val x: Int, public val y: Int) {
 
     /**
      * Returns this position wrapped onto a [width] x [height] torus: `Position(x.mod(width), y.mod(height))`.
-     * To wrap onto a grid, write `wrap(grid)`.
      *
      * @throws IllegalArgumentException if [width] or [height] is not positive
      *
@@ -93,8 +88,7 @@ public data class Position(public val x: Int, public val y: Int) {
     }
 
     /**
-     * Returns a hash code that spreads positions with small coordinates of either sign well, inside a grid
-     * or not. The exact value is unspecified.
+     * Returns a hash code that spreads small coordinates of either sign well. The exact value is unspecified.
      */
     override fun hashCode(): Int {
         // The linear value alone never collides for grid-sized coordinates, but it clusters in hash tables

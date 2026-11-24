@@ -12,14 +12,15 @@ import kodvent.datastructures.Heap
 /**
  * [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) from [start]: returns the
  * fewest steps from [start] to every state it reaches, with [start] at 0. A state that cannot be reached is
- * not in the map, so `steps[end] ?: -1` gives -1 for it and `steps.getValue(end)` throws.
+ * not in the map, and the order of the map is unspecified.
  *
- * [neighbors] returns the states one step away from a state and is called once for every reached state. A
- * state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a list. An
- * array compares by identity, not by contents. A state that is itself a collection needs a named argument,
- * `bfs(start = listOf(0, 0))`. The search visits every reachable state, so in an endless space [neighbors]
- * has to set a bound. The order of the map is unspecified. O(V + E) for V reached states and E steps out of
- * them.
+ * [neighbors] returns the states one step away from a state and is called once for every reached state.
+ * The search visits every reachable state, so in an endless space [neighbors] has to set a bound. O(V + E)
+ * for V reached states and E steps out of them.
+ *
+ * A state is any value with stable `equals` and `hashCode`, such as a `Position`, a data class or a list,
+ * but not an array, which compares by identity. A state that is itself a collection needs a named
+ * argument, `bfs(start = listOf(0, 0))`.
  *
  * @sample samples.GraphSamples.shortestPathInMaze
  * @sample samples.GraphSamples.floodFill
@@ -31,9 +32,8 @@ public fun <S> bfs(start: S, neighbors: (state: S) -> Iterable<S>): Map<S, Int> 
 /**
  * [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) from all of [starts] at once,
  * each at 0: like [bfs] from a single start, but the distance of a state is to the nearest of them. A
- * repeated start counts once, and no starts give an empty map. With a lambda that does not give the type of
- * its parameter, a collection of starts fits both overloads, so name the argument:
- * `bfs(starts = sources) { ... }`. O(V + E).
+ * repeated start counts once, and no starts give an empty map. A collection of starts fits both overloads,
+ * so name the argument: `bfs(starts = sources) { ... }`. O(V + E).
  *
  * @sample samples.GraphSamples.severalStarts
  */
@@ -63,8 +63,8 @@ public fun <S> bfs(starts: Iterable<S>, neighbors: (state: S) -> Iterable<S>): M
  * reached is not in the map.
  *
  * [neighbors] returns the steps out of a state as `next to cost` pairs, with costs of zero or more. It is
- * called once for every reached state, when its cost is final. States and the order of the map are as in
- * [bfs]. O((V + E) log(V + E)) for V reached states and E steps out of them.
+ * called once for every reached state, when its cost is final. States, the bound on an endless space and
+ * the order of the map are as in [bfs]. O((V + E) log(V + E)) for V reached states and E steps out of them.
  *
  * @throws IllegalArgumentException if a step has a negative cost
  * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]
@@ -77,9 +77,8 @@ public fun <S> dijkstra(start: S, neighbors: (state: S) -> Iterable<Pair<S, Int>
 /**
  * [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) from all of [starts] at once,
  * each at 0: like [dijkstra] from a single start, but the cost of a state is the cheapest from any of them.
- * A repeated start counts once, and no starts give an empty map. With a lambda that does not give the type
- * of its parameter, a collection of starts fits both overloads, so name the argument:
- * `dijkstra(starts = sources) { ... }`. O((V + E) log(V + E)).
+ * A repeated start counts once, and no starts give an empty map. A collection of starts fits both overloads,
+ * so name the argument: `dijkstra(starts = sources) { ... }`. O((V + E) log(V + E)).
  *
  * @throws IllegalArgumentException if a step has a negative cost
  * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]

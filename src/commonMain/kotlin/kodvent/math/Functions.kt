@@ -10,45 +10,42 @@ package kodvent.math
 import kotlin.math.abs
 
 /**
- * Computes the greatest common divisor of [a] and [b] using the Euclidean algorithm.
- *
- * @see lcm
+ * Returns the greatest common divisor of [a] and [b]. If one is 0, the result is the absolute value of the
+ * other. It is never negative, except when it would be 2^31: `gcd(Int.MIN_VALUE, 0)` is `Int.MIN_VALUE`.
  *
  * @sample samples.GcdAndLcmSamples.gcdBasicUsage
  */
 public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) abs(a) else gcd(b, a % b)
 
 /**
- * Computes the least common multiple of [a] and [b], as `abs(a) / gcd(a, b) * abs(b)` to reduce the risk of
- * overflow.
- *
- * @see gcd
+ * Returns the least common multiple of [a] and [b], or 0 if either is 0. It wraps around only when it does
+ * not fit in an Int, and it is never negative otherwise.
  *
  * @sample samples.GcdAndLcmSamples.lcmBasicUsage
  */
 public fun lcm(a: Int, b: Int): Int = if (a == 0 || b == 0) 0 else abs(a) / gcd(a, b) * abs(b)
 
 /**
- * See [gcd] for Int parameters
+ * Returns the greatest common divisor of [a] and [b]. If one is 0, the result is the absolute value of the
+ * other. It is never negative, except when it would be 2^63: `gcd(Long.MIN_VALUE, 0L)` is `Long.MIN_VALUE`.
  *
  * @sample samples.GcdAndLcmSamples.gcdBasicUsage
  */
 public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) abs(a) else gcd(b, a % b)
 
 /**
- * See [lcm] for Int parameters
+ * Returns the least common multiple of [a] and [b], or 0 if either is 0. It wraps around only when it does
+ * not fit in a Long, and it is never negative otherwise.
  *
  * @sample samples.GcdAndLcmSamples.lcmBasicUsage
  */
 public fun lcm(a: Long, b: Long): Long = if (a == 0L || b == 0L) 0L else abs(a) / gcd(a, b) * abs(b)
 
 /**
- * Raises this Long to the given [power] (which must be non-negative) using
- * [binary exponentiation](https://en.wikipedia.org/wiki/Exponentiation_by_squaring), in O(log n) time.
+ * Returns this value raised to [power], wrapping around on overflow. As an infix call it binds looser than
+ * arithmetic operators: `2L pow n - 1` is `2L pow (n - 1)`. O(log power).
  *
- * **Warning**: does not check for overflow — large values wrap around.
- *
- * @see pow overload with modulo parameter for modular exponentiation
+ * @throws IllegalArgumentException if [power] is negative
  *
  * @sample samples.PowSamples.powBasicUsage
  */
@@ -58,12 +55,11 @@ public infix fun Long.pow(power: Long): Long {
 }
 
 /**
- * Raises this Long to the given [power] (non-negative) modulo [modulo] (positive), using binary
- * exponentiation in O(log power) multiplications; the result is in `[0, modulo)`. The modulus is applied at
- * each step to avoid overflow: for a [modulo] above 3,037,000,500, where a product of two remainders can
- * overflow a Long, a multiplication takes O(log modulo) additions.
+ * Returns this value raised to [power] modulo [modulo]. The result is in `0..<modulo`, also for a negative
+ * base, and exact for every [modulo]. O(log power) multiplications. Above a [modulo] of 3,037,000,500, where
+ * a product of two remainders could overflow a Long, each multiplication takes O(log modulo) additions.
  *
- * @see pow overload without a modulo parameter for regular exponentiation
+ * @throws IllegalArgumentException if [power] is negative or [modulo] is not positive
  *
  * @sample samples.PowSamples.powModuloBasicUsage
  */
@@ -113,14 +109,14 @@ private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long
 }
 
 /**
- * Returns the square of [this] Int value.
+ * Returns the square of [this] Int value, wrapping around when its absolute value exceeds 46,340.
  *
  * @sample samples.SqrSamples.sqrBasicUsage
  */
 public fun Int.sqr(): Int = this * this
 
 /**
- * Returns the square of [this] Long value.
+ * Returns the square of [this] Long value, wrapping around when its absolute value exceeds 3,037,000,499.
  *
  * @sample samples.SqrSamples.sqrBasicUsage
  */

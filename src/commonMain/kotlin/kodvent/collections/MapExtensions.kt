@@ -17,8 +17,8 @@ public fun <T> MutableMap<T, Int>.increment(key: T) {
 }
 
 /**
- * Decrements the count for [key] by 1, removing it when the count reaches 0. Returns `true` if [key] was
- * present, `false` otherwise.
+ * Decrements the count for [key] by 1, removing it when the count drops to 0 or below. Returns `true` if
+ * [key] was present, `false` otherwise.
  *
  * @sample samples.IncrementAndDecrementSamples.decrementBasicUsage
  */

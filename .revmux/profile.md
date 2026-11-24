@@ -54,7 +54,8 @@ A finding must matter to such a user. Noise here:
   and Dokka prints them with `failOnWarning` on.
 - `Module.md` is the front page of the Dokka documentation and the description of every package. The
   solutions it prints under "With kodvent" are also tests in `samples/PuzzleSamples.kt`. No `@sample`
-  points to that file, and it changes together with `Module.md`.
+  points to that file, and it changes together with `Module.md`. The README also prints the solution
+  of Reindeer Maze, with the line counts of the 3 puzzles.
 - The code documents itself. A comment stays only for a reason the code cannot show: a measured
   performance decision, an overflow argument, a platform difference, a binary-interface constraint.
 - A performance decision is measured, and the comment next to it gives the result. Undoing it needs

@@ -10,24 +10,47 @@
 
 ![kodvent](kodvent-logo.png)
 
-A Kotlin Multiplatform utility library for Advent of Code challenges, featuring efficient data structures, algorithms, and convenient extension functions.
+A Kotlin Multiplatform utility library for Advent of Code challenges, featuring grids for puzzle maps, graph search over any kind of state, efficient data structures, algorithms, and convenient extension functions.
 
 ## Why Kodvent?
 
-Every December, thousands of developers solve [Advent of Code](https://adventofcode.com/) puzzles. In Kotlin, that means writing the same GCD function, the same DSU boilerplate, and the same binary search wrapper – year after year. Kodvent gives you **battle-tested, zero-dependency implementations** so you can focus on the puzzle, not the plumbing.
+Every December, thousands of developers solve [Advent of Code](https://adventofcode.com/) puzzles. In Kotlin, that means writing the same bounds checks around a map, the same table of 4 offsets, the same queue for a breadth-first search, and the same priority queue for Dijkstra's algorithm – year after year. Kodvent gives you **battle-tested, zero-dependency implementations** so you can focus on the puzzle, not the plumbing.
+
+This is [Reindeer Maze](https://adventofcode.com/2024/day/16), day 16 of 2024, solved with kodvent. A reindeer stands on `S`, looks east and has to reach `E`. A step forward costs 1 point and a turn by 90 degrees costs 1000 points. Part 1 is the lowest score, and part 2 is the number of cells that lie on at least one path with this score.
 
 ```kotlin
-// cycleLengths: List<Long>, because their least common multiple may not fit in an Int
+import kodvent.graph.*
+import kodvent.grid.*
 
-// Before: writing it from scratch every year
-fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
-fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
-val answer = cycleLengths.reduce(::lcm)
+data class Reindeer(val position: Position, val direction: Direction)
 
-// After: just import and solve
-import kodvent.math.*
-val answer = cycleLengths.reduce(::lcm)
+fun solve(input: List<String>): Pair<Int, Int> {
+    val maze = input.toGrid()
+    val start = Reindeer(maze.positionOf('S'), Direction.RIGHT)
+    val ends = Direction.entries.map { Reindeer(maze.positionOf('E'), it) }
+
+    fun Reindeer.moves(next: Position) = listOfNotNull(
+        copy(direction = direction.turnLeft()) to 1000,
+        copy(direction = direction.turnRight()) to 1000,
+        (copy(position = next) to 1).takeIf { maze[next] != '#' },
+    )
+
+    val fromStart = dijkstra(start) { it.moves(it.position + it.direction) }
+    val toEnd = dijkstra(starts = ends) { it.moves(it.position - it.direction) }
+
+    val best = ends.minOf { fromStart.getValue(it) }
+    val onBestPath = fromStart.keys.filter { fromStart.getValue(it) + toEnd.getValue(it) == best }
+    return best to onBestPath.map { it.position }.toSet().size
+}
 ```
+
+These are 16 lines of code, and the solution without the library takes 108. The [documentation](https://dmitrynekrasov.github.io/kodvent/) shows both versions, for this puzzle and for 2 more:
+
+| Puzzle | Uses | Without kodvent | With kodvent |
+|--------|------|-----------------|--------------|
+| [Printing Department](https://adventofcode.com/2025/day/4), day 4 of 2025 | grid | [49 lines](https://github.com/DmitryNekrasov/AoC-2025/blob/247c7eeb1d5402221498fb397ce649527d125446/src/main/kotlin/day04/Day04.kt) | 19 lines |
+| [RAM Run](https://adventofcode.com/2024/day/18), day 18 of 2024 | grid, `bfs`, `partitionPoint` | [36 lines](https://github.com/DmitryNekrasov/AoC-2024/blob/47770b639b6daec5ff9a85e0cb34ca6fabbe3f82/src/day18/Day18.kt) | 12 lines |
+| [Reindeer Maze](https://adventofcode.com/2024/day/16), day 16 of 2024 | grid, `dijkstra` | [108 lines](https://github.com/DmitryNekrasov/AoC-2024/blob/47770b639b6daec5ff9a85e0cb34ca6fabbe3f82/src/day16/Day16.kt) | 16 lines |
 
 - **Zero dependencies** — pure Kotlin, nothing extra to pull in
 - **Multiplatform** — works on JVM, JS, Wasm, and Native
@@ -46,19 +69,21 @@ val answer = cycleLengths.reduce(::lcm)
 | Feature | Package | What you get | Complexity |
 |---------|---------|-------------|------------|
 | **Grid** | `kodvent.grid` | `Grid` / `MutableGrid` addressed by `Position(x, y)` or `grid[x, y]`, `Direction` and `Direction8`, `toGrid()` parsing, `neighbors`, `ray`, rotation, wrap-around | $O(1)$ cell access |
-| **Math** | `kodvent.math` | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ multiplications for pow |
-| **Disjoint Set Union** | `kodvent.datastructures` | `find`, `union`, `connected`, `count` with path compression + union by rank, `isolate` in $O(n)$ | $O(\alpha(n))$ amortized |
-| **Heap** | `kodvent.datastructures` | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
 | **Graph Search** | `kodvent.graph` | `bfs` and `dijkstra` over any state with a `neighbors` lambda, from one start or several, giving the distance to every reachable state | $O(V + E)$ and $O((V + E) \log (V + E))$ |
+| **Heap** | `kodvent.datastructures` | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
+| **Disjoint Set Union** | `kodvent.datastructures` | `find`, `union`, `connected`, `count` with path compression + union by rank, `isolate` in $O(n)$ | $O(\alpha(n))$ amortized |
 | **Segment Tree** | `kodvent.datastructures` | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
-| **String Algorithms** | `kodvent.strings` | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
 | **Binary Search** | `kodvent.search` | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
 | **Ternary Search** | `kodvent.search` | Find the maximum of a unimodal function on an interval | $O(\log((r-l)/\varepsilon))$ |
+| **Math** | `kodvent.math` | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ multiplications for pow |
+| **String Algorithms** | `kodvent.strings` | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
 | **Map Counters** | `kodvent.collections` | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | $O(1)$ |
 
 For full API details and parameter descriptions, see the [KDoc reference](https://dmitrynekrasov.github.io/kodvent/).
 
 ## Installation
+
+Kodvent 0.4.0 requires Kotlin 2.4.0 or newer.
 
 Add the dependency to your project:
 
@@ -160,8 +185,6 @@ The project includes comprehensive tests for all functions. Test reports are gen
 ```bash
 ./gradlew dokkaGeneratePublicationHtml
 ```
-
-It fails on a link that does not resolve and on a wrong `@sample`. The pages go to the `docs` directory, which is not tracked on `main`. The solutions that `Module.md` prints under "With kodvent" are also tests in `src/commonTest/kotlin/samples/PuzzleSamples.kt`, so change both together.
 
 ## License
 

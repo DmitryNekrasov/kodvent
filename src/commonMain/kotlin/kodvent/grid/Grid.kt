@@ -22,8 +22,6 @@ package kodvent.grid
  * live views.
  *
  * @sample samples.GridSamples.parseAndRead
- * @sample samples.GridSamples.countCrowdedCells
- * @sample samples.GridSamples.walkUntilLeavingGrid
  */
 public sealed interface Grid<out T> {
     /**
@@ -146,7 +144,7 @@ public sealed interface Grid<out T> {
      * Returns `true` if [other] is a grid, read-only or mutable, with the same width, the same height and
      * equal values at every position.
      *
-     * @sample samples.GridSamples.equalityAndSnapshots
+     * @sample samples.GridSamples.equality
      */
     override fun equals(other: Any?): Boolean
 
@@ -154,7 +152,7 @@ public sealed interface Grid<out T> {
      * Returns a hash code consistent with [equals], computed from the size and every value. Take a
      * `toGrid()` snapshot before using a MutableGrid as a map key.
      *
-     * @sample samples.GridSamples.equalityAndSnapshots
+     * @sample samples.GridSamples.equality
      */
     override fun hashCode(): Int
 

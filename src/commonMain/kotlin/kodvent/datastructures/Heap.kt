@@ -28,11 +28,8 @@ package kodvent.datastructures
  * duplicated elements.
  *
  * @sample samples.HeapSamples.basicUsage
- * @sample samples.HeapSamples.maxHeap
  * @sample samples.HeapSamples.customOrder
- * @sample samples.HeapSamples.dijkstraOnGraph
  * @sample samples.HeapSamples.dijkstraOnGrid
- * @sample samples.HeapSamples.dijkstraOverStates
  */
 public class Heap<T>(private val comparator: Comparator<in T>) {
     private var elements = arrayOfNulls<Any?>(INITIAL_CAPACITY)
@@ -56,7 +53,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
     /**
      * Returns `true` if this heap has at least one element, as in `while (heap.isNotEmpty())`. O(1).
      *
-     * @sample samples.HeapSamples.dijkstraOnGraph
+     * @sample samples.HeapSamples.basicUsage
      */
     public fun isNotEmpty(): Boolean = _size != 0
 
@@ -125,7 +122,7 @@ public class Heap<T>(private val comparator: Comparator<in T>) {
      *
      * @throws NoSuchElementException if this heap is empty
      *
-     * @sample samples.HeapSamples.replaceMergesSortedLists
+     * @sample samples.HeapSamples.replaceKeepsTheLargest
      */
     @IgnorableReturnValue
     public fun replace(element: T): T {
@@ -245,7 +242,7 @@ public fun <T : Comparable<T>> Iterable<T>.toHeap(): Heap<T> = toHeap(naturalOrd
  * Returns a heap of these elements ordered by [comparator], which must follow the rules the [Heap]
  * constructor states for it. O(n), which is cheaper than pushing them one by one.
  *
- * @sample samples.HeapSamples.buildFromCollection
+ * @sample samples.HeapSamples.buildWithComparator
  */
 public fun <T> Iterable<T>.toHeap(comparator: Comparator<in T>): Heap<T> {
     val heap = Heap<T>(comparator)

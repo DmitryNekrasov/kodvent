@@ -18,7 +18,6 @@ package kodvent.grid
  * character (`\r` or `\n`), or if the lines would make more than `Int.MAX_VALUE` cells
  *
  * @sample samples.GridSamples.parseAndRead
- * @sample samples.GridSamples.parseWholeText
  */
 public fun List<CharSequence>.toGrid(): Grid<Char> {
     val width = requireGridLines(this)
@@ -71,7 +70,7 @@ public inline fun <T> List<CharSequence>.toMutableGrid(transform: (Char) -> T): 
  * as a map key or a set element as long as the values themselves do not change: the snapshot holds the
  * same value objects. A grid that is not a MutableGrid never changes, so it is returned as it is.
  *
- * @sample samples.GridSamples.equalityAndSnapshots
+ * @sample samples.GridSamples.copies
  */
 public fun <T> Grid<T>.toGrid(): Grid<T> =
     if (this is MutableGrid<*>) ArrayGrid(width, height, asArrayGrid().copyCells()) else this
@@ -130,7 +129,7 @@ public fun Grid<*>.ray(from: Position, direction: Direction): List<Position> =
  * grid, where [direction] may be diagonal, with the same rules as the other overload. For any other step,
  * write `generateSequence(from + step) { it + step }.takeWhile { it in grid }`.
  *
- * @sample samples.GridSamples.rays
+ * @sample samples.GridSamples.diagonalRay
  */
 public fun Grid<*>.ray(from: Position, direction: Direction8): List<Position> =
     rayOf(this, from, direction.dx, direction.dy)

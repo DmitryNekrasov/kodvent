@@ -19,7 +19,6 @@ import kotlin.math.abs
  * smaller side of the grid, so while porting it helps to name them: `grid[Position(x = column, y = row)]`.
  *
  * @sample samples.PositionSamples.coordinates
- * @sample samples.PositionSamples.arithmetic
  */
 public data class Position(public val x: Int, public val y: Int) {
     /**
@@ -47,28 +46,28 @@ public data class Position(public val x: Int, public val y: Int) {
     /**
      * Returns the position one step away in [direction].
      *
-     * @sample samples.PositionSamples.stepInDirection
+     * @sample samples.PositionSamples.orthogonalStep
      */
     public operator fun plus(direction: Direction): Position = Position(x + direction.dx, y + direction.dy)
 
     /**
      * Returns the position one step back, against [direction], so `p + d - d == p`.
      *
-     * @sample samples.PositionSamples.stepInDirection
+     * @sample samples.PositionSamples.orthogonalStep
      */
     public operator fun minus(direction: Direction): Position = Position(x - direction.dx, y - direction.dy)
 
     /**
      * Returns the position one step away in [direction], which may be diagonal.
      *
-     * @sample samples.PositionSamples.stepInDirection
+     * @sample samples.PositionSamples.diagonalStep
      */
     public operator fun plus(direction: Direction8): Position = Position(x + direction.dx, y + direction.dy)
 
     /**
      * Returns the position one step back, against [direction], which may be diagonal.
      *
-     * @sample samples.PositionSamples.stepInDirection
+     * @sample samples.PositionSamples.diagonalStep
      */
     public operator fun minus(direction: Direction8): Position = Position(x - direction.dx, y - direction.dy)
 

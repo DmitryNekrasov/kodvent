@@ -10,7 +10,6 @@ package kodvent.collections
 /**
  * Increments the count for [key] by 1, treating a missing [key] as 0.
  *
- * @sample samples.IncrementAndDecrementSamples.incrementBasicUsage
  * @sample samples.IncrementAndDecrementSamples.incrementCountingWords
  */
 public fun <T> MutableMap<T, Int>.increment(key: T) {
@@ -22,7 +21,6 @@ public fun <T> MutableMap<T, Int>.increment(key: T) {
  * present, `false` otherwise.
  *
  * @sample samples.IncrementAndDecrementSamples.decrementBasicUsage
- * @sample samples.IncrementAndDecrementSamples.decrementInventoryManagement
  */
 @IgnorableReturnValue
 public fun <T> MutableMap<T, Int>.decrement(key: T): Boolean {

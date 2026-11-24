@@ -70,7 +70,6 @@ public fun <S> bfs(starts: Iterable<S>, neighbors: (state: S) -> Iterable<S>): M
  * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]
  *
  * @sample samples.GraphSamples.dijkstraOnGraph
- * @sample samples.GraphSamples.cellsOnAnyCheapestPath
  */
 public fun <S> dijkstra(start: S, neighbors: (state: S) -> Iterable<Pair<S, Int>>): Map<S, Int> =
     dijkstra(starts = listOf(start), neighbors = neighbors)
@@ -86,7 +85,6 @@ public fun <S> dijkstra(start: S, neighbors: (state: S) -> Iterable<Pair<S, Int>
  * @throws ArithmeticException if the cheapest cost of a reachable state exceeds [Int.MAX_VALUE]
  *
  * @sample samples.GraphSamples.dijkstraOverStates
- * @sample samples.GraphSamples.cellsOnAnyCheapestPath
  */
 public fun <S> dijkstra(starts: Iterable<S>, neighbors: (state: S) -> Iterable<Pair<S, Int>>): Map<S, Int> {
     val costs = LinkedHashMap<S, Int>()

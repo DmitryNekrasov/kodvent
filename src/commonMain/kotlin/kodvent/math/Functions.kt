@@ -15,8 +15,6 @@ import kotlin.math.abs
  * @see lcm
  *
  * @sample samples.GcdAndLcmSamples.gcdBasicUsage
- * @sample samples.GcdAndLcmSamples.gcdSimplifyingFractions
- * @sample samples.GcdAndLcmSamples.gcdReducingRatios
  */
 public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) abs(a) else gcd(b, a % b)
 
@@ -27,17 +25,20 @@ public tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) abs(a) else gcd(b, a %
  * @see gcd
  *
  * @sample samples.GcdAndLcmSamples.lcmBasicUsage
- * @sample samples.GcdAndLcmSamples.lcmSchedulingProblem
  */
 public fun lcm(a: Int, b: Int): Int = if (a == 0 || b == 0) 0 else abs(a) / gcd(a, b) * abs(b)
 
 /**
  * See [gcd] for Int parameters
+ *
+ * @sample samples.GcdAndLcmSamples.gcdBasicUsage
  */
 public tailrec fun gcd(a: Long, b: Long): Long = if (b == 0L) abs(a) else gcd(b, a % b)
 
 /**
  * See [lcm] for Int parameters
+ *
+ * @sample samples.GcdAndLcmSamples.lcmBasicUsage
  */
 public fun lcm(a: Long, b: Long): Long = if (a == 0L || b == 0L) 0L else abs(a) / gcd(a, b) * abs(b)
 
@@ -50,7 +51,6 @@ public fun lcm(a: Long, b: Long): Long = if (a == 0L || b == 0L) 0L else abs(a) 
  * @see pow overload with modulo parameter for modular exponentiation
  *
  * @sample samples.PowSamples.powBasicUsage
- * @sample samples.PowSamples.powInfixNotation
  */
 public infix fun Long.pow(power: Long): Long {
     require(power >= 0) { "Power must be non-negative, but was $power" }
@@ -66,8 +66,6 @@ public infix fun Long.pow(power: Long): Long {
  * @see pow overload without a modulo parameter for regular exponentiation
  *
  * @sample samples.PowSamples.powModuloBasicUsage
- * @sample samples.PowSamples.powModuloLastDigit
- * @sample samples.PowSamples.powModuloFermatLittleTheorem
  */
 public fun Long.pow(power: Long, modulo: Long): Long {
     require(power >= 0) { "Power must be non-negative, but was $power" }
@@ -118,8 +116,6 @@ private inline fun binaryExponentiation(base: Long, power: Long, multiply: (Long
  * Returns the square of [this] Int value.
  *
  * @sample samples.SqrSamples.sqrBasicUsage
- * @sample samples.SqrSamples.sqrDistanceCalculation
- * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Int.sqr(): Int = this * this
 
@@ -127,8 +123,6 @@ public fun Int.sqr(): Int = this * this
  * Returns the square of [this] Long value.
  *
  * @sample samples.SqrSamples.sqrBasicUsage
- * @sample samples.SqrSamples.sqrDistanceCalculation
- * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Long.sqr(): Long = this * this
 
@@ -136,7 +130,5 @@ public fun Long.sqr(): Long = this * this
  * Returns the square of [this] Double value.
  *
  * @sample samples.SqrSamples.sqrBasicUsage
- * @sample samples.SqrSamples.sqrDistanceCalculation
- * @sample samples.SqrSamples.sqrAreaCalculation
  */
 public fun Double.sqr(): Double = this * this

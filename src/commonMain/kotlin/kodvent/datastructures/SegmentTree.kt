@@ -14,13 +14,8 @@ package kodvent.datastructures
  *
  * Construction is O(n); range query and point update are O(log n). Uses O(n) space.
  *
- * @sample samples.SegmentTreeSamples.basicRangeSumQuery
- * @sample samples.SegmentTreeSamples.rangeMinimumQuery
- * @sample samples.SegmentTreeSamples.rangeMaximumQuery
- * @sample samples.SegmentTreeSamples.rangeGCDQuery
- * @sample samples.SegmentTreeSamples.stockPriceAnalysis
- * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
- * @sample samples.SegmentTreeSamples.slidingWindowMinimum
+ * @sample samples.SegmentTreeSamples.basicUsage
+ * @sample samples.SegmentTreeSamples.otherOperations
  */
 public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T) -> T) {
     private val size = source.size
@@ -38,7 +33,7 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
      * @throws IllegalArgumentException if the tree is empty or [start] > [end]
      * @throws IndexOutOfBoundsException if [start] is negative or [end] is out of bounds
      *
-     * @sample samples.SegmentTreeSamples.rangeQuery
+     * @sample samples.SegmentTreeSamples.basicUsage
      */
     public operator fun get(start: Int, end: Int): T {
         require(size > 0) { "Cannot query empty segment tree" }
@@ -57,7 +52,7 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
      *
-     * @sample samples.SegmentTreeSamples.singleIndexQuery
+     * @sample samples.SegmentTreeSamples.basicUsage
      */
     public operator fun get(index: Int): T = get(index, index)
 
@@ -87,8 +82,7 @@ public class SegmentTree<T : Any>(source: List<T>, private val operation: (T, T)
      * @throws IllegalArgumentException if the tree is empty
      * @throws IndexOutOfBoundsException if [index] is out of bounds
      *
-     * @sample samples.SegmentTreeSamples.competitiveProgrammingScenario
-     * @sample samples.SegmentTreeSamples.compoundAssignmentOperators
+     * @sample samples.SegmentTreeSamples.basicUsage
      */
     public operator fun set(index: Int, value: T) {
         require(size > 0) { "Cannot update empty segment tree" }

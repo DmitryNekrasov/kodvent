@@ -17,9 +17,6 @@ package kodvent.search
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
  * @sample samples.LowerAndUpperBoundSamples.lowerBoundWithDuplicates
- * @sample samples.LowerAndUpperBoundSamples.countOccurrencesUsingBounds
- * @sample samples.LowerAndUpperBoundSamples.findRangeInSublist
- * @sample samples.LowerAndUpperBoundSamples.insertionPointMaintainsSortOrder
  */
 public fun <T : Comparable<T>> List<T?>.lowerBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)
@@ -86,9 +83,6 @@ public inline fun <T, K : Comparable<K>> List<T>.lowerBoundBy(
  * @throws IllegalArgumentException if [fromIndex] exceeds [toIndex].
  *
  * @sample samples.LowerAndUpperBoundSamples.upperBoundWithDuplicates
- * @sample samples.LowerAndUpperBoundSamples.countOccurrencesUsingBounds
- * @sample samples.LowerAndUpperBoundSamples.upperBoundWithNulls
- * @sample samples.LowerAndUpperBoundSamples.findRangeInSublist
  */
 public fun <T : Comparable<T>> List<T?>.upperBound(element: T?, fromIndex: Int = 0, toIndex: Int = size): Int {
     rangeCheck(size, fromIndex, toIndex)

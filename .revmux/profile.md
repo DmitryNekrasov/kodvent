@@ -16,7 +16,7 @@
 - The same call behaves differently on JVM, JS, Wasm and Native.
 - Code throws, or does not throw, against what its KDoc says.
 - A documented complexity is not met.
-- KDoc, the README or a sample states something the code does not do.
+- KDoc, the README, `Module.md` or a sample states something the code does not do.
 - The public API changes by accident, or without the dumps in `api/`.
 - A test that cannot fail, or documented behaviour that no test checks.
 
@@ -52,6 +52,9 @@ A finding must matter to such a user. Noise here:
 - The public API has short KDoc that states the complexity where it matters and points to a
   `@sample`. The samples are `@Test` functions in `src/commonTest/kotlin/samples`: they run as tests,
   and Dokka prints them with `failOnWarning` on.
+- `Module.md` is the front page of the Dokka documentation and the description of every package. The
+  solutions it prints under "With kodvent" are also tests in `samples/PuzzleSamples.kt`. No `@sample`
+  points to that file, and it changes together with `Module.md`.
 - The code documents itself. A comment stays only for a reason the code cannot show: a measured
   performance decision, an overflow argument, a platform difference, a binary-interface constraint.
 - A performance decision is measured, and the comment next to it gives the result. Undoing it needs
@@ -67,4 +70,5 @@ A finding must matter to such a user. Noise here:
 ## Languages
 
 - Kotlin for the library, the tests and the samples, Gradle Kotlin DSL for the build, Markdown for the
-  README. The Kotlin conventions above are not the bar for the build script or the README.
+  README and `Module.md`. The Kotlin conventions above are not the bar for the build script, the README
+  or `Module.md`.

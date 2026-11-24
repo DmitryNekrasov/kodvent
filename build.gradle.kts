@@ -111,6 +111,7 @@ dokka {
     }
 
     dokkaSourceSets.named("commonMain") {
+        includes.from("Module.md")
         samples.from("src/commonTest/kotlin/samples")
         sourceLink {
             remoteUrl("https://github.com/DmitryNekrasov/kodvent/tree/v$version")

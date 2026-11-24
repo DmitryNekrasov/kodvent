@@ -147,6 +147,11 @@ class PowTest {
     }
 
     @Test
+    fun `pow with modulo should return 0 when power is 0 and modulo is 1`() {
+        assertEquals(0L, 5L.pow(0L, 1L))
+    }
+
+    @Test
     fun `pow with modulo should handle base of 0`() {
         assertEquals(0L, 0L.pow(5L, 7L))
         assertEquals(0L, 0L.pow(100L, 13L))
@@ -195,6 +200,16 @@ class PowTest {
 
         val result = 2L.pow(100L, modulo)
         assertEquals(976371285L, result)
+    }
+
+    @Test
+    fun `pow with modulo should be exact for a modulo above 3037000500`() {
+        val prime = 119_315_717_514_047L // the deck size of Advent of Code 2019 day 22
+        assertEquals(1L, 2L.pow(prime - 1, prime))
+        assertEquals(68_180_410_008_027L, 7L.pow(prime - 2, prime))
+        assertEquals(1L, 3_037_000_500L.pow(2L, 3_037_000_501L))
+        assertEquals(1L, (Long.MAX_VALUE - 1).pow(2L, Long.MAX_VALUE))
+        assertEquals(0L, (1L shl 31).pow(2L, 1L shl 62))
     }
 
     @Test

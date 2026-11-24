@@ -10,6 +10,7 @@ import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -48,6 +49,29 @@ class TernarySearchTest {
     fun `maximum at right boundary`() {
         val result = ternarySearch(0.0, 10.0) { x -> x }
         assertApprox(10.0, result)
+    }
+
+    @Test
+    fun `maximum far from zero`() {
+        var calls = 0
+        val result = ternarySearch(1e9, 2e9) { x ->
+            assertTrue(++calls <= 200)
+            -abs(x - 1.5e9)
+        }
+        assertEquals(1.5e9, result, absoluteTolerance = 1e-6)
+    }
+
+    @Test
+    fun `bounds near the largest Double`() {
+        var calls = 0
+        val nearTop = ternarySearch(1e308, 1.1e308) { x ->
+            assertTrue(++calls <= 200)
+            -abs(x - 1.05e308)
+        }
+        assertEquals(1.05e308, nearTop, absoluteTolerance = 1e294)
+
+        val nearBottom = ternarySearch(-1.1e308, -1e308) { x -> -abs(x + 1.05e308) }
+        assertEquals(-1.05e308, nearBottom, absoluteTolerance = 1e294)
     }
 
     @Test

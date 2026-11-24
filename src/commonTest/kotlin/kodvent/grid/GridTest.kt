@@ -1567,6 +1567,18 @@ class GridTest {
     }
 
     @Test
+    fun `toString writes a CharSequence value as its toString and not as its characters`() {
+        // StringBuilder.append(CharSequence) writes such a value as its characters on JVM, Native and wasmWasi
+        // and as its toString() on JS and wasmJs
+        val cell = object : CharSequence by "characters" {
+            override fun toString(): String = "toString"
+        }
+        val grid = Grid<CharSequence>(1, 1) { cell }
+
+        assertEquals("toString", grid.toString())
+    }
+
+    @Test
     fun `toString of a wide Grid of Char keeps every row and its order`() {
         val lines = List(7) { y -> CharArray(11) { x -> 'a' + (x + 3 * y) % 26 }.concatToString() }
         val grid = Grid(11, 7) { lines[it.y][it.x] }

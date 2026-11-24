@@ -8,6 +8,7 @@ package kodvent.boundsearch
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class PartitionPointTest {
 
@@ -77,6 +78,18 @@ class PartitionPointTest {
     }
 
     @Test
+    fun `partitionPoint Int - range wider than Int MAX_VALUE`() {
+        for (expected in listOf(Int.MIN_VALUE, 5, Int.MAX_VALUE)) {
+            var calls = 0
+            val result = partitionPoint(Int.MIN_VALUE, Int.MAX_VALUE) {
+                assertTrue(++calls <= 32)
+                it < expected
+            }
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
     fun `partitionPoint Int - three element range - various patterns`() {
         assertEquals(0, partitionPoint(0, 3) { _: Int -> false })
         assertEquals(1, partitionPoint(0, 3) { i: Int -> i < 1 })
@@ -142,6 +155,18 @@ class PartitionPointTest {
         val toIndex = Long.MIN_VALUE + 100L
         val result = partitionPoint(fromIndex, toIndex) { it < Long.MIN_VALUE + 50L }
         assertEquals(Long.MIN_VALUE + 50L, result)
+    }
+
+    @Test
+    fun `partitionPoint Long - range wider than Long MAX_VALUE`() {
+        for (expected in listOf(Long.MIN_VALUE, 5L, Long.MAX_VALUE)) {
+            var calls = 0
+            val result = partitionPoint(Long.MIN_VALUE, Long.MAX_VALUE) {
+                assertTrue(++calls <= 64)
+                it < expected
+            }
+            assertEquals(expected, result)
+        }
     }
 
     @Test

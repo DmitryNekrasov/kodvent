@@ -419,6 +419,11 @@ class DisjointSetUnionTest {
     }
 
     @Test
+    fun `DSU should throw IllegalArgumentException for negative size`() {
+        assertFailsWith<IllegalArgumentException> { DisjointSetUnion(-1) }
+    }
+
+    @Test
     fun `isolate should truly isolate element with no remaining connections`() {
         val dsu = DisjointSetUnion(5)
 

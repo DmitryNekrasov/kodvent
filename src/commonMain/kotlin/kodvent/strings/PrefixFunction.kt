@@ -25,12 +25,15 @@ public fun CharSequence.prefixFunction(): IntArray = prefixFunction(length, ::ge
  * of type [T] accessed by index via [at] (compared with `==`). Returns an array whose i-th element is the
  * length of the longest proper prefix that is also a suffix of the subsequence `[0..i]`. O(n) time and space.
  *
+ * @throws IllegalArgumentException if [length] is negative
+ *
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithIntegers
  * @sample samples.PrefixFunctionAndKMPSamples.genericPrefixFunctionWithCustomObjects
  *
  * @see CharSequence.allIndicesOf
  */
 public inline fun <T> prefixFunction(length: Int, at: (Int) -> T): IntArray {
+    require(length >= 0) { "Length must not be negative, but was $length" }
     val pi = IntArray(length)
     for (i in 1..<length) {
         var j = pi[i - 1]

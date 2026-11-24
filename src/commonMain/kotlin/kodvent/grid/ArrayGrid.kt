@@ -74,7 +74,6 @@ internal open class ArrayGrid<T>(
                 // Not append(Any?) for all: it would make a String of every Char
                 when (val value = cells[index]) {
                     is Char -> builder.append(value)
-                    is CharSequence? -> builder.append(value)
                     else -> builder.append(value.toString())
                 }
             }

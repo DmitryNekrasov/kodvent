@@ -225,6 +225,13 @@ class SearchTest {
     }
 
     @Test
+    fun `dijkstra throws when the state beyond the largest Int is null`() {
+        assertFailsWith<ArithmeticException> {
+            dijkstra<Int?>(0) { if (it == 0) listOf(1 to Int.MAX_VALUE) else listOf(null to 1) }
+        }
+    }
+
+    @Test
     fun `dijkstra rejects a negative step back into a finished state`() {
         assertFailsWith<IllegalArgumentException> { dijkstra(0) { if (it == 0) listOf(1 to 1) else listOf(0 to -1) } }
     }

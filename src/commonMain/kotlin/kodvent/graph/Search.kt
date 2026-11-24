@@ -111,8 +111,7 @@ public fun <S> dijkstra(starts: Iterable<S>, neighbors: (state: S) -> Iterable<P
             }
         }
     }
-    val tooExpensive = overflowed?.firstOrNull { it !in costs }
-    if (tooExpensive != null) throw ArithmeticException("The cost of $tooExpensive exceeds Int.MAX_VALUE")
+    overflowed?.forEach { if (it !in costs) throw ArithmeticException("The cost of $it exceeds Int.MAX_VALUE") }
     return costs
 }
 

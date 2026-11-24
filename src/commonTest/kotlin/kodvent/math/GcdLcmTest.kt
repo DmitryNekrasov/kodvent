@@ -118,6 +118,28 @@ class GcdLcmTest {
     }
 
     @Test
+    fun `gcd should not be negative for negative arguments`() {
+        assertEquals(2, gcd(4, -6))
+        assertEquals(2, gcd(-4, 6))
+        assertEquals(2, gcd(-4, -6))
+        assertEquals(5, gcd(-5, 0))
+        assertEquals(5, gcd(0, -5))
+        assertEquals(2L, gcd(4L, -6L))
+        assertEquals(2L, gcd(-4L, 6L))
+        assertEquals(2L, gcd(-4L, -6L))
+        assertEquals(5L, gcd(-5L, 0L))
+        assertEquals(5L, gcd(0L, -5L))
+    }
+
+    @Test
+    fun `gcd should be negative only when the result does not fit`() {
+        assertEquals(2, gcd(Int.MIN_VALUE, 6))
+        assertEquals(Int.MIN_VALUE, gcd(Int.MIN_VALUE, 0))
+        assertEquals(2L, gcd(Long.MIN_VALUE, 6L))
+        assertEquals(Long.MIN_VALUE, gcd(Long.MIN_VALUE, 0L))
+    }
+
+    @Test
     fun `lcm should return correct result for basic positive integers`() {
         assertEquals(24, lcm(8, 12))
         assertEquals(60, lcm(15, 20))
@@ -217,6 +239,22 @@ class GcdLcmTest {
     fun `lcm should be commutative for longs`() {
         assertEquals(lcm(123L, 456L), lcm(456L, 123L))
         assertEquals(lcm(1000L, 0L), lcm(0L, 1000L))
+    }
+
+    @Test
+    fun `lcm should not be negative for negative arguments`() {
+        assertEquals(12, lcm(4, -6))
+        assertEquals(12, lcm(-4, 6))
+        assertEquals(12, lcm(-4, -6))
+        assertEquals(12L, lcm(4L, -6L))
+        assertEquals(12L, lcm(-4L, 6L))
+        assertEquals(12L, lcm(-4L, -6L))
+    }
+
+    @Test
+    fun `lcm should wrap around when the result does not fit`() {
+        assertEquals(-2_147_432_674, lcm(46_341, 46_342))
+        assertEquals(-9_223_372_033_672_301_116L, lcm(3_037_000_500L, 3_037_000_501L))
     }
 
     @Test

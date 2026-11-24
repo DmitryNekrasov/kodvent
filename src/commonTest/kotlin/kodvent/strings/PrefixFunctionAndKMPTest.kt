@@ -97,6 +97,11 @@ class PrefixFunctionAndKMPTest {
         assertContentEquals(intArrayOf(), result)
     }
 
+    @Test
+    fun `generic prefixFunction throws when length is negative`() {
+        assertFailsWith<IllegalArgumentException> { prefixFunction(-1) { 0 } }
+    }
+
     // Tests for CharSequence.allIndicesOf()
 
     @Test

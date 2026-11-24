@@ -159,9 +159,9 @@ public sealed interface Grid<out T> {
     override fun hashCode(): Int
 
     /**
-     * Returns the rows joined by `\n`, each row being its values written one after another: a Char or a
-     * CharSequence as it is and any other value as its `toString()`, like `joinToString("")`. So a
-     * `Grid<Char>` prints as the puzzle input. There is no line break after the last row.
+     * Returns the rows joined by `\n`, each row being its values written one after another: a Char as it is
+     * and any other value, null included, as its `toString()`. So a `Grid<Char>` prints as the puzzle
+     * input. There is no line break after the last row.
      *
      * @sample samples.GridSamples.printing
      */

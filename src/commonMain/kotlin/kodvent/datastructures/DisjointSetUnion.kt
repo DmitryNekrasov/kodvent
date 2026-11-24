@@ -17,6 +17,7 @@ package kodvent.datastructures
  * element is in its own singleton set.
  *
  * @constructor Creates a DSU of [size] singleton elements.
+ * @throws IllegalArgumentException if [size] is negative.
  *
  * @sample samples.DisjointSetUnionSamples.basicUsage
  * @sample samples.DisjointSetUnionSamples.networkConnectivity
@@ -25,6 +26,10 @@ package kodvent.datastructures
  * @sample samples.DisjointSetUnionSamples.kruskalMinimumSpanningTree
  */
 public class DisjointSetUnion(size: Int) {
+    init {
+        require(size >= 0) { "Size must not be negative, but was $size" }
+    }
+
     private val parent = IntArray(size) { it }
     private val rank = IntArray(size) { 0 }
     private var _count = size

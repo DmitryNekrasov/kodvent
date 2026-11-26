@@ -9,7 +9,7 @@ package kodvent.datastructures
 
 /**
  * Numbers distinct elements from 0, in the order in which they are first passed to [get]. With it values
- * of any kind, like the names of vertices, become indices of an array.
+ * like the names of vertices become indices of an array.
  *
  * An element is any value with stable `equals` and `hashCode`, but not an array, which compares by
  * identity.
@@ -21,7 +21,7 @@ public class Enumerator<T> {
     private val cache = mutableMapOf<T, Int>()
 
     /**
-     * Returns the number of [x], giving it the next free number if it is new. O(1) on average.
+     * Returns the number given to [x]. A new [x] gets the next free number. O(1) on average.
      *
      * @sample samples.EnumeratorSamples.basicUsage
      */

@@ -7,6 +7,7 @@ package kodvent.datastructures
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class EnumeratorTest {
 
@@ -38,5 +39,27 @@ class EnumeratorTest {
         val enumerator = Enumerator<Int?>()
 
         assertEquals(listOf(0, 1, 0, 2, 1), listOf(7, null, 7, 0, null).map { enumerator[it] })
+    }
+
+    @Test
+    fun `get takes a constant number of comparisons on average`() {
+        val n = 1024
+        var comparisons = 0
+
+        class Key(val id: Int) {
+            override fun equals(other: Any?): Boolean {
+                comparisons++
+                return other is Key && other.id == id
+            }
+
+            override fun hashCode(): Int = id
+        }
+
+        // A search through a list of the elements takes n * n comparisons for these 2n calls. The map takes 1024
+        // on the JVM and 1078 on JS, Wasm and Native.
+        val enumerator = Enumerator<Key>()
+        repeat(2) { for (i in 0..<n) assertEquals(i, enumerator[Key(i)]) }
+
+        assertTrue(comparisons < 2 * n)
     }
 }

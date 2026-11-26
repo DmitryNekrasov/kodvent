@@ -89,6 +89,9 @@ final class <#A: kotlin/Any> kodvent.datastructures/SegmentTree { // kodvent.dat
 final class <#A: kotlin/Any?> kodvent.datastructures/Enumerator { // kodvent.datastructures/Enumerator|null[0]
     constructor <init>() // kodvent.datastructures/Enumerator.<init>|<init>(){}[0]
 
+    final val size // kodvent.datastructures/Enumerator.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // kodvent.datastructures/Enumerator.size.<get-size>|<get-size>(){}[0]
+
     final fun get(#A): kotlin/Int // kodvent.datastructures/Enumerator.get|get(1:0){}[0]
 }
 

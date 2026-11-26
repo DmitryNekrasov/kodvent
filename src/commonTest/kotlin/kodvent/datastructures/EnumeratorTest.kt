@@ -35,10 +35,34 @@ class EnumeratorTest {
     }
 
     @Test
+    fun `unequal elements with the same hash code get different numbers`() {
+        val first = 0 to 31
+        val second = 1 to 0
+        assertEquals(first.hashCode(), second.hashCode())
+
+        val enumerator = Enumerator<Pair<Int, Int>>()
+
+        assertEquals(listOf(0, 1, 0, 1), listOf(first, second, first, second).map { enumerator[it] })
+    }
+
+    @Test
     fun `null is an element like any other`() {
         val enumerator = Enumerator<Int?>()
 
         assertEquals(listOf(0, 1, 0, 2, 1), listOf(7, null, 7, 0, null).map { enumerator[it] })
+    }
+
+    @Test
+    fun `size grows with a new element and stays with a repeated one`() {
+        val enumerator = Enumerator<String>()
+        assertEquals(0, enumerator.size)
+
+        assertEquals(0, enumerator["a"])
+        assertEquals(1, enumerator.size)
+
+        assertEquals(1, enumerator["b"])
+        assertEquals(0, enumerator["a"])
+        assertEquals(2, enumerator.size)
     }
 
     @Test

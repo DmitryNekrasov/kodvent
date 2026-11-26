@@ -19,6 +19,8 @@ class EnumeratorSamples {
         assertEquals(1, ids["out"])
         assertEquals(0, ids["you"]) // the same number as before
         assertEquals(2, ids["svr"])
+
+        assertEquals(3, ids.size)
     }
 
     @Test
@@ -26,8 +28,9 @@ class EnumeratorSamples {
         val wires = listOf("you" to "bbb", "you" to "ccc", "bbb" to "out", "ccc" to "out")
 
         val ids = Enumerator<String>()
-        val graph = List(4) { mutableListOf<Int>() }
-        for ((from, to) in wires) graph[ids[from]] += ids[to]
+        val edges = wires.map { (from, to) -> ids[from] to ids[to] }
+        val graph = List(ids.size) { mutableListOf<Int>() }
+        for ((from, to) in edges) graph[from] += to
 
         // you is 0, bbb is 1, ccc is 2 and out is 3
         assertEquals(listOf(listOf(1, 2), listOf(3), listOf(3), emptyList()), graph)

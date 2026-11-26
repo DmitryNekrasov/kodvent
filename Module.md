@@ -519,7 +519,7 @@ sums.getOrNull(0, 100)  // null
 sums.getOrDefault(0, 100, 0)  // 0
 ```
 
-[Enumerator][kodvent.datastructures.Enumerator] numbers distinct elements from 0. A new element gets the next free number, and an element that it has already seen gets the same number again. With it the names from the input become indices of an array.
+[Enumerator][kodvent.datastructures.Enumerator] numbers distinct elements from 0. A new element gets the next free number, and an element that it has already seen gets the same number again. With it the names from the input become indices of an array, and `size` is the length of this array.
 
 ```kotlin
 val ids = Enumerator<String>()
@@ -527,12 +527,14 @@ val ids = Enumerator<String>()
 ids["you"]  // 0
 ids["out"]  // 1
 ids["you"]  // 0 again
+ids.size  // 2
 
 // Named vertices as indices of an adjacency list
 val wires = listOf("you" to "bbb", "you" to "ccc", "bbb" to "out", "ccc" to "out")
 val names = Enumerator<String>()
-val graph = List(4) { mutableListOf<Int>() }
-for ((from, to) in wires) graph[names[from]] += names[to]
+val edges = wires.map { (from, to) -> names[from] to names[to] }
+val graph = List(names.size) { mutableListOf<Int>() }
+for ((from, to) in edges) graph[from] += to
 // graph is [[1, 2], [3], [3], []]
 ```
 

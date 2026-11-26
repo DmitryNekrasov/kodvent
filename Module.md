@@ -1,6 +1,6 @@
 # Module kodvent
 
-Kodvent is a Kotlin Multiplatform library for [Advent of Code](https://adventofcode.com/) and competitive programming. It has grids, breadth-first search and Dijkstra's algorithm, a heap, a disjoint set union and a segment tree, binary and ternary search, and functions for number theory and string matching. All of it is common Kotlin with no dependencies, so it works on JVM, JS, Wasm and Native.
+Kodvent is a Kotlin Multiplatform library for [Advent of Code](https://adventofcode.com/) and competitive programming. It has grids, breadth-first search and Dijkstra's algorithm, a heap, a disjoint set union, a segment tree and an enumerator, binary and ternary search, and functions for number theory and string matching. All of it is common Kotlin with no dependencies, so it works on JVM, JS, Wasm and Native.
 
 A solution of a puzzle usually starts with code that is not about the puzzle: bounds checks around a map, a table of 4 offsets, a queue for a search, a priority queue, which common Kotlin does not have. With kodvent this code is already written and tested, and the solution keeps only the logic of the puzzle. The sections below describe each package with examples. For grids, [bfs][kodvent.graph.bfs] and [dijkstra][kodvent.graph.dijkstra] they also show real solutions from Advent of Code, as they were written without the library and as they look with it.
 
@@ -457,7 +457,7 @@ A state is a position with a direction, so the data class replaces the numbering
 
 ## Data structures
 
-The [kodvent.datastructures] package has a heap, a disjoint set union and a segment tree.
+The [kodvent.datastructures] package has a heap, a disjoint set union, a segment tree and an enumerator.
 
 [Heap][kodvent.datastructures.Heap] is a binary heap with any comparator, and the smallest element by the comparator is on top. A search for shortest paths does not need it directly, because `dijkstra` already runs on it.
 
@@ -517,6 +517,25 @@ val divisors = SegmentTree(numbers, ::gcd)
 // Queries with bounds that may be outside
 sums.getOrNull(0, 100)  // null
 sums.getOrDefault(0, 100, 0)  // 0
+```
+
+[Enumerator][kodvent.datastructures.Enumerator] numbers distinct elements from 0. A new element gets the next free number, and an element that it has already seen gets the same number again. With it the names from the input become indices of an array, and `size` is the length of this array.
+
+```kotlin
+val ids = Enumerator<String>()
+
+ids["you"]  // 0
+ids["out"]  // 1
+ids["you"]  // 0 again
+ids.size  // 2
+
+// Named vertices as indices of an adjacency list
+val wires = listOf("you" to "bbb", "you" to "ccc", "bbb" to "out", "ccc" to "out")
+val names = Enumerator<String>()
+val edges = wires.map { (from, to) -> names[from] to names[to] }
+val graph = List(names.size) { mutableListOf<Int>() }
+for ((from, to) in edges) graph[from] += to
+// graph is [[1, 2], [3], [3], []]
 ```
 
 ## Binary and ternary search
@@ -627,7 +646,7 @@ frequencies.decrement('m')
 
 # Package kodvent.datastructures
 
-A [Heap] with any comparator, a [DisjointSetUnion] with path compression and union by rank, and a [SegmentTree] for range queries with point updates.
+A [Heap] with any comparator, a [DisjointSetUnion] with path compression and union by rank, a [SegmentTree] for range queries with point updates, and an [Enumerator] that numbers distinct elements from 0.
 
 # Package kodvent.graph
 

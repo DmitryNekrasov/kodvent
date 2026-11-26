@@ -68,6 +68,8 @@ These are 16 lines of code, and the solution without the library takes 108. The 
 | **String Algorithms** | `kodvent.strings` | KMP prefix function, `allIndicesOf` for pattern matching, generic sequence support | $O(n + m)$ |
 | **Map Counters** | `kodvent.collections` | `MutableMap<T, Int>.increment` / `decrement` for frequency maps | $O(1)$ |
 
+`Enumerator` is not released yet, it will be available in the next version.
+
 For full API details and parameter descriptions, see the [KDoc reference](https://dmitrynekrasov.github.io/kodvent/).
 
 ## Installation

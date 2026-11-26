@@ -10,7 +10,7 @@ package kodvent.datastructures
 /**
  * Gives distinct values consecutive numbers from 0, in the order in which [get] first sees them. This turns
  * names from the input into indices of an array or into elements of a [DisjointSetUnion]. Values are
- * compared with `equals` and `hashCode`, as the keys of a map.
+ * compared with `equals` and `hashCode`, as the keys of a map, so an array is compared by identity.
  *
  * @sample samples.EnumeratorSamples.basicUsage
  * @sample samples.EnumeratorSamples.namesInDisjointSetUnion
@@ -19,7 +19,7 @@ public class Enumerator<T> {
     private val cache = mutableMapOf<T, Int>()
 
     /**
-     * Returns the number of [x]: the one it already has, or the next free one if [x] is new. O(1).
+     * Returns the number given to [x]. If [x] is new, it gets the next free number. O(1).
      *
      * @sample samples.EnumeratorSamples.basicUsage
      */

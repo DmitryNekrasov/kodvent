@@ -27,11 +27,13 @@ class EnumeratorSamples {
     @Test
     fun namesInDisjointSetUnion() {
         val friends = listOf("ann" to "bob", "eve" to "dan", "bob" to "kim")
+        val names = friends.flatMap { it.toList() }.toSet()
 
         val ids = Enumerator<String>()
-        val groups = DisjointSetUnion(2 * friends.size) // a pair has at most 2 new names
+        val groups = DisjointSetUnion(names.size)
         for ((a, b) in friends) groups.union(ids[a], ids[b])
 
+        assertEquals(2, groups.count) // {ann, bob, kim}, {eve, dan}
         assertTrue(groups.connected(ids["ann"], ids["kim"]))
         assertFalse(groups.connected(ids["ann"], ids["eve"]))
     }

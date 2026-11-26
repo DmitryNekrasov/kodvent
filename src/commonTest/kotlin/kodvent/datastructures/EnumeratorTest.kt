@@ -10,6 +10,12 @@ import kotlin.test.assertEquals
 
 class EnumeratorTest {
 
+    private class SameHash(val id: Int) {
+        override fun equals(other: Any?): Boolean = other is SameHash && other.id == id
+
+        override fun hashCode(): Int = 0
+    }
+
     @Test
     fun `a new value gets the next number and a repeated value keeps its own`() {
         val enumerator = Enumerator<String>()
@@ -26,6 +32,23 @@ class EnumeratorTest {
         assertEquals(0, enumerator[listOf(1, 2)])
         assertEquals(1, enumerator[listOf(2, 1)])
         assertEquals(0, enumerator[mutableListOf(1, 2)])
+    }
+
+    @Test
+    fun `values that are not equal have different numbers when their hash codes are the same`() {
+        val enumerator = Enumerator<SameHash>()
+
+        assertEquals(listOf(0, 1, 0, 2, 1), listOf(1, 2, 1, 3, 2).map { enumerator[SameHash(it)] })
+    }
+
+    @Test
+    fun `an array is the same value only as itself`() {
+        val enumerator = Enumerator<IntArray>()
+        val array = intArrayOf(1, 2)
+
+        assertEquals(0, enumerator[array])
+        assertEquals(1, enumerator[intArrayOf(1, 2)])
+        assertEquals(0, enumerator[array])
     }
 
     @Test

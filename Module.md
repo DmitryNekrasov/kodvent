@@ -529,10 +529,13 @@ ids["bob"]  // 1
 ids["ann"]  // 0, the same value has the same number
 
 // Names as elements of a disjoint set union
-// friends: List<Pair<String, String>>, such as "ann" to "bob"
-val groups = DisjointSetUnion(2 * friends.size)  // a pair has at most 2 new names
-for ((a, b) in friends) groups.union(ids[a], ids[b])
-val together = groups.connected(ids["ann"], ids["bob"])
+fun countGroups(friends: List<Pair<String, String>>): Int {
+    val names = friends.flatMap { it.toList() }.toSet()
+    val ids = Enumerator<String>()  // a new one, so the numbers are 0..<names.size
+    val groups = DisjointSetUnion(names.size)
+    for ((a, b) in friends) groups.union(ids[a], ids[b])
+    return groups.count
+}
 ```
 
 ## Binary and ternary search

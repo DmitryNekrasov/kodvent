@@ -9,8 +9,8 @@ package kodvent.datastructures
 
 /**
  * Gives distinct values consecutive numbers from 0, in the order in which [get] first sees them, so that
- * names from the input can be indices of an array. Values are compared with `equals` and `hashCode`, as the
- * keys of a map, so an array is compared by identity.
+ * names from the input can be indices of an array. Values are compared as the keys of a map, so they need
+ * stable `equals` and `hashCode`, and an array is compared by identity.
  *
  * @sample samples.EnumeratorSamples.basicUsage
  * @sample samples.EnumeratorSamples.namesInDisjointSetUnion

@@ -86,7 +86,6 @@ class EnumeratorTest {
         val n = 4096
         val enumerator = Enumerator<Counted>()
 
-        // New values, then the same values again
         repeat(2) { assertEquals((0..<n).toList(), List(n) { enumerator[Counted(it)] }) }
 
         // Measured: 4096 comparisons on the JVM and 4150 on JS, Wasm and Native. A search through a list of the

@@ -22,16 +22,18 @@ class EnumeratorSamples {
         assertEquals(1, ids["bob"])
         assertEquals(0, ids["ann"]) // seen before: the same number
         assertEquals(2, ids["eve"])
+        assertEquals(3, ids.size)
     }
 
     @Test
     fun namesInDisjointSetUnion() {
         val friends = listOf("ann" to "bob", "eve" to "dan", "bob" to "kim")
-        val names = friends.flatMap { it.toList() }.toSet()
 
         val ids = Enumerator<String>()
-        val groups = DisjointSetUnion(names.size)
-        for ((a, b) in friends) groups.union(ids[a], ids[b])
+        val pairs = friends.map { (a, b) -> ids[a] to ids[b] }
+
+        val groups = DisjointSetUnion(ids.size)
+        for ((a, b) in pairs) groups.union(a, b)
 
         assertEquals(2, groups.count) // {ann, bob, kim}, {eve, dan}
         assertTrue(groups.connected(ids["ann"], ids["kim"]))

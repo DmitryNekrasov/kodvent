@@ -15,6 +15,7 @@ public final class kodvent/datastructures/DisjointSetUnion {
 public final class kodvent/datastructures/Enumerator {
 	public fun <init> ()V
 	public final fun get (Ljava/lang/Object;)I
+	public final fun getSize ()I
 }
 
 public final class kodvent/datastructures/Heap {

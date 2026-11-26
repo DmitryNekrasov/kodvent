@@ -519,7 +519,7 @@ sums.getOrNull(0, 100)  // null
 sums.getOrDefault(0, 100, 0)  // 0
 ```
 
-[Enumerator][kodvent.datastructures.Enumerator] gives distinct values consecutive numbers from 0, in the order in which it first sees them. With it, names from the input become indices of an array or elements of a `DisjointSetUnion`.
+[Enumerator][kodvent.datastructures.Enumerator] gives distinct values consecutive numbers from 0, in the order in which it first sees them. With it, names from the input become indices of an array or elements of a `DisjointSetUnion`, and its `size` is the size that the array or the `DisjointSetUnion` needs.
 
 ```kotlin
 val ids = Enumerator<String>()
@@ -527,13 +527,14 @@ val ids = Enumerator<String>()
 ids["ann"]  // 0
 ids["bob"]  // 1
 ids["ann"]  // 0, the same value has the same number
+ids.size  // 2
 
 // Names as elements of a disjoint set union
 fun countGroups(friends: List<Pair<String, String>>): Int {
-    val names = friends.flatMap { it.toList() }.toSet()
-    val ids = Enumerator<String>()  // a new one, so the numbers are 0..<names.size
-    val groups = DisjointSetUnion(names.size)
-    for ((a, b) in friends) groups.union(ids[a], ids[b])
+    val ids = Enumerator<String>()
+    val pairs = friends.map { (a, b) -> ids[a] to ids[b] }
+    val groups = DisjointSetUnion(ids.size)
+    for ((a, b) in pairs) groups.union(a, b)
     return groups.count
 }
 ```

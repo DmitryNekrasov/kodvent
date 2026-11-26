@@ -7,6 +7,7 @@ package kodvent.datastructures
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class EnumeratorTest {
 
@@ -56,6 +57,41 @@ class EnumeratorTest {
         val enumerator = Enumerator<String?>()
 
         assertEquals(listOf(0, 1, 0, 2, 1), listOf("a", null, "a", "b", null).map { enumerator[it] })
+        assertEquals(3, enumerator.size)
+    }
+
+    @Test
+    fun `size counts the distinct values seen so far`() {
+        val enumerator = Enumerator<String>()
+        assertEquals(0, enumerator.size)
+
+        val numbersAndSizes = listOf("a", "b", "a", "c", "b").map { enumerator[it] to enumerator.size }
+
+        assertEquals(listOf(0 to 1, 1 to 2, 0 to 2, 2 to 3, 1 to 3), numbersAndSizes)
+    }
+
+    @Test
+    fun `get compares values a constant number of times per call`() {
+        var comparisons = 0
+
+        class Counted(val id: Int) {
+            override fun equals(other: Any?): Boolean {
+                comparisons++
+                return other is Counted && other.id == id
+            }
+
+            override fun hashCode(): Int = id
+        }
+
+        val n = 4096
+        val enumerator = Enumerator<Counted>()
+
+        // New values, then the same values again
+        repeat(2) { assertEquals((0..<n).toList(), List(n) { enumerator[Counted(it)] }) }
+
+        // Measured: 4096 comparisons on the JVM and 4150 on JS, Wasm and Native. A search through a list of the
+        // seen values takes n * n, about 16.8 million.
+        assertTrue(comparisons < 8 * n)
     }
 
     @Test

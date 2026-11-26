@@ -12,6 +12,11 @@ public final class kodvent/datastructures/DisjointSetUnion {
 	public final fun union (II)Z
 }
 
+public final class kodvent/datastructures/Enumerator {
+	public fun <init> ()V
+	public final fun get (Ljava/lang/Object;)I
+}
+
 public final class kodvent/datastructures/Heap {
 	public fun <init> (Ljava/util/Comparator;)V
 	public final fun clear ()V

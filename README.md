@@ -61,6 +61,7 @@ These are 16 lines of code, and the solution without the library takes 108. The 
 | **Heap** | `kodvent.datastructures` | Binary min-heap with any `Comparator`: `push`, `pop`, `peek`, `replace`, `…OrNull` variants, `toHeap()` in $O(n)$ | $O(\log n)$ push/pop |
 | **Disjoint Set Union** | `kodvent.datastructures` | `find`, `union`, `connected`, `count` with path compression + union by rank, `isolate` in $O(n)$ | $O(\alpha(n))$ amortized |
 | **Segment Tree** | `kodvent.datastructures` | Range queries (`sum`, `min`, `max`, `gcd`, …) and point updates with `tree[i, j]` syntax | $O(\log n)$ query/update |
+| **Enumerator** | `kodvent.datastructures` | Numbers distinct elements of any type from 0 with `ids[x]` syntax, so names become array indices | $O(1)$ on average |
 | **Binary Search** | `kodvent.search` | `partitionPoint` (Int and Long), `lowerBound`, `upperBound` with multiple overloads | $O(\log n)$ |
 | **Ternary Search** | `kodvent.search` | Find the maximum of a unimodal function on an interval | $O(\log((r-l)/\varepsilon))$ |
 | **Math** | `kodvent.math` | `gcd`, `lcm`, `Long.pow` (binary exponentiation), modular `pow`, `sqr` | $O(\log n)$ multiplications for pow |

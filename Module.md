@@ -457,7 +457,7 @@ A state is a position with a direction, so the data class replaces the numbering
 
 ## Data structures
 
-The [kodvent.datastructures] package has a heap, a disjoint set union and a segment tree.
+The [kodvent.datastructures] package has a heap, a disjoint set union, a segment tree and an enumerator.
 
 [Heap][kodvent.datastructures.Heap] is a binary heap with any comparator, and the smallest element by the comparator is on top. A search for shortest paths does not need it directly, because `dijkstra` already runs on it.
 
@@ -517,6 +517,22 @@ val divisors = SegmentTree(numbers, ::gcd)
 // Queries with bounds that may be outside
 sums.getOrNull(0, 100)  // null
 sums.getOrDefault(0, 100, 0)  // 0
+```
+
+[Enumerator][kodvent.datastructures.Enumerator] gives distinct values consecutive numbers from 0, in the order in which it first sees them. With it, names from the input become indices of an array or elements of a `DisjointSetUnion`.
+
+```kotlin
+val ids = Enumerator<String>()
+
+ids["ann"]  // 0
+ids["bob"]  // 1
+ids["ann"]  // 0, the same value has the same number
+
+// Names as elements of a disjoint set union
+// friends: List<Pair<String, String>>, such as "ann" to "bob"
+val groups = DisjointSetUnion(2 * friends.size)  // a pair has at most 2 new names
+for ((a, b) in friends) groups.union(ids[a], ids[b])
+val together = groups.connected(ids["ann"], ids["bob"])
 ```
 
 ## Binary and ternary search
@@ -627,7 +643,7 @@ frequencies.decrement('m')
 
 # Package kodvent.datastructures
 
-A [Heap] with any comparator, a [DisjointSetUnion] with path compression and union by rank, and a [SegmentTree] for range queries with point updates.
+A [Heap] with any comparator, a [DisjointSetUnion] with path compression and union by rank, a [SegmentTree] for range queries with point updates, and an [Enumerator] that numbers distinct values from 0.
 
 # Package kodvent.graph
 

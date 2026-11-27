@@ -117,11 +117,17 @@ kodvent = "0.4.0"
 kodvent = { module = "io.github.dmitrynekrasov:kodvent", version.ref = "kodvent" }
 ```
 
-Then use `libs.kodvent` in place of the coordinates:
+Then use `libs.kodvent` in place of the coordinates. In a Kotlin Multiplatform project:
 
 ```kotlin
-dependencies {
-    implementation(libs.kodvent)
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(libs.kodvent)
+            }
+        }
+    }
 }
 ```
 

@@ -108,6 +108,32 @@ dependencies {
 }
 ```
 
+### Gradle (version catalog)
+
+Declare the library in `gradle/libs.versions.toml`:
+
+```toml
+[versions]
+kodvent = "0.4.0"
+
+[libraries]
+kodvent = { module = "io.github.dmitrynekrasov:kodvent", version.ref = "kodvent" }
+```
+
+Then use `libs.kodvent` in place of the coordinates. In a Kotlin Multiplatform project:
+
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(libs.kodvent)
+            }
+        }
+    }
+}
+```
+
 ### Maven
 
 ```xml
